@@ -11,12 +11,12 @@ const Landing = ({navigation}) => {
       <Text>Landing Page</Text>
       <View>
         <Button 
-            title='Register'
-            onPress={() => navigation.navigate('RegisterPage')}/>
+          title='Register'
+          onPress={() => navigation.navigate('RegisterPage')}/>
         <Button 
-            title='Login'
-            onPress={() => navigation.navigate('LoginPage')}/>
-            
+          title='Login'
+          onPress={() => navigation.navigate('LoginPage')}/>
+          
        
       </View>
     </View>

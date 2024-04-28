@@ -1,10 +1,8 @@
 import { EmailAuthCredential } from 'firebase/auth/cordova';
-import React, { Component } from 'react'
-import { View, StyleSheet, Text, Button } from 'react-native'
-import { TextInput } from 'react-native-gesture-handler';
-import firebase from 'firebase/compat/app';
-// import 'firebase/compat/auth';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import React, { useState } from 'react'
+import { View, StyleSheet, Text, Button, TextInput } from 'react-native'
+
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 
 // const firebaseConfig = {
@@ -22,69 +20,53 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 //   firebase.initializeApp(firebaseConfig);
 // }
 
-export class Register extends Component {
-  constructor(props) {
-    super(props);
+const Register = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    this.state ={
-      email:'',
-      password:'',
-      name:'',
-    }
-    this.onSignUp =this.onSignUp.bind(this)
+  const Registering  = () => {
+    const auth = getAuth();
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up 
+          const user = userCredential.user;
+          // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
   }
-  onSignUp(){
-    const {email, password, name} = this.state;
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((result) => {
-      console.log(result)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={{backgroundColor:'#f1f1f1', padding:10, margin:5, }}>
-          <TextInput
-            placeholder='Username'
-            style={styles.txtInput}
-            onChangeText={(name) => this.setState({name})}
+  return (
+    <View style={styles.container}>
+      <TextInput
+        placeholder='email'
+        style={styles.txtInput}
+        value={email}
+        onChangeText={(text) => setEmail(text)}
 
-          />
-          <TextInput
-            placeholder='email'
-            style={styles.txtInput}
-            onChangeText={(email) => this.setState({email})}
-
-          />
-          <TextInput
-            placeholder='password'
-            secureTextEntry={true}
-            style={styles.txtInput}
-            onChangeText={(password) => this.setState({password})}
-
-          />
-          </View>
-        <Button 
-          title='register'
-          onPress={this.onSignUp}
-        />
-
-      </View>
+      />
+      <TextInput
+        placeholder='password'
+        secureTextEntry={true}
+        style={styles.txtInput}
+        value={password}
+        onChangeText={(text) => setPassword(text)}
+      />
+      <Button title='Register' onPress={Registering} />
+    </View>
     )
   }
-}
 
 export default Register
 
 const styles = StyleSheet.create({
   container: {
-      flex:1,
-      justifyContent:'center',
-      // alignItems:'center',
-      backgroundColor:'#709065',
+    flex:1,
+    justifyContent:'center',
+    // alignItems:'center',
+    backgroundColor:'#709065',
   },
   txtInput: {
     borderBottomWidth:0.2,

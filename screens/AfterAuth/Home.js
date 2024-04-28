@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import {auth} from '../../firebaseAPI';
 
 const Home = () => {
+  const MyID = auth.currentUser.email
+
   return (
     <View>
-      <Text>Home</Text>
+      <Text> {MyID} </Text>
     </View>
   )
 }
