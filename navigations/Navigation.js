@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import firebase from 'firebase/compat/app';
 
 
 // Page Stack
@@ -12,6 +13,7 @@ const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
+    
     <Stack.Navigator 
       screenOptions={{
         headerShown: false, // Default header visibility for all screens

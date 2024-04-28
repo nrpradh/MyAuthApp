@@ -3,13 +3,26 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import Navigation from './Navigation'
 
+import firebase from 'firebase/compat/app';
+
 const NavContainers = () => {
   return (
-    <NavigationContainer>
-      <Navigation/>
-    </NavigationContainer>
+    
+      <NavigationContainer>
+        <Navigation/>
+      </NavigationContainer>
+    
   )
 }
 
-export default NavContainers
+export default NavContainers 
+const styles = StyleSheet.create({
+  container: {
+      flex:1,
+      justifyContent:'center',
+      alignItems:'center',
+      backgroundColor:'#709065',
+  }
+
+})
 
