@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
 import React,{useState} from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
+import { authGStyles } from './AuthGlobalStyling';
 
 // Auth Pages
 import Register from './Register'
@@ -18,10 +19,24 @@ const Landing = ({navigation}) => {
     >
       <View style={styles.container}>
         {isRegistering ? <Register /> : <Login />}
-        <Button
-          title={isRegistering ? 'Switch to Login' : 'Switch to Register'}
-          onPress={() => setIsRegistering(prevState => !prevState)}
-        />
+
+        {/* Conditional label based on isRegistering */}
+        <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+          {isRegistering ? (
+            // If registering, show "already have an account?" label
+            <Text style={authGStyles.switchAuth}>Already have an account?</Text>
+          ) : (
+            // If not registering, show "don't have an account?" label
+            <Text style={authGStyles.switchAuth}>Don't have an account?</Text>
+          )}
+
+          {/* Touchable to switch between login and signup */}
+          <TouchableOpacity onPress={() => setIsRegistering(!isRegistering)}>
+            <Text style={styles.switchAuth}>
+              {isRegistering ? 'Log in' : 'Sign up'}
+            </Text>
+          </TouchableOpacity>
+        </View>  
       </View>
     </LinearGradient>
   )
@@ -35,6 +50,18 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         // alignItems:'center',
         // backgroundColor:'#709065',
+        // margin:10,
+    },
+    switchAuth:{
+      fontSize:13,
+      color:'lightgrey',
+      textAlign:'center',
+      textDecorationLine:'underline',
+      paddingVertical:10,
+      // paddingHorizontal:5,
+      // position:'absolute',
+      // bottom:229, 
+      // right:108,
     }
 
 })

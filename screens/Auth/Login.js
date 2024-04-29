@@ -1,7 +1,8 @@
-import { StyleSheet, TextInput, View, Button, Text } from 'react-native'
+import { StyleSheet, TextInput, View, Button, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { authGStyles } from './AuthGlobalStyling';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -29,21 +30,35 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder='Email'
-        style={styles.txtInput}
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-      />
-      <TextInput
-        placeholder='Password'
-        secureTextEntry={true}
-        style={styles.txtInput}
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
-      <Button title='Login' onPress={LoggingIn} />
+      <Text style={authGStyles.titleAuth}> Log into an existing account</Text>
+        <View style={authGStyles.boxesAuth}>
+        <TextInput
+          placeholder='Email'
+          placeholderTextColor='#f1f1f1'
+          style={authGStyles.inputAuth}
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
+        <TextInput
+          placeholder='Password'
+          placeholderTextColor='#f1f1f1'
+          secureTextEntry={true}
+          style={authGStyles.inputAuth}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+        />
+        <View style={{width:'80%', alignSelf:'center', marginTop:20,}}>
+          <TouchableOpacity onPress={LoggingIn}>
+            <Text style={authGStyles.btnAuth}> Log in </Text>
+          </TouchableOpacity>
+        </View>
+
+      </View>
+      
+      {/* 
+      <Button title='Login' onPress={LoggingIn} /> 
       {error && <Text style={styles.errorText}>{error}</Text>}
+      <Text style={authGStyles.switchAuth}> Don't have an account? </Text> */}
     </View>
   );
 }
@@ -56,12 +71,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // alignItems: 'center',
     // backgroundColor: '#709065',
+    margin:15
   },
-  txtInput: {
-    borderBottomWidth: 0.2,
-    padding: 7,
-    margin: 10,
-  },
+  
   errorText: {
     color: '#902020',
     marginTop: 10,

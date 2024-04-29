@@ -1,8 +1,9 @@
 import { EmailAuthCredential } from 'firebase/auth/cordova';
 import React, { useState } from 'react'
-import { View, StyleSheet, Text, Button, TextInput } from 'react-native'
+import { View, StyleSheet, Text, Button, TextInput, TouchableOpacity } from 'react-native'
 
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { authGStyles } from './AuthGlobalStyling';
 
 
 
@@ -27,21 +28,33 @@ const Register = () => {
   }
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder='email'
-        style={styles.txtInput}
-        value={email}
-        onChangeText={(text) => setEmail(text)}
+      <Text style={authGStyles.titleAuth}> Create a new account </Text>
+      <View style={authGStyles.boxesAuth}>
+        <TextInput
+          placeholder='Email'
+          placeholderTextColor='#f1f1f1'
+          style={[authGStyles.inputAuth, { color: '#f1f1f1' }]}
+          value={email}
+          onChangeText={(text) => setEmail(text)}
 
-      />
-      <TextInput
-        placeholder='password'
-        secureTextEntry={true}
-        style={styles.txtInput}
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
-      <Button title='Register' onPress={Registering} />
+        />
+        <TextInput
+          placeholder='Password'
+          placeholderTextColor='#f1f1f1'
+          secureTextEntry={true}
+          style={authGStyles.inputAuth}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+        />
+        <View style={{width:'80%', alignSelf:'center', marginTop:20,}}>
+          <TouchableOpacity onPress={Registering}>
+            <Text style={authGStyles.btnAuth}> Sign up </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      
+      {/* <Button title='Register' onPress={Registering} /> 
+      <Text style={authGStyles.switchAuth}> Already have an account? </Text>*/}
     </View>
     )
   }
@@ -54,11 +67,8 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     // alignItems:'center',
     // backgroundColor:'#709065',
+    margin:15
   },
-  txtInput: {
-    borderBottomWidth:0.2,
-    padding:7,
-    margin:10,
-  }
+  
 
 })
