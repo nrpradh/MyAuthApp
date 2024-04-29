@@ -1,24 +1,20 @@
 import { StyleSheet, Text, View, Button } from 'react-native'
-import React from 'react'
+import React,{useState} from 'react'
 
 // Auth Pages
 import Register from './Register'
 import Login from './Login'
+import Home from '../AfterAuth/Home'
 
 const Landing = ({navigation}) => {
+  const [isRegistering, setIsRegistering] = useState(true);
   return (
     <View style={styles.container}>
-      <Text>Landing Page</Text>
-      <View>
-        <Button 
-          title='Register'
-          onPress={() => navigation.navigate('RegisterPage')}/>
-        <Button 
-          title='Login'
-          onPress={() => navigation.navigate('LoginPage')}/>
-          
-       
-      </View>
+      {isRegistering ? <Register /> : <Login />}
+      <Button
+        title={isRegistering ? 'Switch to Login' : 'Switch to Register'}
+        onPress={() => setIsRegistering(prevState => !prevState)}
+      />
     </View>
   )
 }
@@ -29,7 +25,7 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         justifyContent:'center',
-        alignItems:'center',
+        // alignItems:'center',
         backgroundColor:'#709065',
     }
 

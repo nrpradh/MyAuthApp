@@ -6,7 +6,7 @@ const Home = () => {
   const MyID = auth.currentUser.email
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text> {MyID} </Text>
     </View>
   )
@@ -14,4 +14,10 @@ const Home = () => {
 
 export default Home
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
+  }
+})

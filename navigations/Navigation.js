@@ -19,10 +19,10 @@ const AppNavigator = () => {
         headerShown: false, // Default header visibility for all screens
       }}
     >
-        <Stack.Screen name="LandingPage" component={Landing} />
-        <Stack.Screen name="RegisterPage" component={Register} />
-        <Stack.Screen name="LoginPage" component={Login} />
-        <Stack.Screen name="HomePage" component={Home} />
+        <Stack.Screen name='LandingPage' component={Landing} />
+        <Stack.Screen name='RegisterPage' component={Register} />
+        <Stack.Screen name='LoginPage' component={Login} />
+        <Stack.Screen name='HomePage' component={Home} />
     </Stack.Navigator>
   );
 };
