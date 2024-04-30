@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import firebase from 'firebase/compat/app';
 
@@ -23,21 +24,24 @@ const MainStack = () => {
     
     <Stack.Navigator 
       screenOptions= {{headerShown: false}}
-      initialRouteName='TabsNavigation'>
-        <Stack.Screen name='TabNavigation' component={TabNav}/>
+      initialRouteName='LandingPage'>
+        <Stack.Screen name='LandingPage' component={Landing} />
+        <Stack.Screen name='TabNav' component={TabNav}/>
+         
+        
          
     </Stack.Navigator>
   );
 };
 
-const Homestack = () => {
+const HomeStack = () => {
   
   return( 
     <Stack.Navigator
       screenOptions={{
-        headerShown: true, // Remove if you want the header bar visible
+        headerShown: false, // Remove if you want the header bar visible
       }}>
-      <Stack.Screen name='LandingPage' component={Landing} />
+      
       <Stack.Screen name='HomePage' component={Home} /> 
       
     </Stack.Navigator>
@@ -47,17 +51,23 @@ const Homestack = () => {
 
 const EventMenuStack = () => {
   return (
-    <View>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false, // Remove if you want the header bar visible
+      }}>
       <Stack.Screen name='EventMenuPage' component={EventMenu} /> 
-    </View>
+    </Stack.Navigator>
   )
 }
 
 const ProfileStack = () => {
   return (
-    <View>
-     <Stack.Screen name='ProfilePage' component={Profile} /> 
-    </View>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false, // Remove if you want the header bar visible
+      }}>
+      <Stack.Screen name='ProfilePage' component={Profile} /> 
+    </Stack.Navigator>
   )
 }
 
@@ -65,4 +75,4 @@ const ProfileStack = () => {
 
 
 
-export {MainStack, Homestack, EventMenuStack, ProfileStack};
+export {MainStack, HomeStack, EventMenuStack, ProfileStack};

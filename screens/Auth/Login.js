@@ -18,7 +18,7 @@ const Login = () => {
         const user = userCredential.user;
         console.log('User logged in:', user.email);
         // Navigate to 'HomePage' after successful login
-        navigation.navigate('HomePage');
+        navigation.navigate('TabNav');
       })
       .catch((error) => {
         const errorCode = error.code;
