@@ -7,7 +7,7 @@ import firebase from 'firebase/compat/app';
 import Landing from '../screens/Auth/Landing';
 import Register from '../screens/Auth/Register';
 import Login from '../screens/Auth/Login';
-import Home from '../screens/AfterAuth/Home';
+import Home from '../screens/AfterAuth/MainPages/Home';
 
 const Stack = createStackNavigator();
 

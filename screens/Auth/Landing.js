@@ -6,7 +6,7 @@ import { authGStyles } from './AuthGlobalStyling';
 // Auth Pages
 import Register from './Register'
 import Login from './Login'
-import Home from '../AfterAuth/Home'
+
 
 const Landing = ({navigation}) => {
   const [isRegistering, setIsRegistering] = useState(true);

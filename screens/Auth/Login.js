@@ -1,6 +1,7 @@
 import { StyleSheet, TextInput, View, Button, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
+
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { authGStyles } from './AuthGlobalStyling';
 
@@ -35,7 +36,7 @@ const Login = () => {
         <TextInput
           placeholder='Email'
           placeholderTextColor='#f1f1f1'
-          style={authGStyles.inputAuth}
+          style={[authGStyles.inputAuth, { color: '#f1f1f1' }]}
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
@@ -43,7 +44,7 @@ const Login = () => {
           placeholder='Password'
           placeholderTextColor='#f1f1f1'
           secureTextEntry={true}
-          style={authGStyles.inputAuth}
+          style={[authGStyles.inputAuth, { color: '#f1f1f1' }]}
           value={password}
           onChangeText={(text) => setPassword(text)}
         />

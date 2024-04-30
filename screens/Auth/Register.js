@@ -42,7 +42,7 @@ const Register = () => {
           placeholder='Password'
           placeholderTextColor='#f1f1f1'
           secureTextEntry={true}
-          style={authGStyles.inputAuth}
+          style={[authGStyles.inputAuth, { color: '#f1f1f1' }]}
           value={password}
           onChangeText={(text) => setPassword(text)}
         />
