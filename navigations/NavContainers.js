@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
-import Navigation from './Navigation'
+import { MainStack } from './Navigation';
 
 import firebase from 'firebase/compat/app';
 
@@ -9,7 +9,7 @@ const NavContainers = () => {
   return (
     
       <NavigationContainer>
-        <Navigation/>
+        <MainStack/>
       </NavigationContainer>
     
   )
