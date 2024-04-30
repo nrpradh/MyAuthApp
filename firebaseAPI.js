@@ -1,4 +1,5 @@
-import { initializeAuth } from "firebase/auth";
+// import { initializeAuth } from "firebase/auth";
+import { initializeAuth } from "firebase/auth/cordova";
 import { initializeApp } from "firebase/app";
 // import * as firebase from 'firebase';
 import firebase from "firebase/compat/app";

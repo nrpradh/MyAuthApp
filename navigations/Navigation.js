@@ -51,7 +51,7 @@ const HomeStack = () => {
       }}>
       
       <Stack.Screen name='HomePage' component={Home} /> 
-      
+      <Stack.Screen name='Categories' component={Categories} /> 
     </Stack.Navigator>
   );
 };
@@ -75,6 +75,7 @@ const ProfileStack = () => {
         headerShown: false, // Remove if you want the header bar visible
       }}>
       <Stack.Screen name='ProfilePage' component={Profile} /> 
+      <Stack.Screen name='EditProfile' component={EditProfile} /> 
     </Stack.Navigator>
   )
 }

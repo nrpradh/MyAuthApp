@@ -15,9 +15,10 @@ const TabNav = () => {
       <Tab.Navigator
         shifting={true} // Enable it to shift animation for more than 3 tabs
         initialRouteName="HomePage"
-        activeColor="#922090"
-        inactiveColor="#b0bec5"
-        barStyle={{ backgroundColor: '#f1f1f1', height:60 }}
+        activeColor="#353535"
+        inactiveColor="#f1f1f1"
+        barStyle={{ backgroundColor:'#353535', height:65 }}
+        
       >
         <Tab.Screen
           name='Home'

@@ -1,50 +1,46 @@
-import { StyleSheet, Text, View, Button, BackHandler } from 'react-native'
-import React,{useEffect} from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View, Button, BackHandler, TouchableOpacity } from 'react-native'
+import React,{useEffect, useCallback} from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import { PGStyling } from '../PGStyling';
 
-// firebase
-import {auth} from '../../../firebaseAPI';
+
+
 
 const Home = ({navigation}) => {
-  useEffect(() => {
-    const backAction = () => {
-      // Return true to prevent the default back button behavior
-      return true;
-    };
-  
-    // Add event listener for the hardware back button
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction
-    );
-  
-    // Clean up event listener when the component unmounts
-    return () => backHandler.remove();
-  }, []);
-  
-  const MyID = auth.currentUser.email
+  useFocusEffect(
+    useCallback(() => {
+      const backAction = () => {
+        return true;
+      };
 
-  const handleLogout = () => {
-    auth.signOut()
-    .then(() => {
-      // Logout successful
-      console.log(`User ${MyID} logged out successfully`);
-      // You can navigate to a different screen or perform any other action upon logout
-      navigation.navigate('LandingPage');
-    })
-    .catch((error) => {
-      // Handle errors here
-      console.error('Error logging out:', error);
-    });
-  };
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backAction
+      );
 
+      return () => backHandler.remove();
+    }, [])
+  );
+  
+
+  
   return (
-    <View style={styles.container}>
-      <Text> {MyID} </Text>
-      <Button title="Logout" onPress={handleLogout} />
-    </View>
+    <LinearGradient
+      colors={['#f1f1f1', '#6155e5', '#353535']}
+      start={{ x: 0.5, y: 0 }}
+      end={{ x: 0.5, y: 1 }}  
+      style={styles.container}
+    >
+      <View style={PGStyling.forContainer}>
+        
+        
+
+        <Button onPress={() => navigation.navigate('Categories')} title="Next page" />
+
+      </View>
+    </LinearGradient>
   )
 }
 
@@ -53,8 +49,7 @@ export default Home
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    justifyContent:'center',
-    alignItems:'center',
-    backgroundColor:'#909090'
+    padding:10,
   }
+ 
 })
