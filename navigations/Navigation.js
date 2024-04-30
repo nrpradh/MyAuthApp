@@ -12,10 +12,18 @@ import Landing from '../screens/Auth/Landing';
 import Register from '../screens/Auth/Register';
 import Login from '../screens/Auth/Login';
 
-// Main Screen
+// Main Screen w/ inside it
 import Home from '../screens/AfterAuth/MainPages/Home';
+import Categories from '../screens/AfterAuth/InsideMenus/InsideHome/Categories';
+
+// EventMenu Stack w/ inside it
 import EventMenu from '../screens/AfterAuth/MainPages/EventMenu';
+
+
+// Profile Stack w/ inside it
 import Profile from '../screens/AfterAuth/MainPages/Profile';
+import EditProfile from '../screens/AfterAuth/InsideMenus/InsideProfile/EditProfile';
+
 
 const Stack = createStackNavigator();
 

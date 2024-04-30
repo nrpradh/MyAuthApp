@@ -20,7 +20,7 @@ const TabNav = () => {
         barStyle={{ backgroundColor: '#f1f1f1', height:60 }}
       >
         <Tab.Screen
-          name='HomePage'
+          name='Home'
           component={HomeStack}
           options={{
             tabBarIcon: ({ color }) => (
