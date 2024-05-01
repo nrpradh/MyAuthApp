@@ -51,7 +51,7 @@ export const ForEventMenu = StyleSheet.create ({
         backgroundColor: '#353535',
         borderRadius: 5,
         borderColor: '#6155e5',
-        borderWidth: 1,
+        borderWidth: 0.5,
         padding: 10,
         marginHorizontal: 2,
         marginBottom:15,
@@ -82,7 +82,7 @@ export const ForManageEvent = StyleSheet.create ({
     imageContainer: {
         // flexDirection: 'row', // Arrange image and text horizontally
         backgroundColor:'#353535',
-        borderWidth:1,
+        borderWidth:0.5,
         borderColor:'#6155e5',
         padding:8,
         margin:10,
@@ -128,7 +128,7 @@ export const ForProfile = StyleSheet.create ({
         backgroundColor: '#353535',
         padding: 10,
         marginVertical:5,
-        borderWidth:1,
+        borderWidth:0.5,
         borderColor:'#6155E5',
         // width: '95%',
         alignItems: 'center',

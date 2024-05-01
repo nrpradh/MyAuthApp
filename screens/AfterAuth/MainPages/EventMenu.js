@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Animated, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, Animated, TouchableOpacity, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useNavigation } from '@react-navigation/native';
@@ -95,14 +95,14 @@ const ToAddEvent = () => {
       onOpen={() => setOpen(!open)}
       onClose={() => setOpen(!open)}
       buttonStyle={{backgroundColor:'#353535'}} 
-      containerStyle={{ borderWidth: 1, borderColor: '#6155e5' }}
+      containerStyle={{ borderWidth: 0.5, borderColor: '#6155e5' }}
     >
       <SpeedDial.Action
         icon={{ name: 'add', color: '#f1f1f1' }}
         buttonStyle={{backgroundColor:'#353535', }}
         title="Create event"
         titleStyle={{ color: '#6155e5' }}
-        containerStyle={{ borderWidth: 1, borderColor: '#6155e5' }}
+        containerStyle={{ borderWidth: 0.5, borderColor: '#6155e5' }}
         onPress={handleNavigation} // Call the handleNavigation function
       />
     </SpeedDial>
