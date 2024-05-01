@@ -21,7 +21,7 @@ const LogOut = () => {
   return (
     <TouchableOpacity onPress={handleLogout}>
         <View style={ForProfile.profileContent}>
-            <Feather name='log-out' size={22} color="#A00102" marginLeft={5} />
+            <Feather name='log-out' size={22} color="#C40002" marginLeft={5} />
             <View style={{flexDirection:'column'}}>
                 <Text style={styles.logOutOnly}>Log Out</Text>
                 <Text style={styles.logOutSubOnly}> Log out from this account </Text>
@@ -33,13 +33,13 @@ const LogOut = () => {
 
 const styles = StyleSheet.create({
     logOutOnly:{
-        color: '#A00102',
+        color: '#C40002',
         paddingTop: 2,
         marginLeft: 20,
         fontSize: 16,
       },
       logOutSubOnly: {
-        color: 'rgba(146, 2, 3, 0.7)',
+        color: 'rgba(255, 8, 13, 0.6)',
         paddingBottom: 2,
         marginLeft: 17,
         fontSize: 11,

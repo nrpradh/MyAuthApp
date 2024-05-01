@@ -24,14 +24,14 @@ const Profile = ({navigation}) => {
       <View style={ForProfile.proFrame}>
         <Text style={ForProfile.headerFrame}> General </Text>
         <BtnForProfile 
-          icon={<MaterialIcons name="history" size={26} color="#6155e5" marginLeft={2} />}
+          icon={<MaterialIcons name="history" size={26} color="#f1f1f1" marginLeft={2} />}
           headText="Event Logs"
           subHeading="The list of your event logs"
           onPress={() => navigation.navigate('EventLogsPage')}
         />
         
         <BtnForProfile 
-          icon={<Feather name="book-open" size={22} color="#6155e5" marginLeft={5}  />}
+          icon={<Feather name="book-open" size={22} color="#f1f1f1" marginLeft={5}  />}
           headText="Terms of use"
           subHeading="User guidelines, rights, agreements, etc."
           onPress={() => navigation.navigate('HomeScreen')}
@@ -40,13 +40,13 @@ const Profile = ({navigation}) => {
       <View style={ForProfile.proFrame}>
         <Text style={ForProfile.headerFrame} > Preferences </Text>
         <BtnForProfile 
-          icon={<Feather name="help-circle" size={25} color="#6155e5" marginLeft={2} />}
+          icon={<Feather name="help-circle" size={25} color="#f1f1f1" marginLeft={2} />}
           headText="About"
           subHeading="About the app and etc."
           onPress={() => navigation.navigate('EventLogsPage')}
         />
         <BtnForProfile 
-          icon={<MaterialCommunityIcons name="comment-question-outline" size={22} color="#6155e5" marginLeft={5}  />}
+          icon={<MaterialCommunityIcons name="comment-question-outline" size={22} color="#f1f1f1" marginLeft={5}  />}
           headText="FAQ"
           subHeading="Frequently asked question"
           onPress={() => navigation.navigate('HomeScreen')}

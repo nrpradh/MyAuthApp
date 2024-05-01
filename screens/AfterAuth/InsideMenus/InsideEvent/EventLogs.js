@@ -10,15 +10,23 @@ const EventLogs = () => {
   return (
     <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
       <View style={PGStyling.forContainer}>
+      <View style={styles.flexEndRow}>
+        <Text style={ForEventMenu.eventHeading}>Event Logs</Text>
+      </View>
+      
         <View style={ForEventMenu.eventFlex}>
-          <Entypo name="chevron-thin-left" size={18} color="grey" />
-          <Text style={ForEventMenu.eventHeading}>Event Logs</Text>
+          <View style={{flexDirection:'row'}}>
+            <Entypo name="chevron-thin-left" size={18} color="grey" />
+            <Text style={ForEventMenu.textGuide}> Manage Event</Text>
+          </View>  
+          <View style={styles.flexEndRow}>
+            <Text style={ForEventMenu.textGuide} > List of active, requested event, etc. </Text>
+          </View>
         </View>
-        <View style={{justifyContent:'flex-end', flexDirection:'row'}}>
-          <Text style={ForEventMenu.textGuide} > List of event logs (active, requested, etc.) </Text>
-        </View>
+        
+        
         <ScrollView style={ForEventMenu.theFrame}>
-          
+          <Text> CRUD </Text>
         </ScrollView>
       </View>
     </LinearGradient>
@@ -27,4 +35,9 @@ const EventLogs = () => {
 
 export default EventLogs
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  flexEndRow:{
+    justifyContent:'flex-end',
+    flexDirection:'row'
+  }
+})
