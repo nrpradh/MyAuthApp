@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'; 
 
-import { auth } from '../../firebaseAPI';
-import { PGStyling } from './PGStyling';
+import { auth } from '../../../firebaseAPI';
+import { ForProfile } from './InsideGStyles';
 
 const LogOut = () => {
   const navigation = useNavigation(); 
@@ -20,7 +20,7 @@ const LogOut = () => {
 
   return (
     <TouchableOpacity onPress={handleLogout}>
-        <View style={PGStyling.profileContent}>
+        <View style={ForProfile.profileContent}>
             <Feather name='log-out' size={22} color="#A00102" marginLeft={5} />
             <View style={{flexDirection:'column'}}>
                 <Text style={styles.logOutOnly}>Log Out</Text>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         color: 'rgba(146, 2, 3, 0.7)',
         paddingBottom: 2,
         marginLeft: 17,
-       fontSize: 11,
+        fontSize: 11,
     },        
 })
 export default LogOut;

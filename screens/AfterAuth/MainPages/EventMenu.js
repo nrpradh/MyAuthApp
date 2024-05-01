@@ -5,7 +5,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import ManageEvent from '../InsideMenus/InsideEvent/ManageEvent';
 import EventLogs from '../InsideMenus/InsideEvent/EventLogs';
-import { PGStyling } from '../PGStyling';
+
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -73,7 +73,7 @@ const EventMenu = () => {
         <Tab.Screen name="Manage" component={ManageEvent} />
         <Tab.Screen name="Logs" component={EventLogs} />
       </Tab.Navigator>
-    
+      
   )
 }
 

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const PGStyling = StyleSheet.create ({
     forContainer :{
-        marginTop:50,
+        marginTop:40,
         // flex:1,
     },
     profileContent: {

@@ -18,7 +18,9 @@ import Categories from '../screens/AfterAuth/InsideMenus/InsideHome/Categories';
 
 // EventMenu Stack w/ inside it
 import EventMenu from '../screens/AfterAuth/MainPages/EventMenu';
-
+import AddEvent from '../screens/AfterAuth/InsideMenus/InsideEvent/AddEvent';
+import ManageEvent from '../screens/AfterAuth/InsideMenus/InsideEvent/ManageEvent';
+import EventLogs from '../screens/AfterAuth/InsideMenus/InsideEvent/EventLogs';
 
 // Profile Stack w/ inside it
 import Profile from '../screens/AfterAuth/MainPages/Profile';
@@ -63,7 +65,13 @@ const EventMenuStack = () => {
       screenOptions={{
         headerShown: false, // Remove if you want the header bar visible
       }}>
-      <Stack.Screen name='EventMenuPage' component={EventMenu} /> 
+      <Stack.Screen name='EventMenuPage' component={EventMenu} />
+      <Stack.Screen name='AddEventPage' component={AddEvent} /> 
+      <Stack.Screen name='ManageEventPage' component={ManageEvent} />  
+      <Stack.Screen name='EventLogsPage' component={EventLogs} />  
+
+ 
+
     </Stack.Navigator>
   )
 }
@@ -76,6 +84,7 @@ const ProfileStack = () => {
       }}>
       <Stack.Screen name='ProfilePage' component={Profile} /> 
       <Stack.Screen name='EditProfile' component={EditProfile} /> 
+      <Stack.Screen name='EventLogsPage' component={EventLogs} />  
     </Stack.Navigator>
   )
 }

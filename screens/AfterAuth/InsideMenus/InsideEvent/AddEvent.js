@@ -6,9 +6,11 @@ import { PGStyling } from '../../PGStyling'
 
 const AddEvent = () => {
   return (
-    <View style={PGStyling.forContainer}>
-      <Text>AddEvent</Text>
-    </View>
+    <LinearGradient {...PGStyling.linearGradient}>
+      <View style={PGStyling.forContainer}>
+        <Text>AddEvent</Text>
+      </View>
+    </LinearGradient>
   )
 }
 
