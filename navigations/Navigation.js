@@ -33,7 +33,7 @@ const MainStack = () => {
     <Stack.Navigator 
       screenOptions= {{headerShown: false}}
       initialRouteName='LandingPage'>
-        <Stack.Screen name='LandingPage' component={Landing} />
+        {/* <Stack.Screen name='LandingPage' component={Landing} /> */}
         <Stack.Screen name='TabNav' component={TabNav}/>
          
         

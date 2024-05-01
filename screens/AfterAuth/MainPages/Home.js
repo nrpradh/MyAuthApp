@@ -27,12 +27,7 @@ const Home = ({navigation}) => {
 
   
   return (
-    <LinearGradient
-      colors={['#f1f1f1', '#6155e5', '#353535']}
-      start={{ x: 0.5, y: 0 }}
-      end={{ x: 0.5, y: 1 }}  
-      style={styles.container}
-    >
+    <LinearGradient {...PGStyling.linearGradient}style={styles.container} >
       <View style={PGStyling.forContainer}>
         
         
