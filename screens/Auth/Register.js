@@ -28,7 +28,8 @@ const Register = () => {
   }
   return (
     <View style={styles.container}>
-      <Text style={authGStyles.titleAuth}> Create a new account </Text>
+      <Text style={authGStyles.headingAuth}> Sign Up</Text>
+      <Text style={authGStyles.subHeadingAuth}> Create a new account </Text>
       <View style={authGStyles.boxesAuth}>
         <TextInput
           placeholder='Email'

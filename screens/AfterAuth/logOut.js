@@ -1,23 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'; 
 
-import {auth} from '../../firebaseAPI';
+import { auth } from '../../firebaseAPI';
 import { PGStyling } from './PGStyling';
 
+const LogOut = () => {
+  const navigation = useNavigation(); 
 
-const LogOut = ({ navigation }) => {
   const handleLogout = () => {
-    
     auth.signOut().then(() => {
-      
-      // Logout successful
-      // console.log(`User ${MyID} logged out successfully`);
-      // You can navigate to a different screen or perform any other action upon logout
       navigation.navigate('LandingPage');
     })
     .catch((error) => {
-      // Handle errors here
       console.error('Error logging out:', error);
     });
   }
@@ -34,8 +30,6 @@ const LogOut = ({ navigation }) => {
     </TouchableOpacity>
   );
 };
-
-
 
 const styles = StyleSheet.create({
     logOutOnly:{

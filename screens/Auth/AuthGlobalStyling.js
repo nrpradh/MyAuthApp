@@ -1,20 +1,21 @@
 import { StyleSheet } from 'react-native';
 
 export const authGStyles = StyleSheet.create ({
+
+
     inputAuth:{
         borderBottomWidth:0.7,
         borderColor:'#f1f1f1',
         borderRadius:5,
-        padding:15,
+        padding:10,
         marginVertical:5,
 
     },
     boxesAuth:{
         backgroundColor:'rgba(255, 255, 255, 0.3)',
         padding:20,
-        height:'45%',
+        height:'40%',
         borderRadius:5,
-        marginVertical:25,
         justifyContent:'space-evenly'
     },
 
@@ -25,11 +26,21 @@ export const authGStyles = StyleSheet.create ({
         textAlign:'center',
         color:'#6155e5'
     },
-
-    titleAuth:{ 
+    headingAuth: {
+        color:'#f1f1f1',
+        // backgroundColor:'rgba(255, 255, 255, 0.3)',
+        padding:10,
+        // alignSelf:'center',
+        textAlign:'center',
+        fontSize:25,
+        fontWeight:'bold'
+    },
+    subHeadingAuth:{ 
         color:'#f1f1f1',
         textAlign:'center',
-        fontSize:20,
+        fontSize:16,
+        marginTop:8,
+        marginBottom:20,
         // margin:10,
 
     },
