@@ -10,15 +10,15 @@ const EventLogs = () => {
   return (
     <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
       <View style={PGStyling.forContainer}>
-      <View style={styles.flexEndRow}>
+      
         <Text style={ForEventMenu.eventHeading}>Event Logs</Text>
-      </View>
+      
       
         <View style={ForEventMenu.eventFlex}>
-          <View style={{flexDirection:'row'}}>
+          {/* <View style={{flexDirection:'row'}}>
             <Entypo name="chevron-thin-left" size={18} color="grey" />
             <Text style={ForEventMenu.textGuide}> Manage Event</Text>
-          </View>  
+          </View>   */}
           <View style={styles.flexEndRow}>
             <Text style={ForEventMenu.textGuide} > List of active, requested event, etc. </Text>
           </View>

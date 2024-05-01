@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
-import { Entypo, MaterialIcons } from '@expo/vector-icons';
+import { Entypo, MaterialIcons,Ionicons } from '@expo/vector-icons';
 
 
 import { PGStyling } from '../../PGStyling'
-import { ForEventMenu} from '../InsideGStyles' 
+import { ForEventMenu, ForManageEvent} from '../InsideGStyles' 
 
 const ManageEvent = () => {
   return (
@@ -20,9 +20,29 @@ const ManageEvent = () => {
           </View>
         </View>  
         
-          
-        <ScrollView style={ForEventMenu.theFrame}>
+        {/* Manage Event Here */}
+        <ScrollView 
+          style={ForEventMenu.theFrame} 
+          // contentContainerStyle={styles.scrollViewContent}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          >
+            
           <Text> Manage </Text>
+
+          <TouchableOpacity onPress={() => console.log(`Image ${item.id} pressed`)}>
+             <View style={ForManageEvent.imageContainer}> 
+              {/*<Image source={item.source} style={styles.image} /> */}
+              <View style={ForManageEvent.textContainer}>
+                <Text style={ForManageEvent.eventName}> Hello </Text>
+                <View style={{flexDirection:'row', alignItems:'center'}}>
+                  <Ionicons name="location-outline" size={16} color="lightgrey" />
+                  <Text style={ForManageEvent.location}> Location</Text>
+                </View>
+                <Text style={ForManageEvent.dTime}> Date&Time</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     </LinearGradient>
@@ -32,6 +52,11 @@ const ManageEvent = () => {
 export default ManageEvent
 
 const styles = StyleSheet.create({
+  scrollViewContent: {
+    alignItems: 'center',
+    // backgroundColor:'rgba(244, 244, 244, 0.2)',
+    // flexGrow: 1, // Added flexGrow to ensure proper scrolling
+  },
   
 
 })

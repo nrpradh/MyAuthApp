@@ -44,15 +44,83 @@ export const ForEventMenu = StyleSheet.create ({
         color:'#f1f1f1',
         fontSize:15,
         fontWeight:'500',
-        // marginLeft:3,
+        marginLeft:5,
         marginVertical:10,
-    }
+    },
+    inputBox: {
+        backgroundColor: '#353535',
+        borderRadius: 5,
+        borderColor: '#6155e5',
+        borderWidth: 1,
+        padding: 10,
+        marginHorizontal: 2,
+        marginBottom:15,
+    },
 
 
 
 
 })
 
+
+export const ForManageEvent = StyleSheet.create ({
+
+    eventList: {
+        // flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    itemContainer: {
+        paddingVertical: 18,
+        paddingHorizontal: 17,
+        backgroundColor:'rgba(244, 244, 244, 0.2)',
+        borderRadius: 1.5,
+        // marginRight: 10,
+        marginBottom: 10,
+        // height: 200, // Adjusted height for better visibility
+        // width: '45%', // Adjusted width to fit two items per row
+    },
+    imageContainer: {
+        // flexDirection: 'row', // Arrange image and text horizontally
+        backgroundColor:'#353535',
+        borderWidth:1,
+        borderColor:'#6155e5',
+        padding:8,
+        margin:10,
+        borderRadius:2,
+    },
+    image: {
+        resizeMode: 'cover',
+        borderRadius: 3,
+        width: 300, // Adjusted width to fit two items per row
+        height: 180,
+    },
+    textContainer: {
+        padding:15,
+        // flex: 1, // Take remaining space beside the image
+        marginRight: 22, // Add some spacing between image and text
+        // justifyContent: 'center', // Center text vertically
+    },
+    eventName: {
+        fontSize:16,
+        fontWeight:'500',
+        color:'#f1f1f1',
+        // marginHorizontal:3,
+        marginVertical:5,
+        // textAlign: 'center',
+        // marginTop: 5,
+    },
+    location: {
+        color:'lightgrey'
+    },
+    dTime: {
+        margin:2,
+        color:'lightgrey',
+        fontSize:13,
+    }
+
+
+    
+})
 export const ForProfile = StyleSheet.create ({
     profileContent: {
         flexDirection: 'row',
