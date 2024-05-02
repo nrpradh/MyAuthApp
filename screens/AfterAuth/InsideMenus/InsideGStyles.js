@@ -11,6 +11,8 @@ export const ForEventMenu = StyleSheet.create ({
         minHeight: '92.5%',
         borderRadius:5,  
         marginTop:10,
+        // flex:1,
+        // marginVertical:10,
     
     },
     eventFlex:{
@@ -88,7 +90,11 @@ export const ForEventMenu = StyleSheet.create ({
 
 
 export const ForManageEvent = StyleSheet.create ({
-
+    forContainer :{
+        marginTop:40,
+        flex:1,
+        // flexGrow:1,
+    },
     eventList: {
         // flexDirection: 'row',
         flexWrap: 'wrap',
@@ -119,21 +125,23 @@ export const ForManageEvent = StyleSheet.create ({
         height: 180,
     },
     textContainer: {
-        padding:15,
+        paddingHorizontal:15,
+        paddingVertical:8,
         // flex: 1, // Take remaining space beside the image
         marginRight: 22, // Add some spacing between image and text
         // justifyContent: 'center', // Center text vertically
     },
     eventName: {
-        fontSize:16,
+        fontSize:15,
         fontWeight:'500',
         color:'#f1f1f1',
         // marginHorizontal:3,
         marginVertical:5,
         // textAlign: 'center',
-        // marginTop: 5,
+        paddingTop: 5,
     },
     location: {
+        fontSize:13,
         color:'lightgrey'
     },
     dTime: {

@@ -3,6 +3,8 @@ import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, AntDesign, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
+import { auth } from '../../../firebaseAPI';
+
 import { PGStyling } from '../PGStyling';
 
 
@@ -12,13 +14,15 @@ import BtnForProfile from '../InsideMenus/InsideProfile/btnForProfile'
 import { ForProfile } from '../InsideMenus/InsideGStyles';
 
 const Profile = ({navigation}) => {
-  // const MyID = auth.currentUser.email
+  const MyID = auth.currentUser.email
+  const displayName = auth.currentUser.displayNamedisplayName;
   
   return (
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
       <View style={PGStyling.forContainer}>
         <Text >Profile</Text>
-        {/* <Text> {MyID} </Text> */}
+        <Text> {displayName} </Text>
+        <Text> {MyID} </Text>
       </View>
 
       <View style={ForProfile.proFrame}>

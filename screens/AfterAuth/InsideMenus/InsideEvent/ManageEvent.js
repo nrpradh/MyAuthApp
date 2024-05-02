@@ -3,9 +3,11 @@ import React, { useState, useEffect } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
+import "firebase/firestore";
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent } from '../InsideGStyles'
-import { getDocs, collection, db } from '../../../../firebaseAPI';
+import { getDocs, collection, db, where, query } from '../../../../firebaseAPI';
+import { getAuth } from 'firebase/auth';
 
 const ManageEvent = () => {
   const [newEventList, setNewEventList] = useState([]);
@@ -13,7 +15,7 @@ const ManageEvent = () => {
 
   const getNewEvent = async () => {
     setRefreshing(true);
-    const querySnapshot = await getDocs(collection(db, "NewEvent"));
+    const querySnapshot = await getDocs(collection(db, "newevent"));
     const events = [];
     querySnapshot.forEach((doc) => {
       events.push({
@@ -24,18 +26,19 @@ const ManageEvent = () => {
     setNewEventList(events);
     setRefreshing(false);
   };
-
+  
   useEffect(() => {
     getNewEvent();
   }, []);
-
+  
   const onRefresh = () => {
     getNewEvent();
   };
+  
 
   return (
     <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
-      <View style={PGStyling.forContainer}>
+      <View style={ForManageEvent.forContainer}>
         <Text style={ForEventMenu.eventHeading}>Manage Event</Text>
         <View style={ForEventMenu.eventFlex}>
           <Text style={ForEventMenu.textGuide}> Manage your event by update, delete, etc.</Text>
@@ -61,14 +64,14 @@ const ManageEvent = () => {
                   <View style={ForManageEvent.textContainer}>
                     <Text style={ForManageEvent.eventName}>{item.eventName}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                      <Ionicons name="location-outline" size={16} color="lightgrey" />
+                      <Ionicons name="location-outline" size={13} color="lightgrey"  marginRight={5}/>
                       <Text style={ForManageEvent.location}>{item.location}</Text>
                     </View>
                     <Text style={ForManageEvent.dTime}>{item.selectedDate}</Text>
                   </View>
                 </View>
               </TouchableOpacity>
-            
+          
             ))
           ) : (
               <Text style={styles.noEvents}>No events available yet</Text>
@@ -84,7 +87,7 @@ export default ManageEvent;
 
 const styles = StyleSheet.create({
   scrollViewContent: {
-    flexGrow: 1,
+    flexGrow: 1, 
     // alignItems: 'center',
     // paddingBottom: 20,
   },
@@ -96,10 +99,11 @@ const styles = StyleSheet.create({
     
   },
   image: {
+    alignSelf:'center',
     resizeMode: 'cover',
     borderRadius: 3,
     width: '100%', 
-    height: 140,
+    height: 125,
 },
 });
 
