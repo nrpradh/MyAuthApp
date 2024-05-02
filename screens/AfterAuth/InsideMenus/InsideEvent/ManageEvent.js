@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, RefreshControl } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, RefreshControl, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Entypo, Ionicons } from '@expo/vector-icons';
@@ -52,10 +52,12 @@ const ManageEvent = () => {
           showsHorizontalScrollIndicator={false}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
+          
           {newEventList.length > 0 ? (
             newEventList.map(item => (
               <TouchableOpacity key={item.id} onPress={() => console.log(`Event ${item.id} pressed`)}>
                 <View style={ForManageEvent.imageContainer}>
+                  <Image source={{ uri: item.imageSource }} style={styles.image} />
                   <View style={ForManageEvent.textContainer}>
                     <Text style={ForManageEvent.eventName}>{item.eventName}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -66,10 +68,12 @@ const ManageEvent = () => {
                   </View>
                 </View>
               </TouchableOpacity>
+            
             ))
           ) : (
               <Text style={styles.noEvents}>No events available yet</Text>
           )}
+          
         </ScrollView>
       </View>
     </LinearGradient>
@@ -90,6 +94,12 @@ const styles = StyleSheet.create({
     marginVertical:8,
     textAlign: 'center',
     
-  }
+  },
+  image: {
+    resizeMode: 'cover',
+    borderRadius: 3,
+    width: '100%', 
+    height: 140,
+},
 });
 

@@ -59,6 +59,16 @@ export const ForEventMenu = StyleSheet.create ({
 
 
     // Add Image Styling
+
+    imageContainer: {
+        // flexDirection: 'row', // Arrange image and text horizontally
+        backgroundColor:'#353535',
+        borderWidth:0.5,
+        borderColor:'#6155e5',
+        // padding:8,
+        // margin:10,
+        borderRadius:2,
+    },
     addImageCont: {
         marginTop: 20,
         alignItems: 'center',

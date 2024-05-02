@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 import DatePicker from '../../../../components/datePicker';
-import { ForEventMenu, ForProfile } from '../InsideGStyles'
+import { ForEventMenu, ForManageEvent, ForProfile } from '../InsideGStyles'
 import { PGStyling } from '../../PGStyling'
 
 
@@ -17,7 +17,7 @@ import { app,  db , getFirestore, collection, addDoc}  from '../../../../firebas
 const AddEvent = () => {
   const navigation = useNavigation(); 
 
-  const [imageSource, setImageSource] = useState(null);
+  const [imageSource, setImageSource] = useState('');
   const [eventName, setEventName] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [address, setAddress] = useState("");
@@ -98,7 +98,7 @@ const AddEvent = () => {
     const pickerResult = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [9, 5],
+      aspect: [5, 3],
       quality: 1,
     });
 
@@ -141,6 +141,7 @@ const AddEvent = () => {
               onPress: () => {
                 navigation.navigate('EventMenuPage');
                 // Proceed to the next step or navigate to another page
+                console.log('The Image:', imageSource);
                 console.log('Event Name:', eventName);
                 console.log('Date & Time:', selectedDate);
                 console.log('Location:', location);
@@ -190,31 +191,33 @@ const AddEvent = () => {
         <Text style={styles.create}>Create Event</Text>
 
         <View style={ForEventMenu.theFrame}>
-          <View style={ForEventMenu.addImageCont}>
-            <TouchableOpacity onPress={selectImage}>
-              {imageSource ? (
-                <Image
-                  source={{ uri: imageSource }}
-                  style={ForEventMenu.image}
-                  resizeMode="contain"
-                />
-              ) : (
-                <Ionicons 
-                  name="add-circle-outline" 
-                  size={35} 
-                  color="#f1f1f1" 
-                />
-              )}
-            </TouchableOpacity>
-            <View style={{ alignItems: 'center', marginTop: 8 }}>
-              <Text style={{ fontWeight: 'bold', color:'#f1f1f1' }}>
-                {imageSource ? 'Tap again to edit ' : 'Add Image'}
-              </Text>
-              <Text style={{fontSize:14, color:'#ABABAB'}}>
-                (poster, environment, etc.)
-              </Text>
-            </View>
+          <View style={ForEventMenu.imageContainer}>
+            <View style={styles.addImages}>
+              <TouchableOpacity onPress={selectImage}>
+                {imageSource ? (
+                  <Image
+                    source={{ uri: imageSource }}
+                    style={styles.image}
+                    resizeMode="contain"
+                  />
+                ) : (
+                  <Ionicons 
+                    name="add-circle-outline" 
+                    size={35} 
+                    color="#f1f1f1" 
+                  />
+                )}
+              </TouchableOpacity>
+              <View style={{ alignItems: 'center', marginTop: 8 }}>
+                <Text style={{ fontWeight: 'bold', color:'#f1f1f1' }}>
+                  {imageSource ? 'Tap again to edit ' : 'Add Image'}
+                </Text>
+                <Text style={{fontSize:14, color:'#ABABAB'}}>
+                  (poster, environment, etc.)
+                </Text>
+              </View>
 
+            </View>
           </View>
           <TxtInputs 
             label='Event Name' 
@@ -299,6 +302,18 @@ const styles = StyleSheet.create({
     // width: '95%',
     alignSelf: 'center',
 
-  }
+  },
+  addImages: {
+    // marginLeft: 5,
+    // marginTop: 20,
+    alignItems: 'center',
+    padding: 10,
+    // marginHorizontal:120,
+  },
+  image: {
+    borderRadius:5,
+    width: 370,
+    height: 200,
+  },
 
 })
