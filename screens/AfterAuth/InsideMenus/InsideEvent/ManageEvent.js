@@ -6,7 +6,8 @@ import { Entypo, Ionicons } from '@expo/vector-icons';
 import "firebase/firestore";
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent } from '../InsideGStyles'
-import { getDocs, collection, db, where, query } from '../../../../firebaseAPI';
+import { query, where } from 'firebase/firestore';
+import {collection, db, getDocs} from '../../../../firebaseAPI'
 import { getAuth } from 'firebase/auth';
 
 const ManageEvent = () => {
@@ -14,17 +15,47 @@ const ManageEvent = () => {
   const [refreshing, setRefreshing] = useState(false);
 
   const getNewEvent = async () => {
-    setRefreshing(true);
-    const querySnapshot = await getDocs(collection(db, "newevent"));
-    const events = [];
-    querySnapshot.forEach((doc) => {
-      events.push({
-        ...doc.data(),
-        id: doc.id,
+    try {
+      setRefreshing(true);
+  
+      // Get the Firebase authentication object
+      const auth = getAuth();
+  
+      // Get information about the currently authenticated user
+      const user = auth.currentUser;
+  
+      if (!user) {
+        // If the user is not signed in, exit the function
+        return;
+      }
+  
+      // Get the UID of the currently authenticated user
+      const userId = user.uid;
+  
+      // Create a query to fetch documents from the "newevent" collection for the authenticated user
+      const q = query(collection(db, 'newevent'), where('userId', '==', userId));
+  
+      // Fetch data using the created query
+      const querySnapshot = await getDocs(q);
+  
+      // Create an array to store the retrieved data
+      const events = [];
+  
+      // Iterate through each document in the query result and add it to the events array
+      querySnapshot.forEach((doc) => {
+        events.push({
+          ...doc.data(),
+          id: doc.id,
+        });
       });
-    });
-    setNewEventList(events);
-    setRefreshing(false);
+  
+      // Set the state with the obtained data
+      setNewEventList(events);
+    } catch (error) {
+      console.error('Error fetching documents: ', error);
+    } finally {
+      setRefreshing(false);
+    }
   };
   
   useEffect(() => {

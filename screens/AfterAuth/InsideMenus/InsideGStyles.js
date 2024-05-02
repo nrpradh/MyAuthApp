@@ -7,7 +7,7 @@ export const ForEventMenu = StyleSheet.create ({
     },
     theFrame: {
         backgroundColor:'rgba(25, 25, 25, 0.7)',
-        padding:10,
+        padding:5,
         minHeight: '92.5%',
         borderRadius:5,  
         marginTop:10,

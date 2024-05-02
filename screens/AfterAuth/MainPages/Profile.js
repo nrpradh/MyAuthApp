@@ -15,13 +15,13 @@ import { ForProfile } from '../InsideMenus/InsideGStyles';
 
 const Profile = ({navigation}) => {
   const MyID = auth.currentUser.email
-  const displayName = auth.currentUser.displayNamedisplayName;
+  const displayName = auth.currentUser.displayName;
   
   return (
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
       <View style={PGStyling.forContainer}>
         <Text >Profile</Text>
-        <Text> {displayName} </Text>
+        {/* <Text> {displayName} </Text> */}
         <Text> {MyID} </Text>
       </View>
 

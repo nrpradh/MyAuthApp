@@ -23,7 +23,6 @@ const AddEvent = () => {
   const [imageSource, setImageSource] = useState('');
   const [eventName, setEventName] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
-  const [address, setAddress] = useState("");
   const [location, setLocation] = useState(""); 
   const [description, setDescription] = useState('');
   
@@ -113,72 +112,68 @@ const AddEvent = () => {
   };
 
   const handleConfirmAndSave = async () => {
-  try {
-    // Mendapatkan objek autentikasi Firebase
-    const auth = getAuth();
+    try {
+      const auth = getAuth(); // Mendapatkan objek autentikasi Firebase
+      const user = auth.currentUser; // Mendapatkan info user authenticated
 
-    // Mendapatkan informasi pengguna yang terautentikasi saat ini
-    const user = auth.currentUser;
+      if (!user) {
+        alert('Please sign in to continue.');
+        return;
+      }
 
-    if (!user) {
-      // Jika pengguna belum masuk, tampilkan pesan dan keluar dari fungsi
-      alert('Please sign in to continue.');
-      return;
-    }
+      const userId = user.uid; // Mendapatkan UID pengguna yang terautentikasi
 
-    // Mendapatkan UID pengguna yang terautentikasi
-    const userId = user.uid;
+      if (!imageSource || !eventName || !selectedDate || !location || !description) {
+        // If any of the fields are empty, display an alert to the user
+        alert('Please fill in all fields.');
+        return;
+      }
 
-    if (!imageSource || !eventName || !selectedDate || !location || !description) {
-      // If any of the fields are empty, display an alert to the user
-      alert('Please fill in all fields.');
-      return;
-    }
+      // Save the data to Firestore
+      const docRef = await addDoc(collection(db, 'newevent'), {
+        imageSource: imageSource,
+        eventName: eventName,
+        selectedDate: selectedDate,
+        location: location,
+        description: description,
+        userId: userId, // Include the userId field
+      });
 
-    // Save the data to Firestore
-    const docRef = await addDoc(collection(db, 'newevent'), {
-      imageSource: imageSource,
-      eventName: eventName,
-      selectedDate: selectedDate,
-      location: location,
-      description: description,
-      userId: userId, // Include the userId field
-    });
+      console.log("Document written with ID: ", docRef.id);
 
-    console.log("Document written with ID: ", docRef.id);
-
-    // Show an alert for confirmation
-    Alert.alert(
-      'Confirmation',
-      'Do you want to continue with the entered information?',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel'
-        },
-        {
-          text: 'Continue',
-          onPress: () => {
-            navigation.navigate('EventMenuPage');
-            // Proceed to the next step or navigate to another page
-            console.log('The Image:', imageSource);
-            console.log('Event Name:', eventName);
-            console.log('Date & Time:', selectedDate);
-            console.log('Location:', location);
-            console.log('Description:', description);
+      Alert.alert(
+        'Confirmation',
+        'Do you want to continue with the entered information?',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel'
+          },
+          {
+            text: 'Continue',
+            onPress: () => {
+              navigation.navigate('EventMenuPage');
+              // Proceed to the next step or navigate to another page
+              console.log('The Image:', imageSource);
+              console.log('Event Name:', eventName);
+              console.log('Date & Time:', selectedDate);
+              console.log('Location:', location);
+              console.log('Description:', description);
+            }
           }
-        }
-      ],
-      { cancelable: false }
-    );
-  } catch (error) {
-    console.error("Error adding document: ", error);
-  }
-};
+        ],
+        { cancelable: false }
+      );
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  };
 
   
   // Later on __________________________________________________________________
+  const [address, setAddress] = useState("");
+
   const openMaps = () => {
     const formattedAddress = location.replace(/\s/g, '+');
     let url;
