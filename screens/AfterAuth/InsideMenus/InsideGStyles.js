@@ -58,6 +58,20 @@ export const ForEventMenu = StyleSheet.create ({
     },
 
 
+    // Add Image Styling
+    addImageCont: {
+        marginTop: 20,
+        alignItems: 'center',
+        padding: 20,
+    },
+    imageSize: {    
+        borderRadius:5,
+        width: 370,
+        height: 200,
+        
+    }
+
+
 
 
 })
