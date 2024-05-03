@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
   btnSubmit:{
     borderRadius: 5,
     backgroundColor: '#f1f1f1',
-    color:'#353535',
+    color:'#6155e5',
     padding: 10,
     marginVertical:5,
     fontWeight:'500',

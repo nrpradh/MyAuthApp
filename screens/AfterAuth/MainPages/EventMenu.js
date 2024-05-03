@@ -90,17 +90,17 @@ const ToAddEvent = () => {
   return(
     <SpeedDial 
       isOpen={open}
-      icon={{ name: 'edit', color: '#f1f1f1' }}
-      openIcon={{ name: 'close', color: '#f1f1f1' }}
+      icon={{ name: 'add', color: '#6155e5' }}
+      openIcon={{ name: 'close', color: '#6155e5' }}
       onOpen={() => setOpen(!open)}
       onClose={() => setOpen(!open)}
-      buttonStyle={{backgroundColor:'#353535'}} 
+      buttonStyle={{backgroundColor:'#f1f1f1'}} 
       containerStyle={{ borderWidth: 0.5, borderColor: '#6155e5' }}
     >
       <SpeedDial.Action
-        icon={{ name: 'add', color: '#f1f1f1' }}
-        buttonStyle={{backgroundColor:'#353535', }}
-        title="Create event"
+        icon={{ name: 'upload', color: '#6155e5' }}
+        buttonStyle={{backgroundColor:'#f1f1f1', }}
+        title="Create & upload"
         titleStyle={{ color: '#6155e5' }}
         containerStyle={{ borderWidth: 0.5, borderColor: '#6155e5' }}
         onPress={handleNavigation} // Call the handleNavigation function

@@ -3,11 +3,13 @@ import React, { useState, useEffect } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
-import "firebase/firestore";
+// import Global Style
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent } from '../InsideGStyles'
-import { query, where } from 'firebase/firestore';
-import {collection, db, getDocs} from '../../../../firebaseAPI'
+
+// import Firestore
+// import { query, where } from 'firebase/firestore';
+import {collection, db, getDocs, query, where} from '../../../../firebaseAPI'
 import { getAuth } from 'firebase/auth';
 
 const ManageEvent = () => {

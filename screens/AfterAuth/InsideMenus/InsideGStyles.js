@@ -8,7 +8,7 @@ export const ForEventMenu = StyleSheet.create ({
     theFrame: {
         backgroundColor:'rgba(25, 25, 25, 0.7)',
         padding:5,
-        minHeight: '92.5%',
+        // minHeight: '92.5%',
         borderRadius:5,  
         marginTop:10,
         // flex:1,
@@ -16,6 +16,7 @@ export const ForEventMenu = StyleSheet.create ({
     
     },
     eventFlex:{
+        // flexGrow:1,
         flexDirection:'row', 
         justifyContent:'space-between',
         alignItems:'center',
@@ -115,7 +116,7 @@ export const ForManageEvent = StyleSheet.create ({
         borderWidth:0.5,
         borderColor:'#6155e5',
         padding:8,
-        margin:10,
+        margin:8,
         borderRadius:2,
     },
     image: {

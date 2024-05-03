@@ -4,7 +4,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { PGStyling } from '../PGStyling';
-
+import CategoryFilter from '../InsideMenus/InsideHome/Categories';
 
 
 
@@ -27,9 +27,9 @@ const Home = ({navigation}) => {
 
   
   return (
-    <LinearGradient {...PGStyling.linearGradient}style={styles.container} >
+    <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
       <View style={PGStyling.forContainer}>
-        
+        <CategoryFilter/>
         
 
         <Button onPress={() => navigation.navigate('Categories')} title="Next page" />
