@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, Text, StyleSheet, Image, RefreshControl, TouchableOpacity, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Image, RefreshControl, TouchableOpacity, FlatList } from 'react-native';
 
 //import Global Style
 import { forCategories } from './homeGStyle';
 
 //import Firestore
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, getDocs,db } from '../../../../firebaseAPI';
+import { collection, query, where, getDocs, db } from '../../../../firebaseAPI';
 
 const CombinedEventDataScreen = () => {
   const [combinedData, setCombinedData] = useState([]);
@@ -47,36 +47,31 @@ const CombinedEventDataScreen = () => {
     // Handle event press, for example, navigate to event details screen
     console.log(`Event ${eventId} pressed`);
   };
+
   return (
-    <ScrollView
-      contentContainerStyle={forCategories.container}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
-    {combinedData.map(event => (
-      <TouchableOpacity key={event.id} onPress={() => handleEventPress(event.id)}>
-        <View key={event.id} style={forCategories.itemContainer}>
-          <Image source={{ uri: event.imageSource }} style={forCategories.image} />
-          <View style={forCategories.overlay}>
-            <Text style={forCategories.overlayText}>{event.eventName}</Text>
-          </View>
-          {/* Render other event details as needed */}
-        </View>
-      </TouchableOpacity>
-    ))}
-  </ScrollView>
+    <View style={forCategories.theFrame}> 
+      <FlatList
+        horizontal
+        data={combinedData}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => handleEventPress(item.id)}>
+            <View style={forCategories.itemContainer}>
+              <Image source={{ uri: item.imageSource }} style={forCategories.image} />
+              
+                <Text style={forCategories.overlayText}>{item.eventName}</Text>
+             
+              <Text style={forCategories.locationText}>{item.location}</Text>
+              {/* Render other event details as needed */}
+            </View>
+            
+          </TouchableOpacity>
+        )}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        showsHorizontalScrollIndicator={false}
+      />
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    alignItems: 'center',
-    paddingVertical: 20,
-    
-  },
-  
-});
 
 export default CombinedEventDataScreen;

@@ -1,11 +1,8 @@
 import { StyleSheet } from "react-native";
 
 export const forCategories = StyleSheet.create ({
-    container: {
-        flex: 1,
-        flexDirection:'row',
-        paddingVertical: 10,
-    },
+    
+    // Styling categorie boxes
     categories: {
         // paddingHorizontal: 10,
     },
@@ -31,32 +28,41 @@ export const forCategories = StyleSheet.create ({
     flatListContent: {
         alignItems: 'center',
     },
+    
+    // The data container
+    theFrame: {
+        backgroundColor:'rgba(25, 25, 25, 0.7)',
+        padding:15,
+        // minHeight: '92.5%',
+        borderRadius:5,  
+        marginVertical:10,
+        
+    
+    },
 
-    // The Box of it
     itemContainer: {
         borderWidth: 0.5,
         paddingVertical: 8,
         paddingHorizontal: 7,
-        alignItems: 'center',
+        // alignItems: 'center',
         backgroundColor: '#353535',
         borderRadius: 5,
         borderColor:'#6155e5',
         marginRight: 10,
-        height: 200,
-        width: 230, // Adjust item width as needed
+        // height: 200,
+        // width: 220,// Adjust item width as needed
     },
     image: {
-        resizeMode: 'cover',
-        borderRadius: 5,
-        width: '100%', // Adjust image width as needed
-        height: 140, // Adjust image height as needed
+        resizeMode:'cover',
+        borderRadius: 2,
+        // width: '100%', // Adjust image width as needed
+        height: 120, // Adjust image height as needed
     },
     overlay: {
-        position: 'absolute',
-        bottom: 15,
-        left: 15,
-        backgroundColor: '#353535',
-        padding: 10,
+        alignSelf:'center',
+        // backgroundColor: '#353535',
+        margin:5,
+        padding: 7,
         borderRadius: 5,
         borderWidth:0.5,
         borderColor:'#6155e5'
@@ -71,8 +77,12 @@ export const forCategories = StyleSheet.create ({
     },
     overlayText: {
         color: '#f1f1f1',
-        fontSize: 13,
+        fontSize: 14,
         fontWeight: 'bold',
     },
+    locationText: {
+        color:'#f1f1f1',
+        fontSize:13,
+    }
     
 })
