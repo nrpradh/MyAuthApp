@@ -32,7 +32,7 @@ const Home = ({navigation}) => {
         <CategoryFilter/>
         
 
-        <Button onPress={() => navigation.navigate('Categories')} title="Next page" />
+        <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='#353535' />
 
       </View>
     </LinearGradient>

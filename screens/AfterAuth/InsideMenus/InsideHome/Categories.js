@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, Text, StyleSheet, Image, RefreshControl } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Image, RefreshControl, TouchableOpacity, Pressable } from 'react-native';
 
 //import Global Style
 import { forCategories } from './homeGStyle';
@@ -43,20 +43,27 @@ const CombinedEventDataScreen = () => {
     fetchData(); // Fetch data again
   };
 
+  const handleEventPress = (eventId) => {
+    // Handle event press, for example, navigate to event details screen
+    console.log(`Event ${eventId} pressed`);
+  };
   return (
     <ScrollView
-    contentContainerStyle={styles.container}
-    refreshControl={
-      <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-    }
-  >
+      contentContainerStyle={forCategories.container}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
     {combinedData.map(event => (
-      <View key={event.id} style={styles.eventContainer}>
-        <Text style={styles.eventTitle}>{event.title}</Text>
-        <Image source={{ uri: event.imageUrl }} style={styles.eventImage} />
-        <Text style={styles.eventDescription}>{event.description}</Text>
-        {/* Render other event details as needed */}
-      </View>
+      <TouchableOpacity key={event.id} onPress={() => handleEventPress(event.id)}>
+        <View key={event.id} style={forCategories.itemContainer}>
+          <Image source={{ uri: event.imageSource }} style={forCategories.image} />
+          <View style={forCategories.overlay}>
+            <Text style={forCategories.overlayText}>{event.eventName}</Text>
+          </View>
+          {/* Render other event details as needed */}
+        </View>
+      </TouchableOpacity>
     ))}
   </ScrollView>
   );
@@ -67,6 +74,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     paddingVertical: 20,
+    
   },
   
 });

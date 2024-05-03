@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 export const forCategories = StyleSheet.create ({
     container: {
         flex: 1,
+        flexDirection:'row',
         paddingVertical: 10,
     },
     categories: {
@@ -30,20 +31,23 @@ export const forCategories = StyleSheet.create ({
     flatListContent: {
         alignItems: 'center',
     },
+
+    // The Box of it
     itemContainer: {
-        borderWidth: 0.2,
+        borderWidth: 0.5,
         paddingVertical: 8,
         paddingHorizontal: 7,
         alignItems: 'center',
-        backgroundColor: '#f1f1f1',
-        borderRadius: 2,
+        backgroundColor: '#353535',
+        borderRadius: 5,
+        borderColor:'#6155e5',
         marginRight: 10,
-        height: 190,
-        width: 220, // Adjust item width as needed
+        height: 200,
+        width: 230, // Adjust item width as needed
     },
     image: {
         resizeMode: 'cover',
-        borderRadius: 3,
+        borderRadius: 5,
         width: '100%', // Adjust image width as needed
         height: 140, // Adjust image height as needed
     },
@@ -51,20 +55,22 @@ export const forCategories = StyleSheet.create ({
         position: 'absolute',
         bottom: 15,
         left: 15,
-        backgroundColor: '#f1f1f1',
+        backgroundColor: '#353535',
         padding: 10,
         borderRadius: 5,
-        shadowColor: '#101010',
-        shadowOffset: {
-            width: 0,
-            height: 1,
-            },
-            shadowOpacity: 0.1,
-            shadowRadius: 2,
-            elevation: 5,
+        borderWidth:0.5,
+        borderColor:'#6155e5'
+        // shadowColor: '#6155e5',
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 1,
+        //     },
+        //     shadowOpacity: 0.1,
+        //     shadowRadius: 2,
+        //     elevation: 5,
     },
     overlayText: {
-        color: '#6155e5',
+        color: '#f1f1f1',
         fontSize: 13,
         fontWeight: 'bold',
     },
