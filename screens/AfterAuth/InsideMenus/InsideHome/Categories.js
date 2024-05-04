@@ -57,8 +57,7 @@ const CombinedEventDataScreen = () => {
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => handleEventPress(item.id)}>
             <View style={forCategories.itemContainer}>
-              <Image source={{ uri: item.imageSource }} style={forCategories.image} />
-              
+              <Image source={{ uri: item.imageSource }} style={styles.image} />
                 <Text style={forCategories.overlayText}>{item.eventName}</Text>
                 <Text style={forCategories.locationText}>{item.location}</Text>
               {/* Render other event details as needed */}
@@ -74,3 +73,15 @@ const CombinedEventDataScreen = () => {
 };
 
 export default CombinedEventDataScreen;
+
+const styles = StyleSheet.create ({
+  image: {
+    resizeMode:'cover',
+    borderRadius: 2,
+    // width: '100%', // Adjust image width as needed
+    width: '100%', 
+    height: 125 // Adjust image height as needed
+  },
+
+
+})

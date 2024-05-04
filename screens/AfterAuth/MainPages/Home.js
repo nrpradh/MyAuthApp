@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import { PGStyling } from '../PGStyling';
 import CategoryFilter from '../InsideMenus/InsideHome/Categories';
+import SearchDataBar from '../../../components/searchDataBar';
 
 const Home = ({navigation}) => {
   const [loading, setLoading] = useState(false); // State to track loading status
@@ -36,16 +37,18 @@ const Home = ({navigation}) => {
   return (
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
       <View style={PGStyling.forContainer}>
+        <SearchDataBar/>
         <CategoryFilter/>
         <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='#353535' />
-        {/* uncomment when the home Page is done 
+
         
+        {/* uncomment and use this when the home Page is done 
         {loading ? (
-          <ActivityIndicator size={40} color="#6155e5" />
+        <ActivityIndicator size={40} color="#6155e5" />
         ) : (
           <>
-            <CategoryFilter/>
-            <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='#353535' />
+          <CategoryFilter/>
+          <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='#353535' />
           </>
         )} */}
       </View>

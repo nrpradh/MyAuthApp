@@ -11,6 +11,8 @@ import {  getFirestore,
           query, 
           where, 
           orderBy,
+          startAt,
+          endAt
         
         } from "firebase/firestore";
 // import * as firebase from 'firebase';
@@ -33,5 +35,6 @@ const auth = initializeAuth(app);
 const db = getFirestore(app);
 
 export { app, db, auth,
-        getFirestore, collection, addDoc, getDocs, query, where, orderBy
+        getFirestore, collection, addDoc, getDocs, 
+        query, where, orderBy, startAt, endAt
       };
