@@ -6,7 +6,7 @@ import { forCategories } from './homeGStyle';
 
 //import Firestore
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, getDocs, db } from '../../../../firebaseAPI';
+import { collection, query, where, getDocs, db,auth } from '../../../../firebaseAPI';
 
 const CombinedEventDataScreen = () => {
   const [combinedData, setCombinedData] = useState([]);
@@ -47,7 +47,7 @@ const CombinedEventDataScreen = () => {
     // Handle event press, for example, navigate to event details screen
     console.log(`Event ${eventId} pressed`);
   };
-
+  
   return (
     <View style={forCategories.theFrame}> 
       <FlatList
@@ -60,8 +60,7 @@ const CombinedEventDataScreen = () => {
               <Image source={{ uri: item.imageSource }} style={forCategories.image} />
               
                 <Text style={forCategories.overlayText}>{item.eventName}</Text>
-             
-              <Text style={forCategories.locationText}>{item.location}</Text>
+                <Text style={forCategories.locationText}>{item.location}</Text>
               {/* Render other event details as needed */}
             </View>
             

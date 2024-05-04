@@ -121,7 +121,7 @@ const AddEvent = () => {
         return;
       }
 
-      const userId = user.uid; // Mendapatkan UID pengguna yang terautentikasi
+      const userId = user.email; // Mendapatkan UID pengguna yang terautentikasi
 
       if (!imageSource || !eventName || !selectedDate || !location || !description) {
         // If any of the fields are empty, display an alert to the user
@@ -136,7 +136,8 @@ const AddEvent = () => {
         selectedDate: selectedDate,
         location: location,
         description: description,
-        userId: userId, // Include the userId field
+        userId: userId,
+        createdAt: new Date() // Include the userId field
       });
 
       console.log("Document written with ID: ", docRef.id);

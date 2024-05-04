@@ -9,7 +9,7 @@ import { ForEventMenu, ForManageEvent } from '../InsideGStyles'
 
 // import Firestore
 // import { query, where } from 'firebase/firestore';
-import {collection, db, getDocs, query, where} from '../../../../firebaseAPI'
+import {collection, db, getDocs, query, where,orderBy } from '../../../../firebaseAPI'
 import { getAuth } from 'firebase/auth';
 
 const ManageEvent = () => {
@@ -32,7 +32,7 @@ const ManageEvent = () => {
       }
   
       // Get the UID of the currently authenticated user
-      const userId = user.uid;
+      const userId = user.email;
   
       // Create a query to fetch documents from the "newevent" collection for the authenticated user
       const q = query(collection(db, 'newevent'), where('userId', '==', userId));

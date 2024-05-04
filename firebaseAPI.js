@@ -4,7 +4,15 @@ import { initializeApp } from "firebase/app";
 
 
 import "firebase/firestore";
-import { getFirestore, collection, addDoc, getDocs, query, where } from "firebase/firestore";
+import {  getFirestore, 
+          collection, 
+          addDoc, 
+          getDocs, 
+          query, 
+          where, 
+          orderBy,
+        
+        } from "firebase/firestore";
 // import * as firebase from 'firebase';
 import firebase from "firebase/compat/app";
 
@@ -24,4 +32,6 @@ const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app);
 const db = getFirestore(app);
 
-export { app, db , getFirestore, collection, addDoc, getDocs, auth, query, where};
+export { app, db, auth,
+        getFirestore, collection, addDoc, getDocs, query, where, orderBy
+      };
