@@ -10,6 +10,8 @@ import SearchDataBar from '../../../components/searchDataBar';
 const Home = ({navigation}) => {
   const [loading, setLoading] = useState(false); // State to track loading status
 
+  const [searchBarActive, setSearchBarActive] = useState(false);
+
   useFocusEffect(
     useCallback(() => {
       const backAction = () => {

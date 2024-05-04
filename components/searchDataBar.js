@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, RefreshControl, TouchableOpacity, TextInput, FlatList } from 'react-native';
 
+// Import Global Style
+import { searchBarStyling } from '../screens/AfterAuth/InsideMenus/InsideHome/homeGStyle';
+
 // Import Firestore
 import { getAuth } from 'firebase/auth';
 import { collection, query, where, getDocs, db, orderBy, startAt, endAt } from '../firebaseAPI';
@@ -9,6 +12,7 @@ const SearchDataBar = () => {
   const [combinedData, setCombinedData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchClicked, setSearchClicked] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -50,56 +54,53 @@ const SearchDataBar = () => {
     fetchData(); // Fetch data again
   };
 
-  const handleEventPress = (eventId) => {
+  const handleEventPress = (eventName) => {
     // Handle event press, for example, navigate to event details screen
-    console.log(`Event ${eventId} pressed`);
+    console.log(`Event ${eventName} pressed`);
+  };
+
+  const handleSearchBarClick = () => {
+    setSearchClicked(true); // Set search bar clicked to true
+  };
+
+  const handleSearchBarBlur = () => {
+    setSearchClicked(false); // Reset searchClicked state when search bar loses focus
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <TextInput
-        style={styles.searchInput}
+        style={searchBarStyling.searchInput}
         placeholder="Search..."
         value={searchQuery}
         onChangeText={text => setSearchQuery(text)}
+        color='#f1f1f1'
+        placeholderTextColor='#ABABAB'
+        onFocus={handleSearchBarClick}
+        onBlur={handleSearchBarBlur}
       />
-      <FlatList
-        data={combinedData}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleEventPress(item.id)}>
-            <View style={styles.itemContainer}>
-              <Image source={{ uri: item.imageSource }} style={styles.image} />
-              <Text>{item.eventName}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-        keyExtractor={item => item.id}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-      />
+      {searchClicked && ( // Conditionally render the FlatList based on searchClicked state
+        <FlatList
+          data={combinedData}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => handleEventPress(item.id)}>
+              <View style={searchBarStyling.itemContainer}>
+                <Image source={{ uri: item.imageSource }} style={styles.image} />
+                <Text>{item.eventName}</Text>
+                <Text style={searchBarStyling.location}> {item.userId} </Text>
+              </View>
+            </TouchableOpacity>
+          )}
+          keyExtractor={item => item.id}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        />
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-  },
-  searchInput: {
-    backgroundColor: '#353535',
-    borderRadius: 5,
-    borderColor: '#6155e5',
-    borderWidth: 0.5,
-    padding: 10,
-    marginHorizontal: 2,
-    marginBottom:15,
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#CCCCCC',
-  },
+  
   image: {
     width: 50,
     height: 50,

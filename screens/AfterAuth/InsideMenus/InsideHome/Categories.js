@@ -12,6 +12,7 @@ const CombinedEventDataScreen = () => {
   const [combinedData, setCombinedData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
+
   const fetchData = async () => {
     try {
       const auth = getAuth();
@@ -78,7 +79,6 @@ const styles = StyleSheet.create ({
   image: {
     resizeMode:'cover',
     borderRadius: 2,
-    // width: '100%', // Adjust image width as needed
     width: '100%', 
     height: 125 // Adjust image height as needed
   },

@@ -86,3 +86,28 @@ export const forCategories = StyleSheet.create ({
     }
     
 })
+
+export const searchBarStyling = StyleSheet.create({
+    searchInput: {
+        backgroundColor: '#353535',
+        borderRadius: 5,
+        borderColor: '#6155e5',
+        borderWidth: 0.5,
+        padding: 10,
+        // marginHorizontal: 2,
+        marginBottom:5,
+    },
+    itemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 8,
+        borderBottomWidth: 1,
+        borderBottomColor: '#CCCCCC',
+    },
+    location:{
+        marginLeft:2,
+        fontSize:12,
+        color:'#505050'
+
+    }
+})
