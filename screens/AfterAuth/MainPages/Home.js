@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View, Button, BackHandler, TouchableOpacity } from 'react-native'
-import React,{useEffect, useCallback} from 'react';
+import { StyleSheet, Text, View, Button, BackHandler, TouchableOpacity, ActivityIndicator } from 'react-native'
+import React,{useEffect, useCallback, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { PGStyling } from '../PGStyling';
 import CategoryFilter from '../InsideMenus/InsideHome/Categories';
 
-
-
 const Home = ({navigation}) => {
+  const [loading, setLoading] = useState(false); // State to track loading status
+
   useFocusEffect(
     useCallback(() => {
       const backAction = () => {
@@ -23,17 +23,31 @@ const Home = ({navigation}) => {
       return () => backHandler.remove();
     }, [])
   );
+
+  useEffect(() => {
+    // Simulate loading data
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 400); // Simulated loading time in milliseconds
+  }, []);
   
 
-  
   return (
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
       <View style={PGStyling.forContainer}>
         <CategoryFilter/>
-        
-
         <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='#353535' />
-
+        {/* uncomment when the home Page is done 
+        
+        {loading ? (
+          <ActivityIndicator size={40} color="#6155e5" />
+        ) : (
+          <>
+            <CategoryFilter/>
+            <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='#353535' />
+          </>
+        )} */}
       </View>
     </LinearGradient>
   )
@@ -46,5 +60,4 @@ const styles = StyleSheet.create({
     flex:1,
     padding:10,
   }
- 
-})
+});
