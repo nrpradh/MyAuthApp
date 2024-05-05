@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
 
-
+import PickCategories from '../../../../components/pickCategories';
 import DatePicker from '../../../../components/datePicker';
 import { ForEventMenu, ForManageEvent, ForProfile } from '../InsideGStyles'
 import { PGStyling } from '../../PGStyling'
@@ -267,6 +267,7 @@ const AddEvent = () => {
           <TouchableOpacity onPress={handleConfirmAndSave}>
             <Text style={styles.btnSubmit}>  Submit  </Text>
           </TouchableOpacity>
+          <PickCategories/>
         </View>
       </ScrollView>
     </LinearGradient>
