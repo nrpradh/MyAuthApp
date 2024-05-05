@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View,TouchableOpacity, Animated, } from 'react-native'
 import React,{useState} from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
 import { authGStyles } from './AuthGlobalStyling';
@@ -12,11 +12,12 @@ import Login from './Login'
 const Landing = ({navigation}) => {
   const [isRegistering, setIsRegistering] = useState(true);
   return (
+    
     <LinearGradient {...PGStyling.linearGradient} style={styles.container}>
+      
       <View style={styles.container}>
-        <Login/>
-        {/* uncomment later 
-        {isRegistering ? <Register /> : <Login />} */}
+        {/* <Login/> */}
+        {isRegistering ? <Register /> : <Login />}
 
         {/* Conditional label based on isRegistering */}
         <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
@@ -36,7 +37,9 @@ const Landing = ({navigation}) => {
           </TouchableOpacity>
         </View>  
       </View>
-    </LinearGradient>
+     
+    </LinearGradient> 
+    
   )
 }
 
@@ -44,7 +47,7 @@ export default Landing
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
+        flex:10,
         justifyContent:'center',
         // alignItems:'center',
         // backgroundColor:'#709065',

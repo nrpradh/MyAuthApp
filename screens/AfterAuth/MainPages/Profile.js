@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
+import { getAuth } from 'firebase/auth';
 import { MaterialIcons, AntDesign, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { auth } from '../../../firebaseAPI';
@@ -14,15 +15,29 @@ import BtnForProfile from '../InsideMenus/InsideProfile/btnForProfile'
 import { ForProfile } from '../InsideMenus/InsideGStyles';
 
 const Profile = ({navigation}) => {
+  const [username, setUsername] = useState('');
+  useEffect(() => {
+    // Get the currently authenticated user
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    // Check if user is authenticated and has a display name
+    if (user && user.displayName) {
+      setUsername(user.displayName);
+    }
+  }, []);
+
   const MyID = auth.currentUser.email
-  const displayName = auth.currentUser.displayName;
+  
   
   return (
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
       <View style={PGStyling.forContainer}>
         <Text >Profile</Text>
+        <Text> {username} </Text>
         {/* <Text> {displayName} </Text> */}
         <Text> {MyID} </Text>
+        
       </View>
 
       <View style={ForProfile.proFrame}>

@@ -33,7 +33,7 @@ const Login = () => {
     <View style={styles.container}>
       <Text style={authGStyles.headingAuth}> Log In</Text>
       <Text style={authGStyles.subHeadingAuth}> Log into an existing account</Text>
-        <View style={authGStyles.boxesAuth}>
+      <View style={authGStyles.boxesAuth}>
         <TextInput
           placeholder='Email'
           placeholderTextColor='#f1f1f1'

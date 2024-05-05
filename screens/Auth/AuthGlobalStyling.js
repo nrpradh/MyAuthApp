@@ -14,7 +14,7 @@ export const authGStyles = StyleSheet.create ({
     boxesAuth:{
         backgroundColor:'rgba(255, 255, 255, 0.3)',
         padding:20,
-        height:'40%',
+        height:300,
         borderRadius:5,
         justifyContent:'space-evenly'
     },
