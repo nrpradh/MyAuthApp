@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-
+import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
 
 const PickCategories = () => {
   const [open, setOpen] = useState(false);
@@ -31,14 +31,14 @@ const PickCategories = () => {
         setItems={setItems}
         multiple={true}
         min={0}
-        max={2}
+        max={4}
         mode="BADGE" // Change the mode here
         containerStyle={styles.dropdownContainer}
         style={styles.dropdown}
         textStyle={styles.dropdownText}
         // badgeDotColors={[]}
-        badgeDotColors={['white']}  
-        badgeColors={['#f1f1f1']}
+        badgeDotColors={['#f1f1f1']}  
+        badgeColors={['white']}
         badgeDotStyle={{
           borderRadius: 5
         }}
@@ -58,7 +58,7 @@ const PickCategories = () => {
         listItemContainerStyle={styles.dropdownItemContainer}
         selectedItemContainerStyle={styles.selectedItemContainer}
         selectedItemLabelStyle={styles.selectedItemLabel}
-        placeholder="Select fruits"
+        placeholder="Pick one category or more..."
         
       />
     </View>
@@ -68,12 +68,13 @@ const PickCategories = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop:20,
     // justifyContent: 'center',
     // alignItems: 'center',
     
   },
   dropdownContainer: {
-    width: '50%',
+    // width: '50%',
     height: 40,
     marginBottom: 20,
     
@@ -84,12 +85,12 @@ const styles = StyleSheet.create({
     // color:'#ababab',
     borderColor: '#6155e5',
     borderRadius:5,
-    borderBottomWidth: 1,
+    borderWidth: 0.5,
     
   },
   dropdownText: {
     
-    fontSize: 16,
+    fontSize: 14,
     color: '#ABABAB',
     
   },

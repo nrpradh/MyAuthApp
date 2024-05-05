@@ -16,6 +16,7 @@ import "firebase/firestore";
 import 'firebase/auth';
 import { getAuth } from 'firebase/auth';
 import { app,  db , collection, addDoc}  from '../../../../firebaseAPI';
+import { FlatList } from 'react-native-gesture-handler';
 
 const AddEvent = () => {
   const navigation = useNavigation(); 
@@ -198,14 +199,22 @@ const AddEvent = () => {
     }
   };
   // _______________________________________________________________________________
+
+
+  // <Text style={ForEventMenu.addEventLabels}> Category :</Text>
+  // <PickCategories/>
   return (
     <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
+      <View style={{marginTop:40,}}>
+        <Text style={styles.create}>Create Event</Text>
+      </View>
+      {/* <Text style={ForEventMenu.addEventLabels}> Category :</Text> */}
+      <PickCategories/>
       
       <ScrollView 
-        style={PGStyling.forContainer}
+        style={{marginTop:53,}}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}>
-        <Text style={styles.create}>Create Event</Text>
 
         <View style={ForEventMenu.theFrame}>
           <View style={ForEventMenu.imageContainer}>
@@ -262,14 +271,23 @@ const AddEvent = () => {
             onChangeText={handleDescription}
             // onChangeText={(text) => handleDescription(text)}
           />
-          <Text style={ForEventMenu.addEventLabels}>Max Attendee :</Text>
-        
-          <TouchableOpacity onPress={handleConfirmAndSave}>
-            <Text style={styles.btnSubmit}>  Submit  </Text>
-          </TouchableOpacity>
-          <PickCategories/>
+
+          <TxtInputs 
+            label='Max Attendee :' 
+            placeholder='Set Max Attendee...'
+            value={description}
+            onChangeText={handleDescription}
+            // onChangeText={(text) => handleDescription(text)}
+          />
+          
+          
+           
         </View>
+        
       </ScrollView>
+      <TouchableOpacity onPress={handleConfirmAndSave}>
+        <Text style={styles.btnSubmit}>  Submit Event  </Text>
+      </TouchableOpacity>
     </LinearGradient>
   )
 }
@@ -315,6 +333,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical:5,
     fontWeight:'500',
+    // marginHorizontal:2,
+    // textAlign:'center',
     // borderWidth:1,
     // borderColor:'#6155E5',
     // width: '95%',

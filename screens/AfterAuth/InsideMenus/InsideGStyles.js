@@ -69,7 +69,8 @@ export const ForEventMenu = StyleSheet.create ({
         borderWidth:0.5,
         borderColor:'#6155e5',
         // padding:8,
-        // margin:10,
+        margin:1,
+        marginTop:5,
         borderRadius:2,
     },
     addImageCont: {
