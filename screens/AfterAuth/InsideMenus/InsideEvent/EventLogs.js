@@ -4,21 +4,16 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { Entypo } from '@expo/vector-icons';
 
 import { PGStyling } from '../../PGStyling'
-import { ForEventMenu} from '../InsideGStyles'
+import { ForEventMenu, ForManageEvent} from '../InsideGStyles'
 
 const EventLogs = () => {
   return (
     <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
-      <View style={PGStyling.forContainer}>
-      
-        <Text style={ForEventMenu.eventHeading}>Event Logs</Text>
+      <View style={ForManageEvent.forContainer}>
       
       
-        <View style={ForEventMenu.eventFlex}>
-          {/* <View style={{flexDirection:'row'}}>
-            <Entypo name="chevron-thin-left" size={18} color="grey" />
-            <Text style={ForEventMenu.textGuide}> Manage Event</Text>
-          </View>   */}
+      
+        <View style={ForEventMenu.eventFlex}>  
           <View style={styles.flexEndRow}>
             <Text style={ForEventMenu.textGuide} > List of active, requested event, etc. </Text>
           </View>

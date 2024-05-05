@@ -17,8 +17,7 @@ export const ForEventMenu = StyleSheet.create ({
     },
     eventFlex:{
         // flexGrow:1,
-        flexDirection:'row', 
-        justifyContent:'space-between',
+        margin:7,
         alignItems:'center',
         marginHorizontal:2,
         // backgroundColor:'white'
@@ -93,7 +92,7 @@ export const ForEventMenu = StyleSheet.create ({
 
 export const ForManageEvent = StyleSheet.create ({
     forContainer :{
-        marginTop:40,
+        // marginTop:40,
         flex:1,
         // flexGrow:1,
     },

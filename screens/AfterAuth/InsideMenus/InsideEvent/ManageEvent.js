@@ -72,13 +72,9 @@ const ManageEvent = () => {
   return (
     <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
       <View style={ForManageEvent.forContainer}>
-        <Text style={ForEventMenu.eventHeading}>Manage Event</Text>
         <View style={ForEventMenu.eventFlex}>
           <Text style={ForEventMenu.textGuide}> Manage your event by update, delete, etc.</Text>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={ForEventMenu.textGuide}> Event Logs</Text>
-            <Entypo name="chevron-thin-right" size={18} color="grey" />
-          </View>
+          
         </View>
 
         <ScrollView

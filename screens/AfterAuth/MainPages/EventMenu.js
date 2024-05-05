@@ -5,74 +5,18 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { useNavigation } from '@react-navigation/native';
 import { SpeedDial } from '@rneui/themed';
 
+
 import ManageEvent from '../InsideMenus/InsideEvent/ManageEvent';
 import EventLogs from '../InsideMenus/InsideEvent/EventLogs';
 
 
-const Tab = createMaterialTopTabNavigator();
 
-function MyTabBar({ state, descriptors, navigation, position }) {
-  return (
-    <View style={{ flexDirection: 'row' }}>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
 
-        const isFocused = state.index === index;
-
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
-
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name, route.params);
-          }
-        };
-
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
-
-        const inputRange = state.routes.map((_, i) => i);
-        const opacity = position.interpolate({
-          inputRange,
-          outputRange: inputRange.map(i => (i === index ? 1 : 0)),
-        });
-
-        return (
-          <TouchableOpacity
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ flex: 1 }}
-            key={route.key} // Add key prop to TouchableOpacity
-          >
-            
-          </TouchableOpacity>
-        );
-      })}
-      
-    </View>
-  );
-}
 
 const EventMenu = () => {
+  
   return(
-    <View style={{flex:1,}}>
+    <View style={{flex:1}}>
       <TopTabNav/>
       <ToAddEvent/>
     </View>
@@ -110,12 +54,41 @@ const ToAddEvent = () => {
 
 }
 
+
+const Tab = createMaterialTopTabNavigator();
+
 const TopTabNav = () => {
   return (
-      <Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
-        <Tab.Screen name="Manage" component={ManageEvent} />
-        <Tab.Screen name="Logs" component={EventLogs} />
-      </Tab.Navigator>
+    <Tab.Navigator 
+      initialRouteName='Manage'
+      screenOptions={{
+        tabBarActiveTintColor: '#6155e5', // Color of the active tab text
+        tabBarInactiveTintColor: '#ABABAB', // Color of the inactive tab text
+        tabBarLabelStyle: {
+          fontSize: 15, // Font size of the tab labels
+          fontWeight: 500, // Font weight of the tab labels
+        },
+        tabBarStyle: {
+          backgroundColor: '#f1f1f1', // Background color of the tab bar
+          paddingTop:40,
+        },
+        tabBarIndicatorStyle: {
+          backgroundColor: '#6155e5', // Color of the tab indicator
+        },
+        tabBarPressColor:'#f5f5f5', // Disable touch effect color
+        tabBarPressOpacity: 0,
+      }}>
+      <Tab.Screen 
+        name="Manage" 
+        component={ManageEvent} 
+        options={{tabBarLabel:' Manage Event'}}
+      />
+      <Tab.Screen 
+        name="Logs" 
+        component={EventLogs} 
+        options={{tabBarLabel:' Event Logs'}}  
+      />
+    </Tab.Navigator>
       
       
   )
