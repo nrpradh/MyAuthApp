@@ -333,20 +333,13 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical:10,
     fontWeight:'500',
-    // marginHorizontal:2,
-    // textAlign:'center',
-    // borderWidth:1,
-    // borderColor:'#6155E5',
-    // width: '95%',
     alignSelf: 'center',
 
   },
   addImages: {
-    // marginLeft: 5,
-    // marginTop: 20,
     alignItems: 'center',
     padding: 10,
-    // marginHorizontal:120,
+    
   },
   image: {
     borderRadius:5,

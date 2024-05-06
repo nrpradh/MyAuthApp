@@ -17,14 +17,12 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log('User logged in:', user.email);
-        // Navigate to 'HomePage' after successful login
         navigation.navigate('TabNav');
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error('Login error:', errorCode, errorMessage);
-        // Set error state to display error message
         setError(errorMessage);
       });
   };

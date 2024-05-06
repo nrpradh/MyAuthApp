@@ -1,5 +1,5 @@
 // import { initializeAuth } from "firebase/auth";
-import { initializeAuth } from "firebase/auth/cordova";
+import { initializeAuth,} from "firebase/auth/cordova";
 import { initializeApp } from "firebase/app";
 
 
@@ -29,9 +29,12 @@ const firebaseConfig = {
     measurementId: "G-GMC95BDDL7" 
   };
   
+
   // firebase.initializeApp(firebaseConfig);
 const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app);
+
+
 const db = getFirestore(app);
 
 export { app, db, auth,

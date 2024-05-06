@@ -14,6 +14,7 @@ import { PGStyling } from '../PGStyling';
 import LogOut from '../InsideMenus/logOut';
 import BtnForProfile from '../InsideMenus/InsideProfile/btnForProfile'
 import { ForProfile } from '../InsideMenus/InsideGStyles';
+import RNModal from '../../../components/RNModal';
 
 const Profile = () => {
   const navigation = useNavigation();
@@ -40,39 +41,26 @@ const Profile = () => {
         <Text style={PGStyling.pageTitle} >Your Profile</Text>
         
         <View style={PGStyling.profileDetail}>
-        <Image source={require('../../../assets/icon.png')} style={styles.image} />
+          <Image source={require('../../../assets/icon.png')} style={styles.image} />
           <View>
             <Text style={PGStyling.username}> {username}  </Text>
             <Text style={PGStyling.org}>  Organization </Text>
             <Text style={PGStyling.email}>  {MyID} </Text>
             
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('EditPage')}>
-              <Feather name="edit" size={20} color="#f1f1f1"  
-                marginLeft={80}  
-              /> 
-          </TouchableOpacity>
+          <RNModal/>
+          
         </View>
       </View>
       
       <View style={ForProfile.proFrame}>
-        <Text style={ForProfile.headerFrame}> General </Text>
-        <BtnForProfile 
-          icon={<MaterialIcons name="history" size={26} color="#f1f1f1" marginLeft={2} />}
-          headText="Event Logs"
-          subHeading="The list of your event logs"
-          onPress={() => navigation.navigate('EventLogsPage')}
-        />
-        
+        <Text style={ForProfile.headerFrame} > Preferences </Text>
         <BtnForProfile 
           icon={<Feather name="book-open" size={22} color="#f1f1f1" marginLeft={5}  />}
           headText="Terms of use"
           subHeading="User guidelines, rights, agreements, etc."
           onPress={() => navigation.navigate('HomeScreen')}
         />
-      </View>
-      <View style={ForProfile.proFrame}>
-        <Text style={ForProfile.headerFrame} > Preferences </Text>
         <BtnForProfile 
           icon={<Feather name="help-circle" size={25} color="#f1f1f1" marginLeft={2} />}
           headText="About"
@@ -84,9 +72,12 @@ const Profile = () => {
           headText="FAQ"
           subHeading="Frequently asked question"
           onPress={() => navigation.navigate('HomeScreen')}
-        />
+        /> 
+        
         <LogOut/>
+        
       </View>
+      
       
     </LinearGradient>
   )

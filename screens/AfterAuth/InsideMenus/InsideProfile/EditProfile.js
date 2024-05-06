@@ -2,6 +2,9 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
 
+
+import Example from '../../../../components/RNModal';
+
 import { ForEventMenu, ForProfile } from '../InsideGStyles';
 import { PGStyling } from '../../PGStyling';
 
@@ -20,12 +23,14 @@ const EditProfile = () => {
             label='Organization' 
             placeholder='Add or input new org..'  
           />
-          <TxtInputs
-            label='Email' 
-            placeholder='Input new email @..'  
-          />
         </View>
+        
+        <TouchableOpacity>
+          <Text style={styles.btnSubmit}>  Save Edit  </Text>
+          
+       </TouchableOpacity>
       </View>
+      <Example/>
     </LinearGradient>
   )
 }
@@ -58,5 +63,15 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     padding:10,
+  },
+  btnSubmit:{
+    borderRadius: 5,
+    backgroundColor: '#f1f1f1',
+    color:'#6155e5',
+    padding: 10,
+    marginVertical:5,
+    fontWeight:'500',
+    alignSelf: 'center',
+
   },
 })
