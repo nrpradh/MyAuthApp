@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native'
 import React,{useState, useEffect} from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
 import { getAuth } from 'firebase/auth';
@@ -16,6 +16,7 @@ import { ForProfile } from '../InsideMenus/InsideGStyles';
 
 const Profile = ({navigation}) => {
   const [username, setUsername] = useState('');
+  
   useEffect(() => {
     // Get the currently authenticated user
     const auth = getAuth();
@@ -34,10 +35,10 @@ const Profile = ({navigation}) => {
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
       <View style={PGStyling.forContainer}>
         <Text >Profile</Text>
-        <Text> {username} </Text>
-        {/* <Text> {displayName} </Text> */}
-        <Text> {MyID} </Text>
-        
+        <View style={PGStyling.profileDetail}>
+          <Text style={PGStyling.username}> {username}  </Text>
+          <Text style={PGStyling.email}>  {MyID} </Text>
+        </View>
       </View>
 
       <View style={ForProfile.proFrame}>

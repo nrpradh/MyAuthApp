@@ -9,7 +9,7 @@ import { ForEventMenu, ForManageEvent } from '../InsideGStyles'
 
 // import Firestore
 // import { query, where } from 'firebase/firestore';
-import {collection, db, getDocs, query, where,orderBy } from '../../../../firebaseAPI'
+import {collection, db, getDocs, query, where, orderBy } from '../../../../firebaseAPI'
 import { getAuth } from 'firebase/auth';
 
 const ManageEvent = () => {
@@ -130,9 +130,9 @@ const styles = StyleSheet.create({
   image: {
     alignSelf:'center',
     resizeMode: 'cover',
-    borderRadius: 3,
+    borderRadius: 2,
     width: '100%', 
-    height: 125,
+    height: 135,
 },
 });
 
