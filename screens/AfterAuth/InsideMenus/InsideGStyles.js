@@ -10,7 +10,7 @@ export const ForEventMenu = StyleSheet.create ({
         padding:5,
         // minHeight: '92.5%',
         borderRadius:5,  
-        marginTop:10,
+        marginTop:5,
         // flex:1,
         // marginVertical:10,
     
@@ -167,6 +167,15 @@ export const ForProfile = StyleSheet.create ({
         alignItems: 'center',
         // marginBottom: 10,
     },
+    editProfileTitle:{
+        color:'#353535',
+        textAlign:'center',
+        fontSize:18,
+        fontWeight:'500',
+        marginBottom:15,
+        
+    },
+
     editText: {
         color: '#f1f1f1',
         paddingTop: 2,
@@ -183,7 +192,7 @@ export const ForProfile = StyleSheet.create ({
         backgroundColor:'rgba(25, 25, 25, 0.7)', //rgba(25, 25, 25, 0.25)
         padding:10,
         borderRadius:5,  
-        marginBottom:10,
+        marginVertical:5,
     },
     headerFrame:{
         color:'#f1f1f1',

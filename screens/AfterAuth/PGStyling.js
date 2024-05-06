@@ -16,7 +16,7 @@ export const PGStyling = StyleSheet.create ({
         flexDirection: 'row',
         backgroundColor: 'rgba(25, 25, 25, 0.7)',
         padding: 14,
-        marginTop:20, marginBottom:10,
+        marginTop:20, marginBottom:5,
         alignItems: 'center',
 
         borderWidth:0.5,

@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f1f1f1',
     color:'#6155e5',
     padding: 10,
-    marginVertical:5,
+    marginVertical:10,
     fontWeight:'500',
     // marginHorizontal:2,
     // textAlign:'center',

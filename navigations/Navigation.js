@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import firebase from 'firebase/compat/app';
+import { Ionicons } from '@expo/vector-icons';
 
 
 // TabNav imported
@@ -66,7 +66,7 @@ const EventMenuStack = () => {
         headerShown: false, // Remove if you want the header bar visible
       }}>
       <Stack.Screen name='EventMenuPage' component={EventMenu} />
-      <Stack.Screen name='AddEventPage' component={AddEvent} /> 
+      <Stack.Screen name='AddEventPage' component={AddEvent}/>
       <Stack.Screen name='ManageEventPage' component={ManageEvent} />  
       <Stack.Screen name='EventLogsPage' component={EventLogs} />  
 
