@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native'
 import React,{useState, useEffect} from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
-import { getAuth } from 'firebase/auth';
+import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons, AntDesign, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import { getAuth } from 'firebase/auth';
 
+// Directory imports
 import { auth } from '../../../firebaseAPI';
-
 import { PGStyling } from '../PGStyling';
 
 
@@ -14,7 +15,9 @@ import LogOut from '../InsideMenus/logOut';
 import BtnForProfile from '../InsideMenus/InsideProfile/btnForProfile'
 import { ForProfile } from '../InsideMenus/InsideGStyles';
 
-const Profile = ({navigation}) => {
+const Profile = () => {
+  const navigation = useNavigation();
+
   const [username, setUsername] = useState('');
   
   useEffect(() => {
@@ -44,7 +47,7 @@ const Profile = ({navigation}) => {
             <Text style={PGStyling.email}>  {MyID} </Text>
             
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('EditPage')}>
               <Feather name="edit" size={20} color="#f1f1f1"  
                 marginLeft={80}  
               /> 

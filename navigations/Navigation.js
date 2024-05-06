@@ -83,7 +83,7 @@ const ProfileStack = () => {
         headerShown: false, // Remove if you want the header bar visible
       }}>
       <Stack.Screen name='ProfilePage' component={Profile} /> 
-      <Stack.Screen name='EditProfile' component={EditProfile} /> 
+      <Stack.Screen name='EditPage' component={EditProfile} /> 
       <Stack.Screen name='EventLogsPage' component={EventLogs} />  
     </Stack.Navigator>
   )

@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     
   },
   dropdown: {
-    backgroundColor: '#353535',
+    backgroundColor: 'rgba(25, 25, 25, 0.7)',
     // color:'#ababab',
     borderColor: '#6155e5',
     borderRadius:5,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   dropdownItemContainer: {
    
     backgroundColor: '#353535',
-    borderColor:'#6155e5', borderWidth:0.5,
+    borderColor:'#6155e5', borderWidth:0.2,
   },
   dropdownItemLabel: {
     
