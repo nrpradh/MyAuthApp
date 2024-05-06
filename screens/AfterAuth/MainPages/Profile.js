@@ -34,13 +34,24 @@ const Profile = ({navigation}) => {
   return (
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
       <View style={PGStyling.forContainer}>
-        <Text >Profile</Text>
+        <Text style={PGStyling.pageTitle} >Your Profile</Text>
+        
         <View style={PGStyling.profileDetail}>
-          <Text style={PGStyling.username}> {username}  </Text>
-          <Text style={PGStyling.email}>  {MyID} </Text>
+        <Image source={require('../../../assets/icon.png')} style={styles.image} />
+          <View>
+            <Text style={PGStyling.username}> {username}  </Text>
+            <Text style={PGStyling.org}>  Organization </Text>
+            <Text style={PGStyling.email}>  {MyID} </Text>
+            
+          </View>
+          <TouchableOpacity>
+              <Feather name="edit" size={20} color="#f1f1f1"  
+                marginLeft={80}  
+              /> 
+          </TouchableOpacity>
         </View>
       </View>
-
+      
       <View style={ForProfile.proFrame}>
         <Text style={ForProfile.headerFrame}> General </Text>
         <BtnForProfile 
@@ -85,5 +96,12 @@ const styles = StyleSheet.create({
     flex:1,
     padding:10,
   },
+  image: {
+    // alignSelf:'center',
+    resizeMode: 'cover',
+    borderRadius: 50,
+    width: 75, 
+    height: 75,
+  },  
 
 })

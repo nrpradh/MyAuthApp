@@ -133,6 +133,6 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     width: '100%', 
     height: 135,
-},
+  },  
 });
 

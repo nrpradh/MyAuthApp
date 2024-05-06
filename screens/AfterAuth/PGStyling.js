@@ -5,14 +5,24 @@ export const PGStyling = StyleSheet.create ({
         marginTop:40,
         // flex:1,
     },
-    profileDetail:{
-        // flexDirection: 'row',
-        borderRadius: 5,
-        backgroundColor: '#353535',
-        padding: 15,
-        // width: '95%',
-        // alignItems: 'center',
+    pageTitle:{
+        color:'#353535',
+        textAlign:'center',
+        fontSize:18,
+        fontWeight:'500',
         
+    },
+    profileDetail:{
+        flexDirection: 'row',
+        backgroundColor: 'rgba(25, 25, 25, 0.7)',
+        padding: 14,
+        marginTop:20, marginBottom:10,
+        alignItems: 'center',
+
+        borderWidth:0.5,
+        borderColor:'#6155e5',
+        borderRadius:5,
+       
 
     },
     username:{
@@ -20,12 +30,21 @@ export const PGStyling = StyleSheet.create ({
         paddingTop: 2,
         marginLeft: 20,
         fontSize: 17,
+        
+    },
+    org:{
+        color: 'rgba(255, 255, 255, 0.8)',
+        paddingBottom: 2,
+        marginLeft: 20,
+        fontSize: 13,
+        // marginTop:5
     },
     email:{
-        color: 'rgba(255, 255, 255, 0.7)',
+        color: 'rgba(255, 255, 255, 0.5)',
         paddingBottom: 2,
         marginLeft: 20,
         fontSize: 12,
+        // marginTop:5
     },
 
     profileContent: {
@@ -38,7 +57,7 @@ export const PGStyling = StyleSheet.create ({
         // marginBottom: 10,
     },
     
-    linearGradient: {
+    linearGradient: {  // Global Screen Gradient
         flex:1,
         colors: ['#f1f1f1', '#6155e5', '#353535'],
         start: { x: 0.5, y: 0 },
