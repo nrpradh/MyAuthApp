@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import PickCategories from '../../../../components/pickCategories';
 import DatePicker from '../../../../components/datePicker';
-import { ForEventMenu, ForManageEvent, ForProfile } from '../InsideGStyles'
+import { ForEventMenu } from '../InsideGStyles'
 import { PGStyling } from '../../PGStyling'
 
 
@@ -272,13 +272,13 @@ const AddEvent = () => {
             // onChangeText={(text) => handleDescription(text)}
           />
 
-          <TxtInputs 
+          {/* <TxtInputs 
             label='Max Attendee :' 
             placeholder='Set Max Attendee...'
             value={description}
             onChangeText={handleDescription}
             // onChangeText={(text) => handleDescription(text)}
-          />
+          /> */}
           
           
            

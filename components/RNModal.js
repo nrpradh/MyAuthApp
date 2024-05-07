@@ -1,24 +1,80 @@
 import React, { useState } from 'react';
 import { Text, TouchableOpacity, StyleSheet, View, TextInput, Image } from 'react-native';
 import Modal from 'react-native-modal';
+import * as ImagePicker from 'expo-image-picker';
 import { Feather} from '@expo/vector-icons';
 
 import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
 
-export const Example = () => {
+const RNModal = () => {
   const [visibleModal, setVisibleModal] = useState(null);
+  const [username, setUsername] = useState('');
+  const [imageSelected, setImageSelected] = useState(false);
+  const [lastSelectedImage, setLastSelectedImage] = useState(null); // Store the last selected image URI
+  const [imageSource, setImageSource] = useState(null);
 
+
+  //________________________ Update Profile
+  const handleUsernameChange = (newUsername) => {
+    setUsername(newUsername);
+  };
+
+
+  //________________________ Update User Photo
+  const selectImage = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (status !== 'granted') {
+      alert('Permission to access camera roll is required!');
+      return;
+    }
+
+    const pickerResult = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [5, 3],
+      quality: 1,
+    });
+
+    if (!pickerResult.cancelled) {
+      const selectedImage = pickerResult.assets[0].uri;
+      setImageSource(selectedImage);
+      setLastSelectedImage(selectedImage); // Update the last selected image URI
+      setImageSelected(true);
+      console.log('Image uploaded for box:', selectedImage);
+    }
+  };
+
+  const resetImage = () => {
+    setImageSelected(false);
+    setImageSource(lastSelectedImage); // Set the image source to the last selected image URI
+  };
+  //______________________ Update Username
+  
 
   const renderModalContent = () => (
     <View style={styles.modalContent}>
       <View style={{alignItems:'center', marginBottom:10}}>
         <Text style={ForEventMenu.addEventLabels}> Edit Profile </Text>
-        <TouchableOpacity>
+
+        {imageSelected ? (
+        <TouchableOpacity onPress={resetImage}>
+          <Image source={{ uri: imageSource }} style={styles.image} />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={selectImage}>
           <Image source={require('../assets/icon.png')} style={styles.image} />
         </TouchableOpacity>
+      )}
+
         <Text style={{marginTop:5, color:'#ABABAB', fontSize:12}}> Tap to Edit </Text>
       </View>
-      <TxtInputs label='Username' placeholder='Input new username..' />
+      <TxtInputs 
+        label='Username' 
+        placeholder='Input new username..' 
+        value={username}
+        onChangeText={handleUsernameChange}
+      />
       <TxtInputs label='Organization' placeholder='Add or input new org..' />
 
       <View style={styles.buttonFlex}>
@@ -39,6 +95,7 @@ export const Example = () => {
     </View>
   );
 
+  
   return (
     <View style={styles.container}>
         <TouchableOpacity onPress={() => setVisibleModal(1)}>
@@ -138,4 +195,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Example;
+export default RNModal;

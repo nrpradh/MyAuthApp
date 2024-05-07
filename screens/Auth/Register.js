@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {collection, addDoc, db} from '../../firebaseAPI'
+
+
 import { authGStyles } from './AuthGlobalStyling';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  
   const Registering = () => {
+
     const auth = getAuth();
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up 
@@ -29,7 +34,8 @@ const Register = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // Handle error
-      });
+    });
+
   };
 
   return (

@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { authGStyles } from './AuthGlobalStyling';
 import { PGStyling } from '../AfterAuth/PGStyling';
 
+
 // Auth Pages
 import Register from './Register'
 import Login from './Login'
