@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image, ActivityIndicator} from 'react-native'
 import React,{useState, useEffect} from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';

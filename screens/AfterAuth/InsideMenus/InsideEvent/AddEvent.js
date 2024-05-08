@@ -26,24 +26,7 @@ const AddEvent = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [location, setLocation] = useState(""); 
   const [description, setDescription] = useState('');
-  
 
-  /* const intoFirestoreDB = async() => {
-    try {
-      const docRef = await addDoc(collection(db, "NewEvent"), {
-        eventName: eventName,
-        selectedDate: selectedDate,
-        location: location,
-        description: description,
-        
-      });
-      
-      console.log("Document written with ID: ", docRef.id);
-      
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  } */
 
   const handleEventName = (inputText) => { //Handle event Name
     setEventName(inputText);

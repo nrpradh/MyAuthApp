@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, StyleSheet, View, TextInput, Image } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, View, TextInput, Image, ActivityIndicator, Alert } from 'react-native';
 import Modal from 'react-native-modal';
+import firebase from 'firebase/compat/app';
 import * as ImagePicker from 'expo-image-picker';
 import { Feather} from '@expo/vector-icons';
+import { getAuth, updateProfile, } from 'firebase/auth';
+import { updateDoc, doc,db, getFirestore, getDoc } from '../firebaseAPI';
 
 import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
 
 const RNModal = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [visibleModal, setVisibleModal] = useState(null);
-  const [username, setUsername] = useState('');
-  const [imageSelected, setImageSelected] = useState(false);
-  const [lastSelectedImage, setLastSelectedImage] = useState(null); // Store the last selected image URI
+  const [lastSelectedImage, setLastSelectedImage] = useState(null); 
   const [imageSource, setImageSource] = useState(null);
 
-
-  //________________________ Update Profile
-  const handleUsernameChange = (newUsername) => {
-    setUsername(newUsername);
-  };
-
+  const auth = getAuth();
+  const Firestore = getFirestore();
 
   //________________________ Update User Photo
   const selectImage = async () => {
@@ -32,49 +31,84 @@ const RNModal = () => {
     const pickerResult = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [5, 3],
+      aspect: [3, 3],
       quality: 1,
     });
 
     if (!pickerResult.cancelled) {
       const selectedImage = pickerResult.assets[0].uri;
       setImageSource(selectedImage);
-      setLastSelectedImage(selectedImage); // Update the last selected image URI
-      setImageSelected(true);
+
+      
       console.log('Image uploaded for box:', selectedImage);
     }
   };
 
-  const resetImage = () => {
-    setImageSelected(false);
-    setImageSource(lastSelectedImage); // Set the image source to the last selected image URI
-  };
-  //______________________ Update Username
   
+
+  //______________________ Update Username
+  const [username, setUsername] = useState('');
+
+  const handleUpdateUsername = async () => {
+    try {
+      const user = auth.currentUser; // Get the currently signed-in user
+      
+      if (!user) {
+        throw new Error("User is not authenticated.");
+      }
+  
+      // Update user profile with the new username
+      await updateProfile(user, {
+        displayName: username
+      });
+  
+      // Update username in Firestore collection
+      const userRef = doc(db, 'userprofile', user.uid); // Reference to the user's document
+      const userDoc = await getDoc(userRef);
+  
+      if (!userDoc.exists()) {
+        throw new Error("User profile document does not exist.");
+      }
+  
+      await updateDoc(userRef, { username: username }); // Update the username field
+  
+      Alert.alert('Success', 'Username updated successfully!');
+    } catch (error) {
+      Alert.alert('Success', 'Failed to update username. Please try again.');
+      console.error('Error updating username:', error);
+    }
+  };
+  
+
+  //______________________ Update Org
+
+
+
+  //______________________ Handle All Update
+  
+
 
   const renderModalContent = () => (
     <View style={styles.modalContent}>
       <View style={{alignItems:'center', marginBottom:10}}>
         <Text style={ForEventMenu.addEventLabels}> Edit Profile </Text>
 
-        {imageSelected ? (
-        <TouchableOpacity onPress={resetImage}>
+        
+        <TouchableOpacity onPress={selectImage}>
           <Image source={{ uri: imageSource }} style={styles.image} />
         </TouchableOpacity>
-      ) : (
-        <TouchableOpacity onPress={selectImage}>
-          <Image source={require('../assets/icon.png')} style={styles.image} />
-        </TouchableOpacity>
-      )}
-
         <Text style={{marginTop:5, color:'#ABABAB', fontSize:12}}> Tap to Edit </Text>
+        
       </View>
+
       <TxtInputs 
         label='Username' 
         placeholder='Input new username..' 
         value={username}
-        onChangeText={handleUsernameChange}
+        editable={!loading}
+        onChangeText={setUsername}
       />
+
       <TxtInputs label='Organization' placeholder='Add or input new org..' />
 
       <View style={styles.buttonFlex}>
@@ -84,11 +118,15 @@ const RNModal = () => {
             <Text style={styles.buttonCancel}>Cancel</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+
+      
+        <TouchableOpacity onPress={handleUpdateUsername} disabled={loading}>
           <View >
             <Text style={styles.buttonSave}>Save</Text>
           </View>
         </TouchableOpacity>
+        {loading && <ActivityIndicator color="#000" />} 
+        {error && <Text style={{ color: 'red' }}>{error}</Text>}
       </View>
 
       
@@ -141,6 +179,8 @@ const styles = StyleSheet.create({
     // alignSelf:'center',
     resizeMode: 'cover',
     borderRadius: 50,
+    borderWidth:1, 
+    borderColor:'#6155e5',
     width: 85, 
     height: 85,
   },  

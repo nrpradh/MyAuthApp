@@ -133,7 +133,7 @@ export const ForManageEvent = StyleSheet.create ({
         // justifyContent: 'center', // Center text vertically
     },
     eventName: {
-        fontSize:15,
+        fontSize:16,
         fontWeight:'500',
         color:'#f1f1f1',
         // marginHorizontal:3,

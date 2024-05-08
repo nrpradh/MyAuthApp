@@ -87,7 +87,7 @@ const SearchDataBar = () => {
               <View style={searchBarStyling.itemContainer}>
                 <Image source={{ uri: item.imageSource }} style={styles.image} />
                 <Text>{item.eventName}</Text>
-                <Text style={searchBarStyling.location}> {item.userId} </Text>
+                <Text style={searchBarStyling.location}> {item.location} </Text>
               </View>
             </TouchableOpacity>
           )}

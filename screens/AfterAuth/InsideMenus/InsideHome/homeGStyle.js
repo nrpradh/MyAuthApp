@@ -89,7 +89,7 @@ export const forCategories = StyleSheet.create ({
 
 export const searchBarStyling = StyleSheet.create({
     searchInput: {
-        backgroundColor: '#353535',
+        backgroundColor: 'rgba(25, 25, 25, 0.7)',
         borderRadius: 5,
         borderColor: '#6155e5',
         borderWidth: 0.5,

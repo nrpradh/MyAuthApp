@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import {collection, addDoc, db} from '../../firebaseAPI'
+import { getAuth, createUserWithEmailAndPassword, updateProfile, } from 'firebase/auth';
+import {collection, addDoc, db,} from '../../firebaseAPI'
 
 
 import { authGStyles } from './AuthGlobalStyling';
@@ -10,33 +10,34 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
-  const Registering = () => {
 
-    const auth = getAuth();
+  const auth = getAuth();
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed up 
-        const user = userCredential.user;
-        // Update user profile with username
-        updateProfile(auth.currentUser, { displayName: username })
-          .then(() => {
-            // Profile updated successfully
-            console.log('Username added:', username);
-          })
-          .catch((error) => {
-            // An error occurred while updating profile
-            console.error('Error updating profile:', error);
-          });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // Handle error
-    });
+  const handleRegister = async () => {
+    try {
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
+      // Update user profile with username
+      await updateProfile(user, {
+        displayName: username
+      });
+
+      // Add user data to Firestore collection
+      const userData = {
+        uid: user.uid,
+        email: user.email,
+        username: username
+      };
+      await addDoc(collection(db, 'userprofile'), userData);
+
+      console.log('User registered successfully with username:', username);
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
   };
+  
 
   return (
     <View style={styles.container}>
@@ -66,7 +67,7 @@ const Register = () => {
           onChangeText={(text) => setPassword(text)}
         />
         <View style={{ width: '80%', alignSelf: 'center', marginTop: 20, }}>
-          <TouchableOpacity onPress={Registering}>
+          <TouchableOpacity onPress={handleRegister}>
             <Text style={authGStyles.btnAuth}> Sign up </Text>
           </TouchableOpacity>
         </View>

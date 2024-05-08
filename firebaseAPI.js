@@ -1,3 +1,5 @@
+import firebase from "firebase/app";
+
 // import { initializeAuth } from "firebase/auth";
 import { initializeAuth,} from "firebase/auth/cordova";
 import { initializeApp } from "firebase/app";
@@ -7,16 +9,18 @@ import "firebase/firestore";
 import {  getFirestore, 
           collection, 
           addDoc, 
-          getDocs, 
+          updateDoc,
+          doc,
+          getDocs,  getDoc, 
           query, 
           where, 
           orderBy,
           startAt,
-          endAt
-        
+          endAt,
+
         } from "firebase/firestore";
 // import * as firebase from 'firebase';
-import firebase from "firebase/compat/app";
+// import firebase from "firebase/compat/app";
 
 
 const firebaseConfig = {
@@ -39,5 +43,6 @@ const db = getFirestore(app);
 
 export { app, db, auth,
         getFirestore, collection, addDoc, getDocs, 
-        query, where, orderBy, startAt, endAt
+        query, where, orderBy, startAt, endAt,
+        updateDoc, doc
       };
