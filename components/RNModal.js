@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, TouchableOpacity, StyleSheet, View, TextInput, Image, ActivityIndicator, Alert } from 'react-native';
 import Modal from 'react-native-modal';
 import firebase from 'firebase/compat/app';
 import * as ImagePicker from 'expo-image-picker';
 import { Feather} from '@expo/vector-icons';
-import { getAuth, updateProfile, } from 'firebase/auth';
-import { updateDoc, doc,db, getFirestore, query, where } from '../firebaseAPI';
+import { getAuth, updateProfile, sendEmailVerification } from 'firebase/auth';
+
+import {auth, updateDoc, doc,db, getFirestore, query, where, getDocs, collection } from '../firebaseAPI';
+
 
 import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
 
@@ -13,11 +15,27 @@ const RNModal = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [visibleModal, setVisibleModal] = useState(null);
-  const [lastSelectedImage, setLastSelectedImage] = useState(null); 
+  
   const [imageSource, setImageSource] = useState(null);
 
   const auth = getAuth();
-  // const Firestore = getFirestore();
+
+  const updateUsername = () => {
+    updateProfile(auth.currentUser, {
+      displayName: username,
+      
+    }).then(() => {
+      // Profile updated successfully
+      sendEmailVerification(auth.currentUser)
+      console.log("Profile updated successfully" , username);
+    }).catch((error) => {
+      // An error occurred
+      console.error("Error updating profile:", error);
+    });
+
+  } 
+
+  
 
   //________________________ Update User Photo
   const selectImage = async () => {
@@ -40,7 +58,7 @@ const RNModal = () => {
       setImageSource(selectedImage);
 
       
-      console.log('Image uploaded for box:', selectedImage);
+      console.log('Image uploaded for profile:', selectedImage);
     }
   };
 
@@ -49,31 +67,42 @@ const RNModal = () => {
   //______________________ Update Username
   const [username, setUsername] = useState('');
   
-  const data = {
-    username: username
-  }
+  // const handleUsernameChange = (text) => {
+  //   setUsername(text)
+  // } 
 
-  const handleUsernameChange = (text) => {
-    setUsername(text)
-  } 
+  // const user = auth.currentUser.dco;
+  // const currentUser = auth.currentUser;
+  
 
-  const updateUsername = async(email) => {
-    const userRef = doc (db, 'userprofile', 'HKQyZkNsbLq7AfJmCkU4')
-    updateDoc(userRef, data)
-    .then(() => {
-      console.log("New username :", username);
-    })
-    .catch((error) => {
-      console.error("Error updating document: ", error);
-    });
-  }
+
+  // const updateUsername = async() => {
+    
+  //   const data = {
+  //     username: username
+  //   }
+  //   const userRef = doc (db, 'userprofile', user) //'HKQyZkNsbLq7AfJmCkU4'
+  //   updateDoc(userRef, data)
+  //   .then(() => {
+  //     console.log("New username :", username);
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error updating document : ", error);
+  //   });
+  // }
+  
+
+  
+ 
+  
   
 
   //______________________ Update Org
-
+  const [org, setOrg] = useState('');
 
 
   //______________________ Handle All Update
+  
   
 
 
@@ -95,7 +124,7 @@ const RNModal = () => {
         placeholder='Input new username..' 
         value={username}
         editable={!loading}
-        onChangeText={handleUsernameChange}
+        onChangeText={text => setUsername(text)}
       />
 
       <TxtInputs label='Organization' placeholder='Add or input new org..' />

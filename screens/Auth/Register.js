@@ -17,11 +17,12 @@ const Register = () => {
     try {
       // Create user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      const user = userCredential.user.uid;
 
       // Update user profile with username
       await updateProfile(user, {
         displayName: username
+        
       });
 
       // Add user data to Firestore collection

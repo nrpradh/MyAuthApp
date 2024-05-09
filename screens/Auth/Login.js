@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebaseAPI';
 import { authGStyles } from './AuthGlobalStyling';
 
 const Login = () => {
@@ -10,6 +11,15 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+
+  const user = auth.currentUser;
+
+  if (user) {
+    console.log("User is signed in.");
+    // console.log("User UID:", user.uid);
+  } else {
+    console.log("No user signed in.");
+  }
 
   const LoggingIn = () => {
     const auth = getAuth();

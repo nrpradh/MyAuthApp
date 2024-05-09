@@ -1,17 +1,19 @@
 import firebase from "firebase/app";
 
 // import { initializeAuth } from "firebase/auth";
-import { initializeAuth,} from "firebase/auth/cordova";
+import { initializeAuth, updateProfile} from "firebase/auth/cordova";
 import { initializeApp } from "firebase/app";
 
 
 import "firebase/firestore";
-import {  getFirestore, 
+import {  getFirestore,  
           collection, 
           addDoc, 
           updateDoc,
           doc,
+          setDoc,
           getDocs,  getDoc, 
+          writeBatch,
           query, 
           where, 
           orderBy,
@@ -41,8 +43,8 @@ const auth = initializeAuth(app);
 
 const db = getFirestore(app);
 
-export { app, db, auth,
+export { app, db, auth, 
         getFirestore, collection, addDoc, getDocs, 
         query, where, orderBy, startAt, endAt,
-        updateDoc, doc
+        updateDoc, doc, setDoc, writeBatch, updateProfile
       };

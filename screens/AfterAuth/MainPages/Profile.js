@@ -27,7 +27,6 @@ const Profile = () => {
     await getUserProfile();
     setRefreshing(false);
   };
-  
   const getUserProfile = async () => {
     try {
       // Create a query to fetch documents from the "userprofile" collection
@@ -58,8 +57,8 @@ const Profile = () => {
     getUserProfile();
   }, []);
 
-  const MyID = auth.currentUser.email
-
+  // const MyID = auth.currentUser.email
+  const user = auth.currentUser
   
   
   
@@ -84,9 +83,9 @@ const Profile = () => {
         <View style={PGStyling.profileDetail}>
           <Image source={require('../../../assets/icon.png')} style={styles.image} />
           <View>
-            <Text style={PGStyling.username}> {username}  </Text>
+            <Text style={PGStyling.username}> {user.displayName}  </Text>
             <Text style={PGStyling.org}>  Organization </Text>
-            <Text style={PGStyling.email}>  {MyID} </Text>
+            <Text style={PGStyling.email}>  {user.email} </Text>
             
           </View>
           <RNModal/>
