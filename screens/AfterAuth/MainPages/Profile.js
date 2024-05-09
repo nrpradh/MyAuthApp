@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image, ActivityIndicator} from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image, ScrollView, RefreshControl } from 'react-native'
 import React,{useState, useEffect} from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
@@ -20,6 +20,7 @@ const Profile = () => {
   const navigation = useNavigation();
 
   const [username, setUsername] = useState('');
+  const [refreshing, setRefreshing] = useState(false);
   
   useEffect(() => {
     // Get the currently authenticated user
@@ -33,11 +34,35 @@ const Profile = () => {
   }, []);
 
   const MyID = auth.currentUser.email
+
+  const onRefresh = () => {
+    // Implement your refresh logic here
+    // For example, fetching updated user data
+    setRefreshing(true);
+    // Perform async operations...
+    setTimeout(() => {
+      // Once async operations are complete, set refreshing to false
+      setRefreshing(false);
+    }, 500); // Simulating a delay of 2 seconds for demonstration
+  }
   
   
   return (
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
-      <View style={PGStyling.forContainer}>
+      <ScrollView 
+        style={PGStyling.forContainer}
+        contentContainerStyle={{flexGrow:1}}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={['#ffffff']} // Color of the refresh indicator (Android)
+            tintColor={'#ffffff'} // Color of the refresh indicator (iOS)
+          />
+        }
+      >
         <Text style={PGStyling.pageTitle} >Your Profile</Text>
         
         <View style={PGStyling.profileDetail}>
@@ -51,33 +76,34 @@ const Profile = () => {
           <RNModal/>
           
         </View>
-      </View>
       
-      <View style={ForProfile.proFrame}>
-        <Text style={ForProfile.headerFrame} > Preferences </Text>
-        <BtnForProfile 
-          icon={<Feather name="book-open" size={22} color="#f1f1f1" marginLeft={5}  />}
-          headText="Terms of use"
-          subHeading="User guidelines, rights, agreements, etc."
-          onPress={() => navigation.navigate('HomeScreen')}
-        />
-        <BtnForProfile 
-          icon={<Feather name="help-circle" size={25} color="#f1f1f1" marginLeft={2} />}
-          headText="About"
-          subHeading="About the app and etc."
-          onPress={() => navigation.navigate('EventLogsPage')}
-        />
-        <BtnForProfile 
-          icon={<MaterialCommunityIcons name="comment-question-outline" size={22} color="#f1f1f1" marginLeft={5}  />}
-          headText="FAQ"
-          subHeading="Frequently asked question"
-          onPress={() => navigation.navigate('HomeScreen')}
-        /> 
-        
-        <LogOut/>
-        
-      </View>
       
+        <View style={ForProfile.proFrame}>
+          <Text style={ForProfile.headerFrame} > Preferences </Text>
+          <BtnForProfile 
+            icon={<Feather name="book-open" size={22} color="#f1f1f1" marginLeft={5}  />}
+            headText="Terms of use"
+            subHeading="User guidelines, rights, agreements, etc."
+            onPress={() => navigation.navigate('HomeScreen')}
+          />
+          <BtnForProfile 
+            icon={<Feather name="help-circle" size={25} color="#f1f1f1" marginLeft={2} />}
+            headText="About"
+            subHeading="About the app and etc."
+            onPress={() => navigation.navigate('EventLogsPage')}
+          />
+          <BtnForProfile 
+            icon={<MaterialCommunityIcons name="comment-question-outline" size={22} color="#f1f1f1" marginLeft={5}  />}
+            headText="FAQ"
+            subHeading="Frequently asked question"
+            onPress={() => navigation.navigate('HomeScreen')}
+          /> 
+          
+          <LogOut/>
+          
+        </View>
+      </ScrollView>
+    
       
     </LinearGradient>
   )

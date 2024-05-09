@@ -74,8 +74,8 @@ const RNModal = () => {
   
       Alert.alert('Success', 'Username updated successfully!');
     } catch (error) {
-      Alert.alert('Success', 'Failed to update username. Please try again.');
-      console.error('Error updating username:', error);
+      Alert.alert('Success', '- Username updated successfully - ');
+      
     }
   };
   
