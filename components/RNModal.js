@@ -5,7 +5,7 @@ import firebase from 'firebase/compat/app';
 import * as ImagePicker from 'expo-image-picker';
 import { Feather} from '@expo/vector-icons';
 import { getAuth, updateProfile, } from 'firebase/auth';
-import { updateDoc, doc,db, getFirestore, getDoc } from '../firebaseAPI';
+import { updateDoc, doc,db, getFirestore, query, where } from '../firebaseAPI';
 
 import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
 
@@ -17,7 +17,7 @@ const RNModal = () => {
   const [imageSource, setImageSource] = useState(null);
 
   const auth = getAuth();
-  const Firestore = getFirestore();
+  // const Firestore = getFirestore();
 
   //________________________ Update User Photo
   const selectImage = async () => {
@@ -48,36 +48,25 @@ const RNModal = () => {
 
   //______________________ Update Username
   const [username, setUsername] = useState('');
+  
+  const data = {
+    username: username
+  }
 
-  const handleUpdateUsername = async () => {
-    try {
-      const user = auth.currentUser; // Get the currently signed-in user
-      
-      if (!user) {
-        throw new Error("User is not authenticated.");
-      }
-  
-      // Update user profile with the new username
-      await updateProfile(user, {
-        displayName: username
-      });
-  
-      // Update username in Firestore collection
-      const userRef = doc(db, 'userprofile', user.uid); // Reference to the user's document
-      const userDoc = await getDoc(userRef);
-  
-      if (!userDoc.exists()) {
-        throw new Error("User profile document does not exist.");
-      }
-  
-      await updateDoc(userRef, { username: username }); // Update the username field
-  
-      Alert.alert('Success', 'Username updated successfully!');
-    } catch (error) {
-      Alert.alert('Success', '- Username updated successfully - ');
-      
-    }
-  };
+  const handleUsernameChange = (text) => {
+    setUsername(text)
+  } 
+
+  const updateUsername = async(email) => {
+    const userRef = doc (db, 'userprofile', 'HKQyZkNsbLq7AfJmCkU4')
+    updateDoc(userRef, data)
+    .then(() => {
+      console.log("New username :", username);
+    })
+    .catch((error) => {
+      console.error("Error updating document: ", error);
+    });
+  }
   
 
   //______________________ Update Org
@@ -106,7 +95,7 @@ const RNModal = () => {
         placeholder='Input new username..' 
         value={username}
         editable={!loading}
-        onChangeText={setUsername}
+        onChangeText={handleUsernameChange}
       />
 
       <TxtInputs label='Organization' placeholder='Add or input new org..' />
@@ -120,7 +109,7 @@ const RNModal = () => {
         </TouchableOpacity>
 
       
-        <TouchableOpacity onPress={handleUpdateUsername} disabled={loading}>
+        <TouchableOpacity onPress={updateUsername} disabled={loading}>
           <View >
             <Text style={styles.buttonSave}>Save</Text>
           </View>

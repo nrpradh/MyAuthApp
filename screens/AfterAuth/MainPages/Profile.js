@@ -8,7 +8,7 @@ import { getAuth } from 'firebase/auth';
 // Directory imports
 import { auth } from '../../../firebaseAPI';
 import { PGStyling } from '../PGStyling';
-
+import {collection, db,doc, getDocs, query } from '../../../firebaseAPI';
 
 // Components
 import LogOut from '../InsideMenus/logOut';
@@ -19,32 +19,48 @@ import RNModal from '../../../components/RNModal';
 const Profile = () => {
   const navigation = useNavigation();
 
-  const [username, setUsername] = useState('');
   const [refreshing, setRefreshing] = useState(false);
+  const [username, setUsername] = useState('');
   
-  useEffect(() => {
-    // Get the currently authenticated user
-    const auth = getAuth();
-    const user = auth.currentUser;
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await getUserProfile();
+    setRefreshing(false);
+  };
+  
+  const getUserProfile = async () => {
+    try {
+      // Create a query to fetch documents from the "userprofile" collection
+      const q = query(collection(db, 'userprofile'));
 
-    // Check if user is authenticated and has a display name
-    if (user && user.displayName) {
-      setUsername(user.displayName);
+      // Fetch data using the created query
+      const querySnapshot = await getDocs(q);
+
+      // Check if there is any document returned by the query
+      if (querySnapshot.empty) {
+        // If no document found, set username to empty string
+        setUsername('');
+        return;
+      }
+
+      // Assuming there is only one document for each user, directly access the first document
+      const userProfileDoc = querySnapshot.docs[0];
+
+      // Get the username from the document data
+      const userData = userProfileDoc.data();
+      setUsername(userData.username);
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
     }
+  };
+
+  useEffect(() => {
+    getUserProfile();
   }, []);
 
   const MyID = auth.currentUser.email
 
-  const onRefresh = () => {
-    // Implement your refresh logic here
-    // For example, fetching updated user data
-    setRefreshing(true);
-    // Perform async operations...
-    setTimeout(() => {
-      // Once async operations are complete, set refreshing to false
-      setRefreshing(false);
-    }, 500); // Simulating a delay of 2 seconds for demonstration
-  }
+  
   
   
   return (
@@ -58,8 +74,8 @@ const Profile = () => {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            colors={['#ffffff']} // Color of the refresh indicator (Android)
-            tintColor={'#ffffff'} // Color of the refresh indicator (iOS)
+            colors={['#6155e5']} // Color of the refresh indicator (Android)
+            tintColor={'#6155e5'} // Color of the refresh indicator (iOS)
           />
         }
       >

@@ -19,39 +19,26 @@ const ManageEvent = () => {
   const getNewEvent = async () => {
     try {
       setRefreshing(true);
-  
-      // Get the Firebase authentication object
+
       const auth = getAuth();
-  
-      // Get information about the currently authenticated user
       const user = auth.currentUser;
   
       if (!user) {
-        // If the user is not signed in, exit the function
         return;
       }
   
-      // Get the UID of the currently authenticated user
       const userId = user.email;
-  
-      // Create a query to fetch documents from the "newevent" collection for the authenticated user
       const q = query(collection(db, 'newevent'), where('userId', '==', userId));
-  
-      // Fetch data using the created query
       const querySnapshot = await getDocs(q);
-  
-      // Create an array to store the retrieved data
+
       const events = [];
-  
-      // Iterate through each document in the query result and add it to the events array
       querySnapshot.forEach((doc) => {
         events.push({
           ...doc.data(),
           id: doc.id,
         });
       });
-  
-      // Set the state with the obtained data
+      
       setNewEventList(events);
     } catch (error) {
       console.error('Error fetching documents: ', error);
