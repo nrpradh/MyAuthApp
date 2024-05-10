@@ -17,8 +17,8 @@ const Landing = ({navigation}) => {
     <LinearGradient {...PGStyling.linearGradient} style={styles.container}>
       
       <View style={styles.container}>
-        <Login/>
-        {/* {isRegistering ? <Register /> : <Login />} */}
+        {/* <Login/> */}
+        {isRegistering ? <Register /> : <Login />}
 
         {/* Conditional label based on isRegistering */}
         <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>

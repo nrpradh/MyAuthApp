@@ -21,6 +21,7 @@ const Profile = () => {
 
   const [refreshing, setRefreshing] = useState(false);
   const [username, setUsername] = useState('');
+  const [organization, setOrganization] = useState('');
   
   const onRefresh = async () => {
     setRefreshing(true);
@@ -30,15 +31,16 @@ const Profile = () => {
   const getUserProfile = async () => {
     try {
       // Create a query to fetch documents from the "userprofile" collection
-      const q = query(collection(db, 'userprofile'));
+      const userRef = query(collection(db, 'userprofile'));
 
       // Fetch data using the created query
-      const querySnapshot = await getDocs(q);
+      const querySnapshot = await getDocs(userRef);
 
       // Check if there is any document returned by the query
       if (querySnapshot.empty) {
         // If no document found, set username to empty string
         setUsername('');
+        setOrganization('');
         return;
       }
 
@@ -47,7 +49,8 @@ const Profile = () => {
 
       // Get the username from the document data
       const userData = userProfileDoc.data();
-      setUsername(userData.username);
+      setUsername(userData.username || ''); // Make sure username is defined, fallback to empty string
+      setOrganization(userData.organization || '')
     } catch (error) {
       console.error('Error fetching user profile:', error);
     }
@@ -59,6 +62,7 @@ const Profile = () => {
 
   // const MyID = auth.currentUser.email
   const user = auth.currentUser
+  
   
   
   
@@ -83,8 +87,9 @@ const Profile = () => {
         <View style={PGStyling.profileDetail}>
           <Image source={require('../../../assets/icon.png')} style={styles.image} />
           <View>
-            <Text style={PGStyling.username}> {user.displayName}  </Text>
-            <Text style={PGStyling.org}>  Organization </Text>
+            <Text style={PGStyling.username}> {username}  </Text>
+            {/* <Text style={PGStyling.username}> {user.displayName}  </Text> */}
+            <Text style={PGStyling.org}>  {organization} </Text>
             <Text style={PGStyling.email}>  {user.email} </Text>
             
           </View>

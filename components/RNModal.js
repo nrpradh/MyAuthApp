@@ -6,34 +6,53 @@ import * as ImagePicker from 'expo-image-picker';
 import { Feather} from '@expo/vector-icons';
 import { getAuth, updateProfile, sendEmailVerification } from 'firebase/auth';
 
-import {auth, updateDoc, doc,db, getFirestore, query, where, getDocs, collection } from '../firebaseAPI';
+import {auth, updateDoc, doc,db, setDoc, query, where, getDocs, collection, documentId } from '../firebaseAPI';
 
 
 import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
+import { getDoc } from 'firebase/firestore';
+
 
 const RNModal = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [visibleModal, setVisibleModal] = useState(null);
   
+  
+  const [username, setUsername] = useState('');
+  const [organization, setOrganization] = useState('');
   const [imageSource, setImageSource] = useState(null);
 
   const auth = getAuth();
+  // const user = auth.currentUser
+  
 
-  const updateUsername = () => {
-    updateProfile(auth.currentUser, {
-      displayName: username,
+  const handleUpdate = async () => {
+    try {
+      // Get the current user
+      const user = auth.currentUser;
       
-    }).then(() => {
-      // Profile updated successfully
-      sendEmailVerification(auth.currentUser)
-      console.log("Profile updated successfully" , username);
-    }).catch((error) => {
-      // An error occurred
-      console.error("Error updating profile:", error);
-    });
+      if (user) {
+        // Reference to the user's document in the 'userprofile' collection
+        const userProfileCollectionRef = collection(db, 'userprofile');
+        const userDocRef = doc(userProfileCollectionRef, user.uid);
 
-  } 
+        // Update user data in Firestore
+        await updateDoc(userDocRef, {
+          // Update specific fields
+          username: username,
+          organization: organization
+          // Add more fields to update as needed
+        });
+
+        console.log('User data updated successfully');
+      } else {
+        console.error('No user is currently signed in');
+      }
+    } catch (error) {
+      console.error('Error updating user data:', error);
+    }
+  };
 
   
 
@@ -65,31 +84,34 @@ const RNModal = () => {
   
 
   //______________________ Update Username
-  const [username, setUsername] = useState('');
+  
   
   // const handleUsernameChange = (text) => {
   //   setUsername(text)
   // } 
 
-  // const user = auth.currentUser.dco;
+  // const user = auth.currentUser.doc;
   // const currentUser = auth.currentUser;
   
 
 
-  // const updateUsername = async() => {
+  const updateUsername = async() => {
     
-  //   const data = {
-  //     username: username
-  //   }
-  //   const userRef = doc (db, 'userprofile', user) //'HKQyZkNsbLq7AfJmCkU4'
-  //   updateDoc(userRef, data)
-  //   .then(() => {
-  //     console.log("New username :", username);
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error updating document : ", error);
-  //   });
-  // }
+    const data = {
+      username: username
+    }
+    const userRef = doc(db,'userprofile','r97gWLP3EI75lZjLWksm'); //'LQGG3Ms1IF6G8muNGJTV'
+    
+    
+    updateDoc(userRef, data)
+    .then(() => {
+      console.log("New username :", username);
+      console.log(error)
+    })
+    .catch((error) => {
+      console.error("Error updating document : ", error);
+    });
+  }
   
 
   
@@ -98,7 +120,7 @@ const RNModal = () => {
   
 
   //______________________ Update Org
-  const [org, setOrg] = useState('');
+  
 
 
   //______________________ Handle All Update
@@ -127,7 +149,13 @@ const RNModal = () => {
         onChangeText={text => setUsername(text)}
       />
 
-      <TxtInputs label='Organization' placeholder='Add or input new org..' />
+      <TxtInputs 
+        label='Organization' 
+        placeholder='Add or input organization..' 
+        value={organization}
+        editable={!loading}
+        onChangeText={text => setOrganization(text)}
+      />
 
       <View style={styles.buttonFlex}>
         
@@ -138,7 +166,7 @@ const RNModal = () => {
         </TouchableOpacity>
 
       
-        <TouchableOpacity onPress={updateUsername} disabled={loading}>
+        <TouchableOpacity onPress={handleUpdate} disabled={loading}>
           <View >
             <Text style={styles.buttonSave}>Save</Text>
           </View>

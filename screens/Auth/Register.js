@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
-import { getAuth, createUserWithEmailAndPassword, updateProfile, } from 'firebase/auth';
-import {collection, addDoc, db,} from '../../firebaseAPI'
+import { getAuth, createUserWithEmailAndPassword, updateProfile,  } from 'firebase/auth';
+import {collection, addDoc, db, setDoc,doc} from '../../firebaseAPI'
 
 
 import { authGStyles } from './AuthGlobalStyling';
 
 const Register = () => {
   const [username, setUsername] = useState('');
+  const [organization, setOrganization] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -17,23 +18,41 @@ const Register = () => {
     try {
       // Create user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user.uid;
+      const user = userCredential.user;
+      const uid = user.uid
 
-      // Update user profile with username
-      await updateProfile(user, {
-        displayName: username
-        
-      });
+      // // Update user profile with username
+      // await updateProfile(user, {
+      //   displayName: username,
+      //   organization: organization
+
+      // });
 
       // Add user data to Firestore collection
-      const userData = {
-        uid: user.uid,
-        email: user.email,
-        username: username
-      };
-      await addDoc(collection(db, 'userprofile'), userData);
+    const userProfileCollectionRef = collection(db, 'userprofile');
+    // Reference to the document for the current user, using their UID as the document ID
+    const userDocRef = doc(userProfileCollectionRef, uid);
 
-      console.log('User registered successfully with username:', username);
+    // Add user data to Firestore collection
+    await setDoc(userDocRef, {
+      uid: uid,
+      email: user.email,
+      username: username,
+      organization: '' // Initialize organization to empty string
+    });
+      // const userData = {
+      //   uid: user.uid,
+      //   email: user.email,
+      //   username: user.displayName,
+      //   organization: ''
+      // };
+      
+      // await setDoc(collection(db, 'userprofile'), userData);
+      // await addDoc(collection(db, 'userprofile'), userData);
+     
+
+
+      console.log('New user registered successfully with username:', username);
     } catch (error) {
       console.error('Error registering user:', error);
     }

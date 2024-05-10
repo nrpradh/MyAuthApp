@@ -12,6 +12,7 @@ const LogOut = () => {
   const handleLogout = () => {
     auth.signOut().then(() => {
       navigation.navigate('LandingPage');
+      console.log(auth.currentUser.email, 'logged out');
       
     })
     .catch((error) => {
