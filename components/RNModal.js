@@ -24,9 +24,7 @@ const RNModal = () => {
   const [imageSource, setImageSource] = useState(null);
 
   const auth = getAuth();
-  // const user = auth.currentUser
   
-
   const handleUpdate = async () => {
     try {
       // Get the current user
@@ -83,35 +81,7 @@ const RNModal = () => {
 
   
 
-  //______________________ Update Username
   
-  
-  // const handleUsernameChange = (text) => {
-  //   setUsername(text)
-  // } 
-
-  // const user = auth.currentUser.doc;
-  // const currentUser = auth.currentUser;
-  
-
-
-  const updateUsername = async() => {
-    
-    const data = {
-      username: username
-    }
-    const userRef = doc(db,'userprofile','r97gWLP3EI75lZjLWksm'); //'LQGG3Ms1IF6G8muNGJTV'
-    
-    
-    updateDoc(userRef, data)
-    .then(() => {
-      console.log("New username :", username);
-      console.log(error)
-    })
-    .catch((error) => {
-      console.error("Error updating document : ", error);
-    });
-  }
   
 
   
@@ -119,11 +89,7 @@ const RNModal = () => {
   
   
 
-  //______________________ Update Org
-  
 
-
-  //______________________ Handle All Update
   
   
 

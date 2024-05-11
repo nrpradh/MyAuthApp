@@ -8,7 +8,7 @@ import { getAuth } from 'firebase/auth';
 // Directory imports
 import { auth } from '../../../firebaseAPI';
 import { PGStyling } from '../PGStyling';
-import {collection, db,doc, getDocs, query } from '../../../firebaseAPI';
+import {collection, db,doc, getDocs, query,where } from '../../../firebaseAPI';
 
 // Components
 import LogOut from '../InsideMenus/logOut';
@@ -20,48 +20,44 @@ const Profile = () => {
   const navigation = useNavigation();
 
   const [refreshing, setRefreshing] = useState(false);
+  const [userData, setUserData] = useState(null);
+
   const [username, setUsername] = useState('');
   const [organization, setOrganization] = useState('');
-  
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await getUserProfile();
-    setRefreshing(false);
-  };
-  const getUserProfile = async () => {
-    try {
-      // Create a query to fetch documents from the "userprofile" collection
-      const userRef = query(collection(db, 'userprofile'));
 
-      // Fetch data using the created query
-      const querySnapshot = await getDocs(userRef);
+  const fetchUserData = async () => {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
 
-      // Check if there is any document returned by the query
-      if (querySnapshot.empty) {
-        // If no document found, set username to empty string
-        setUsername('');
-        setOrganization('');
-        return;
+    if (currentUser) {
+      const userProfileCollectionRef = collection(db, 'userprofile');
+      const userQuery = query(userProfileCollectionRef, where('uid', '==', currentUser.uid));
+
+      try {
+        const querySnapshot = await getDocs(userQuery);
+        querySnapshot.forEach((doc) => {
+          setUserData(doc.data());
+        });
+      } catch (error) {
+        console.error('Error fetching user data:', error);
       }
-
-      // Assuming there is only one document for each user, directly access the first document
-      const userProfileDoc = querySnapshot.docs[0];
-
-      // Get the username from the document data
-      const userData = userProfileDoc.data();
-      setUsername(userData.username || ''); // Make sure username is defined, fallback to empty string
-      setOrganization(userData.organization || '')
-    } catch (error) {
-      console.error('Error fetching user profile:', error);
     }
   };
 
   useEffect(() => {
-    getUserProfile();
+    fetchUserData();
   }, []);
 
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchUserData();
+    setRefreshing(false);
+  };
+  
+
   // const MyID = auth.currentUser.email
-  const user = auth.currentUser
+  // const user = auth.currentUser
   
   
   
@@ -86,13 +82,15 @@ const Profile = () => {
         
         <View style={PGStyling.profileDetail}>
           <Image source={require('../../../assets/icon.png')} style={styles.image} />
-          <View>
-            <Text style={PGStyling.username}> {username}  </Text>
-            {/* <Text style={PGStyling.username}> {user.displayName}  </Text> */}
-            <Text style={PGStyling.org}>  {organization} </Text>
-            <Text style={PGStyling.email}>  {user.email} </Text>
-            
-          </View>
+          {userData && (
+
+            <View>
+              <Text style={PGStyling.username}> {userData.username}  </Text>
+              <Text style={PGStyling.org}>  {userData.organization} </Text>
+              <Text style={PGStyling.email}>  {userData.email} </Text>
+              
+            </View>
+          )}
           <RNModal/>
           
         </View>

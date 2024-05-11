@@ -21,16 +21,9 @@ const Register = () => {
       const user = userCredential.user;
       const uid = user.uid
 
-      // // Update user profile with username
-      // await updateProfile(user, {
-      //   displayName: username,
-      //   organization: organization
-
-      // });
-
-      // Add user data to Firestore collection
+     
     const userProfileCollectionRef = collection(db, 'userprofile');
-    // Reference to the document for the current user, using their UID as the document ID
+    
     const userDocRef = doc(userProfileCollectionRef, uid);
 
     // Add user data to Firestore collection
@@ -40,16 +33,7 @@ const Register = () => {
       username: username,
       organization: '' // Initialize organization to empty string
     });
-      // const userData = {
-      //   uid: user.uid,
-      //   email: user.email,
-      //   username: user.displayName,
-      //   organization: ''
-      // };
-      
-      // await setDoc(collection(db, 'userprofile'), userData);
-      // await addDoc(collection(db, 'userprofile'), userData);
-     
+
 
 
       console.log('New user registered successfully with username:', username);
