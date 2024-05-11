@@ -97,8 +97,8 @@ const AddEvent = () => {
 
   const handleConfirmAndSave = async () => {
     try {
-      const auth = getAuth(); // Mendapatkan objek autentikasi Firebase
-      const user = auth.currentUser; // Mendapatkan info user authenticated
+      const auth = getAuth(); 
+      const user = auth.currentUser; 
 
       if (!user) {
         alert('Please sign in to continue.');
@@ -114,17 +114,9 @@ const AddEvent = () => {
       }
 
       // Save the data to Firestore
-      const docRef = await addDoc(collection(db, 'newevent'), {
-        imageSource: imageSource,
-        eventName: eventName,
-        selectedDate: selectedDate,
-        location: location,
-        description: description,
-        userId: userId,
-        createdAt: new Date() // Include the userId field
-      });
+      
 
-      console.log("Document written with ID: ", docRef.id);
+     
 
       Alert.alert(
         'Confirmation',
@@ -137,14 +129,25 @@ const AddEvent = () => {
           },
           {
             text: 'Continue',
-            onPress: () => {
-              navigation.navigate('EventMenuPage');
+            onPress: async () => {
+             
+              const docRef = await addDoc(collection(db, 'newevent'), {
+                imageSource: imageSource,
+                eventName: eventName,
+                selectedDate: selectedDate,
+                location: location,
+                description: description,
+                userId: userId,
+                createdAt: new Date() // Include the userId field
+              });
+               console.log("Document written with ID: ", docRef.id);
               // Proceed to the next step or navigate to another page
               console.log('The Image:', imageSource);
               console.log('Event Name:', eventName);
               console.log('Date & Time:', selectedDate);
               console.log('Location:', location);
               console.log('Description:', description);
+              navigation.navigate('EventMenuPage');
             }
           }
         ],

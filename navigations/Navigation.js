@@ -20,6 +20,7 @@ import Categories from '../screens/AfterAuth/InsideMenus/InsideHome/Categories';
 import EventMenu from '../screens/AfterAuth/MainPages/EventMenu';
 import AddEvent from '../screens/AfterAuth/InsideMenus/InsideEvent/AddEvent';
 import ManageEvent from '../screens/AfterAuth/InsideMenus/InsideEvent/ManageEvent';
+import CRUDevent from '../screens/AfterAuth/InsideMenus/InsideEvent/CRUDevent';
 import EventLogs from '../screens/AfterAuth/InsideMenus/InsideEvent/EventLogs';
 
 // Profile Stack w/ inside it
@@ -67,8 +68,9 @@ const EventMenuStack = () => {
       }}>
       <Stack.Screen name='EventMenuPage' component={EventMenu} />
       <Stack.Screen name='AddEventPage' component={AddEvent}/>
-      <Stack.Screen name='ManageEventPage' component={ManageEvent} />  
-      <Stack.Screen name='EventLogsPage' component={EventLogs} />  
+      <Stack.Screen name='ManageEventPage' component={ManageEvent}/>
+      <Stack.Screen name='CRUDeventPage' component={CRUDevent} />  
+      <Stack.Screen name='EventLogsPage' component={EventLogs}/>  
 
  
 
@@ -84,7 +86,6 @@ const ProfileStack = () => {
       }}>
       <Stack.Screen name='ProfilePage' component={Profile} /> 
       <Stack.Screen name='EditPage' component={EditProfile} /> 
-      <Stack.Screen name='EventLogsPage' component={EventLogs} />  
     </Stack.Navigator>
   )
 }

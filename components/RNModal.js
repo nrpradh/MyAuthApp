@@ -79,21 +79,6 @@ const RNModal = () => {
     }
   };
 
-  
-
-  
-  
-
-  
- 
-  
-  
-
-
-  
-  
-
-
   const renderModalContent = () => (
     <View style={styles.modalContent}>
       <View style={{alignItems:'center', marginBottom:10}}>

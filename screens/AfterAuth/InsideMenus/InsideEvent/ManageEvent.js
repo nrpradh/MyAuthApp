@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, RefreshControl, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
+import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient'
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
@@ -15,6 +16,12 @@ import { getAuth } from 'firebase/auth';
 const ManageEvent = () => {
   const [newEventList, setNewEventList] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+
+  const navigation = useNavigation();
+
+  const toCRUDevent = (event) => {
+    navigation.navigate('CRUDeventPage', { event });
+  };
 
   const getNewEvent = async () => {
     try {
@@ -74,7 +81,8 @@ const ManageEvent = () => {
           
           {newEventList.length > 0 ? (
             newEventList.map(item => (
-              <TouchableOpacity key={item.id} onPress={() => console.log(`Event ${item.id} pressed`)}>
+              <TouchableOpacity key={item.id} onPress={() => toCRUDevent(item)}>
+              
                 <View style={ForManageEvent.imageContainer}>
                   <Image source={{ uri: item.imageSource }} style={styles.image} />
                   <View style={ForManageEvent.textContainer}>
@@ -98,6 +106,10 @@ const ManageEvent = () => {
     </LinearGradient>
   );
 }
+
+// old ones
+// <TouchableOpacity key={item.id} onPress={() => console.log(`Event ${item.id} pressed`)}>
+
 
 export default ManageEvent;
 
