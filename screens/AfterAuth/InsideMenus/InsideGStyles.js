@@ -7,10 +7,11 @@ export const ForEventMenu = StyleSheet.create ({
     },
     theFrame: {
         backgroundColor:'rgba(25, 25, 25, 0.7)',
-        padding:5,
-        // minHeight: '92.5%',
+        // padding:10,
+        // minHeight: '70%',
         borderRadius:5,  
         marginTop:5,
+        // marginBottom:5
         // flex:1,
         // marginVertical:10,
     
@@ -42,13 +43,10 @@ export const ForEventMenu = StyleSheet.create ({
         fontSize:12,
         // textAlign:'center'
     },
-    addEventLabels:{
-        color:'#f1f1f1',
-        fontSize:15,
-        fontWeight:'500',
-        marginLeft:5,
-        marginVertical:10,
-    },
+    
+    
+
+    // Add Image Styling
     inputBox: {
         backgroundColor: '#353535',
         borderRadius: 5,
@@ -58,10 +56,13 @@ export const ForEventMenu = StyleSheet.create ({
         marginHorizontal: 2,
         marginBottom:15,
     },
-
-
-    // Add Image Styling
-
+    addEventLabels:{
+        color:'#f1f1f1',
+        fontSize:15,
+        fontWeight:'500',
+        marginLeft:5,
+        marginVertical:10,
+    },
     imageContainer: {
         // flexDirection: 'row', // Arrange image and text horizontally
         backgroundColor:'#353535',
@@ -88,7 +89,40 @@ export const ForEventMenu = StyleSheet.create ({
 
 
 })
+export const inCRUDevent = StyleSheet.create ({ 
 
+    theFrame: {
+        backgroundColor:'rgba(25, 25, 25, 0.7)',
+        padding:10,
+        // minHeight: '90%',
+        borderRadius:5,  
+        marginTop:20,
+        // flex:1,
+        // marginVertical:10,
+    
+    },
+
+    // Labels
+    eventName: {
+        fontSize:17,
+        fontWeight:'500',
+        color:'#f1f1f1',
+        marginHorizontal:5,
+        marginTop:10,
+        // marginBottom:5,
+        // textAlign: 'center',
+        paddingTop: 5,
+    },
+    
+    anotherTxt : { 
+
+        color:'rgba(255, 255, 255, 0.8)',
+        marginHorizontal:5,
+        marginVertical:1
+        
+    }
+
+})
 
 export const ForManageEvent = StyleSheet.create ({
     forContainer :{

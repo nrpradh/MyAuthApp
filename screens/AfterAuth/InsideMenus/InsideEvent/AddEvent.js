@@ -44,34 +44,7 @@ const AddEvent = () => {
     // handleConfirm(); // Call handleConfirm to set the location and log the address
   };
 
-  const openInstagramProfile = (username) => {
-    const url = `https://www.instagram.com/${username}`;
-    Linking.openURL(url).catch(err => console.error('An error occurred', err));
-  }
-
-  const handleDescription = (inputText) => {
-    // Parse the input text to identify Instagram usernames
-    const segments = description.split(/\s+/);
-    const parsedSegments = segments.map((segment, index) => {
-      if (segment.startsWith('@')) {
-        const username = segment.slice(1); // Remove '@' symbol
-        return (
-          <TouchableOpacity key={index} onPress={() => openInstagramProfile(username)}>
-            <Text style={styles.link}>@{username}</Text>
-          </TouchableOpacity>
-        );
-      } else {
-        return segment;
-      }
-    });
-
-    // setOutputText(parsedSegments);
-    // Log the output text to the terminal
-    // console.log('Output:', description);
-    
-    // Set the description state
-    setDescription(inputText);
-  };
+  
 
   const selectImage = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -183,6 +156,35 @@ const AddEvent = () => {
     if (location) {
       openGoogleMaps();
     }
+  };
+  
+  const openInstagramProfile = (username) => {
+    const url = `https://www.instagram.com/${username}`;
+    Linking.openURL(url).catch(err => console.error('An error occurred', err));
+  }
+
+  const handleDescription = (inputText) => {
+    // Parse the input text to identify Instagram usernames
+    const segments = description.split(/\s+/);
+    const parsedSegments = segments.map((segment, index) => {
+      if (segment.startsWith('@')) {
+        const username = segment.slice(1); // Remove '@' symbol
+        return (
+          <TouchableOpacity key={index} onPress={() => openInstagramProfile(username)}>
+            <Text style={styles.link}>@{username}</Text>
+          </TouchableOpacity>
+        );
+      } else {
+        return segment;
+      }
+    });
+
+    // setOutputText(parsedSegments);
+    // Log the output text to the terminal
+    // console.log('Output:', description);
+    
+    // Set the description state
+    setDescription(inputText);
   };
   // _______________________________________________________________________________
 
