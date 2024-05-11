@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, BackHandler, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, Button, BackHandler, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native'
 import React,{useEffect, useCallback, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';

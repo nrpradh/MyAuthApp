@@ -33,6 +33,7 @@ export const forCategories = StyleSheet.create ({
     theFrame: {
         backgroundColor:'rgba(25, 25, 25, 0.7)',
         padding:15,
+        width:'100%',
         // minHeight: '92.5%',
         borderRadius:5,  
         marginVertical:10,

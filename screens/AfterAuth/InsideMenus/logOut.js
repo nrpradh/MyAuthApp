@@ -5,14 +5,17 @@ import { useNavigation } from '@react-navigation/native';
 
 import { auth } from '../../../firebaseAPI';
 import { ForProfile } from './InsideGStyles';
+import { getAuth } from 'firebase/auth';
 
 const LogOut = () => {
   const navigation = useNavigation(); 
+  const auth = getAuth();
+  const user = auth.currentUser
 
   const handleLogout = () => {
     auth.signOut().then(() => {
       navigation.navigate('LandingPage');
-      console.log(auth.currentUser, 'logged out');
+      console.log(user.email, 'logged out');
       
     })
     .catch((error) => {

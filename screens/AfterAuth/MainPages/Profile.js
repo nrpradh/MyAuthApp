@@ -94,6 +94,7 @@ const Profile = () => {
           <RNModal/>
           
         </View>
+        
       
       
         <View style={ForProfile.proFrame}>

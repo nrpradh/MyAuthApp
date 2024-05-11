@@ -31,7 +31,8 @@ const Register = () => {
       uid: uid,
       email: user.email,
       username: username,
-      organization: '' // Initialize organization to empty string
+      organization: '', // Initialize organization to empty string
+      profilePic:''
     });
 
 

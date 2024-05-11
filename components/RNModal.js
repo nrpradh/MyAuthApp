@@ -149,7 +149,12 @@ const RNModal = () => {
   return (
     <View style={styles.container}>
         <TouchableOpacity onPress={() => setVisibleModal(1)}>
-            <Feather name="edit" size={20} color="#f1f1f1" marginLeft={60}/> 
+            <Feather 
+              name="edit" 
+              size={20} 
+              color="#f1f1f1"
+              style={styles.iconEdit}
+              /> 
         </TouchableOpacity>
         
         <Modal
@@ -185,6 +190,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding:10,
+  },
+  iconEdit:{
+    // backgroundColor:'red',
+    position:'absolute',
+    left:60,
+    // top:0,
+    bottom:5,
   },
 
   image: {

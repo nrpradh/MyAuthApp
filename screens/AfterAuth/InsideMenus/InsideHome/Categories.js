@@ -56,11 +56,13 @@ const CombinedEventDataScreen = () => {
         data={combinedData}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleEventPress(item.id)}>
+          <TouchableOpacity onPress={() => handleEventPress([item.eventName,  item.id])}>
             <View style={forCategories.itemContainer}>
               <Image source={{ uri: item.imageSource }} style={styles.image} />
-                <Text style={forCategories.overlayText}>{item.eventName}</Text>
-                <Text style={forCategories.locationText}>{item.location}</Text>
+                <View style={styles.textMargin}>
+                  <Text style={forCategories.overlayText}>{item.eventName}</Text>
+                  <Text style={forCategories.locationText}>{item.location}</Text>
+                </View>
               {/* Render other event details as needed */}
             </View>
             
@@ -79,9 +81,11 @@ const styles = StyleSheet.create ({
   image: {
     resizeMode:'cover',
     borderRadius: 2,
-    width: '100%', 
+    width: 180, 
     height: 125 // Adjust image height as needed
   },
-
+  textMargin: {
+    padding:5,
+  }
 
 })
