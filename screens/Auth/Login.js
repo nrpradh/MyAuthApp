@@ -1,12 +1,14 @@
 import { StyleSheet, TextInput, View, Button, Text, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
 
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged,  } from 'firebase/auth';
 import { auth } from '../../firebaseAPI';
 import { authGStyles } from './AuthGlobalStyling';
+import TabNav from '../../navigations/TabNav';
+import { Tab } from '@rneui/themed';
 
-const Login = () => {
+const LoginPage = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +29,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log('User logged in:', user.email);
-        navigation.navigate('TabNav');
+        // navigation.navigate('TabNav');
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -73,7 +75,33 @@ const Login = () => {
   );
 }
 
-export default Login;
+
+
+// const Login = () => {
+//   const [user, setUser] = useState(null);
+
+//   const onAuthStateSave = (user) => setUser(user);
+
+//   useEffect(() => {
+//     const subscriber = auth.onAuthStateChanged(onAuthStateSave);
+//     return () => subscriber(); // Unsubscribe on component unmount
+//   }, []); 
+
+//   return (
+//     <View style={{flex:1}}>  
+//       <Text> you</Text>
+//       {user ? <TabNav/> : <LoginPage/> } 
+//     </View>
+    
+    
+    
+   
+//   )
+// }
+
+
+
+export default LoginPage;
 
 const styles = StyleSheet.create({
   container: {
