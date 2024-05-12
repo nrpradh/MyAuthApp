@@ -26,6 +26,7 @@ const AddEvent = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [location, setLocation] = useState(""); 
   const [description, setDescription] = useState('');
+  const [outputText, setOutputText] = useState([]);
 
 
   const handleEventName = (inputText) => { //Handle event Name
@@ -113,7 +114,9 @@ const AddEvent = () => {
                 userId: userId,
                 createdAt: new Date() // Include the userId field
               });
-               console.log("Document written with ID: ", docRef.id);
+              console.log("Document written with ID: ", docRef.id);
+                  
+
               // Proceed to the next step or navigate to another page
               console.log('The Image:', imageSource);
               console.log('Event Name:', eventName);
@@ -133,30 +136,6 @@ const AddEvent = () => {
 
   
   // Later on __________________________________________________________________
-  const [address, setAddress] = useState("");
-
-  const openMaps = () => {
-    const formattedAddress = location.replace(/\s/g, '+');
-    let url;
-  
-    // Check the platform and generate the appropriate URL
-    if (Platform.OS === 'android') {
-      url = `https://www.google.com/maps/search/?api=1&query=${formattedAddress}`;
-    } else if (Platform.OS === 'ios') {
-      url = `http://maps.apple.com/?q=${formattedAddress}`;
-    } else {
-      console.warn('Unsupported platform');
-      return;
-    }
-  
-    Linking.openURL(url).catch(err => console.error('An error occurred', err));
-  };
-
-  const handleAddressPress = () => {
-    if (location) {
-      openGoogleMaps();
-    }
-  };
   
   const openInstagramProfile = (username) => {
     const url = `https://www.instagram.com/${username}`;
@@ -178,7 +157,7 @@ const AddEvent = () => {
         return segment;
       }
     });
-
+    
     // setOutputText(parsedSegments);
     // Log the output text to the terminal
     // console.log('Output:', description);
@@ -256,7 +235,7 @@ const AddEvent = () => {
             label='Description' 
             placeholder='Input description (mention with @..)'
             value={description}
-            onChangeText={handleDescription}
+            onChangeText={setDescription}
             // onChangeText={(text) => handleDescription(text)}
           />
 
@@ -323,6 +302,12 @@ const styles = StyleSheet.create({
     fontWeight:'500',
     alignSelf: 'center',
 
+  },
+
+  link:{
+    fontSize:20,
+    color:'#f1f1f1',
+    padding:10,
   },
   addImages: {
     alignItems: 'center',

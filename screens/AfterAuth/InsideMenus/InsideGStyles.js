@@ -7,7 +7,7 @@ export const ForEventMenu = StyleSheet.create ({
     },
     theFrame: {
         backgroundColor:'rgba(25, 25, 25, 0.7)',
-        // padding:10,
+        padding:10,
         // minHeight: '70%',
         borderRadius:5,  
         marginTop:5,
@@ -120,7 +120,9 @@ export const inCRUDevent = StyleSheet.create ({
         marginHorizontal:5,
         marginVertical:1
         
-    }
+    },
+
+    
 
 })
 

@@ -1,18 +1,64 @@
 import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image,} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
 
 const CRUDevent = ({route}) => {
-    const { event } = route.params;
+    const { event} = route.params;
     const [updateEvent, setUpdateEvent] = useState('');
-    const [location, setLocation] = useState(event.location);
+    const [address, setAddress] = useState(event.location);
+    
+   
+    
+    const splitDescription = (description) => {
+        // Regular expression to split the description text
+        const regex = /(@[a-zA-Z0-9_]+)/g;
+        return description.split(regex);
+      };
+      
+      // Component to render description text with clickable Instagram usernames
+      const DescriptionWithInstagramLinks = ({ description }) => {
+        // Split the description text into parts
+        const parts = splitDescription(description);
+      
+        // Function to handle Instagram username clicks
+        const handleInstagramUsernameClick = (username) => {
+          // Open the Instagram profile in the Instagram app or website
+          const instagramUrl = `https://www.instagram.com/${username}`;
+          Linking.openURL(instagramUrl);
+        };
+      
+        return (
+          <View style={styles.container}>
+            {parts.map((part, index) => {
+              if (part.startsWith('@')) {
+                // This part is an Instagram username
+                const username = part.slice(1); // Remove the '@' symbol
+                return (
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() => handleInstagramUsernameClick(username)}
+                  >
+                    <Text style={styles.instagramUsername}>{part}</Text>
+                  </TouchableOpacity>
+                );
+              } else {
+                // This part is regular text
+                return <Text key={index} style={styles.regularText}>{part}</Text>;
+              }
+            })}
+          </View>
+        );
+      };
+
+   
     
 
+
     const openMaps = () => {
-        const formattedAddress = location.replace(/\s/g, '+');
+        const formattedAddress = address.replace(/\s/g, '+');
         let url;
       
         // Check the platform and generate the appropriate URL
@@ -29,8 +75,8 @@ const CRUDevent = ({route}) => {
       };
     
       const handleAddressPress = () => {
-        if  (location) {
-            // console.log("Formatted Address:", formattedAddress);
+        if  (address) {
+            console.log("opened address :", address);
             // console.log("URL:", url);
             openMaps();
         }   else {
@@ -55,9 +101,14 @@ const CRUDevent = ({route}) => {
                             }]}>{event.location}</Text>
                     </TouchableOpacity>
                     <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
-                    <TouchableOpacity>
-                        <Text style={inCRUDevent.anotherTxt}>{event.description}</Text>
-                    </TouchableOpacity>    
+
+                    <DescriptionWithInstagramLinks description={event.description} />
+
+                    
+                    {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
+                    
+                    
+                        
                 </View>
             </View>
         </LinearGradient>
@@ -75,7 +126,11 @@ const styles = StyleSheet.create({
         marginHorizontal:4,
         // marginTop:40
     },
-
+    link:{
+        fontSize:20,
+        color:'#f1f1f1',
+        padding:10,
+    },
     image: {
         
         alignSelf:'center',
@@ -83,7 +138,26 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         width: '100%', 
         height: 200,
-      },  
+    },  
+
+
+    // for description only
+    container: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    regularText: {
+        marginLeft:5,
+        color:'rgba(255, 255, 255, 0.8)',
+        // marginRight: 5, // Adjust spacing between text parts if needed
+    },
+    instagramUsername: {
+        // fontSize: 16,
+        // textDecorationLine:'underline',
+        color: 'rgba(205, 185, 255, 0.8)',
+        
+    },
+
 
 
 })
