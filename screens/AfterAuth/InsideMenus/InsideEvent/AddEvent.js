@@ -87,11 +87,6 @@ const AddEvent = () => {
         return;
       }
 
-      // Save the data to Firestore
-      
-
-     
-
       Alert.alert(
         'Confirmation',
         'Do you want to continue with the entered information?',

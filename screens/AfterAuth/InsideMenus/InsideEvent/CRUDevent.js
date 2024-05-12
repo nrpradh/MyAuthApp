@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image,} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import React, {useState, useEffect} from 'react'
+import { Entypo, Ionicons } from '@expo/vector-icons';
 
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
@@ -35,7 +36,7 @@ const CRUDevent = ({route}) => {
             {parts.map((part, index) => {
               if (part.startsWith('@')) {
                 // This part is an Instagram username
-                const username = part.slice(1); // Remove the '@' symbol
+                const username = part.slice(1); // to remove the '@' symbol
                 return (
                   <TouchableOpacity
                     key={index}
@@ -92,16 +93,24 @@ const CRUDevent = ({route}) => {
                 <Text style={styles.eventEdit}>Edit Event</Text>
                 <View style={inCRUDevent.theFrame}>
                     <Image source={{ uri: event.imageSource }} style={styles.image} />
-                    <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
-                    <TouchableOpacity onPress={handleAddressPress}>
-                        <Text style={[
-                            inCRUDevent.anotherTxt, 
-                            {   textDecorationLine:'underline',
-                                marginVertical:5,
-                            }]}>{event.location}</Text>
-                    </TouchableOpacity>
-                    <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
+                    <View style={styles.nameWlocation}>
+                      <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
+                      
+                      <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
+                    </View>
+                    
+                    <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
+                      <Ionicons name="location-outline" size={15} color="lightgrey"/>
+                      <TouchableOpacity onPress={handleAddressPress}>
+                          <Text style={[
+                              inCRUDevent.anotherTxt, 
+                              {   textDecorationLine:'underline',
+                                  marginVertical:5,
+                                  
+                              }]}>{event.location}</Text>
 
+                      </TouchableOpacity>
+                    </View>
                     <DescriptionWithInstagramLinks description={event.description} />
 
                     
@@ -126,6 +135,14 @@ const styles = StyleSheet.create({
         marginHorizontal:4,
         // marginTop:40
     },
+    nameWlocation: {
+      flexDirection: 'row', 
+      alignItems: 'center' ,
+      justifyContent:'space-between',
+      marginTop:10,
+      // paddingTop: 5,
+    },
+
     link:{
         fontSize:20,
         color:'#f1f1f1',
@@ -144,18 +161,26 @@ const styles = StyleSheet.create({
     // for description only
     container: {
         flexDirection: 'row',
-        flexWrap: 'wrap',
+        flexWrap:'wrap',
+        // borderWidth:0.5,
+        borderColor:'#f1f1f1',
+        borderRadius:5,
+        // marginVertical:5,
+        padding:5,
+        
     },
     regularText: {
+        // fontSize:13,
         marginLeft:5,
         color:'rgba(255, 255, 255, 0.8)',
-        // marginRight: 5, // Adjust spacing between text parts if needed
+        textAlign:'left',
+
+        
     },
     instagramUsername: {
-        // fontSize: 16,
-        // textDecorationLine:'underline',
+        // fontSize:13,
         color: 'rgba(205, 185, 255, 0.8)',
-        
+        textAlign:'left'
     },
 
 

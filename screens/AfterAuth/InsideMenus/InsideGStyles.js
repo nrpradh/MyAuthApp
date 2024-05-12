@@ -7,20 +7,20 @@ export const ForEventMenu = StyleSheet.create ({
     },
     theFrame: {
         backgroundColor:'rgba(25, 25, 25, 0.7)',
-        padding:10,
-        // minHeight: '70%',
+        // height:250,
+        padding:5,
         borderRadius:5,  
         marginTop:5,
-        // marginBottom:5
+        // marginBottom:-20
         // flex:1,
         // marginVertical:10,
     
     },
     eventFlex:{
         // flexGrow:1,
-        margin:7,
+        margin:5,
         alignItems:'center',
-        marginHorizontal:2,
+        // marginHorizontal:2,
         // backgroundColor:'white'
 
     },
@@ -74,7 +74,7 @@ export const ForEventMenu = StyleSheet.create ({
         borderRadius:2,
     },
     addImageCont: {
-        marginTop: 20,
+        // marginTop: 20,
         alignItems: 'center',
         padding: 20,
     },
@@ -108,10 +108,11 @@ export const inCRUDevent = StyleSheet.create ({
         fontWeight:'500',
         color:'#f1f1f1',
         marginHorizontal:5,
-        marginTop:10,
+        // marginTop:10,
+        // paddingTop: 5,
         // marginBottom:5,
         // textAlign: 'center',
-        paddingTop: 5,
+        
     },
     
     anotherTxt : { 
@@ -130,7 +131,7 @@ export const ForManageEvent = StyleSheet.create ({
     forContainer :{
         // marginTop:40,
         flex:1,
-        // flexGrow:1,
+        flexGrow:1,
     },
     eventList: {
         // flexDirection: 'row',
@@ -152,7 +153,8 @@ export const ForManageEvent = StyleSheet.create ({
         borderWidth:0.5,
         borderColor:'#6155e5',
         padding:8,
-        margin:8,
+        marginBottom:15, //marginTop:2,
+        marginHorizontal:5,
         borderRadius:2,
     },
     image: {
@@ -162,10 +164,10 @@ export const ForManageEvent = StyleSheet.create ({
         height: 180,
     },
     textContainer: {
-        paddingHorizontal:15,
+        // paddingHorizontal:15,
         paddingVertical:8,
         // flex: 1, // Take remaining space beside the image
-        marginRight: 22, // Add some spacing between image and text
+        marginHorizontal: 5, 
         // justifyContent: 'center', // Center text vertically
     },
     eventName: {
@@ -173,9 +175,9 @@ export const ForManageEvent = StyleSheet.create ({
         fontWeight:'500',
         color:'#f1f1f1',
         // marginHorizontal:3,
-        marginVertical:5,
+        // marginVertical:5,
         // textAlign: 'center',
-        paddingTop: 5,
+        // paddingTop: 5,
     },
     location: {
         fontSize:13,

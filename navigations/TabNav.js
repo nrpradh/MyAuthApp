@@ -17,7 +17,7 @@ const TabNav = () => {
         initialRouteName="HomePage"
         activeColor="#353535"
         inactiveColor="#f1f1f1"
-        barStyle={{ backgroundColor:'#353535', height:65 }}
+        barStyle={{ backgroundColor:'#353535', height:65  }}
         
       >
         <Tab.Screen

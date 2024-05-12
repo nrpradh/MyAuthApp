@@ -14,7 +14,7 @@ import {collection, db,doc, getDocs, query,where } from '../../../firebaseAPI';
 import LogOut from '../InsideMenus/logOut';
 import BtnForProfile from '../InsideMenus/InsideProfile/btnForProfile'
 import { ForProfile } from '../InsideMenus/InsideGStyles';
-import RNModal from '../../../components/RNModal';
+import IconEditProfile from '../../../components/IconEditProfile';
 
 const Profile = () => {
   const navigation = useNavigation();
@@ -91,7 +91,7 @@ const Profile = () => {
               
             </View>
           )}
-          <RNModal/>
+          <IconEditProfile/>
           
         </View>
         

@@ -13,7 +13,7 @@ import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
 import { getDoc } from 'firebase/firestore';
 
 
-const RNModal = () => {
+const IconEditProfile = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [visibleModal, setVisibleModal] = useState(null);
@@ -244,4 +244,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RNModal;
+export default IconEditProfile;

@@ -86,12 +86,16 @@ const ManageEvent = () => {
                 <View style={ForManageEvent.imageContainer}>
                   <Image source={{ uri: item.imageSource }} style={styles.image} />
                   <View style={ForManageEvent.textContainer}>
-                    <Text style={ForManageEvent.eventName}>{item.eventName}</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
+                      <Text style={ForManageEvent.eventName}>{item.eventName}</Text>
+
+                      <Text style={ForManageEvent.dTime}>{item.selectedDate}</Text>
+                    </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                       <Ionicons name="location-outline" size={13} color="lightgrey"  marginRight={5}/>
                       <Text style={ForManageEvent.location}>{item.location}</Text>
                     </View>
-                    <Text style={ForManageEvent.dTime}>{item.selectedDate}</Text>
+                    
                   </View>
                 </View>
               </TouchableOpacity>

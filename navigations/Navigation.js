@@ -25,7 +25,7 @@ import EventLogs from '../screens/AfterAuth/InsideMenus/InsideEvent/EventLogs';
 
 // Profile Stack w/ inside it
 import Profile from '../screens/AfterAuth/MainPages/Profile';
-import EditProfile from '../screens/AfterAuth/InsideMenus/InsideProfile/EditProfile';
+
 
 
 const Stack = createStackNavigator();
@@ -85,7 +85,7 @@ const ProfileStack = () => {
         headerShown: false, // Remove if you want the header bar visible
       }}>
       <Stack.Screen name='ProfilePage' component={Profile} /> 
-      <Stack.Screen name='EditPage' component={EditProfile} /> 
+      
     </Stack.Navigator>
   )
 }

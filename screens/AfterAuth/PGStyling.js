@@ -12,6 +12,10 @@ export const PGStyling = StyleSheet.create ({
         fontWeight:'500',
         
     },
+
+
+    // for profile.js
+    
     profileDetail:{
         flexDirection: 'row',
         backgroundColor: 'rgba(25, 25, 25, 0.7)',
@@ -27,14 +31,14 @@ export const PGStyling = StyleSheet.create ({
     },
     username:{
         color: '#f1f1f1',
-        paddingTop: 2,
+        // marginTop: 2,
         marginLeft: 20,
         fontSize: 17,
         
     },
     org:{
         color: 'rgba(255, 255, 255, 0.8)',
-        paddingBottom: 2,
+        marginVertical: 2,
         marginLeft: 20,
         fontSize: 13,
         // marginTop:5
@@ -59,7 +63,7 @@ export const PGStyling = StyleSheet.create ({
     
     linearGradient: {  // Global Screen Gradient
         flex:1,
-        colors: ['#f1f1f1', '#6155e5', '#353535'],
+        colors: ['#f1f1f1', '#6155e5', 'white'],
         start: { x: 0.5, y: 0 },
         end: { x: 0.5, y: 1 },
     },
