@@ -149,11 +149,11 @@ export const ForManageEvent = StyleSheet.create ({
     },
     imageContainer: {
         // flexDirection: 'row', // Arrange image and text horizontally
-        backgroundColor:'#353535',
-        borderWidth:0.5,
+        // backgroundColor:'#353535',
+        borderWidth:0.6,
         borderColor:'#6155e5',
-        padding:8,
-        marginBottom:15, //marginTop:2,
+        padding:10,
+        marginBottom:10, //marginTop:2,
         marginHorizontal:5,
         borderRadius:2,
     },
@@ -165,7 +165,7 @@ export const ForManageEvent = StyleSheet.create ({
     },
     textContainer: {
         // paddingHorizontal:15,
-        paddingVertical:8,
+        paddingVertical:10,
         // flex: 1, // Take remaining space beside the image
         marginHorizontal: 5, 
         // justifyContent: 'center', // Center text vertically
@@ -196,7 +196,7 @@ export const ForProfile = StyleSheet.create ({
     profileContent: {
         flexDirection: 'row',
         borderRadius: 5,
-        backgroundColor: '#353535',
+        // backgroundColor: '#353535',
         padding: 10,
         marginVertical:5,
         borderWidth:0.5,

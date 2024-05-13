@@ -41,7 +41,7 @@ const Home = ({navigation}) => {
       <View style={PGStyling.forContainer}>
         <SearchDataBar/>
         <CategoryFilter/>
-        <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='#353535' />
+        <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='rgba(25, 25, 25, 0.7)' />
 
         
         {/* uncomment and use this when the home Page is done 

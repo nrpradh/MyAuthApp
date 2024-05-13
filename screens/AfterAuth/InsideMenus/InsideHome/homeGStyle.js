@@ -42,11 +42,11 @@ export const forCategories = StyleSheet.create ({
     },
 
     itemContainer: {
-        borderWidth: 0.5,
+        borderWidth: 0.6,
         paddingVertical: 8,
-        paddingHorizontal: 7,
+        paddingHorizontal: 10,
         // alignItems: 'center',
-        backgroundColor: '#353535',
+        // backgroundColor: '#353535',
         borderRadius: 5,
         borderColor:'#6155e5',
         marginRight: 10,

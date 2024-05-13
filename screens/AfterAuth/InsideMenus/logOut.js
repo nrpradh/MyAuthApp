@@ -25,7 +25,7 @@ const LogOut = () => {
 
   return (
     <TouchableOpacity onPress={handleLogout}>
-        <View style={ForProfile.profileContent}>
+        <View style={[ForProfile.profileContent, {borderColor:'rgba(255, 8, 13, 0.6)'}]}>
             <Feather name='log-out' size={22} color="#C40002" marginLeft={5} />
             <View style={{flexDirection:'column'}}>
                 <Text style={styles.logOutOnly}>Log Out</Text>

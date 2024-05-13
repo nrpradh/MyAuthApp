@@ -13,19 +13,19 @@ import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
 import { getDoc } from 'firebase/firestore';
 
 
-const IconEditProfile = () => {
+const IconEditProfile = ({userData}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [visibleModal, setVisibleModal] = useState(null);
   
   
-  const [username, setUsername] = useState('');
-  const [organization, setOrganization] = useState('');
+  const [username, setUsername] = useState(userData ? userData.username : '');
+  const [organization, setOrganization] = useState(userData ? userData.organization : '');
   const [imageSource, setImageSource] = useState(null);
 
   const auth = getAuth();
   
-  const handleUpdate = async () => {
+  const handleUpdate = async ({newData}) => {
     try {
       // Get the current user
       const user = auth.currentUser;
@@ -44,6 +44,7 @@ const IconEditProfile = () => {
         });
 
         console.log('User data updated successfully');
+        setVisibleModal(null);
       } else {
         console.error('No user is currently signed in');
       }
