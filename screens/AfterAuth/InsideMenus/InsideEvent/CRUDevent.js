@@ -40,8 +40,7 @@ const CRUDevent = ({route}) => {
                 return (
                   <TouchableOpacity
                     key={index}
-                    onPress={() => handleInstagramUsernameClick(username)}
-                  >
+                    onPress={() => handleInstagramUsernameClick(username)}>
                     <Text style={styles.instagramUsername}>{part}</Text>
                   </TouchableOpacity>
                 );
@@ -105,7 +104,7 @@ const CRUDevent = ({route}) => {
                           <Text style={[
                               inCRUDevent.anotherTxt, 
                               {   textDecorationLine:'underline',
-                                  marginVertical:5,
+                                  marginVertical:3,
                                   
                               }]}>{event.location}</Text>
 
@@ -143,11 +142,6 @@ const styles = StyleSheet.create({
       // paddingTop: 5,
     },
 
-    link:{
-        fontSize:20,
-        color:'#f1f1f1',
-        padding:10,
-    },
     image: {
         
         alignSelf:'center',

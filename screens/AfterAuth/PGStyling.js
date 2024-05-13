@@ -38,7 +38,7 @@ export const PGStyling = StyleSheet.create ({
     },
     org:{
         color: 'rgba(255, 255, 255, 0.8)',
-        marginVertical: 2,
+        marginBottom: 1,
         marginLeft: 20,
         fontSize: 13,
         // marginTop:5
@@ -63,7 +63,7 @@ export const PGStyling = StyleSheet.create ({
     
     linearGradient: {  // Global Screen Gradient
         flex:1,
-        colors: ['#f1f1f1', '#6155e5', 'white'],
+        colors: ['#f1f1f1', '#6155e5', 'black'],
         start: { x: 0.5, y: 0 },
         end: { x: 0.5, y: 1 },
     },
