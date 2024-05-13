@@ -22,9 +22,6 @@ const Profile = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [userData, setUserData] = useState(null);
 
-  const [username, setUsername] = useState('');
-  const [organization, setOrganization] = useState('');
-
   const fetchUserData = async () => {
     const auth = getAuth();
     const currentUser = auth.currentUser;

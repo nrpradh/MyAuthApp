@@ -4,8 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
 import { MaterialIcons, Ionicons, Feather } from '@expo/vector-icons';
 
+import { getAuth } from 'firebase/auth';
+import { doc, deleteDoc, db, collection, where, getDocs, query } from '../../../../firebaseAPI';
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
+import { setUserId } from 'firebase/analytics';
 
 const CRUDevent = ({route}) => {
     const { event} = route.params;
@@ -102,7 +105,7 @@ const CRUDevent = ({route}) => {
                     </View>
                     
                     <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
-                      <Ionicons name="location-outline" size={15} color="lightgrey"/>
+                      <Ionicons name="location-outline" size={18} color="lightgrey"/>
                       <TouchableOpacity onPress={handleAddressPress}>
                           <Text style={[
                               inCRUDevent.anotherTxt, 
@@ -132,6 +135,32 @@ const TopBarCustom = () => {
   const handleGoBack = () => {
     navigation.goBack();
   };
+  
+  
+
+  const auth = getAuth();
+
+const deleteEvent = async () => {
+  try {
+    const user = auth.currentUser;
+    if (user) {
+      const newEventRef = collection(db, 'newevent', user.uid); // last update
+      // Menentukan dokumen yang akan dihapus berdasarkan userId
+      const querySnapshot = await getDocs(query(newEventRef, where("uid", "==", user.uid)));
+      querySnapshot.forEach(async (doc) => {
+        // Menghapus dokumen
+        await deleteDoc(doc.ref);
+      });
+
+      console.log("Documents deleted successfully!");
+      navigation.navigate('EventMenuPage');
+    } else {
+      console.error('No user is currently signed in');
+    }
+  } catch (error) {
+    console.error('Error deleting documents: ', error);
+  }
+};
 
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -143,8 +172,8 @@ const TopBarCustom = () => {
         <TouchableOpacity>
           <Feather name="edit" size={20} color="black" marginHorizontal={10}  />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <MaterialIcons name="delete" size={24} color='#951010' />
+        <TouchableOpacity onPress={deleteEvent}> 
+          <MaterialIcons name="delete" size={24} color='#353535' marginRight={5} />
         </TouchableOpacity>
       </View>
     </View>
@@ -159,15 +188,13 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:18,
         fontWeight:'500',
-        marginLeft:32,
-        // marginTop:40
+        marginLeft:40,
     },
     nameWlocation: {
       flexDirection: 'row', 
       alignItems: 'center' ,
       justifyContent:'space-between',
       marginTop:10,
-      // paddingTop: 5,
     },
 
     image: {

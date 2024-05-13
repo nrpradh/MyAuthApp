@@ -14,6 +14,7 @@ import {  getFirestore,
           setDoc,
           getDocs,  
           getDoc,
+          deleteDoc,
           writeBatch,
           query, 
           where, 
@@ -46,7 +47,7 @@ const auth = initializeAuth(app);
 const db = getFirestore(app);
 
 export { app, db, auth, 
-        getFirestore, collection, addDoc, getDocs, 
+        getFirestore, collection, addDoc, getDocs, deleteDoc,
         query, where, orderBy, startAt, endAt,
-        updateDoc, doc, setDoc, writeBatch, updateProfile, documentId
+        updateDoc, doc, setDoc, writeBatch, documentId
       };

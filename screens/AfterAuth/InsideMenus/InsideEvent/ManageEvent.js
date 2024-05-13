@@ -29,13 +29,14 @@ const ManageEvent = () => {
 
       const auth = getAuth();
       const user = auth.currentUser;
-  
+      const uid = user.uid;
+      
       if (!user) {
         return;
       }
   
-      const userId = user.email;
-      const q = query(collection(db, 'newevent'), where('userId', '==', userId));
+      
+      const q = query(collection(db, 'newevent'), where('uid', '==', uid)); //last update
       const querySnapshot = await getDocs(q);
 
       const events = [];

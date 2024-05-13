@@ -15,7 +15,7 @@ import { PGStyling } from '../../PGStyling'
 import "firebase/firestore"; 
 import 'firebase/auth';
 import { getAuth } from 'firebase/auth';
-import { app,  db , collection, addDoc}  from '../../../../firebaseAPI';
+import { app,  db , collection, setDoc, doc, addDoc}  from '../../../../firebaseAPI';
 import { FlatList } from 'react-native-gesture-handler';
 
 const AddEvent = () => {
@@ -74,12 +74,11 @@ const AddEvent = () => {
       const auth = getAuth(); 
       const user = auth.currentUser; 
 
+
       if (!user) {
         alert('Please sign in to continue.');
         return;
       }
-
-      const userId = user.email; // Mendapatkan UID pengguna yang terautentikasi
 
       if (!imageSource || !eventName || !selectedDate || !location || !description) {
         // If any of the fields are empty, display an alert to the user
@@ -99,17 +98,17 @@ const AddEvent = () => {
           {
             text: 'Continue',
             onPress: async () => {
-             
-              const docRef = await addDoc(collection(db, 'newevent'), {
+              const newEventRef = collection(db, 'newevent');
+              await addDoc(newEventRef, {
                 imageSource: imageSource,
                 eventName: eventName,
                 selectedDate: selectedDate,
                 location: location,
                 description: description,
-                userId: userId,
-                createdAt: new Date() // Include the userId field
+                uid: user.uid, // last update
+                createdAt: new Date()
               });
-              console.log("Document written with ID: ", docRef.id);
+              console.log("Document written with ID: ", newEventRef.id);
                   
 
               // Proceed to the next step or navigate to another page

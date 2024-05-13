@@ -10,7 +10,7 @@ import {auth, updateDoc, doc,db, setDoc, query, where, getDocs, collection, docu
 
 
 import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
-import { getDoc } from 'firebase/firestore';
+
 
 
 const IconEditProfile = ({userData}) => {
@@ -25,7 +25,7 @@ const IconEditProfile = ({userData}) => {
 
   const auth = getAuth();
   
-  const handleUpdate = async ({newData}) => {
+  const handleUpdate = async () => {
     try {
       // Get the current user
       const user = auth.currentUser;
