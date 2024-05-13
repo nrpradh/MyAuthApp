@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image,} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useNavigation } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
-import { Entypo, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons, Feather } from '@expo/vector-icons';
 
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
@@ -89,8 +90,10 @@ const CRUDevent = ({route}) => {
     return (
         <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
             <View style={PGStyling.forContainer}>
-                <Text style={styles.eventEdit}>Edit Event</Text>
+                <TopBarCustom/>
                 <View style={inCRUDevent.theFrame}>
+                   
+               
                     <Image source={{ uri: event.imageSource }} style={styles.image} />
                     <View style={styles.nameWlocation}>
                       <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
@@ -123,6 +126,31 @@ const CRUDevent = ({route}) => {
     )
 }
 
+const TopBarCustom = () => {
+  const navigation = useNavigation();
+
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
+  return (
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+      <TouchableOpacity onPress={handleGoBack} >
+        <MaterialIcons name="arrow-back-ios" size={20} color="#353535" marginLeft={7} />
+      </TouchableOpacity>
+      <Text style={styles.eventEdit}>Edit Event</Text>
+      <View style={{ flexDirection: 'row', alignItems:'center' }}>
+        <TouchableOpacity>
+          <Feather name="edit" size={20} color="black" marginHorizontal={10}  />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <MaterialIcons name="delete" size={24} color='#951010' />
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
+}
+
 export default CRUDevent
 
 const styles = StyleSheet.create({
@@ -131,7 +159,7 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:18,
         fontWeight:'500',
-        marginHorizontal:4,
+        marginLeft:32,
         // marginTop:40
     },
     nameWlocation: {
