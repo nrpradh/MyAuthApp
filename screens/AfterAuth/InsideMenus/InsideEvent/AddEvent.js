@@ -98,6 +98,9 @@ const AddEvent = () => {
           {
             text: 'Continue',
             onPress: async () => {
+              // ____________________________ if we use setDoc
+              
+
               const newEventRef = collection(db, 'newevent');
               await addDoc(newEventRef, {
                 imageSource: imageSource,

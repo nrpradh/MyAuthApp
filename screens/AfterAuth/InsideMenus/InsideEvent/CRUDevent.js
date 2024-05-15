@@ -8,7 +8,7 @@ import { getAuth } from 'firebase/auth';
 import { doc, deleteDoc, db, collection, where, getDocs, query } from '../../../../firebaseAPI';
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
-import { setUserId } from 'firebase/analytics';
+
 
 const CRUDevent = ({route}) => {
     const { event} = route.params;
@@ -136,23 +136,33 @@ const TopBarCustom = () => {
     navigation.goBack();
   };
   
-  
+  const [eventName, setEventName] = useState('');
 
-  const auth = getAuth();
+const auth = getAuth();
 
 const deleteEvent = async () => {
   try {
     const user = auth.currentUser;
+    const uid = user.email
+    const eventName = setEventName
     if (user) {
-      const newEventRef = collection(db, 'newevent', user.uid); // last update
+      
+      // const newEventRef = collection(db, 'newevent'); 
+      // const querySnapshot = await getDocs(query(newEventRef, where("eventName", "==", eventName)));
+
       // Menentukan dokumen yang akan dihapus berdasarkan userId
-      const querySnapshot = await getDocs(query(newEventRef, where("uid", "==", user.uid)));
+      const q = 
+      query(collection(db, 'newevent'), 
+            
+            where ('eventName', '==' , 'eventName')
+          );
+      const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
-        // Menghapus dokumen
+        
         await deleteDoc(doc.ref);
       });
 
-      console.log("Documents deleted successfully!");
+      console.log("Documents deleted successfully!", q.id);
       navigation.navigate('EventMenuPage');
     } else {
       console.error('No user is currently signed in');
