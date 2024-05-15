@@ -15,7 +15,7 @@ const CRUDevent = ({route}) => {
     const [updateEvent, setUpdateEvent] = useState('');
     const [address, setAddress] = useState(event.location);
     
-   
+
     
     const splitDescription = (description) => {
         // Regular expression to split the description text
@@ -57,10 +57,6 @@ const CRUDevent = ({route}) => {
         );
       };
 
-   
-    
-
-
     const openMaps = () => {
         const formattedAddress = address.replace(/\s/g, '+');
         let url;
@@ -91,86 +87,55 @@ const CRUDevent = ({route}) => {
 
 
     return (
-        <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
-            <View style={PGStyling.forContainer}>
-                <TopBarCustom/>
-                <View style={inCRUDevent.theFrame}>
-                   
-               
-                    <Image source={{ uri: event.imageSource }} style={styles.image} />
-                    <View style={styles.nameWlocation}>
-                      <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
-                      
-                      <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
-                    </View>
-                    
-                    <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
-                      <Ionicons name="location-outline" size={18} color="lightgrey"/>
-                      <TouchableOpacity onPress={handleAddressPress}>
-                          <Text style={[
-                              inCRUDevent.anotherTxt, 
-                              {   textDecorationLine:'underline',
-                                  marginVertical:3,
-                                  
-                              }]}>{event.location}</Text>
-
-                      </TouchableOpacity>
-                    </View>
-                    <DescriptionWithInstagramLinks description={event.description} />
-
-                    
-                    {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
-                    
-                    
-                        
+      <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
+          <View style={PGStyling.forContainer}>
+            <TopBarCustom event={event}/>
+            <View style={inCRUDevent.theFrame}>
+              <Image source={{ uri: event.imageSource }} style={styles.image} />
+              <View style={styles.nameWlocation}>
+                <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
+                <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
+              </View>
+                <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
+                  <Ionicons name="location-outline" size={18} color="lightgrey"/>
+                  <TouchableOpacity onPress={handleAddressPress}>
+                    <Text style={[
+                        inCRUDevent.anotherTxt, 
+                        {   textDecorationLine:'underline',
+                            marginVertical:3,
+                            
+                        }]}>{event.location}</Text>
+                  </TouchableOpacity>
                 </View>
-            </View>
-        </LinearGradient>
+                <DescriptionWithInstagramLinks description={event.description} />
+                {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
+          </View>
+        </View>
+      </LinearGradient>
     )
 }
 
-const TopBarCustom = () => {
-  const navigation = useNavigation();
+const TopBarCustom = ({event}) => {
+
+  // const { event} = route.params;
+  const navigation = useNavigation()
 
   const handleGoBack = () => {
     navigation.goBack();
   };
-  
-  const [eventName, setEventName] = useState('');
 
-const auth = getAuth();
 
-const deleteEvent = async () => {
-  try {
-    const user = auth.currentUser;
-    const uid = user.email
-    const eventName = setEventName
-    if (user) {
-      
-      // const newEventRef = collection(db, 'newevent'); 
-      // const querySnapshot = await getDocs(query(newEventRef, where("eventName", "==", eventName)));
-
-      // Menentukan dokumen yang akan dihapus berdasarkan userId
-      const q = 
-      query(collection(db, 'newevent'), 
-            
-            where ('eventName', '==' , 'eventName')
-          );
-      const querySnapshot = await getDocs(q)
-      querySnapshot.forEach(async (doc) => {
-        
+  const handleDeleteEvent = async() => {
+    const q = query(collection(db, 'newevent'), where('eventName', '==', event.eventName));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach(async (doc) => {
+      if (doc.exists) {
+        const eventId = doc.id;
         await deleteDoc(doc.ref);
-      });
-
-      console.log("Documents deleted successfully!", q.id);
-      navigation.navigate('EventMenuPage');
-    } else {
-      console.error('No user is currently signed in');
-    }
-  } catch (error) {
-    console.error('Error deleting documents: ', error);
-  }
-};
+        console.log(`Deleted document with ID: ${eventId}`);
+      }
+    });
+  };
 
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -178,11 +143,12 @@ const deleteEvent = async () => {
         <MaterialIcons name="arrow-back-ios" size={20} color="#353535" marginLeft={7} />
       </TouchableOpacity>
       <Text style={styles.eventEdit}>Edit Event</Text>
+
       <View style={{ flexDirection: 'row', alignItems:'center' }}>
         <TouchableOpacity>
           <Feather name="edit" size={20} color="black" marginHorizontal={10}  />
         </TouchableOpacity>
-        <TouchableOpacity onPress={deleteEvent}> 
+        <TouchableOpacity onPress={handleDeleteEvent}> 
           <MaterialIcons name="delete" size={24} color='#353535' marginRight={5} />
         </TouchableOpacity>
       </View>

@@ -21,6 +21,7 @@ const ManageEvent = () => {
 
   const toCRUDevent = (event) => {
     navigation.navigate('CRUDeventPage', { event });
+    
   };
 
   const getNewEvent = async () => {

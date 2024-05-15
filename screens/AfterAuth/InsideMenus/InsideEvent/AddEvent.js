@@ -98,20 +98,20 @@ const AddEvent = () => {
           {
             text: 'Continue',
             onPress: async () => {
-              // ____________________________ if we use setDoc
               
 
+
               const newEventRef = collection(db, 'newevent');
-              await addDoc(newEventRef, {
+              const docRef = await addDoc(newEventRef, {
                 imageSource: imageSource,
                 eventName: eventName,
                 selectedDate: selectedDate,
                 location: location,
                 description: description,
-                uid: user.uid, // last update
+                uid: user.uid, 
                 createdAt: new Date()
               });
-              console.log("Document written with ID: ", newEventRef.id);
+              console.log("Document written with ID: ", docRef.id);
                   
 
               // Proceed to the next step or navigate to another page
