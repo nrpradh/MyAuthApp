@@ -37,7 +37,11 @@ const ManageEvent = () => {
       }
   
       
-      const q = query(collection(db, 'newevent'), where('uid', '==', uid)); //last update
+      const q = 
+      query(collection(db, 'newevent'), 
+            where('uid', '==', uid),
+             
+          ); 
       const querySnapshot = await getDocs(q);
 
       const events = [];
@@ -47,7 +51,7 @@ const ManageEvent = () => {
           id: doc.id,
         });
       });
-      
+      const sortedEvents = events.sort((a, b) => b.createdAt - a.createdAt);
       setNewEventList(events);
     } catch (error) {
       console.error('Error fetching documents: ', error);

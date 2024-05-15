@@ -133,6 +133,7 @@ const TopBarCustom = ({event}) => {
         const eventId = doc.id;
         await deleteDoc(doc.ref);
         console.log(`Deleted document with ID: ${eventId}`);
+        navigation.navigate('EventMenuPage1')
       }
     });
   };
