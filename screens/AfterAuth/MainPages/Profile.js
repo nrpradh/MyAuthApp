@@ -21,6 +21,8 @@ const Profile = () => {
 
   const [refreshing, setRefreshing] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [profilePic, setProfilePic] = useState(null);
+  // const profilePic = require('../../../assets/icon.png');
 
   const fetchUserData = async () => {
     const auth = getAuth();
@@ -81,7 +83,9 @@ const Profile = () => {
         <Text style={PGStyling.pageTitle} >Your Profile</Text>
         
         <View style={PGStyling.profileDetail}>
-          <Image source={require('../../../assets/icon.png')} style={styles.image} />
+          <Image source={{uri : userData.profilePic}} style={styles.image}/>
+          {/* <Image  source={profilePic? { uri: profilePic } : require('../../../assets/icon.png')}
+                  style={styles.image} /> */}
           {userData && (
 
             <View>

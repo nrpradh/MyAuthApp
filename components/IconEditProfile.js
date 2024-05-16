@@ -21,7 +21,7 @@ const IconEditProfile = ({userData}) => {
   
   const [username, setUsername] = useState('');
   const [organization, setOrganization] = useState('');
-  const [imageSource, setImageSource] = useState(null);
+  const [profilePic, setProfilePic] = useState(null);
 
   const auth = getAuth();
   
@@ -42,8 +42,8 @@ const IconEditProfile = ({userData}) => {
         await updateDoc(userDocRef, {
           // Update specific fields
           username: username || userData.username,
-          organization: organization || userData.organization
-          // Add more fields to update as needed
+          organization: organization || userData.organization,
+          profilePic: profilePic
         });
 
         console.log('User data updated successfully');
@@ -76,8 +76,9 @@ const IconEditProfile = ({userData}) => {
 
     if (!pickerResult.cancelled) {
       const selectedImage = pickerResult.assets[0].uri;
-      setImageSource(selectedImage);
-
+      setProfilePic(selectedImage);
+    
+      
       
       console.log('Image uploaded for profile:', selectedImage);
     }
@@ -90,7 +91,7 @@ const IconEditProfile = ({userData}) => {
 
         
         <TouchableOpacity onPress={selectImage}>
-          <Image source={{ uri: imageSource }} style={styles.image} />
+          <Image source={{ uri: profilePic }} style={styles.image} />
         </TouchableOpacity>
         <Text style={{marginTop:5, color:'#ABABAB', fontSize:12}}> Tap to Edit </Text>
         
