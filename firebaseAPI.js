@@ -49,6 +49,6 @@ const db = getFirestore(app);
 
 export { app, db, auth, 
         getFirestore, collection, addDoc, getDocs, deleteDoc,
-        query, where, orderBy, startAt, endAt,
+        query, where, orderBy, startAt, endAt, getDoc,
         updateDoc, doc, setDoc, writeBatch, documentId
       };

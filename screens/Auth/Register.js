@@ -8,7 +8,6 @@ import { authGStyles } from './AuthGlobalStyling';
 
 const Register = () => {
   const [username, setUsername] = useState('');
-  const [organization, setOrganization] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

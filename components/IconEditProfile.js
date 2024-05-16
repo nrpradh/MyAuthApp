@@ -6,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Feather} from '@expo/vector-icons';
 import { getAuth, updateProfile, sendEmailVerification } from 'firebase/auth';
 
-import {auth, updateDoc, doc,db, setDoc, query, where, getDocs, collection, documentId } from '../firebaseAPI';
+import {auth, updateDoc, doc,db, getDoc, query, where, getDocs, collection, documentId } from '../firebaseAPI';
 
 
 import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
@@ -19,8 +19,8 @@ const IconEditProfile = ({userData}) => {
   const [visibleModal, setVisibleModal] = useState(null);
   
   
-  const [username, setUsername] = useState(userData ? userData.username : '');
-  const [organization, setOrganization] = useState(userData ? userData.organization : '');
+  const [username, setUsername] = useState('');
+  const [organization, setOrganization] = useState('');
   const [imageSource, setImageSource] = useState(null);
 
   const auth = getAuth();
@@ -35,11 +35,14 @@ const IconEditProfile = ({userData}) => {
         const userProfileCollectionRef = collection(db, 'userprofile');
         const userDocRef = doc(userProfileCollectionRef, user.uid);
 
+        // Get the current user profile data
+        const userData = (await getDoc(userDocRef)).data();
+
         // Update user data in Firestore
         await updateDoc(userDocRef, {
           // Update specific fields
-          username: username,
-          organization: organization
+          username: username || userData.username,
+          organization: organization || userData.organization
           // Add more fields to update as needed
         });
 
