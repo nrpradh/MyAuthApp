@@ -18,10 +18,9 @@ const IconEditProfile = ({userData}) => {
   const [error, setError] = useState(null);
   const [visibleModal, setVisibleModal] = useState(null);
   
-  
-  const [username, setUsername] = useState('');
-  const [organization, setOrganization] = useState('');
-  const [profilePic, setProfilePic] = useState(userData.profilePic);
+  const [username, setUsername] = useState(userData?.username || '');
+  const [organization, setOrganization] = useState(userData?.organization || '');
+  const [profilePic, setProfilePic] = useState(userData?.profilePic || '');
 
   const auth = getAuth();
   
@@ -38,6 +37,9 @@ const IconEditProfile = ({userData}) => {
         // Get the current user profile data
         const userData = (await getDoc(userDocRef)).data();
 
+        // Show in terminal
+        
+
         // Update user data in Firestore
         await updateDoc(userDocRef, {
           // Update specific fields
@@ -46,7 +48,7 @@ const IconEditProfile = ({userData}) => {
           profilePic: profilePic || userData.profilePic
         });
 
-        console.log('User data updated successfully');
+        console.log('User data updated successfully : ',  true, true, true);
         setVisibleModal(null);
       } else {
         console.error('No user is currently signed in');
