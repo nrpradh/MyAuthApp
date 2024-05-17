@@ -21,7 +21,7 @@ const IconEditProfile = ({userData}) => {
   
   const [username, setUsername] = useState('');
   const [organization, setOrganization] = useState('');
-  const [profilePic, setProfilePic] = useState(null);
+  const [profilePic, setProfilePic] = useState(userData.profilePic);
 
   const auth = getAuth();
   
@@ -43,7 +43,7 @@ const IconEditProfile = ({userData}) => {
           // Update specific fields
           username: username || userData.username,
           organization: organization || userData.organization,
-          profilePic: profilePic
+          profilePic: profilePic || userData.profilePic
         });
 
         console.log('User data updated successfully');

@@ -20,10 +20,9 @@ const Profile = () => {
   const navigation = useNavigation();
 
   const [refreshing, setRefreshing] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [profilePic, setProfilePic] = useState(null);
-  // const profilePic = require('../../../assets/icon.png');
-
+  const [userData, setUserData] = useState('');
+  // const [profilePic, setProfilePic] = useState(userData.profilePic);
+  
   const fetchUserData = async () => {
     const auth = getAuth();
     const currentUser = auth.currentUser;
@@ -83,9 +82,9 @@ const Profile = () => {
         <Text style={PGStyling.pageTitle} >Your Profile</Text>
         
         <View style={PGStyling.profileDetail}>
-          <Image source={{uri : userData.profilePic}} style={styles.image}/>
-          {/* <Image  source={profilePic? { uri: profilePic } : require('../../../assets/icon.png')}
-                  style={styles.image} /> */}
+          {/* <Image source={{uri : userData.profilePic}} style={styles.image}/> */}
+          <Image  source={userData? { uri: userData.profilePic } : require('../../../assets/icon.png')}
+                  style={styles.image} />
           {userData && (
 
             <View>
