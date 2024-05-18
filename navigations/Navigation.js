@@ -68,7 +68,7 @@ const HomeStack = () => {
       
       <Stack.Screen name='HomePage'  component={Home} options={{title : 'Home'}}/> 
       <Stack.Screen name='Categories' component={Categories} /> 
-      <Stack.Screen name='ViewEventPage' component={ViewEvent} options={{title : 'View Event'}}/>
+      <Stack.Screen name='ViewEventPage' component={ViewEvent} options={{title : 'The Event'}}/>
     </Stack.Navigator>
   );
 };

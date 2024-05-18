@@ -99,17 +99,17 @@ const IconEditProfile = ({userData}) => {
 
       <TxtInputs 
         label='Username' 
-        placeholder='Input new username..' 
+        placeholder={userData.username} 
         value={username}
-        editable={!loading}
+        editable={loading}
         onChangeText={text => setUsername(text)}
       />
 
       <TxtInputs 
         label='Organization' 
-        placeholder='Add or input organization..' 
+        placeholder={userData.organization} 
         value={organization}
-        editable={!loading}
+        editable={loading}
         onChangeText={text => setOrganization(text)}
       />
 

@@ -86,13 +86,44 @@ const CRUDevent = ({route}) => {
         }
     };
 
-      const MainViewPage = () => {
-        return(
-            <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
+    
+      
+
+    return (
+      <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
               <View style={PGStyling.forContainer}>
                 <DeleteTheEvent event={event}/>
                 <View style={inCRUDevent.theFrame}>
                   <Image source={{ uri: event.imageSource }} style={styles.image} />
+                  <TxtInputs 
+                    // placeholder={event.eventName}
+                    label='Event Name'
+                    placeholder='Input new data... '
+                    value={{}}
+                    onChangeText={{}}
+                  />
+                  <TxtInputs 
+                    // placeholder={event.selectedDate}
+                    label='Date & Time'
+                    placeholder='Input new data... '
+                    value={{}}
+                    onChangeText={{}}
+                  />
+                  <TxtInputs 
+                    // placeholder={event.location}
+                    label='Location'
+                    placeholder='Input new data... '
+                    value={{}}
+                    onChangeText={{}}
+                  />
+                  <TxtInputs 
+                    // placeholder={event.description}
+                    label='Description'
+                    placeholder='Input new data... '
+                    value={{}}
+                    onChangeText={{}}
+                  />
+
                   <View style={styles.nameWlocation}>
                     <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
                     <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
@@ -112,14 +143,9 @@ const CRUDevent = ({route}) => {
                   <DescriptionWithInstagramLinks description={event.description} />
                   {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
               </View>
+              
             </View>
           </LinearGradient>
-        )
-      }
-      
-
-    return (
-      <MainViewPage/>
     )
 }
 
@@ -159,6 +185,24 @@ const DeleteTheEvent = ({event}) => {
       
     </View>
   )
+}
+
+
+const TxtInputs = ({ placeholder, value, onChangeText, label }) => {
+  return (
+    <View>
+      <Text style={ForEventMenu.addEventLabels}>{label}</Text>
+      <TextInput
+        multiline
+        placeholder={placeholder}
+        value={value}
+        onChangeText={onChangeText}
+        style={ForEventMenu.inputBox}
+        color='#f1f1f1'
+        placeholderTextColor='#ABABAB'
+      />
+    </View>
+  );
 }
 
 export default CRUDevent
