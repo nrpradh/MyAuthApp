@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, RefreshControl, TouchableOpacity, FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 //import Global Style
 import { forCategories } from './homeGStyle';
@@ -12,6 +13,12 @@ const CombinedEventDataScreen = () => {
   const [combinedData, setCombinedData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
+  const navigation = useNavigation();
+
+  const toViewEvent = (event) => {
+    navigation.navigate('ViewEventPage', { event });
+    
+  };
 
   const fetchData = async () => {
     try {
@@ -56,7 +63,7 @@ const CombinedEventDataScreen = () => {
         data={combinedData}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleEventPress([item.eventName,  item.id])}>
+          <TouchableOpacity onPress={() =>  toViewEvent(item)}>
             <View style={forCategories.itemContainer}>
               <Image source={{ uri: item.imageSource }} style={styles.image} />
                 <View style={styles.textMargin}>

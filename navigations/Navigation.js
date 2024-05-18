@@ -15,6 +15,7 @@ import Login from '../screens/Auth/Login';
 // Main Screen w/ inside it
 import Home from '../screens/AfterAuth/MainPages/Home';
 import Categories from '../screens/AfterAuth/InsideMenus/InsideHome/Categories';
+import ViewEvent from '../screens/AfterAuth/InsideMenus/InsideHome/ViewEvent';
 
 // EventMenu Stack w/ inside it
 import EventMenu from '../screens/AfterAuth/MainPages/EventMenu';
@@ -55,6 +56,7 @@ const HomeStack = () => {
       
       <Stack.Screen name='HomePage' component={Home} /> 
       <Stack.Screen name='Categories' component={Categories} /> 
+      <Stack.Screen name='ViewEventPage' component={ViewEvent} />
     </Stack.Navigator>
   );
 };
