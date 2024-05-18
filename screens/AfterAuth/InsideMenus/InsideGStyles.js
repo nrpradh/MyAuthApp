@@ -96,7 +96,7 @@ export const inCRUDevent = StyleSheet.create ({
         padding:10,
         // minHeight: '90%',
         borderRadius:5,  
-        marginTop:20,
+        // marginTop:20,
         // flex:1,
         // marginVertical:10,
     

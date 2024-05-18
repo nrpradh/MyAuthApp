@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const PGStyling = StyleSheet.create ({
     forContainer :{
-        marginTop:40,
+        // marginTop:40,
         // flex:1,
     },
     pageTitle:{
@@ -20,7 +20,8 @@ export const PGStyling = StyleSheet.create ({
         flexDirection: 'row',
         backgroundColor: 'rgba(25, 25, 25, 0.7)',
         padding: 14,
-        marginTop:20, marginBottom:5,
+        // marginTop:20, 
+        marginBottom:5,
         alignItems: 'center',
 
         borderWidth:0.5,

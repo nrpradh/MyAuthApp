@@ -90,7 +90,7 @@ const CRUDevent = ({route}) => {
         return(
             <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
               <View style={PGStyling.forContainer}>
-                <TopBarCustom event={event}/> 
+                <DeleteTheEvent event={event}/>
                 <View style={inCRUDevent.theFrame}>
                   <Image source={{ uri: event.imageSource }} style={styles.image} />
                   <View style={styles.nameWlocation}>
@@ -123,7 +123,7 @@ const CRUDevent = ({route}) => {
     )
 }
 
-const TopBarCustom = ({event}) => {
+const DeleteTheEvent = ({event}) => {
   const [toEdit, setToEdit] = useState(true);
 
   // const { event} = route.params;
@@ -151,19 +151,12 @@ const TopBarCustom = ({event}) => {
   
 
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-      <TouchableOpacity onPress={handleGoBack} >
-        <MaterialIcons name="arrow-back-ios" size={20} color="#353535" marginLeft={7} />
+    <View style={{margin:10, alignItems:'flex-end'}}>
+    
+      <TouchableOpacity onPress={handleDeleteEvent}> 
+        <Ionicons name="trash" size={20} color='#353535' marginRight={5} />
       </TouchableOpacity>
-      <Text style={styles.eventEdit}>Edit Event</Text>
-
-      <View style={{ flexDirection: 'row', alignItems:'center' }}>
-        
-
-        <TouchableOpacity onPress={handleDeleteEvent}> 
-          <MaterialIcons name="delete" size={24} color='#353535' marginRight={5} />
-        </TouchableOpacity>
-      </View>
+      
     </View>
   )
 }

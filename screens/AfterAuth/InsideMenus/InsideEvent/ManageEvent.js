@@ -39,7 +39,7 @@ const ManageEvent = () => {
       
       const q = 
       query(collection(db, 'newevent'), 
-            where('uid', '==', uid),
+            // where('uid', '==', uid),
              
           ); 
       const querySnapshot = await getDocs(q);

@@ -79,8 +79,7 @@ const Profile = () => {
           />
         }
       >
-        <Text style={PGStyling.pageTitle} >Your Profile</Text>
-        
+   
         <View style={PGStyling.profileDetail}>
           {/* <Image source={{uri : userData.profilePic}} style={styles.image}/> */}
           <Image  source={userData? { uri: userData.profilePic } : require('../../../assets/icon.png')}

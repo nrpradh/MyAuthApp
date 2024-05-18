@@ -1,8 +1,11 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
+// Head Bar
+import { doc, deleteDoc, db, collection, where, getDocs, query } from '../firebaseAPI';
+import { useNavigation } from '@react-navigation/native';
 
 // TabNav imported
 import TabNav from './TabNav';
@@ -63,15 +66,23 @@ const HomeStack = () => {
         headerTitleAlign: 'center',
       }}>
       
-      <Stack.Screen name='HomePage' component={Home} /> 
+      <Stack.Screen name='HomePage'  component={Home} options={{title : 'Home'}}/> 
       <Stack.Screen name='Categories' component={Categories} /> 
-      <Stack.Screen name='ViewEventPage' component={ViewEvent} />
+      <Stack.Screen name='ViewEventPage' component={ViewEvent} options={{title : 'View Event'}}/>
     </Stack.Navigator>
   );
 };
 
 
 const EventMenuStack = () => {
+  const navigation = useNavigation()
+
+  const handleGoBack = () => {
+    navigation.navigate('EventMenuPage');
+  };
+
+  
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -81,7 +92,31 @@ const EventMenuStack = () => {
       <Stack.Screen name='EventMenuPage' component={EventMenu} />
       <Stack.Screen name='AddEventPage' component={AddEvent}/>
       <Stack.Screen name='ManageEventPage' component={ManageEvent}/>
-      <Stack.Screen name='CRUDeventPage' component={CRUDevent} />  
+
+      <Stack.Screen
+        name="CRUDeventPage"
+        component={CRUDevent}
+        options={{
+          title: '  Edit Event',
+          headerShown:true,
+          headerStyle: {
+            backgroundColor: '#f1f1f1', // Set background color of the header
+          },
+          headerTintColor: '#353535', // Set color of back button and title
+          headerTitleAlign: 'center', // Center the header title
+          headerLeft: () => (
+            <TouchableOpacity
+              style={{ marginLeft: 10 }}
+              onPress={handleGoBack}
+            >
+              <Ionicons name="arrow-back" size={24} color="#353535" />
+            </TouchableOpacity>
+          ),
+         
+        }}
+      />
+
+      
       <Stack.Screen name='EventLogsPage' component={EventLogs}/>  
 
  
@@ -94,9 +129,18 @@ const ProfileStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false, // Remove if you want the header bar visible
+        headerShown: true, // Remove if you want the header bar visible
+        gestureEnabled:true,
+        headerStyle: {
+          backgroundColor: '#f1f1f1', // Set background color of the header
+        },
+        headerTitleStyle: {
+          fontWeight: 500, // Set title font weight
+        },
+        headerTintColor: '#353535', // Set color of back button and title
+        headerTitleAlign: 'center',
       }}>
-      <Stack.Screen name='ProfilePage' component={Profile} /> 
+      <Stack.Screen name='ProfilePage' component={Profile} options={{title:' Your Profile'}} /> 
       <Stack.Screen name='EditProfileModal' component={EditProfileModal} />
     </Stack.Navigator>
   )

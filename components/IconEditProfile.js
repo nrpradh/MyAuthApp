@@ -20,7 +20,7 @@ const IconEditProfile = ({userData}) => {
   
   const [username, setUsername] = useState(userData?.username || '');
   const [organization, setOrganization] = useState(userData?.organization || '');
-  const [profilePic, setProfilePic] = useState(userData?.profilePic || '');
+  const [profilePic, setProfilePic] = useState(userData?.profilePic || null);
 
   const auth = getAuth();
   
@@ -36,9 +36,6 @@ const IconEditProfile = ({userData}) => {
 
         // Get the current user profile data
         const userData = (await getDoc(userDocRef)).data();
-
-        // Show in terminal
-        
 
         // Update user data in Firestore
         await updateDoc(userDocRef, {
@@ -86,6 +83,7 @@ const IconEditProfile = ({userData}) => {
     }
   };
 
+ 
   const renderModalContent = () => (
     <View style={styles.modalContent}>
       <View style={{alignItems:'center', marginBottom:10}}>
@@ -115,6 +113,12 @@ const IconEditProfile = ({userData}) => {
         onChangeText={text => setOrganization(text)}
       />
 
+      <Text style={{
+        color:'#ABABAB',
+        fontSize:9,
+        alignSelf:'center'
+      }}
+      >* Update at least one data  </Text>
       <View style={styles.buttonFlex}>
         
         <TouchableOpacity onPress={() => setVisibleModal(null)}>
@@ -129,10 +133,10 @@ const IconEditProfile = ({userData}) => {
             <Text style={styles.buttonSave}>Save</Text>
           </View>
         </TouchableOpacity>
-        {loading && <ActivityIndicator color="#000" />} 
+        {loading && <ActivityIndicator color="#6155e5" />} 
         {error && <Text style={{ color: 'red' }}>{error}</Text>}
       </View>
-
+      
       
     </View>
   );
