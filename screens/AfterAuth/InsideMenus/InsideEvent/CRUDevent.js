@@ -158,9 +158,6 @@ const TopBarCustom = ({event}) => {
       <Text style={styles.eventEdit}>Edit Event</Text>
 
       <View style={{ flexDirection: 'row', alignItems:'center' }}>
-        <TouchableOpacity>
-          <Feather name="edit" size={20} color="black" marginHorizontal={10}  />
-        </TouchableOpacity>
         
 
         <TouchableOpacity onPress={handleDeleteEvent}> 

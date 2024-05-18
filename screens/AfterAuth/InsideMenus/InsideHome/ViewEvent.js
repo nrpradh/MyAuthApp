@@ -4,8 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
 import { MaterialIcons, Ionicons, Feather } from '@expo/vector-icons';
 
-import { getAuth } from 'firebase/auth';
-import { doc, deleteDoc, db, collection, where, getDocs, query } from '../../../../firebaseAPI';
+
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
 
@@ -86,90 +85,47 @@ const CRUDevent = ({route}) => {
         }
     };
 
-      const MainViewPage = () => {
-        return(
-            <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
-              <View style={PGStyling.forContainer}>
-                <TopBarCustom event={event}/> 
-                <View style={inCRUDevent.theFrame}>
-                  <Image source={{ uri: event.imageSource }} style={styles.image} />
-                  <View style={styles.nameWlocation}>
-                    <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
-                    <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
-                  </View>
-                  <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
-                    <Ionicons name="location-outline" size={18} color="lightgrey"/>
-                    <TouchableOpacity onPress={handleAddressPress}>
-                    <Text style={[
-                        inCRUDevent.anotherTxt, 
-                        {   textDecorationLine:'underline',
-                              marginVertical:3,
-                            
-                        }]}>{event.location}</Text>
-                    </TouchableOpacity>
-                      
-                  </View>
-                  <DescriptionWithInstagramLinks description={event.description} />
-                  {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
-              </View>
-            </View>
-          </LinearGradient>
-        )
-      }
+     
       
+      const navigation = useNavigation()
 
+      const handleGoBack = () => {
+        navigation.goBack();
+      };
     return (
-      <MainViewPage/>
+    <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
+        <View >
+          <View style={inCRUDevent.theFrame}>
+            <Image source={{ uri: event.imageSource }} style={styles.image} />
+            <View style={styles.nameWlocation}>
+              <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
+              <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
+            </View>
+            <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
+              <Ionicons name="location-outline" size={18} color="lightgrey"/>
+              <TouchableOpacity onPress={handleAddressPress}>
+              <Text style={[
+                  inCRUDevent.anotherTxt, 
+                  {   textDecorationLine:'underline',
+                        marginVertical:3,
+                      
+                  }]}>{event.location}</Text>
+              </TouchableOpacity>
+                
+            </View>
+            <DescriptionWithInstagramLinks description={event.description} />
+            {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
+            
+        </View>
+        
+      </View>
+    </LinearGradient>
+      
     )
 }
 
-const TopBarCustom = ({event}) => {
-  const [toEdit, setToEdit] = useState(true);
-
-  // const { event} = route.params;
-  const navigation = useNavigation()
-
-  const handleGoBack = () => {
-    navigation.goBack();
-  };
 
 
-  const handleDeleteEvent = async() => {
-    const q = query(collection(db, 'newevent'), where('eventName', '==', event.eventName));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach(async (doc) => {
-      if (doc.exists) {
-        const eventId = doc.id;
-        await deleteDoc(doc.ref);
-        console.log(`Deleted document with ID: ${eventId}`);
-        navigation.navigate('EventMenuPage')
-      }
-    });
-  };
-
-
-  
-
-  return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-      <TouchableOpacity onPress={handleGoBack} >
-        <MaterialIcons name="arrow-back-ios" size={20} color="#353535" marginLeft={7} />
-      </TouchableOpacity>
-      <Text style={styles.eventEdit}>Edit Event</Text>
-
-      <View style={{ flexDirection: 'row', alignItems:'center' }}>
-        <TouchableOpacity>
-          <Feather name="edit" size={20} color="black" marginHorizontal={10}  />
-        </TouchableOpacity>
-        
-
-        <TouchableOpacity onPress={handleDeleteEvent}> 
-          <MaterialIcons name="delete" size={24} color='#353535' marginRight={5} />
-        </TouchableOpacity>
-      </View>
-    </View>
-  )
-}
 
 export default CRUDevent
 
@@ -179,7 +135,7 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:18,
         fontWeight:'500',
-        marginLeft:40,
+        // marginLeft:40,
     },
     nameWlocation: {
       flexDirection: 'row', 
@@ -202,7 +158,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         flexWrap:'wrap',
-        // borderWidth:0.5,
+        borderWidth:0.5,
         borderColor:'#f1f1f1',
         borderRadius:5,
         // marginVertical:5,
@@ -223,6 +179,16 @@ const styles = StyleSheet.create({
         textAlign:'left'
     },
 
+    // goBack arrow 
+    goBack :{ 
+        
+        borderRadius:5,
+        margin:10,
+        padding:10,
+        width:100,
+        alignItems: 'center', 
+        // backgroundColor:'#f1f1f1',
+    }
 
 
 })

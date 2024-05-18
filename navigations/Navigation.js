@@ -51,7 +51,16 @@ const HomeStack = () => {
   return( 
     <Stack.Navigator
       screenOptions={{
-        headerShown: false, // Remove if you want the header bar visible
+        headerShown: true, // Remove if you want the header bar visible
+        gestureEnabled:true,
+        headerStyle: {
+          backgroundColor: '#f1f1f1', // Set background color of the header
+        },
+        headerTitleStyle: {
+          fontWeight: 500, // Set title font weight
+        },
+        headerTintColor: '#353535', // Set color of back button and title
+        headerTitleAlign: 'center',
       }}>
       
       <Stack.Screen name='HomePage' component={Home} /> 
@@ -67,6 +76,7 @@ const EventMenuStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false, // Remove if you want the header bar visible
+        gestureEnabled: true
       }}>
       <Stack.Screen name='EventMenuPage' component={EventMenu} />
       <Stack.Screen name='AddEventPage' component={AddEvent}/>
