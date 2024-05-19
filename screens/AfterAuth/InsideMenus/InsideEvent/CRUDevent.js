@@ -13,10 +13,7 @@ import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
 const CRUDevent = ({route}) => {
     const { event} = route.params;
     const [address, setAddress] = useState('');
-    
-    
 
-    
     const splitDescription = (description) => {
         // Regular expression to split the description text
         const regex = /(@[a-zA-Z0-9_]+)/g;

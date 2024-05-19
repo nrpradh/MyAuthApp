@@ -18,9 +18,16 @@ const IconEditProfile = ({userData}) => {
   const [error, setError] = useState(null);
   const [visibleModal, setVisibleModal] = useState(null);
   
-  const [username, setUsername] = useState(userData?.username || '');
-  const [organization, setOrganization] = useState(userData?.organization || '');
-  const [profilePic, setProfilePic] = useState(userData?.profilePic || null);
+  const [username, setUsername] = useState('');
+  const [organization, setOrganization] = useState('');
+  const [profilePic, setProfilePic] = useState(null);
+
+  useEffect(() => {
+    // Set the values from params to the state variables
+    setUsername(userData.username);
+    setOrganization(userData.organization);
+    setProfilePic(userData.profilePic);
+  }, [userData.username, userData.organization, userData.profilePic]);
 
   const auth = getAuth();
   
@@ -99,7 +106,7 @@ const IconEditProfile = ({userData}) => {
 
       <TxtInputs 
         label='Username' 
-        placeholder={userData.username} 
+        placeholder='Update username...'
         value={username}
         editable={loading}
         onChangeText={text => setUsername(text)}
@@ -107,7 +114,7 @@ const IconEditProfile = ({userData}) => {
 
       <TxtInputs 
         label='Organization' 
-        placeholder={userData.organization} 
+        placeholder='Update org...' 
         value={organization}
         editable={loading}
         onChangeText={text => setOrganization(text)}
