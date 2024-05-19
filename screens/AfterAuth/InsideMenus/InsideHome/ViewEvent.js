@@ -13,47 +13,40 @@ const CRUDevent = ({route}) => {
     const { event} = route.params;
     const [address, setAddress] = useState(event.location);
 
-    const splitDescription = (description) => {
-        // Regular expression to split the description text
-        const regex = /(@[a-zA-Z0-9_]+)/g;
-        return description.split(regex);
+    const DescriptionWithInstagramLinks = ({ description }) => {
+      // Split the description text into parts
+      const parts = description.split(/(@[a-zA-Z0-9_]+)/g);
+    
+      // Directly open someone's profile
+      const handleInstagramUsernameClick = (username) => {
+        const instagramUrl = `https://www.instagram.com/${username}`;
+        Linking.openURL(instagramUrl);
       };
-      
-      // Component to render description text with clickable Instagram usernames
-      const DescriptionWithInstagramLinks = ({ description }) => {
-
-        // Split the description text into parts
-        const parts = splitDescription(description);
-      
-        // Directly open someone's profile
-        const handleInstagramUsernameClick = (username) => {
-
-          
-          const instagramUrl = `https://www.instagram.com/${username}`;
-          Linking.openURL(instagramUrl);
-        };
-      
-        return (
-          <View style={styles.container}>
+    
+      return (
+        <View style={styles.container}>
+          <Text style={styles.regularText}>
             {parts.map((part, index) => {
               if (part.startsWith('@')) {
                 // This part is an Instagram username
                 const username = part.slice(1); // to remove the '@' symbol
                 return (
-                  <TouchableOpacity
+                  <Text
                     key={index}
+                    style={styles.instagramUsername}
                     onPress={() => handleInstagramUsernameClick(username)}>
-                    <Text style={styles.instagramUsername}>{part}</Text>
-                  </TouchableOpacity>
+                    {part}
+                  </Text>
                 );
               } else {
                 // This part is regular text
-                return <Text key={index} style={styles.regularText}>{part}</Text>;
+                return part;
               }
             })}
-          </View>
-        );
-      };
+          </Text>
+        </View>
+      );
+    };
 
     const openMaps = () => {
         const formattedAddress = address.replace(/\s/g, '+');
@@ -94,19 +87,19 @@ const CRUDevent = ({route}) => {
         <View >
           <View style={inCRUDevent.theFrame}>
             <Image source={{ uri: event.imageSource }} style={styles.image} />
-            <View style={styles.nameWlocation}>
+            <View style={styles.nameWDate}>
               <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
               <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
             </View>
             <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
-              <Ionicons name="location-outline" size={18} color="lightgrey"/>
+              <Ionicons name="location-outline" size={18} color="lightgrey" marginTop={6}/>
               <TouchableOpacity onPress={handleAddressPress}>
-              <Text style={[
-                  inCRUDevent.anotherTxt, 
-                  {   textDecorationLine:'underline',
-                        marginVertical:3,
-                      
-                  }]}>{event.location}</Text>
+                <Text style={[
+                    inCRUDevent.anotherTxt, 
+                    {   textDecorationLine:'underline',
+                          marginTop:6,
+                        
+                    }]}>{event.location}</Text>
               </TouchableOpacity>
                 
             </View>
@@ -127,14 +120,7 @@ const CRUDevent = ({route}) => {
 export default CRUDevent
 
 const styles = StyleSheet.create({
-    eventEdit:{
-        color:'#353535',
-        textAlign:'center',
-        fontSize:18,
-        fontWeight:'500',
-        // marginLeft:40,
-    },
-    nameWlocation: {
+    nameWDate: {
       flexDirection: 'row', 
       alignItems: 'center' ,
       justifyContent:'space-between',
@@ -142,12 +128,11 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        
-        alignSelf:'center',
-        resizeMode: 'cover',
-        borderRadius: 2,
-        width: '100%', 
-        height: 200,
+      alignSelf:'center',
+      resizeMode: 'cover',
+      borderRadius: 2,
+      width: '100%', 
+      height: 200,
     },  
 
 
@@ -155,11 +140,9 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         flexWrap:'wrap',
-        borderWidth:0.5,
-        borderColor:'#f1f1f1',
-        borderRadius:5,
-        // marginVertical:5,
+        // margin:10,
         padding:5,
+        // backgroundColor: 'black', 
         
     },
     regularText: {
@@ -173,19 +156,9 @@ const styles = StyleSheet.create({
     instagramUsername: {
         // fontSize:13,
         color: 'rgba(205, 185, 255, 0.8)',
-        textAlign:'left'
+        textAlign:'right',
+       
     },
-
-    // goBack arrow 
-    goBack :{ 
-        
-        borderRadius:5,
-        margin:10,
-        padding:10,
-        width:100,
-        alignItems: 'center', 
-        // backgroundColor:'#f1f1f1',
-    }
-
-
+ 
+   
 })
