@@ -6,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { MaterialIcons, Ionicons, Feather } from '@expo/vector-icons';
 
 import { getAuth } from 'firebase/auth';
-import { updateDoc, getDoc, deleteDoc, db, collection, where, getDocs, query, doc } from '../../../../firebaseAPI';
+import { updateDoc, getDoc, deleteDoc, db, collection, where, getDocs, query, doc, setDoc } from '../../../../firebaseAPI';
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
 
@@ -32,24 +32,27 @@ const CRUDevent = ({route}) => {
         
         if (user) {
           // Reference to the user's document in the 'newevent' collection
-          const userEventDocRef = doc(collection(db, 'newevent'), user.uid);
-    
-          // Check if the user's document exists
-          const userEventDocSnapshot = await getDoc(userEventDocRef);
+          const newEventRef = collection(db, 'newevent');
+          const q = query(newEventRef, where("eventName", "==", event.eventName));
+          const querySnapshot = await getDocs(q);
           
-    
-          // Update user data in Firestore
-          await updateDoc(userEventDocRef, {
-            // Update specific fields
-            imageSource: newImageSource,
-            eventName: newEventName,
-            selectedDate: newDate,
-            location: newLocation,
-            description: newDescription,
-          });
-    
-          console.log('Event data updated successfully');
-          navigation.navigate('EventMenuPage');
+          if (querySnapshot.docs.length > 0) {
+            const userEventDocRef = querySnapshot.docs[0].ref;
+            
+            // Update user data in Firestore
+            await updateDoc(userEventDocRef, {
+              imageSource: newImageSource,
+              eventName: newEventName,
+              selectedDate: newDate,
+              location: newLocation,
+              description: newDescription,
+            });
+            
+            console.log('Event data updated successfully');
+            navigation.navigate('EventMenuPage');
+          } else {
+            console.log('Event not found');
+          }
         } else {
           throw new Error('No user is currently signed in');
         }
