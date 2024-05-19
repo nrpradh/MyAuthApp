@@ -31,7 +31,7 @@ export const forCategories = StyleSheet.create ({
     
     // The data container
     theFrame: {
-        backgroundColor:'rgba(25, 25, 25, 0.7)',
+        backgroundColor:'#353535',
         padding:15,
         width:'100%',
         // minHeight: '92.5%',
@@ -90,13 +90,13 @@ export const forCategories = StyleSheet.create ({
 
 export const searchBarStyling = StyleSheet.create({
     searchInput: {
-        backgroundColor: 'rgba(25, 25, 25, 0.7)',
+        backgroundColor: '#353535',
         borderRadius: 5,
         borderColor: 'lightblue',
         borderWidth: 0.5,
         padding: 10,
         // marginHorizontal: 2,
-        marginBottom:5,
+        // marginBottom:5,
     },
     itemContainer: {
         flexDirection: 'row',

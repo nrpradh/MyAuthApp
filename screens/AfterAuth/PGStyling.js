@@ -18,7 +18,7 @@ export const PGStyling = StyleSheet.create ({
     
     profileDetail:{
         flexDirection: 'row',
-        backgroundColor: 'rgba(25, 25, 25, 0.7)',
+        backgroundColor: '#353535',
         padding: 14,
         // marginTop:20, 
         marginBottom:5,

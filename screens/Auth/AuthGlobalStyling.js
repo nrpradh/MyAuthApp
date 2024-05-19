@@ -12,7 +12,7 @@ export const authGStyles = StyleSheet.create ({
 
     },
     boxesAuth:{
-        backgroundColor:'rgba(25, 25, 25, 0.3)',
+        backgroundColor:'#353535',
         padding:20,
         height:300,
         borderRadius:5,

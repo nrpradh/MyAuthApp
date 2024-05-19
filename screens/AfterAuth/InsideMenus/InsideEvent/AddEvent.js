@@ -25,8 +25,23 @@ const AddEvent = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [location, setLocation] = useState(""); 
   const [description, setDescription] = useState('');
-  const [outputText, setOutputText] = useState([]);
+  
+  const [category, setCategory] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [items, setItems] = useState([
+    { label: 'Tech', value: 'tech' },
+    { label: 'Sports', value: 'sports' },
+    { label: 'Competition', value: 'competition' },
+    { label: 'Seminar', value: 'seminar' },
+    { label: 'Online', value: 'online' },
+    { label: 'Concert', value: 'concert' },
+    { label: 'Workshop', value: 'workshop' },
+    { label: 'Others', value: 'others' },
+  ]);
 
+  const handleCategoryChange = (category) => { 
+    setCategory(category);
+  }
 
   const handleEventName = (inputText) => { 
     setEventName(inputText);
@@ -96,6 +111,7 @@ const AddEvent = () => {
               
               const newEventRef = collection(db, 'newevent');
               const docRef = await addDoc(newEventRef, {
+                category: category,
                 imageSource: imageSource,
                 eventName: eventName,
                 selectedDate: selectedDate,
@@ -158,7 +174,16 @@ const AddEvent = () => {
         <Text style={styles.create}>Create Event</Text>
       </View>
       {/* <Text style={ForEventMenu.addEventLabels}> Category :</Text> */}
-      <PickCategories/>
+      <PickCategories
+        open={open}
+        setOpen={setOpen}
+        value={category}
+        setValue={setCategory}
+        items={items}
+        setItems={setItems}
+        category={category}
+        setCategory={handleCategoryChange}
+      />
       
       <ScrollView 
         style={{marginTop:53,}}
@@ -239,8 +264,6 @@ const AddEvent = () => {
 }
 
 const TxtInputs = ({placeholder,value, onChangeText, label}) => {
-  
-
   return(
     <View>
       <Text style={ForEventMenu.addEventLabels}>{label}</Text>
@@ -255,7 +278,6 @@ const TxtInputs = ({placeholder,value, onChangeText, label}) => {
         placeholderTextColor='#ABABAB'
 
       />
-
     </View>
   )
 
@@ -273,7 +295,7 @@ const styles = StyleSheet.create({
     // marginTop:40
   },
   btnSubmit:{
-    borderRadius: 5,
+    borderRadius: 25,
     backgroundColor: '#f1f1f1',
     color:'#353535',
     padding: 10,
@@ -281,7 +303,7 @@ const styles = StyleSheet.create({
     marginVertical:10,
     textAlign:'center',
     fontWeight:'500',
-    width:150,
+    width:135,
     alignSelf: 'center',
 
   },

@@ -149,7 +149,7 @@ const CRUDevent = ({route}) => {
 const styles = StyleSheet.create({
 
   btnUpdate:{
-    borderRadius: 5,
+    borderRadius: 25,
     backgroundColor: '#f1f1f1',
     color:'#353535',
     padding: 10,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     marginVertical:10,
     textAlign:'center',
     fontWeight:'500',
-    width:130,
+    width:135,
     alignSelf: 'center',
   },
 

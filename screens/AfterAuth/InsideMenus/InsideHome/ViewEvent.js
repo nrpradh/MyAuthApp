@@ -101,8 +101,18 @@ const CRUDevent = ({route}) => {
                         
                     }]}>{event.location}</Text>
               </TouchableOpacity>
-                
+               
             </View>
+            <View style={styles.showCategories}>
+              {event.category.map((category, index) => (
+                <View key={index} style= {styles.categoryBox }>
+                  <Text style={styles.categoryText}>
+                    {category}
+                  </Text>
+                </View>
+              ))}
+            </View>
+            {/* <Text style={styles.showCategories}>{event.category}</Text>  */}
             <DescriptionWithInstagramLinks description={event.description} />
             {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
             
@@ -120,6 +130,29 @@ const CRUDevent = ({route}) => {
 export default CRUDevent
 
 const styles = StyleSheet.create({
+    showCategories :{
+      flexDirection:'row',
+      // backgroundColor:'#f1f1f1',
+      borderRadius:20,
+      // marginHorizontal:5,
+      marginTop:5,
+      padding:2,
+    },
+    
+    categoryBox: {
+      // backgroundColor: '#ABABAB',
+      borderWidth:0.5,
+      borderColor:'lightblue',
+      paddingVertical: 5,
+      paddingHorizontal:10,
+      marginHorizontal: 4,
+      borderRadius: 5,
+    },
+    categoryText: {
+      color: 'lightblue',
+      // fontSize: 18,
+    },
+
     nameWDate: {
       flexDirection: 'row', 
       alignItems: 'center' ,

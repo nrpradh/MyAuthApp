@@ -4,21 +4,40 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
 
-const PickCategories = () => {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState([]);
+const PickCategories = ({
+  open,
+  setOpen,
+  value,
+  setValue,
+  items,
+  setItems,
+  category,
+  setCategory,
+  }) => {
+    const handleAddDoc = async (category) => {
+      if (category.length === 0) {
+        console.log('No category selected.');
+        return;
+      }
   
-  const [items, setItems] = useState([
-    { label: 'Tech', value: 'tech' },
-    { label: 'Sports', value: 'sports' },
-    { label: 'Competition', value: 'competition' },
-    { label: 'Seminar', value: 'seminar' },
-    { label: 'Online', value: 'online' },
-    { label: 'Concert', value: 'concert' },
-    { label: 'Workshop', value: 'workshop' },
-    { label: 'Others', value: 'others' },
+      setValue(category);
+      setOpen(false);
+      onPress(category);
+    };
+  // const [open, setOpen] = useState(false);
+  // const [value, setValue] = useState([]);
+  
+  // const [items, setItems] = useState([
+  //   { label: 'Tech', value: 'tech' },
+  //   { label: 'Sports', value: 'sports' },
+  //   { label: 'Competition', value: 'competition' },
+  //   { label: 'Seminar', value: 'seminar' },
+  //   { label: 'Online', value: 'online' },
+  //   { label: 'Concert', value: 'concert' },
+  //   { label: 'Workshop', value: 'workshop' },
+  //   { label: 'Others', value: 'others' },
 
-  ]);
+  // ]);
 
   return (
     <View style={styles.container}>
@@ -44,22 +63,22 @@ const PickCategories = () => {
         }}
         badgeStyle={{
           padding: 10,
+          // background: 'black',
           // marginRight:30,
-          borderRadius:20,
+          borderRadius:5,
         }}  
         badgeTextStyle={{
           fontSize:15,
           color:'#353535',
-          // marginRight:20,
-          // padding:2
-          // backgroundColor:'#353535',
         }}
         listItemLabelStyle={styles.dropdownItemLabel}
         listItemContainerStyle={styles.dropdownItemContainer}
         selectedItemContainerStyle={styles.selectedItemContainer}
         selectedItemLabelStyle={styles.selectedItemLabel}
         placeholder="Pick one category or more..."
-        
+        onConfirm={() => handleAddDoc(category)}
+        category={category}
+        setCategory={setCategory}
       />
     </View>
   );
@@ -81,7 +100,7 @@ const styles = StyleSheet.create({
     
   },
   dropdown: {
-    backgroundColor: 'rgba(25, 25, 25, 0.7)',
+    backgroundColor: '#353535',
     // color:'#ababab',
     borderColor: 'lightblue',
     borderRadius:5,

@@ -6,7 +6,7 @@ export const ForEventMenu = StyleSheet.create ({
         padding:10,
     },
     theFrame: {
-        backgroundColor:'rgba(25, 25, 25, 0.7)',
+        backgroundColor:'#353535',
         // height:250,
         padding:5,
         borderRadius:5,  
@@ -93,7 +93,7 @@ export const ForEventMenu = StyleSheet.create ({
 export const inCRUDevent = StyleSheet.create ({ 
 
     theFrame: {
-        backgroundColor:'rgba(25, 25, 25, 0.7)',
+        backgroundColor:'#353535',
         padding:10,
         // minHeight: '90%',
         borderRadius:5,  
@@ -228,7 +228,7 @@ export const ForProfile = StyleSheet.create ({
         fontSize: 11,
     },
     proFrame: {
-        backgroundColor:'rgba(25, 25, 25, 0.7)', //rgba(25, 25, 25, 0.25)
+        backgroundColor:'#353535', //rgba(25, 25, 25, 0.25)
         padding:10,
         borderRadius:5,  
         marginVertical:5,
