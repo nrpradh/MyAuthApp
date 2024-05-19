@@ -1,97 +1,89 @@
-import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image,} from 'react-native'
+import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image,Modal} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
+import * as ImagePicker from 'expo-image-picker';
 import { MaterialIcons, Ionicons, Feather } from '@expo/vector-icons';
 
 import { getAuth } from 'firebase/auth';
-import { doc, deleteDoc, db, collection, where, getDocs, query } from '../../../../firebaseAPI';
+import { updateDoc, getDoc, deleteDoc, db, collection, where, getDocs, query, doc } from '../../../../firebaseAPI';
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
 
 
 const CRUDevent = ({route}) => {
     const { event} = route.params;
-    const [address, setAddress] = useState('');
-
-    const splitDescription = (description) => {
-        // Regular expression to split the description text
-        const regex = /(@[a-zA-Z0-9_]+)/g;
-        return description.split(regex);
-      };
-      
-      // Component to render description text with clickable Instagram usernames
-      const DescriptionWithInstagramLinks = ({ description }) => {
-
-        // Split the description text into parts
-        const parts = splitDescription(description);
-      
-        // Directly open someone's profile
-        const handleInstagramUsernameClick = (username) => {
-
-          
-          const instagramUrl = `https://www.instagram.com/${username}`;
-          Linking.openURL(instagramUrl);
-        };
-      
-        return (
-          <View style={styles.container}>
-            {parts.map((part, index) => {
-              if (part.startsWith('@')) {
-                // This part is an Instagram username
-                const username = part.slice(1); // to remove the '@' symbol
-                return (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => handleInstagramUsernameClick(username)}>
-                    <Text style={styles.instagramUsername}>{part}</Text>
-                  </TouchableOpacity>
-                );
-              } else {
-                // This part is regular text
-                return <Text key={index} style={styles.regularText}>{part}</Text>;
-              }
-            })}
-          </View>
-        );
-      };
-
-    const openMaps = () => {
-        const formattedAddress = address.replace(/\s/g, '+');
-        let url;
-      
-        // Check the platform and generate the appropriate URL for both platforms
-        if (Platform.OS === 'android') {
-          url = `https://www.google.com/maps/search/?api=1&query=${formattedAddress}`;
-        } else if (Platform.OS === 'ios') {
-          url = `http://maps.apple.com/?q=${formattedAddress}`;
-        } else {
-          console.warn('Unsupported platform');
-          return;
-        }
-      
-        Linking.openURL(url).catch(err => console.error('An error occurred', err));
-      };
+    const navigation = useNavigation();
     
-      const handleAddressPress = () => {
-        if  (address) {
-            console.log("opened address :", address);
-            // console.log("URL:", url);
-            openMaps();
-        }   else {
-            console.warn('Location is not provided');
-        }
-    };
+    // const [updateEvent, setUpdateEvent] = useState('');
 
-    const [updateEvent, setUpdateEvent] = useState('');
-
+    const [newImageSource, setNewImageSource] = useState(null);
     const [newEventName, setNewEventName] = useState('');
     const [newLocation, setNewLocation] = useState('');
     const [newDate, setNewDate] = useState('');
     const [newDescription, setNewDescription] = useState('');
 
+    const auth = getAuth();
+
+    const handleUpdateEvent = async () => {
+      try {
+        // Get the current user
+        const user = auth.currentUser;
+        
+        if (user) {
+          // Reference to the user's document in the 'newevent' collection
+          const userEventDocRef = doc(collection(db, 'newevent'), user.uid);
+    
+          // Check if the user's document exists
+          const userEventDocSnapshot = await getDoc(userEventDocRef);
+          
+    
+          // Update user data in Firestore
+          await updateDoc(userEventDocRef, {
+            // Update specific fields
+            imageSource: newImageSource,
+            eventName: newEventName,
+            selectedDate: newDate,
+            location: newLocation,
+            description: newDescription,
+          });
+    
+          console.log('Event data updated successfully');
+          navigation.navigate('EventMenuPage');
+        } else {
+          throw new Error('No user is currently signed in');
+        }
+      } catch (error) {
+        console.error('Error updating event data:', error.message);
+        // Handle error (e.g., show error message to the user)
+      }
+    };
+
+    const selectImage = async () => {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+  
+      if (status !== 'granted') {
+        alert('Permission to access camera roll is required!');
+        return;
+      }
+  
+      const pickerResult = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [5, 3],
+        quality: 1,
+      });
+  
+      if (!pickerResult.cancelled) {
+        const selectedImage = pickerResult.assets[0].uri;
+        setNewImageSource(selectedImage);
+        console.log('Image uploaded for box:', selectedImage);
+      }
+    };
+
     useEffect(() => {
       // Set the values from params to the state variables
+      setNewImageSource(event.imageSource);
       setNewEventName(event.eventName);
       setNewDate(event.selectedDate);
       setNewLocation(event.location);
@@ -102,9 +94,16 @@ const CRUDevent = ({route}) => {
 
     return (
       <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
-          <ScrollView style={PGStyling.forContainer}>
+          <ScrollView style={PGStyling.forContainer}
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+          >
             <View style={inCRUDevent.theFrame}>
-              <Image source={{ uri: event.imageSource }} style={styles.image} />
+              <View style={ForEventMenu.imageContainer}>
+                <TouchableOpacity onPress={selectImage}>
+                  <Image source={{ uri: newImageSource }} style={styles.image} />
+                </TouchableOpacity>
+              </View>
               <TxtInputs 
                 // placeholder={event.eventName}
                 label='Event Name'
@@ -133,31 +132,39 @@ const CRUDevent = ({route}) => {
                 value={newDescription}
                 onChangeText={text => setNewDescription(text)}
               />
-
-              <View style={styles.nameWlocation}>
-                <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
-                <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
-              </View>
-              <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
-                <Ionicons name="location-outline" size={18} color="lightgrey"/>
-                <TouchableOpacity onPress={handleAddressPress}>
-                <Text style={[
-                    inCRUDevent.anotherTxt, 
-                    {   textDecorationLine:'underline',
-                          marginVertical:3,
-                        
-                    }]}>{event.location}</Text>
-                </TouchableOpacity>
-                  
-              </View>
-              <DescriptionWithInstagramLinks description={event.description} />
-              {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
+              <TouchableOpacity onPress={handleUpdateEvent}>
+                <Text style={styles.btnUpdate}>  Update Event  </Text>
+              </TouchableOpacity>
+              
           </View>
           
         </ScrollView>
       </LinearGradient>
     )
 }
+
+const styles = StyleSheet.create({
+
+  btnUpdate:{
+    borderRadius: 5,
+    backgroundColor: '#f1f1f1',
+    color:'#6155e5',
+    padding: 10,
+    marginVertical:10,
+    fontWeight:'500',
+    alignSelf: 'center',
+
+  },
+
+  image: {
+    alignSelf:'center',
+    resizeMode: 'cover',
+    borderRadius: 2,
+    width: '100%', 
+    height: 200,
+  },  
+
+})
 
 export const DeleteTheEvent = () => {
   const [toEdit, setToEdit] = useState(true);
@@ -179,13 +186,29 @@ export const DeleteTheEvent = () => {
     });
   };
 
-
-  
+  const confirmDelete = () => {
+    Alert.alert(
+      'Warning',
+      `Are you sure you want to delete the event "${event.eventName}"?`,
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: handleDeleteEvent,
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
   return (
     <View style={{margin:10, alignItems:'flex-end'}}>
     
-      <TouchableOpacity onPress={handleDeleteEvent}> 
+      <TouchableOpacity onPress={confirmDelete}> 
         <MaterialIcons name="delete" size={25} color='#353535' marginRight={5} />
       </TouchableOpacity>
       
@@ -213,56 +236,3 @@ const TxtInputs = ({ placeholder, value, onChangeText, label }) => {
 
 export default CRUDevent
 
-const styles = StyleSheet.create({
-    eventEdit:{
-        color:'#353535',
-        textAlign:'center',
-        fontSize:18,
-        fontWeight:'500',
-        marginLeft:40,
-    },
-    nameWlocation: {
-      flexDirection: 'row', 
-      alignItems: 'center' ,
-      justifyContent:'space-between',
-      marginTop:10,
-    },
-
-    image: {
-        
-        alignSelf:'center',
-        resizeMode: 'cover',
-        borderRadius: 2,
-        width: '100%', 
-        height: 200,
-    },  
-
-
-    // for description only
-    container: {
-        flexDirection: 'row',
-        flexWrap:'wrap',
-        // borderWidth:0.5,
-        borderColor:'#f1f1f1',
-        borderRadius:5,
-        // marginVertical:5,
-        padding:5,
-        
-    },
-    regularText: {
-        // fontSize:13,
-        marginLeft:5,
-        color:'rgba(255, 255, 255, 0.8)',
-        textAlign:'left',
-
-        
-    },
-    instagramUsername: {
-        // fontSize:13,
-        color: 'rgba(205, 185, 255, 0.8)',
-        textAlign:'left'
-    },
-
-
-
-})

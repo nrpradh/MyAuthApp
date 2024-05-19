@@ -105,14 +105,14 @@ const EventMenuStack = () => {
           },
           headerTintColor: '#353535', // Set color of back button and title
           headerTitleAlign: 'center', // Center the header title
-          headerLeft: () => (
-            <TouchableOpacity
-              style={{ marginLeft: 10 }}
-              onPress={handleGoBack}
-            >
-              <Ionicons name="arrow-back" size={24} color="#353535" />
-            </TouchableOpacity>
-          ),
+          // headerLeft: () => (
+          //   <TouchableOpacity
+          //     style={{ marginLeft: 10 }}
+          //     onPress={handleGoBack}
+          //   >
+          //     <Ionicons name="arrow-back" size={24} color="#353535" />
+          //   </TouchableOpacity>
+          // ),
           headerRight: () => (  <DeleteTheEvent/>  ),
         }}
       />

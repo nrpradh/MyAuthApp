@@ -4,9 +4,9 @@ import Modal from 'react-native-modal';
 import firebase from 'firebase/compat/app';
 import * as ImagePicker from 'expo-image-picker';
 import { Feather} from '@expo/vector-icons';
-import { getAuth, updateProfile, sendEmailVerification } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
-import {auth, updateDoc, doc,db, getDoc, query, where, getDocs, collection, documentId } from '../firebaseAPI';
+import {updateDoc, doc,db, getDoc,  collection, } from '../firebaseAPI';
 
 
 import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
@@ -47,12 +47,12 @@ const IconEditProfile = ({userData}) => {
         // Update user data in Firestore
         await updateDoc(userDocRef, {
           // Update specific fields
-          username: username || userData.username,
-          organization: organization || userData.organization,
-          profilePic: profilePic || userData.profilePic
+          username: username ,
+          organization: organization ,
+          profilePic: profilePic 
         });
 
-        console.log('User data updated successfully : ',  true, true, true);
+        console.log('User data updated successfully : ',  username, organization, profilePic);
         setVisibleModal(null);
       } else {
         console.error('No user is currently signed in');
@@ -83,9 +83,6 @@ const IconEditProfile = ({userData}) => {
     if (!pickerResult.cancelled) {
       const selectedImage = pickerResult.assets[0].uri;
       setProfilePic(selectedImage);
-    
-      
-      
       console.log('Image uploaded for profile:', selectedImage);
     }
   };

@@ -15,13 +15,12 @@ import { PGStyling } from '../../PGStyling'
 import "firebase/firestore"; 
 import 'firebase/auth';
 import { getAuth } from 'firebase/auth';
-import { app,  db , collection, setDoc, doc, addDoc}  from '../../../../firebaseAPI';
-import { FlatList } from 'react-native-gesture-handler';
+import {  db , collection,  addDoc}  from '../../../../firebaseAPI';
 
 const AddEvent = () => {
   const navigation = useNavigation(); 
 
-  const [imageSource, setImageSource] = useState('');
+  const [imageSource, setImageSource] = useState(null);
   const [eventName, setEventName] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [location, setLocation] = useState(""); 
@@ -99,8 +98,6 @@ const AddEvent = () => {
             text: 'Continue',
             onPress: async () => {
               
-
-
               const newEventRef = collection(db, 'newevent');
               const docRef = await addDoc(newEventRef, {
                 imageSource: imageSource,
