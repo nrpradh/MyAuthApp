@@ -67,37 +67,17 @@ const LoginPage = () => {
 
       </View>
       
-      {/* 
-      <Button title='Login' onPress={LoggingIn} /> 
+      
+     
       {error && <Text style={styles.errorText}>{error}</Text>}
-      <Text style={authGStyles.switchAuth}> Don't have an account? </Text> */}
+      {/* <Text style={authGStyles.switchAuth}> Don't have an account? </Text> */}
     </View>
   );
 }
 
 
 
-// const Login = () => {
-//   const [user, setUser] = useState(null);
 
-//   const onAuthStateSave = (user) => setUser(user);
-
-//   useEffect(() => {
-//     const subscriber = auth.onAuthStateChanged(onAuthStateSave);
-//     return () => subscriber(); // Unsubscribe on component unmount
-//   }, []); 
-
-//   return (
-//     <View style={{flex:1}}>  
-//       <Text> you</Text>
-//       {user ? <TabNav/> : <LoginPage/> } 
-//     </View>
-    
-    
-    
-   
-//   )
-// }
 
 
 
@@ -113,6 +93,7 @@ const styles = StyleSheet.create({
   },
   
   errorText: {
+    textAlign:'center',
     color: '#902020',
     marginTop: 10,
   }

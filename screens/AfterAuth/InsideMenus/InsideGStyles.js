@@ -50,7 +50,7 @@ export const ForEventMenu = StyleSheet.create ({
     inputBox: {
         backgroundColor: '#353535',
         borderRadius: 5,
-        borderColor: '#6155e5',
+        borderColor: 'lightblue',
         borderWidth: 0.5,
         padding: 10,
         marginHorizontal: 2,
@@ -67,7 +67,7 @@ export const ForEventMenu = StyleSheet.create ({
         // flexDirection: 'row', // Arrange image and text horizontally
         backgroundColor:'#353535',
         borderWidth:0.5,
-        borderColor:'#6155e5',
+        borderColor:'lightblue',
         // padding:8,
         margin:1,
         marginTop:5,
@@ -152,7 +152,7 @@ export const ForManageEvent = StyleSheet.create ({
         // flexDirection: 'row', // Arrange image and text horizontally
         // backgroundColor:'#353535',
         borderWidth:0.6,
-        borderColor:'#6155e5',
+        borderColor:'lightblue',
         padding:10,
         marginBottom:10, //marginTop:2,
         marginHorizontal:5,
@@ -201,7 +201,7 @@ export const ForProfile = StyleSheet.create ({
         padding: 10,
         marginVertical:5,
         borderWidth:0.5,
-        borderColor:'#6155E5',
+        borderColor:'lightblue',
         // width: '95%',
         alignItems: 'center',
         // marginBottom: 10,

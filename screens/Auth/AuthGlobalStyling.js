@@ -24,19 +24,19 @@ export const authGStyles = StyleSheet.create ({
         padding:10,
         borderRadius:5,
         textAlign:'center',
-        color:'#6155e5'
+        color:'#353535'
     },
     headingAuth: {
-        color:'#f1f1f1',
+        color:'#353535',
         // backgroundColor:'rgba(255, 255, 255, 0.3)',
-        padding:10,
+        // padding:10,
         // alignSelf:'center',
         textAlign:'center',
         fontSize:25,
         fontWeight:'bold'
     },
     subHeadingAuth:{ 
-        color:'#f1f1f1',
+        color:'grey',
         textAlign:'center',
         fontSize:16,
         marginTop:8,
@@ -48,7 +48,7 @@ export const authGStyles = StyleSheet.create ({
    
         textAlign:'center',
         fontSize:13,    
-        color:'#f1f1f1',
+        color:'#353535',
         paddingVertical:10,
         paddingHorizontal:5,
         // marginBottom:65,

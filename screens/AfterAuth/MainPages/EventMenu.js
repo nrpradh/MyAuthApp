@@ -34,19 +34,19 @@ const ToAddEvent = () => {
   return(
     <SpeedDial 
       isOpen={open}
-      icon={{ name: 'add', color: '#6155e5' }}
-      openIcon={{ name: 'close', color: '#6155e5' }}
+      icon={{ name: 'add', color: '#353535' }}
+      openIcon={{ name: 'close', color: '#353535' }}
       onOpen={() => setOpen(!open)}
       onClose={() => setOpen(!open)}
       buttonStyle={{backgroundColor:'#f1f1f1'}} 
-      containerStyle={{ borderWidth: 0.5, borderColor: '#6155e5' }}
+      containerStyle={{ borderWidth: 0.5, borderColor: '#353535' }}
     >
       <SpeedDial.Action
-        icon={{ name: 'upload', color: '#6155e5' }}
+        icon={{ name: 'upload', color: '#353535' }}
         buttonStyle={{backgroundColor:'#f1f1f1', }}
         title="Create & upload"
-        titleStyle={{ color: '#6155e5' }}
-        containerStyle={{ borderWidth: 0.5, borderColor: '#6155e5' }}
+        titleStyle={{ color: '#353535' }}
+        containerStyle={{ borderWidth: 0.5, borderColor: '#353535' }}
         onPress={handleNavigation} // Call the handleNavigation function
       />
     </SpeedDial>
@@ -62,7 +62,7 @@ const TopTabNav = () => {
     <Tab.Navigator 
       initialRouteName='Manage'
       screenOptions={{
-        tabBarActiveTintColor: '#6155e5', // Color of the active tab text
+        tabBarActiveTintColor: '#353535', // Color of the active tab text
         tabBarInactiveTintColor: '#ABABAB', // Color of the inactive tab text
         tabBarLabelStyle: {
           fontSize: 15, // Font size of the tab labels
@@ -73,7 +73,7 @@ const TopTabNav = () => {
           paddingTop:40,
         },
         tabBarIndicatorStyle: {
-          backgroundColor: '#6155e5', // Color of the tab indicator
+          backgroundColor: '#353535', // Color of the tab indicator
         },
         tabBarPressColor:'#f5f5f5', // Disable touch effect color
         tabBarPressOpacity: 0,

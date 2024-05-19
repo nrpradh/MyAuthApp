@@ -121,9 +121,10 @@ const Profile = () => {
           /> 
           
           
-          <LogOut/>
+          
           
         </View>
+        <LogOut/>
       </ScrollView>
     
       

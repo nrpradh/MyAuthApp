@@ -149,14 +149,14 @@ const styles = StyleSheet.create({
         // fontSize:13,
         marginLeft:5,
         color:'rgba(255, 255, 255, 0.8)',
-        textAlign:'left',
+        textAlign:'justify',
 
         
     },
     instagramUsername: {
         // fontSize:13,
-        color: 'rgba(205, 185, 255, 0.8)',
-        textAlign:'right',
+        color: '#ADD8E6',
+        textAlign:'justify',
        
     },
  

@@ -64,7 +64,7 @@ export const PGStyling = StyleSheet.create ({
     
     linearGradient: {  // Global Screen Gradient
         flex:1,
-        colors: ['#f1f1f1', '#6155e5', 'black'],
+        colors: ['#f1f1f1', 'lightblue'],
         start: { x: 0.5, y: 0 },
         end: { x: 0.5, y: 1 },
     },

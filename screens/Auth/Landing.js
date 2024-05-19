@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     },
     switchAuth:{
       fontSize:13,
-      color:'lightgrey',
+      color:'grey',
       textAlign:'center',
       textDecorationLine:'underline',
       paddingVertical:10,

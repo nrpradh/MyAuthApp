@@ -24,28 +24,39 @@ const LogOut = () => {
   }
 
   return (
-    <TouchableOpacity onPress={handleLogout}>
-        <View style={[ForProfile.profileContent, {borderColor:'rgba(255, 8, 13, 0.6)'}]}>
-            <Feather name='log-out' size={22} color="#C40002" marginLeft={5} />
-            <View style={{flexDirection:'column'}}>
-                <Text style={styles.logOutOnly}>Log Out</Text>
-                <Text style={styles.logOutSubOnly}> Log out from this account </Text>
-            </View>
-        </View>
-    </TouchableOpacity>
+    <View style={styles.logOutPos}>
+      <TouchableOpacity onPress={handleLogout}>
+          <View style={[ForProfile.profileContent, {backgroundColor:'#f1f1f1'}]}>
+              <Feather name='log-out' size={22} color="#C40002" marginLeft={5} />
+              <View style={{flexDirection:'column'}}>
+                  <Text style={styles.logOutOnly}>Log Out</Text>
+                  <Text style={styles.logOutSubOnly}> Log out from this account </Text>
+              </View>
+          </View>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+    logOutPos:{
+      // width:200,
+      // backgroundColor:'blue',
+      flex:1,
+      // paddingHorizontal:10,
+      alignItems:'flex-end',
+      // justifyContent:'flex-end'
+    },
+
     logOutOnly:{
         color: '#C40002',
-        paddingTop: 2,
+        // paddingTop: 2,
         marginLeft: 20,
         fontSize: 16,
       },
       logOutSubOnly: {
-        color: 'rgba(255, 8, 13, 0.6)',
-        paddingBottom: 2,
+        color: 'rgba(155, 8, 13, 0.65)',
+        // paddingBottom: 2,
         marginLeft: 17,
         fontSize: 11,
     },        

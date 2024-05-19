@@ -6,7 +6,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import { ForEventMenu } from "../screens/AfterAuth/InsideMenus/InsideGStyles";
 
-const DatePicker = ({ onDateChange }) => {
+const DatePicker = ({ onDateChange, value }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [dateInputValue, setDateInputValue] = useState('');
@@ -40,11 +40,11 @@ const DatePicker = ({ onDateChange }) => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
           style={styles.inputBox}
-          datePickerContainerStyle={{ backgroundColor: "#6155E5" }}
+          datePickerContainerStyle={{ backgroundColor: "lightblue" }}
         />
         <TextInput
           placeholder='dd/mm/yyyy'
-          value={dateInputValue}
+          value={value}
           onChangeText={setDateInputValue}
           editable={true} 
           style={ForEventMenu.inputBox}
@@ -53,7 +53,13 @@ const DatePicker = ({ onDateChange }) => {
           placeholderTextColor='#ABABAB'
         />
         <TouchableOpacity onPress={showDatePicker}>
-          <Text style={{color:'#ABABAB'}}> D&T Picker</Text>
+          <Text style={{
+            color:'lightgrey', 
+            fontSize:13,
+            marginBottom:15, 
+            marginLeft:10,
+            // textDecorationLine:'underline'
+            }}> Autopicker *</Text>
         </TouchableOpacity>
       </View>
     </View>

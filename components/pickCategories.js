@@ -37,8 +37,8 @@ const PickCategories = () => {
         style={styles.dropdown}
         textStyle={styles.dropdownText}
         // badgeDotColors={[]}
-        badgeDotColors={['#f1f1f1']}  
-        badgeColors={['white']}
+        badgeDotColors={['#353535']}  
+        badgeColors={['#f1f1f1']}
         badgeDotStyle={{
           borderRadius: 5
         }}
@@ -49,7 +49,7 @@ const PickCategories = () => {
         }}  
         badgeTextStyle={{
           fontSize:15,
-          color:'#6155e5',
+          color:'#353535',
           // marginRight:20,
           // padding:2
           // backgroundColor:'#353535',
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   dropdown: {
     backgroundColor: 'rgba(25, 25, 25, 0.7)',
     // color:'#ababab',
-    borderColor: '#6155e5',
+    borderColor: 'lightblue',
     borderRadius:5,
     borderWidth: 0.5,
     
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   dropdownItemContainer: {
    
     backgroundColor: '#353535',
-    borderColor:'#6155e5', borderWidth:0.2,
+    borderColor:'#353535', borderWidth:0.2,
   },
   dropdownItemLabel: {
     
@@ -107,14 +107,14 @@ const styles = StyleSheet.create({
     
   },
   selectedItemContainer: {
-    borderColor:'#6155e5', borderLeftWidth:2,
+    borderColor:'#353535', borderLeftWidth:3,
     backgroundColor: '#f1f1f1',
     
   },
   selectedItemLabel: {
     
     fontSize: 14,
-    color: '#6155e5',
+    color: '#353535',
   },
 });
 

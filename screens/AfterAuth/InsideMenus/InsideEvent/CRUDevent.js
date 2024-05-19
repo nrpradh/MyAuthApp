@@ -9,7 +9,7 @@ import { getAuth } from 'firebase/auth';
 import { updateDoc, getDoc, deleteDoc, db, collection, where, getDocs, query, doc, setDoc } from '../../../../firebaseAPI';
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
-
+import DatePicker from '../../../../components/datePicker';
 
 const CRUDevent = ({route}) => {
     const { event} = route.params;
@@ -83,6 +83,10 @@ const CRUDevent = ({route}) => {
         console.log('Image uploaded for box:', selectedImage);
       }
     };
+    const handleDateChange = (formattedDateTime) => {
+      setNewDate(formattedDateTime); 
+    
+    };
 
     useEffect(() => {
       // Set the values from params to the state variables
@@ -99,12 +103,11 @@ const CRUDevent = ({route}) => {
       <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
           <ScrollView style={PGStyling.forContainer}
             showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}
-          >
+            showsHorizontalScrollIndicator={false}>
             <View style={inCRUDevent.theFrame}>
               <View style={ForEventMenu.imageContainer}>
                 <TouchableOpacity onPress={selectImage}>
-                  <Image source={{ uri: newImageSource }} style={styles.image} />
+                  <Image source={{ uri: newImageSource }} style={styles.theImage} />
                 </TouchableOpacity>
               </View>
               <TxtInputs 
@@ -114,13 +117,9 @@ const CRUDevent = ({route}) => {
                 value={newEventName}
                 onChangeText={text => setNewEventName(text)}
               />
-              <TxtInputs 
-                // placeholder={event.selectedDate}
-                label='Date & Time'
-                placeholder='Input new data... '
-                value={newDate}
-                onChangeText={text => setNewDate(text)}
-              />
+              
+              <DatePicker onDateChange={handleDateChange} value={newDate}/>
+
               <TxtInputs 
                 // placeholder={event.location}
                 label='Location'
@@ -135,13 +134,14 @@ const CRUDevent = ({route}) => {
                 value={newDescription}
                 onChangeText={text => setNewDescription(text)}
               />
-              <TouchableOpacity onPress={handleUpdateEvent}>
-                <Text style={styles.btnUpdate}>  Update Event  </Text>
-              </TouchableOpacity>
               
           </View>
           
+          
         </ScrollView>
+        <TouchableOpacity onPress={handleUpdateEvent}>
+                <Text style={styles.btnUpdate}>  Update Event  </Text>
+              </TouchableOpacity>
       </LinearGradient>
     )
 }
@@ -151,15 +151,17 @@ const styles = StyleSheet.create({
   btnUpdate:{
     borderRadius: 5,
     backgroundColor: '#f1f1f1',
-    color:'#6155e5',
+    color:'#353535',
     padding: 10,
+    // borderWidth:0.5,
     marginVertical:10,
+    textAlign:'center',
     fontWeight:'500',
+    width:130,
     alignSelf: 'center',
-
   },
 
-  image: {
+  theImage: {
     alignSelf:'center',
     resizeMode: 'cover',
     borderRadius: 2,

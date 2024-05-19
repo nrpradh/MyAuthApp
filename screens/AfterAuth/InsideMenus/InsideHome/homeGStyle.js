@@ -8,7 +8,7 @@ export const forCategories = StyleSheet.create ({
     },
     categoryItem: {
         borderWidth: 1,
-        borderColor: '#6155e5',
+        borderColor: 'lightblue',
         paddingVertical: 8,
         paddingHorizontal: 10,
         borderRadius: 5,
@@ -16,11 +16,11 @@ export const forCategories = StyleSheet.create ({
         marginHorizontal: 5,
     },
     categoryText: {
-        color: '#6155e5',
+        color: 'lightblue',
         fontWeight: 'bold',
     },
     selectedCategory: {
-        backgroundColor: '#6155e5',
+        backgroundColor: 'lightblue',
     },
     selectedText: {
         color: '#f1f1f1',
@@ -48,7 +48,7 @@ export const forCategories = StyleSheet.create ({
         // alignItems: 'center',
         // backgroundColor: '#353535',
         borderRadius: 5,
-        borderColor:'#6155e5',
+        borderColor:'lightblue',
         marginRight: 10,
         // height: 200,
         // width: 220,// Adjust item width as needed
@@ -66,8 +66,8 @@ export const forCategories = StyleSheet.create ({
         padding: 7,
         borderRadius: 5,
         borderWidth:0.5,
-        borderColor:'#6155e5'
-        // shadowColor: '#6155e5',
+        borderColor:'lightblue'
+        // shadowColor: 'lightblue',
         // shadowOffset: {
         //     width: 0,
         //     height: 1,
@@ -92,7 +92,7 @@ export const searchBarStyling = StyleSheet.create({
     searchInput: {
         backgroundColor: 'rgba(25, 25, 25, 0.7)',
         borderRadius: 5,
-        borderColor: '#6155e5',
+        borderColor: 'lightblue',
         borderWidth: 0.5,
         padding: 10,
         // marginHorizontal: 2,

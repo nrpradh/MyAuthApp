@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import PickCategories from '../../../../components/pickCategories';
 import DatePicker from '../../../../components/datePicker';
-import { ForEventMenu } from '../InsideGStyles'
+import { ForEventMenu, inCRUDevent } from '../InsideGStyles'
 import { PGStyling } from '../../PGStyling'
 
 
@@ -28,7 +28,7 @@ const AddEvent = () => {
   const [outputText, setOutputText] = useState([]);
 
 
-  const handleEventName = (inputText) => { //Handle event Name
+  const handleEventName = (inputText) => { 
     setEventName(inputText);
   }
 
@@ -37,15 +37,11 @@ const AddEvent = () => {
   
   };
 
-  
-
   const handleLocation = (inputText) => {
     setLocation(inputText);
-    // handleConfirm(); // Call handleConfirm to set the location and log the address
   };
 
   
-
   const selectImage = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -129,7 +125,6 @@ const AddEvent = () => {
   };
 
   
-  // Later on __________________________________________________________________
   
   const openInstagramProfile = (username) => {
     const url = `https://www.instagram.com/${username}`;
@@ -152,15 +147,8 @@ const AddEvent = () => {
       }
     });
     
-    // setOutputText(parsedSegments);
-    // Log the output text to the terminal
-    // console.log('Output:', description);
-    
-    // Set the description state
     setDescription(inputText);
   };
-  // _______________________________________________________________________________
-
 
   // <Text style={ForEventMenu.addEventLabels}> Category :</Text>
   // <PickCategories/>
@@ -177,14 +165,14 @@ const AddEvent = () => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}>
 
-        <View style={ForEventMenu.theFrame}>
+        <View style={inCRUDevent.theFrame}>
           <View style={ForEventMenu.imageContainer}>
             <View style={styles.addImages}>
               <TouchableOpacity onPress={selectImage}>
                 {imageSource ? (
                   <Image
                     source={{ uri: imageSource }}
-                    style={styles.image}
+                    style={styles.theImage}
                     resizeMode="contain"
                   />
                 ) : (
@@ -195,7 +183,7 @@ const AddEvent = () => {
                   />
                 )}
               </TouchableOpacity>
-              <View style={{ alignItems: 'center', marginTop: 8 }}>
+              <View style={{ alignItems: 'center', marginTop: 5 }}>
                 <Text style={{ fontWeight: 'bold', color:'#f1f1f1' }}>
                   {imageSource ? 'Tap again to edit ' : 'Add Image'}
                 </Text>
@@ -208,20 +196,18 @@ const AddEvent = () => {
           </View>
           <TxtInputs 
             label='Event Name' 
-            placeholder='input the name'
+            placeholder='Input the name...'
             value={eventName}
             onChangeText={handleEventName}
-            // onChangeText={(text) => handleEventName(text)}
           />
           
-          <DatePicker onDateChange={handleDateChange} />
+          <DatePicker onDateChange={handleDateChange} value={selectedDate} />
           
           <TxtInputs 
             label='Location' 
             placeholder='Input the location...'
             value={location}
             onChangeText={handleLocation}
-            // onChangeText={(text) => handleLocation(text)}
           />
           
           
@@ -230,7 +216,6 @@ const AddEvent = () => {
             placeholder='Input description (mention with @..)'
             value={description}
             onChangeText={setDescription}
-            // onChangeText={(text) => handleDescription(text)}
           />
 
           {/* <TxtInputs 
@@ -290,10 +275,13 @@ const styles = StyleSheet.create({
   btnSubmit:{
     borderRadius: 5,
     backgroundColor: '#f1f1f1',
-    color:'#6155e5',
+    color:'#353535',
     padding: 10,
+    // borderWidth:0.5,
     marginVertical:10,
+    textAlign:'center',
     fontWeight:'500',
+    width:150,
     alignSelf: 'center',
 
   },
@@ -308,9 +296,10 @@ const styles = StyleSheet.create({
     padding: 10,
     
   },
-  image: {
+  theImage: {
+    
     borderRadius:5,
-    width: 370,
+    width:370,
     height: 200,
   },
 
