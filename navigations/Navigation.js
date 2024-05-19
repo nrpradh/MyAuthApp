@@ -5,7 +5,7 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 // Head Bar
 import { doc, deleteDoc, db, collection, where, getDocs, query } from '../firebaseAPI';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 // TabNav imported
 import TabNav from './TabNav';
@@ -74,14 +74,15 @@ const HomeStack = () => {
 };
 
 
+import { DeleteTheEvent } from '../screens/AfterAuth/InsideMenus/InsideEvent/CRUDevent';
+
 const EventMenuStack = () => {
+
   const navigation = useNavigation()
 
   const handleGoBack = () => {
     navigation.navigate('EventMenuPage');
   };
-
-  
 
   return (
     <Stack.Navigator
@@ -112,7 +113,7 @@ const EventMenuStack = () => {
               <Ionicons name="arrow-back" size={24} color="#353535" />
             </TouchableOpacity>
           ),
-         
+          headerRight: () => (  <DeleteTheEvent/>  ),
         }}
       />
 

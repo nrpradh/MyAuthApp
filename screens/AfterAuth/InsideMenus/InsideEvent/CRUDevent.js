@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image,} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
 import { MaterialIcons, Ionicons, Feather } from '@expo/vector-icons';
 
@@ -12,8 +12,8 @@ import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
 
 const CRUDevent = ({route}) => {
     const { event} = route.params;
-    const [updateEvent, setUpdateEvent] = useState('');
-    const [address, setAddress] = useState(event.location);
+    const [address, setAddress] = useState('');
+    
     
 
     
@@ -86,79 +86,88 @@ const CRUDevent = ({route}) => {
         }
     };
 
-    
+    const [updateEvent, setUpdateEvent] = useState('');
+
+    const [newEventName, setNewEventName] = useState('');
+    const [newLocation, setNewLocation] = useState('');
+    const [newDate, setNewDate] = useState('');
+    const [newDescription, setNewDescription] = useState('');
+
+    useEffect(() => {
+      // Set the values from params to the state variables
+      setNewEventName(event.eventName);
+      setNewDate(event.selectedDate);
+      setNewLocation(event.location);
+      setNewDescription(event.description);
+    }, [event.description, event.eventName, event.location, event.selectedDate]);
+
       
 
     return (
       <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
-              <View style={PGStyling.forContainer}>
-                <DeleteTheEvent event={event}/>
-                <View style={inCRUDevent.theFrame}>
-                  <Image source={{ uri: event.imageSource }} style={styles.image} />
-                  <TxtInputs 
-                    // placeholder={event.eventName}
-                    label='Event Name'
-                    placeholder='Input new data... '
-                    value={{}}
-                    onChangeText={{}}
-                  />
-                  <TxtInputs 
-                    // placeholder={event.selectedDate}
-                    label='Date & Time'
-                    placeholder='Input new data... '
-                    value={{}}
-                    onChangeText={{}}
-                  />
-                  <TxtInputs 
-                    // placeholder={event.location}
-                    label='Location'
-                    placeholder='Input new data... '
-                    value={{}}
-                    onChangeText={{}}
-                  />
-                  <TxtInputs 
-                    // placeholder={event.description}
-                    label='Description'
-                    placeholder='Input new data... '
-                    value={{}}
-                    onChangeText={{}}
-                  />
+          <ScrollView style={PGStyling.forContainer}>
+            <View style={inCRUDevent.theFrame}>
+              <Image source={{ uri: event.imageSource }} style={styles.image} />
+              <TxtInputs 
+                // placeholder={event.eventName}
+                label='Event Name'
+                placeholder='Input new data... '
+                value={newEventName}
+                onChangeText={text => setNewEventName(text)}
+              />
+              <TxtInputs 
+                // placeholder={event.selectedDate}
+                label='Date & Time'
+                placeholder='Input new data... '
+                value={newDate}
+                onChangeText={text => setNewDate(text)}
+              />
+              <TxtInputs 
+                // placeholder={event.location}
+                label='Location'
+                placeholder='Input new data... '
+                value={newLocation}
+                onChangeText={text => setNewLocation(text)}
+              />
+              <TxtInputs 
+                // placeholder={event.description}
+                label='Description'
+                placeholder='Input new data... '
+                value={newDescription}
+                onChangeText={text => setNewDescription(text)}
+              />
 
-                  <View style={styles.nameWlocation}>
-                    <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
-                    <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
-                  </View>
-                  <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
-                    <Ionicons name="location-outline" size={18} color="lightgrey"/>
-                    <TouchableOpacity onPress={handleAddressPress}>
-                    <Text style={[
-                        inCRUDevent.anotherTxt, 
-                        {   textDecorationLine:'underline',
-                              marginVertical:3,
-                            
-                        }]}>{event.location}</Text>
-                    </TouchableOpacity>
-                      
-                  </View>
-                  <DescriptionWithInstagramLinks description={event.description} />
-                  {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
+              <View style={styles.nameWlocation}>
+                <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
+                <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
               </View>
-              
-            </View>
-          </LinearGradient>
+              <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
+                <Ionicons name="location-outline" size={18} color="lightgrey"/>
+                <TouchableOpacity onPress={handleAddressPress}>
+                <Text style={[
+                    inCRUDevent.anotherTxt, 
+                    {   textDecorationLine:'underline',
+                          marginVertical:3,
+                        
+                    }]}>{event.location}</Text>
+                </TouchableOpacity>
+                  
+              </View>
+              <DescriptionWithInstagramLinks description={event.description} />
+              {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
+          </View>
+          
+        </ScrollView>
+      </LinearGradient>
     )
 }
 
-const DeleteTheEvent = ({event}) => {
+export const DeleteTheEvent = () => {
   const [toEdit, setToEdit] = useState(true);
 
-  // const { event} = route.params;
-  const navigation = useNavigation()
-
-  const handleGoBack = () => {
-    navigation.goBack();
-  };
-
+  const route = useRoute();
+  const { event} = route.params;
+  const navigation = useNavigation();
 
   const handleDeleteEvent = async() => {
     const q = query(collection(db, 'newevent'), where('eventName', '==', event.eventName));
@@ -180,7 +189,7 @@ const DeleteTheEvent = ({event}) => {
     <View style={{margin:10, alignItems:'flex-end'}}>
     
       <TouchableOpacity onPress={handleDeleteEvent}> 
-        <Ionicons name="trash" size={20} color='#353535' marginRight={5} />
+        <MaterialIcons name="delete" size={25} color='#353535' marginRight={5} />
       </TouchableOpacity>
       
     </View>
