@@ -25,7 +25,7 @@ export const PGStyling = StyleSheet.create ({
         alignItems: 'center',
 
         borderWidth:0.5,
-        borderColor:'#6155e5',
+        // borderColor:'#6155e5',
         borderRadius:5,
        
 

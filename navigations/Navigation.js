@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Feather, Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 // Head Bar
 import { doc, deleteDoc, db, collection, where, getDocs, query } from '../firebaseAPI';
@@ -19,6 +19,7 @@ import Login from '../screens/Auth/Login';
 import Home from '../screens/AfterAuth/MainPages/Home';
 import Categories from '../screens/AfterAuth/InsideMenus/InsideHome/Categories';
 import ViewEvent from '../screens/AfterAuth/InsideMenus/InsideHome/ViewEvent';
+import SearchEvent from '../components/searchDataBar';
 
 // EventMenu Stack w/ inside it
 import EventMenu from '../screens/AfterAuth/MainPages/EventMenu';
@@ -49,7 +50,10 @@ const MainStack = () => {
   );
 };
 
-const HomeStack = () => {
+const HomeStack = ({navigation}) => {
+  const searchEvent = () => {
+    navigation.navigate('SearchEventPage');
+  };
   
   return( 
     <Stack.Navigator
@@ -66,9 +70,27 @@ const HomeStack = () => {
         headerTitleAlign: 'center',
       }}>
       
-      <Stack.Screen name='HomePage'  component={Home} options={{title : 'Home'}}/> 
+      <Stack.Screen 
+        name='HomePage'
+        component={Home} 
+        options={{
+          title : 'Home',
+          headerStyle: {
+            backgroundColor: '#f1f1f1', // Set background color of the header
+          },
+          headerTintColor: '#353535', // Set color of back button and title
+          headerTitleAlign: 'center', // Center the header title
+
+          headerRight: () => (
+            <TouchableOpacity onPress={searchEvent}>
+              <Ionicons name="search" size={24} color="black" marginRight={15} />
+            </TouchableOpacity>
+          )
+
+        }}/> 
       <Stack.Screen name='Categories' component={Categories} /> 
       <Stack.Screen name='ViewEventPage' component={ViewEvent} options={{title : 'The Event'}}/>
+      <Stack.Screen name='SearchEventPage' component={SearchEvent} options={{title : 'Search Event'}}/>
     </Stack.Navigator>
   );
 };
@@ -80,9 +102,6 @@ const EventMenuStack = () => {
 
   const navigation = useNavigation()
 
-  const handleGoBack = () => {
-    navigation.navigate('EventMenuPage');
-  };
 
   return (
     <Stack.Navigator
@@ -105,14 +124,7 @@ const EventMenuStack = () => {
           },
           headerTintColor: '#353535', // Set color of back button and title
           headerTitleAlign: 'center', // Center the header title
-          // headerLeft: () => (
-          //   <TouchableOpacity
-          //     style={{ marginLeft: 10 }}
-          //     onPress={handleGoBack}
-          //   >
-          //     <Ionicons name="arrow-back" size={24} color="#353535" />
-          //   </TouchableOpacity>
-          // ),
+
           headerRight: () => (  <DeleteTheEvent/>  ),
         }}
       />

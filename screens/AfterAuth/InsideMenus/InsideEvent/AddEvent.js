@@ -90,7 +90,7 @@ const AddEvent = () => {
         return;
       }
 
-      if (!imageSource || !eventName || !selectedDate || !location || !description) {
+      if (!category || !imageSource || !eventName || !selectedDate || !location || !description) {
         // If any of the fields are empty, display an alert to the user
         alert('Please fill in all fields.');
         return;

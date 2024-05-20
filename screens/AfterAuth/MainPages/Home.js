@@ -39,7 +39,6 @@ const Home = ({navigation}) => {
   return (
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
       <View style={PGStyling.forContainer}>
-        <SearchDataBar/>
         <CategoryFilter/>
         <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='rgba(25, 25, 25, 0.7)' />
 

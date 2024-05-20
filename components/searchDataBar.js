@@ -68,7 +68,8 @@ const SearchDataBar = () => {
   };
 
   return (
-    <View>
+    <View  style={{flex:1,
+      padding:10,}}>
       <TextInput
         style={searchBarStyling.searchInput}
         placeholder="Search..."
