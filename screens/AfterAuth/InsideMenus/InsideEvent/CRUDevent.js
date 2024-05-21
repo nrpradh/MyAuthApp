@@ -111,18 +111,36 @@ const CRUDevent = ({route}) => {
 
     useEffect(() => {
       // Set the values from params to the state variables
+      setNewCategory(event.category)
       setNewImageSource(event.imageSource);
       setNewEventName(event.eventName);
       setNewDate(event.selectedDate);
       setNewLocation(event.location);
       setNewDescription(event.description);
-    }, [event.description, event.eventName, event.location, event.selectedDate]);
+    }, [
+      event.category,
+      event.imageSource,
+      event.description, 
+      event.eventName, 
+      event.location, 
+      event.selectedDate
+    ]);
 
       
 
     return (
       <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
           {/* <PickCategories/> */}
+          <PickCategories
+            open={open}
+            setOpen={setOpen}
+            value={newCategory}
+            setValue={setNewCategory}
+            items={items}
+            setItems={setItems}
+            category={newCategory}
+            setCategory={handleCategoryChange}
+          />
           <ScrollView 
             style={{marginTop:53,}}
             showsVerticalScrollIndicator={false}

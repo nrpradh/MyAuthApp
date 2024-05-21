@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   dropdownItemContainer: {
    
     backgroundColor: '#353535',
-    borderColor:'#353535', borderWidth:0.2,
+    borderColor:'lightblue', borderWidth:0.2,
   },
   dropdownItemLabel: {
     
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     
   },
   selectedItemContainer: {
-    borderColor:'#353535', borderLeftWidth:3,
+    borderColor:'lightblue', borderLeftWidth:3,
     backgroundColor: '#f1f1f1',
     
   },
