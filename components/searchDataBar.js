@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, RefreshControl, TouchableOpacity, TextInput, FlatList } from 'react-native';
+import { Divider } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 // Import Global Style
 import { searchBarStyling } from '../screens/AfterAuth/InsideMenus/InsideHome/homeGStyle';
@@ -67,9 +69,26 @@ const SearchDataBar = () => {
     setSearchClicked(false); // Reset searchClicked state when search bar loses focus
   };
 
+  const navigation = useNavigation();
+  const toViewEvent = (event) => {
+    navigation.navigate('ViewEventPage', { event });
+    
+  }; 
+
   return (
-    <View  style={{flex:1,
-      padding:10,}}>
+    <View  
+      style={{
+        flex: 1,
+        padding:10,
+        marginTop:40,}}
+      >
+      <Divider 
+        style={{
+          height:3, 
+          backgroundColor:'#353535', 
+          marginBottom:15, marginHorizontal:90, 
+          borderRadius:5,}} />
+      
       <TextInput
         style={searchBarStyling.searchInput}
         placeholder="Search..."
@@ -84,11 +103,13 @@ const SearchDataBar = () => {
         <FlatList
           data={combinedData}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => handleEventPress(item.id)}>
+            <TouchableOpacity onPress={toViewEvent} >
               <View style={searchBarStyling.itemContainer}>
+                
                 <Image source={{ uri: item.imageSource }} style={styles.image} />
                 <Text>{item.eventName}</Text>
                 <Text style={searchBarStyling.location}> {item.location} </Text>
+                
               </View>
             </TouchableOpacity>
           )}

@@ -5,7 +5,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import { PGStyling } from '../PGStyling';
 import CategoryFilter from '../InsideMenus/InsideHome/Categories';
-import SearchDataBar from '../../../components/searchDataBar';
 
 const Home = ({navigation}) => {
   const [loading, setLoading] = useState(false); // State to track loading status

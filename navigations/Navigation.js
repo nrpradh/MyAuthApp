@@ -90,7 +90,19 @@ const HomeStack = ({navigation}) => {
         }}/> 
       <Stack.Screen name='Categories' component={Categories} /> 
       <Stack.Screen name='ViewEventPage' component={ViewEvent} options={{title : 'The Event'}}/>
-      <Stack.Screen name='SearchEventPage' component={SearchEvent} options={{title : 'Search Event'}}/>
+      <Stack.Screen 
+        name='SearchEventPage' 
+        component={SearchEvent}
+        options={{
+          title : 'Search Event', 
+          headerShown:false, 
+          presentation:'modal',
+          gestureEnabled: true,
+          
+          // cardStyle: { backgroundColor: 'lightblue' },
+          
+          
+        }}/>
     </Stack.Navigator>
   );
 };
@@ -107,7 +119,7 @@ const EventMenuStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false, // Remove if you want the header bar visible
-        gestureEnabled: true
+        // gestureEnabled: true
       }}>
       <Stack.Screen name='EventMenuPage' component={EventMenu} />
       <Stack.Screen name='AddEventPage' component={AddEvent}/>
@@ -128,12 +140,7 @@ const EventMenuStack = () => {
           headerRight: () => (  <DeleteTheEvent/>  ),
         }}
       />
-
-      
       <Stack.Screen name='EventLogsPage' component={EventLogs}/>  
-
- 
-
     </Stack.Navigator>
   )
 }

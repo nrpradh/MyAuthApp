@@ -39,7 +39,7 @@ const AddEvent = () => {
     { label: 'Others', value: 'others' },
   ]);
 
-  const handleCategoryChange = (category) => { 
+  const handleCategory = (category) => { 
     setCategory(category);
   }
 
@@ -166,14 +166,11 @@ const AddEvent = () => {
     setDescription(inputText);
   };
 
-  // <Text style={ForEventMenu.addEventLabels}> Category :</Text>
-  // <PickCategories/>
   return (
     <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
       <View style={{marginTop:40,}}>
         <Text style={styles.create}>Create Event</Text>
       </View>
-      {/* <Text style={ForEventMenu.addEventLabels}> Category :</Text> */}
       <PickCategories
         open={open}
         setOpen={setOpen}
@@ -182,7 +179,7 @@ const AddEvent = () => {
         items={items}
         setItems={setItems}
         category={category}
-        setCategory={handleCategoryChange}
+        setCategory={handleCategory}
       />
       
       <ScrollView 

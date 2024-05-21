@@ -5,11 +5,13 @@ import React, {useState, useEffect} from 'react'
 import * as ImagePicker from 'expo-image-picker';
 import { MaterialIcons, Ionicons, Feather } from '@expo/vector-icons';
 
+
 import { getAuth } from 'firebase/auth';
 import { updateDoc, getDoc, deleteDoc, db, collection, where, getDocs, query, doc, setDoc } from '../../../../firebaseAPI';
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
 import DatePicker from '../../../../components/datePicker';
+import PickCategories from '../../../../components/pickCategories'
 
 const CRUDevent = ({route}) => {
     const { event} = route.params;
@@ -22,6 +24,24 @@ const CRUDevent = ({route}) => {
     const [newLocation, setNewLocation] = useState('');
     const [newDate, setNewDate] = useState('');
     const [newDescription, setNewDescription] = useState('');
+
+    const [newCategory, setNewCategory] = useState(null);
+    const [open, setOpen] = useState(false);
+    const [items, setItems] = useState([
+      { label: 'Tech', value: 'tech' },
+      { label: 'Sports', value: 'sports' },
+      { label: 'Competition', value: 'competition' },
+      { label: 'Seminar', value: 'seminar' },
+      { label: 'Online', value: 'online' },
+      { label: 'Concert', value: 'concert' },
+      { label: 'Workshop', value: 'workshop' },
+      { label: 'Others', value: 'others' },
+    ]);
+
+    const handleCategoryChange = (category) => { 
+      setNewCategory(category);
+    }
+
 
     const auth = getAuth();
 
@@ -41,6 +61,7 @@ const CRUDevent = ({route}) => {
             
             // Update user data in Firestore
             await updateDoc(userEventDocRef, {
+              category:newCategory,
               imageSource: newImageSource,
               eventName: newEventName,
               selectedDate: newDate,
@@ -101,7 +122,9 @@ const CRUDevent = ({route}) => {
 
     return (
       <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
-          <ScrollView style={PGStyling.forContainer}
+          {/* <PickCategories/> */}
+          <ScrollView 
+            style={{marginTop:53,}}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}>
             <View style={inCRUDevent.theFrame}>
