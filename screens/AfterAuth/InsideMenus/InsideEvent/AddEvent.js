@@ -37,7 +37,7 @@ const AddEvent = () => {
     { label: 'Concert', value: 'concert' },
     { label: 'Workshop', value: 'workshop' },
     { label: 'Others', value: 'others' },
-  ]);
+  ].map((item, index) => ({...item, id: index })));
 
   const handleCategory = (category) => { 
     setCategory(category);
@@ -118,7 +118,8 @@ const AddEvent = () => {
                 location: location,
                 description: description,
                 uid: user.uid, 
-                createdAt: new Date()
+                createdAt: new Date(),
+                sortOrder: items.length
               });
               console.log("Document written with ID: ", docRef.id);
                   

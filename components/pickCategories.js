@@ -24,20 +24,6 @@ const PickCategories = ({
       setOpen(false);
       onPress(category);
     };
-  // const [open, setOpen] = useState(false);
-  // const [value, setValue] = useState([]);
-  
-  // const [items, setItems] = useState([
-  //   { label: 'Tech', value: 'tech' },
-  //   { label: 'Sports', value: 'sports' },
-  //   { label: 'Competition', value: 'competition' },
-  //   { label: 'Seminar', value: 'seminar' },
-  //   { label: 'Online', value: 'online' },
-  //   { label: 'Concert', value: 'concert' },
-  //   { label: 'Workshop', value: 'workshop' },
-  //   { label: 'Others', value: 'others' },
-
-  // ]);
 
   return (
     <View style={styles.container}>
