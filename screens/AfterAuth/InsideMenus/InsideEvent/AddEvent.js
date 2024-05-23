@@ -29,15 +29,16 @@ const AddEvent = () => {
   const [category, setCategory] = useState(null);
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([
-    { label: 'Tech', value: 'tech' },
-    { label: 'Sports', value: 'sports' },
-    { label: 'Competition', value: 'competition' },
-    { label: 'Seminar', value: 'seminar' },
-    { label: 'Online', value: 'online' },
-    { label: 'Concert', value: 'concert' },
-    { label: 'Workshop', value: 'workshop' },
-    { label: 'Others', value: 'others' },
-  ].map((item, index) => ({...item, id: index })));
+    { label: 'Tech', value: 'tech', id: 0 },
+    { label: 'Sports', value: 'sports', id: 1 },
+    { label: 'Competition', value: 'competition', id: 2 },
+    { label: 'Tour', value: 'tour', id: 3 },
+    { label: 'Seminar', value: 'eminar', id: 4 },
+    { label: 'Online', value: 'online', id: 5 },
+    { label: 'Concert', value: 'concert', id: 6},
+    { label: 'Workshop', value: 'workshop', id: 7 },
+    { label: 'Others', value: 'others', id: 8 },
+  ]);
 
   const handleCategory = (category) => { 
     setCategory(category);
@@ -119,7 +120,7 @@ const AddEvent = () => {
                 description: description,
                 uid: user.uid, 
                 createdAt: new Date(),
-                sortOrder: items.length
+                
               });
               console.log("Document written with ID: ", docRef.id);
                   

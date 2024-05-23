@@ -31,11 +31,12 @@ const CRUDevent = ({route}) => {
       { label: 'Tech', value: 'tech' },
       { label: 'Sports', value: 'sports' },
       { label: 'Competition', value: 'competition' },
-      { label: 'Seminar', value: 'seminar' },
-      { label: 'Online', value: 'online' },
-      { label: 'Concert', value: 'concert' },
-      { label: 'Workshop', value: 'workshop' },
-      { label: 'Others', value: 'others' },
+      { label: 'Tour', value: 'tour', id: 3 },
+      { label: 'Seminar', value: 'eminar', id: 4 },
+      { label: 'Online', value: 'online', id: 5 },
+      { label: 'Concert', value: 'concert', id: 6},
+      { label: 'Workshop', value: 'workshop', id: 7 },
+      { label: 'Others', value: 'others', id: 8 },
     ]);
 
     const handleCategoryChange = (category) => { 
