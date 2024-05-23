@@ -29,15 +29,15 @@ const AddEvent = () => {
   const [category, setCategory] = useState(null);
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([
-    { label: 'Tech', value: 'tech', id: 0 },
-    { label: 'Sports', value: 'sports', id: 1 },
-    { label: 'Competition', value: 'competition', id: 2 },
-    { label: 'Tour', value: 'tour', id: 3 },
-    { label: 'Seminar', value: 'eminar', id: 4 },
-    { label: 'Online', value: 'online', id: 5 },
-    { label: 'Concert', value: 'concert', id: 6},
-    { label: 'Workshop', value: 'workshop', id: 7 },
-    { label: 'Others', value: 'others', id: 8 },
+    { label: 'Tech', value: 'Tech', id: 0 },
+    { label: 'Sports', value: 'Sports', id: 1 },
+    { label: 'Competition', value: 'Competition', id: 2 },
+    { label: 'Tour', value: 'Tour', id: 3 },
+    { label: 'Seminar', value: 'Seminar', id: 4 },
+    { label: 'Online', value: 'Online', id: 5 },
+    { label: 'Concert', value: 'Concert', id: 6},
+    { label: 'Workshop', value: 'Workshop', id: 7 },
+    { label: 'Others', value: 'Others', id: 8 },
   ]);
 
   const handleCategory = (category) => { 

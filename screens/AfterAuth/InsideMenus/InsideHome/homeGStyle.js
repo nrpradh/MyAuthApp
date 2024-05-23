@@ -40,7 +40,30 @@ export const forCategories = StyleSheet.create ({
         
     
     },
+    
+    noCatFrame:{
+        backgroundColor:'#353535',
+        padding:15,
+        width:'100%',
+        justifyContent:'center',
+        // minHeight:'50%',
+        height:225,
+        // minHeight: '92.5%',
+        borderRadius:5,  
+        marginVertical:5,
+        
+    },
 
+    catFrame:{
+        backgroundColor:'#353535',
+        padding:15,
+        width:'100%',
+        // minHeight:'50%',
+        height:225,
+        // minHeight: '92.5%',
+        borderRadius:5,  
+        marginVertical:5,
+    },
     itemContainer: {
         borderWidth: 0.6,
         paddingVertical: 8,
@@ -82,7 +105,7 @@ export const forCategories = StyleSheet.create ({
         fontWeight: 'bold',
     },
     locationText: {
-        color:'#f1f1f1',
+        color:'lightgrey',
         fontSize:13,
     }
     

@@ -24,7 +24,9 @@ export const authGStyles = StyleSheet.create ({
         padding:10,
         borderRadius:5,
         textAlign:'center',
-        color:'#353535'
+        color:'#353535',
+        fontWeight:'500',
+        fontSize:15
     },
     headingAuth: {
         color:'#353535',

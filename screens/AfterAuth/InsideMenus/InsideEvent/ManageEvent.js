@@ -97,8 +97,8 @@ const ManageEvent = () => {
 
                       <Text style={ForManageEvent.dTime}>{item.selectedDate}</Text>
                     </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                      <Ionicons name="location-outline" size={13} color="lightgrey"  marginRight={5}/>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:2 }}>
+                      <Ionicons name="location-outline" size={14} color="lightblue"  marginRight={4}/>
                       <Text style={ForManageEvent.location}>{item.location}</Text>
                     </View>
                     

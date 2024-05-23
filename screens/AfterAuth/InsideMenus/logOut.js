@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
       // backgroundColor:'blue',
       // flex:1,
       // paddingHorizontal:10,
-      alignItems:'center',
+      alignItems:'flex-end',
       justifyContent:'flex-end'
     },
     theBtn: {
       flexDirection: 'row',
-      borderRadius: 25,
+      borderRadius: 5,
       backgroundColor: '#353535',
       padding: 10,
       paddingHorizontal:15,

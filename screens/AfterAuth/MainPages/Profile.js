@@ -74,8 +74,8 @@ const Profile = () => {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            colors={['#6155e5']} // Color of the refresh indicator (Android)
-            tintColor={'#6155e5'} // Color of the refresh indicator (iOS)
+            colors={['#353535']} // Color of the refresh indicator (Android)
+            tintColor={'#353535'} // Color of the refresh indicator (iOS)
           />
         }
       >

@@ -92,7 +92,7 @@ const CRUDevent = ({route}) => {
               <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
             </View>
             <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
-              <Ionicons name="location-outline" size={18} color="lightgrey" marginTop={6}/>
+              <Ionicons name="location-outline" size={18} color="lightblue" marginTop={6}/>
               <TouchableOpacity onPress={handleAddressPress}>
                 <Text style={[
                     inCRUDevent.anotherTxt, 
@@ -103,6 +103,10 @@ const CRUDevent = ({route}) => {
               </TouchableOpacity>
                
             </View>
+            
+            {/* <Text style={styles.showCategories}>{event.category}</Text>  */}
+            <DescriptionWithInstagramLinks description={event.description} />
+            {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
             <View style={styles.showCategories}>
               {event.category.map((category, index) => (
                 <View key={index} style= {styles.categoryBox }>
@@ -112,9 +116,6 @@ const CRUDevent = ({route}) => {
                 </View>
               ))}
             </View>
-            {/* <Text style={styles.showCategories}>{event.category}</Text>  */}
-            <DescriptionWithInstagramLinks description={event.description} />
-            {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
             
         </View>
         

@@ -28,15 +28,15 @@ const CRUDevent = ({route}) => {
     const [newCategory, setNewCategory] = useState(null);
     const [open, setOpen] = useState(false);
     const [items, setItems] = useState([
-      { label: 'Tech', value: 'tech' },
-      { label: 'Sports', value: 'sports' },
-      { label: 'Competition', value: 'competition' },
-      { label: 'Tour', value: 'tour', id: 3 },
-      { label: 'Seminar', value: 'eminar', id: 4 },
-      { label: 'Online', value: 'online', id: 5 },
-      { label: 'Concert', value: 'concert', id: 6},
-      { label: 'Workshop', value: 'workshop', id: 7 },
-      { label: 'Others', value: 'others', id: 8 },
+      { label: 'Tech', value: 'Tech' },
+      { label: 'Sports', value: 'Sports' },
+      { label: 'Competition', value: 'Competition' },
+      { label: 'Tour', value: 'Tour', id: 3 },
+      { label: 'Seminar', value: 'Seminar', id: 4 },
+      { label: 'Online', value: 'Online', id: 5 },
+      { label: 'Concert', value: 'Concert', id: 6},
+      { label: 'Workshop', value: 'Workshop', id: 7 },
+      { label: 'Others', value: 'Others', id: 8 },
     ]);
 
     const handleCategoryChange = (category) => { 
