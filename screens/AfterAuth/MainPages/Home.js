@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, BackHandler, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, Button, BackHandler, TouchableOpacity, RefreshControl, ScrollView } from 'react-native'
 import React,{useEffect, useCallback, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -9,49 +9,57 @@ import CategoryFilter from '../InsideMenus/InsideHome/Categories';
 const Home = ({navigation}) => {
   const [loading, setLoading] = useState(false); // State to track loading status
 
+  const [refreshing, setRefreshing] = useState(false);
+
   const [searchBarActive, setSearchBarActive] = useState(false);
 
-  useFocusEffect(
-    useCallback(() => {
-      const backAction = () => {
-        return true;
-      };
 
-      const backHandler = BackHandler.addEventListener(
-        'hardwareBackPress',
-        backAction
-      );
+  // _______________ * ________________ * User Go Back Disabled
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     const backAction = () => {
+  //       return true;
+  //     };
 
-      return () => backHandler.remove();
-    }, [])
-  );
+  //     const backHandler = BackHandler.addEventListener(
+  //       'hardwareBackPress',
+  //       backAction
+  //     );
 
-  useEffect(() => {
-    // Simulate loading data
-    setLoading(true);
+  //     return () => backHandler.remove();
+  //   }, [])
+  // );
+  // useEffect(() => {
+  //   // Simulate loading data
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 400); // Simulated loading time in milliseconds
+  // }, []);
+
+  // _______________ * ________________ * ________________
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
     setTimeout(() => {
-      setLoading(false);
-    }, 400); // Simulated loading time in milliseconds
+      setRefreshing(false);
+    }, 500);
   }, []);
+
+  
   
 
   return (
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
-      <View style={PGStyling.forContainer}>
-        <CategoryFilter/>
+      <ScrollView
+        contentContainerStyle={PGStyling.forContainer}
+        // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        >
+        <CategoryFilter />
         <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='rgba(25, 25, 25, 0.7)' />
-
+        {/* Other content goes here */}
         
-        {/* uncomment and use this when the home Page is done 
-        {loading ? (
-        <ActivityIndicator size={40} color="#6155e5" />
-        ) : (
-          <>
-          <CategoryFilter/>
-          <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='#353535' />
-          </>
-        )} */}
-      </View>
+      </ScrollView>
     </LinearGradient>
   )
 }

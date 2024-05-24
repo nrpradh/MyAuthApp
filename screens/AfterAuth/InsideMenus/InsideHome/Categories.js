@@ -14,7 +14,8 @@ import { PGStyling } from '../../PGStyling';
 const Categoriest = () => {
   const [combinedData, setCombinedData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('tech');
+  
+  const [selectedCategory, setSelectedCategory] = useState('Tech');
   const [categories, setCategories] = useState([
     { label: 'Tech', value: 'Tech', id: 0 },
     { label: 'Sports', value: 'Sports', id: 1 },
