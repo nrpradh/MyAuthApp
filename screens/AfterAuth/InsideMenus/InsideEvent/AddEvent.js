@@ -182,6 +182,7 @@ const AddEvent = () => {
         setItems={setItems}
         category={category}
         setCategory={handleCategory}
+        theBar={{flex:1, marginTop:25}}
       />
       
       <ScrollView 
@@ -255,8 +256,12 @@ const AddEvent = () => {
         </View>
         
       </ScrollView>
-      <TouchableOpacity onPress={handleConfirmAndSave}>
-        <Text style={styles.btnSubmit}>  Submit Event  </Text>
+      <TouchableOpacity onPress={handleConfirmAndSave} style={styles.btnSubmit}>
+        <Text style={{
+          color:'#353535',
+          textAlign:'center',
+          fontWeight:'500',
+          }}>  Submit Event  </Text>
       </TouchableOpacity>
     </LinearGradient>
   )
@@ -294,14 +299,10 @@ const styles = StyleSheet.create({
     // marginTop:40
   },
   btnSubmit:{
-    borderRadius: 25,
+    borderRadius: 5,
     backgroundColor: '#f1f1f1',
-    color:'#353535',
     padding: 10,
-    // borderWidth:0.5,
     marginVertical:10,
-    textAlign:'center',
-    fontWeight:'500',
     width:135,
     alignSelf: 'center',
 

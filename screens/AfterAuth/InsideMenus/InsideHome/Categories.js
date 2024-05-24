@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, RefreshControl, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, RefreshControl, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -12,9 +12,9 @@ import { collection, query, where, getDocs, db, auth } from '../../../../firebas
 import { PGStyling } from '../../PGStyling';
 
 const Categoriest = () => {
+  
   const [combinedData, setCombinedData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  
   const [selectedCategory, setSelectedCategory] = useState('Tech');
   const [categories, setCategories] = useState([
     { label: 'Tech', value: 'Tech', id: 0 },

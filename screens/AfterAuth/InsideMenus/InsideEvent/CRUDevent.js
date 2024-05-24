@@ -131,7 +131,6 @@ const CRUDevent = ({route}) => {
 
     return (
       <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
-          {/* <PickCategories/> */}
           <PickCategories
             open={open}
             setOpen={setOpen}
@@ -141,6 +140,7 @@ const CRUDevent = ({route}) => {
             setItems={setItems}
             category={newCategory}
             setCategory={handleCategoryChange}
+            theBar={{flex:1,}}
           />
           <ScrollView 
             style={{marginTop:53,}}
@@ -181,9 +181,13 @@ const CRUDevent = ({route}) => {
           
           
         </ScrollView>
-        <TouchableOpacity onPress={handleUpdateEvent}>
-                <Text style={styles.btnUpdate}>  Update Event  </Text>
-              </TouchableOpacity>
+          <TouchableOpacity onPress={handleUpdateEvent} style={styles.btnUpdate}>
+            <Text style={{
+              color:'#353535',
+              textAlign:'center',
+              fontWeight:'500',
+              }}>  Update Event  </Text>
+          </TouchableOpacity>
       </LinearGradient>
     )
 }
@@ -191,14 +195,10 @@ const CRUDevent = ({route}) => {
 const styles = StyleSheet.create({
 
   btnUpdate:{
-    borderRadius: 25,
+    borderRadius: 5,
     backgroundColor: '#f1f1f1',
-    color:'#353535',
     padding: 10,
-    // borderWidth:0.5,
     marginVertical:10,
-    textAlign:'center',
-    fontWeight:'500',
     width:135,
     alignSelf: 'center',
   },

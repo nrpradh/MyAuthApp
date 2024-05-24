@@ -13,6 +13,7 @@ const PickCategories = ({
   setItems,
   category,
   setCategory,
+  theBar
   }) => {
     const handleAddDoc = async (category) => {
       if (category.length === 0) {
@@ -40,7 +41,7 @@ const PickCategories = ({
   // ]);
 
   return (
-    <View style={styles.container}>
+    <View style={theBar}>
       <DropDownPicker
         open={open}
         value={value}
@@ -87,7 +88,7 @@ const PickCategories = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop:20,
+    paddingTop:25,
     // justifyContent: 'center',
     // alignItems: 'center',
     

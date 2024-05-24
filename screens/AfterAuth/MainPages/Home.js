@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, BackHandler, TouchableOpacity, RefreshControl, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Button, BackHandler, TouchableOpacity, RefreshControl, ScrollView, ActivityIndicator } from 'react-native'
 import React,{useEffect, useCallback, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -6,13 +6,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { PGStyling } from '../PGStyling';
 import CategoryFilter from '../InsideMenus/InsideHome/Categories';
 
-const Home = ({navigation}) => {
+const Home = ({navigation }) => {
   const [loading, setLoading] = useState(false); // State to track loading status
 
   const [refreshing, setRefreshing] = useState(false);
-
-  const [searchBarActive, setSearchBarActive] = useState(false);
-
 
   // _______________ * ________________ * User Go Back Disabled
   // useFocusEffect(
@@ -53,6 +50,8 @@ const Home = ({navigation}) => {
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
       <ScrollView
         contentContainerStyle={PGStyling.forContainer}
+        showsHorizontalScrollIndicator={false}
+        
         // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
         <CategoryFilter />
