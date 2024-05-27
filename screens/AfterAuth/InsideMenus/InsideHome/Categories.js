@@ -85,6 +85,7 @@ const Categoriest = () => {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.categoryContainer}
+        
       >
         {categories.map((category) => (
           <TouchableOpacity
