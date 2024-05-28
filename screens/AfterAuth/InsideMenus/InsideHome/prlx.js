@@ -1,8 +1,9 @@
 import React from 'react';
-import { Dimensions, Text, View, Image } from 'react-native';
+import {  Text, View, Image, useWindowDimensions, StyleSheet } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { getAuth } from 'firebase/auth';
 import { collection, query, where, getDocs, db, } from '../../../../firebaseAPI';// Ensure this points to your firebase configuration file
+import { forCategories } from './homeGStyle';
 
 const fetchData = async (setCombinedData, setRefreshing) => {
   try {
@@ -38,25 +39,26 @@ const Index = () => {
     fetchData(setCombinedData, setRefreshing);
   }, []);
 
-  const width = Dimensions.get('window').width;
+  const { width } = useWindowDimensions();
+  const adjustedWidth = width - 22
+
   return (
-    <View style={{ flex: 1, marginBottom:20,}}>
+    <View style={styles.prlxContainer}>
       <Carousel
         loop
-        width={width}
-        height={width / 2}
+        width={adjustedWidth}
+        height={width/2}
         autoPlay={true}
         data={combinedData}
         scrollAnimationDuration={1000}
-        onSnapToItem={(index) => console.log('current index:', index)}
         renderItem={({ item }) => (
-          <View style={{alignItems:'center' }} >
+          <View style={{justifyContent:'center', width:'95%',  borderRadius:2,padding:20, borderWidth:1, borderColor:'lightblue'  }} >
             <Image
-              source={{ uri: item.imageSource }} // Assuming image is a property in each event object
-              style={{ width: width, height: width / 2 }}
+              source={{ uri: item.imageSource }} 
+              style={styles.image}
             />
 
-            <Text style={{ textAlign: 'center' }}> {item.category} </Text>
+            {/* <Text style={{ textAlign: 'center', color:'#f1f1f1' }}> {item.category} </Text> */}
             
           </View>
         )}
@@ -66,3 +68,24 @@ const Index = () => {
 }
 
 export default Index;
+ 
+
+const styles = StyleSheet.create({
+    prlxContainer : {
+        marginBottom: 20, 
+        backgroundColor: '#353535',
+        borderRadius:5, 
+        paddingHorizontal: 10, 
+        paddingVertical:10, 
+
+    },
+    image: {
+        marginRight:10,
+        resizeMode: 'cover',
+        borderRadius: 10,
+        width: '100%',
+        height: '100%',
+    }
+
+ })
+

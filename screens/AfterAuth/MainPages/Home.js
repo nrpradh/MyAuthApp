@@ -41,7 +41,7 @@ const Home = ({navigation }) => {
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
-    }, 500);
+    }, 60);
   }, []);
 
   
@@ -50,7 +50,6 @@ const Home = ({navigation }) => {
   return (
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
       <ScrollView
-        contentContainerStyle={PGStyling.forContainer}
         showsHorizontalScrollIndicator={false}
         
         // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
