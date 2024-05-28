@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import React, {Component} from 'react'
+import 'react-native-gesture-handler';
 
 // Original auth
 import OriginalAuth from './matterOne/originalAuth'
