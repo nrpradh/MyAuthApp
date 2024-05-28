@@ -4,6 +4,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { PGStyling } from '../PGStyling';
+import Prlx from '../InsideMenus/InsideHome/prlx';
 import CategoryFilter from '../InsideMenus/InsideHome/Categories';
 
 const Home = ({navigation }) => {
@@ -54,9 +55,16 @@ const Home = ({navigation }) => {
         
         // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
+        <Prlx/>
         <CategoryFilter />
         <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='rgba(25, 25, 25, 0.7)' />
         {/* Other content goes here */}
+        
+        
+        <TouchableOpacity>
+          <Text style={{}}>  Create new event </Text>
+        </TouchableOpacity>
+        
         
       </ScrollView>
     </LinearGradient>
