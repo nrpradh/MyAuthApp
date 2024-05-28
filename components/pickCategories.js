@@ -57,25 +57,27 @@ const PickCategories = ({
         style={styles.dropdown}
         textStyle={styles.dropdownText}
         // badgeDotColors={[]}
-        badgeDotColors={['#353535']}  
+        badgeDotColors={['#321C43']}  
         badgeColors={['#f1f1f1']}
         badgeDotStyle={{
           borderRadius: 5
         }}
         badgeStyle={{
           padding: 10,
-          background: 'black',
+          background: '',
           // marginRight:30,
           borderRadius:5,
+          borderColor:'#E4D4F1'
         }}  
         badgeTextStyle={{
           fontSize:15,
-          color:'#353535',
+          color:'#321c43',
         }}
         listItemLabelStyle={styles.dropdownItemLabel}
         listItemContainerStyle={styles.dropdownItemContainer}
         selectedItemContainerStyle={styles.selectedItemContainer}
         selectedItemLabelStyle={styles.selectedItemLabel}
+        placeholderStyle={{color:'rgba(234, 221, 243, 0.5)'}}
         placeholder="Pick one category or more... ( max : 4 )"
         onConfirm={() => handleAddDoc(category)}
         category={category}
@@ -101,9 +103,9 @@ const styles = StyleSheet.create({
     
   },
   dropdown: {
-    backgroundColor: '#353535',
+    backgroundColor: '#321c43',
     // color:'#ababab',
-    borderColor: 'lightblue',
+    borderColor: '#E4D4F1',
     borderRadius:5,
     borderWidth: 0.5,
     
@@ -116,8 +118,8 @@ const styles = StyleSheet.create({
   },
   dropdownItemContainer: {
    
-    backgroundColor: '#353535',
-    borderColor:'lightblue', borderWidth:0.2,
+    backgroundColor: '#321c43',
+    borderColor:'#E4D4F1', borderWidth:0.2,
   },
   dropdownItemLabel: {
     
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
     
   },
   selectedItemContainer: {
-    borderColor:'lightblue', borderLeftWidth:4,
+    borderColor:'#E4D4F1', borderLeftWidth:4,
     backgroundColor: '#f1f1f1',
     
   },

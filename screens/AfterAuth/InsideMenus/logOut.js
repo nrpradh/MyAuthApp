@@ -27,11 +27,8 @@ const LogOut = () => {
     <View style={styles.logOutPos}>
       <TouchableOpacity onPress={handleLogout}>
           <View style={styles.theBtn}>
-              <Feather name='log-out' size={22} color="#F72F31" marginLeft={5} />
-              <View style={{flexDirection:'column'}}>
                   <Text style={styles.logOutOnly}>Log Out</Text>
-                  {/* <Text style={styles.logOutSubOnly}> Log out from this account </Text> */}
-              </View>
+              <Feather name='log-out' size={18} color="#F72F31" marginLeft={15} />
           </View>
       </TouchableOpacity>
     </View>
@@ -49,10 +46,11 @@ const styles = StyleSheet.create({
     },
     theBtn: {
       flexDirection: 'row',
+      alignItems:'center',
       borderRadius: 5,
-      backgroundColor: '#353535',
+      backgroundColor: '#f1f1f1',
       padding: 10,
-      paddingHorizontal:15,
+      // marginRight:5,
       marginVertical:5,
       
     },
@@ -62,7 +60,7 @@ const styles = StyleSheet.create({
         color: '#F72F31',
         // paddingTop: 2,
         marginLeft: 20,
-        fontSize: 16,
+        // fontSize: 16,
       },
       logOutSubOnly: {
         color: 'rgba(155, 8, 13, 0.65)',

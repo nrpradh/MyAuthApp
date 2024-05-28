@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image, ImageBackground } from 'react-native'
+import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image, StatusBar} from 'react-native'
 import React, {useState} from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Ionicons } from '@expo/vector-icons';
@@ -170,7 +170,7 @@ const AddEvent = () => {
 
   return (
     <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
-      <View style={{marginTop:40,}}>
+      <View style={{marginTop:10,}}>
         <Text style={styles.create}>Create Event</Text>
       </View>
       <PickCategories
@@ -209,10 +209,10 @@ const AddEvent = () => {
                 )}
               </TouchableOpacity>
               <View style={{ alignItems: 'center', marginTop: 5 }}>
-                <Text style={{ fontWeight: 'bold', color:'#f1f1f1' }}>
-                  {imageSource ? 'Tap again to edit ' : 'Add Image'}
+                <Text style={{ fontWeight: '450', color:'#f1f1f1' }}>
+                  {imageSource ? 'Tap again to change ' : 'Add Image'}
                 </Text>
-                <Text style={{fontSize:14, color:'#ABABAB'}}>
+                <Text style={{fontSize:12, color:'#ABABAB'}}>
                   (poster, environment, etc.)
                 </Text>
               </View>
@@ -258,7 +258,7 @@ const AddEvent = () => {
       </ScrollView>
       <TouchableOpacity onPress={handleConfirmAndSave} style={styles.btnSubmit}>
         <Text style={{
-          color:'#353535',
+          color:'#321c43',
           textAlign:'center',
           fontWeight:'500',
           }}>  Submit Event  </Text>
@@ -279,7 +279,7 @@ const TxtInputs = ({placeholder,value, onChangeText, label}) => {
         onChangeText={onChangeText}
         style={ForEventMenu.inputBox}
         color='#f1f1f1'
-        placeholderTextColor='#ABABAB'
+        placeholderTextColor='rgba(234, 221, 243, 0.5)'
 
       />
     </View>
@@ -291,11 +291,11 @@ export default AddEvent
 
 const styles = StyleSheet.create({
   create:{
-    color:'#353535',
+    color:'#f1f1f1',
     textAlign:'center',
     fontSize:18,
-    fontWeight:'500',
-    marginHorizontal:4,
+    fontWeight:'400',
+    // marginHorizontal:4,
     // marginTop:40
   },
   btnSubmit:{
@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
   },
   addImages: {
     alignItems: 'center',
-    padding: 10,
+    padding: 20,
     
   },
   theImage: {

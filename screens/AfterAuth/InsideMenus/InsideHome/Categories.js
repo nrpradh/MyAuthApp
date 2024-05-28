@@ -110,16 +110,16 @@ const Categoriest = () => {
 
       
         {filteredData.length === 0 ? (
-          <View style={forCategories.noCatFrame}>
+          <View style={forCategories.noCatFrame} >
             <Text style={{
-              color:'grey',
+              color:'rgba(234, 221, 243, 0.7)',
               fontSize:12,
               textAlign:'center'
             }}>No events available for the selected category/categories.</Text>
             
           </View>
         ) : (
-          <View style={forCategories.catFrame}>
+          <View style={{marginVertical:10,}}>
             <FlatList
               data={filteredData}
               keyExtractor={item => item.id}
@@ -130,7 +130,7 @@ const Categoriest = () => {
                     <View style={styles.textMargin}>
                       <Text style={forCategories.overlayText}>{item.eventName}</Text>
                       <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 2 }}>
-                        <Ionicons name="location-outline" size={14} color="lightblue" marginRight={4} />
+                        <Ionicons name="location-outline" size={14} color="#E4D4F1" marginRight={4} />
                         <Text style={forCategories.locationText}>{item.location}</Text>
                       </View>
                     </View>
@@ -165,21 +165,21 @@ const styles = StyleSheet.create({
     marginBottom:5,
     borderRadius: 20,
     borderWidth:0.8,
-    borderColor:'#353535'
-    // backgroundColor: '#353535',
+    borderColor:'#E4D4F1'
+    // backgroundColor: '#E4D4F1',
   },
 
   categoryButtonText: {
     fontWeight:500,
-    color: '#353535',
+    color: '#E4D4F1',
   },
 
   selectedCategoryButton: {
-    backgroundColor: '#353535', // Change to your selected color
+    backgroundColor: '#E4D4F1', // Change to your selected color
   },
   
   selectedCategoryButtonText: {
-    color: '#f1f1f1', // Change to your selected color
+    color: '#321c43', // Change to your selected color
   },
   image: {
     resizeMode: 'cover',

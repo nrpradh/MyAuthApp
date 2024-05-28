@@ -56,12 +56,12 @@ const Home = ({navigation }) => {
         >
         <Prlx/>
         <CategoryFilter />
-        <Button onPress={() => navigation.navigate('Categories')} title="Next page" color='rgba(25, 25, 25, 0.7)' />
+       
         {/* Other content goes here */}
         
         
         <TouchableOpacity>
-          <Text style={{}}>  Create new event </Text>
+          <Text style={{color:'#EADDF3'}}>  Create new event </Text>
         </TouchableOpacity>
         
         

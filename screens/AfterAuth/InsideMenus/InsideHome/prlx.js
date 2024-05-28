@@ -31,9 +31,10 @@ const fetchData = async (setCombinedData, setRefreshing) => {
   }
 };
 
-const Index = () => {
+const Crousel = () => {
   const [combinedData, setCombinedData] = React.useState([]);
   const [refreshing, setRefreshing] = React.useState(true);
+  const [limitedData, setLimitedData] = React.useState(combinedData.slice(0, 5));
 
   React.useEffect(() => {
     fetchData(setCombinedData, setRefreshing);
@@ -50,15 +51,20 @@ const Index = () => {
         height={width/2}
         autoPlay={true}
         data={combinedData}
-        scrollAnimationDuration={1000}
+        scrollAnimationDuration={800}
+        onSnapToItem={(index) => {
+          if (index >= limitedData.length - 2) {
+            setLimitedData(combinedData.slice(0, limitedData.length + 5));
+          }
+        }}
         renderItem={({ item }) => (
-          <View style={{justifyContent:'center', width:'95%',  borderRadius:2,padding:20, borderWidth:1, borderColor:'lightblue'  }} >
+          <View style={styles.imageContainer} >
             <Image
               source={{ uri: item.imageSource }} 
               style={styles.image}
             />
 
-            {/* <Text style={{ textAlign: 'center', color:'#f1f1f1' }}> {item.category} </Text> */}
+            {/* <Text style={{ textAlign: 'center', color:'#f1f1f1' }}> {item.eventName} </Text> */}
             
           </View>
         )}
@@ -67,22 +73,35 @@ const Index = () => {
   );
 }
 
-export default Index;
+export default Crousel;
  
 
 const styles = StyleSheet.create({
     prlxContainer : {
-        marginBottom: 20, 
-        backgroundColor: '#353535',
+        marginBottom: 15, 
+        // backgroundColor: '#353535',
+        borderColor:'#E4D4F1',
+        borderWidth:0.5,
         borderRadius:5, 
         paddingHorizontal: 10, 
-        paddingVertical:10, 
+        paddingVertical:8, 
 
     },
+
+    imageContainer :{
+      justifyContent:'center',
+      // backgroundColor:'red',
+      width:'95%',  
+      padding:2, 
+      borderRadius:2,
+      // borderTopWidth:1, 
+      borderColor:'#E4D4F1'  
+    },
+
     image: {
-        marginRight:10,
+        // marginRight:10,
         resizeMode: 'cover',
-        borderRadius: 10,
+        borderRadius: 2,
         width: '100%',
         height: '100%',
     }

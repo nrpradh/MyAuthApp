@@ -34,19 +34,19 @@ const ToAddEvent = () => {
   return(
     <SpeedDial 
       isOpen={open}
-      icon={{ name: 'add', color: '#353535' }}
-      openIcon={{ name: 'close', color: '#353535' }}
+      icon={{ name: 'add', color: '#321C43' }}
+      openIcon={{ name: 'close', color: '#321C43' }}
       onOpen={() => setOpen(!open)}
       onClose={() => setOpen(!open)}
       buttonStyle={{backgroundColor:'#f1f1f1'}} 
-      containerStyle={{ borderWidth: 0.5, borderColor: '#353535' }}
+      containerStyle={{ borderWidth: 0.5, borderColor: '#321C43' }}
     >
       <SpeedDial.Action
-        icon={{ name: 'upload', color: '#353535' }}
+        icon={{ name: 'upload', color: '#321C43' }}
         buttonStyle={{backgroundColor:'#f1f1f1', }}
         title="Create & upload"
-        titleStyle={{ color: '#353535' }}
-        containerStyle={{ borderWidth: 0.5, borderColor: '#353535' }}
+        titleStyle={{ color: '#321C43' }}
+        containerStyle={{ borderWidth: 0.5, borderColor: '#321C43' }}
         onPress={handleNavigation} // Call the handleNavigation function
       />
     </SpeedDial>
@@ -62,20 +62,21 @@ const TopTabNav = () => {
     <Tab.Navigator 
       initialRouteName='Manage'
       screenOptions={{
-        tabBarActiveTintColor: '#353535', // Color of the active tab text
-        tabBarInactiveTintColor: '#ABABAB', // Color of the inactive tab text
+        tabBarActiveTintColor: '#EADDF3', // Color of the active tab text
+        tabBarInactiveTintColor: 'rgba(234, 221, 243, 0.4)', // Color of the inactive tab text
         tabBarLabelStyle: {
           fontSize: 15, // Font size of the tab labels
           fontWeight: 500, // Font weight of the tab labels
         },
         tabBarStyle: {
-          backgroundColor: '#f1f1f1', // Background color of the tab bar
-          paddingTop:40,
+          backgroundColor: '#321C43', // Background color of the tab bar
+          paddingTop:10,
         },
         tabBarIndicatorStyle: {
-          backgroundColor: '#353535', // Color of the tab indicator
+          backgroundColor: '#EADDF3',
+          // padding:1.5
         },
-        tabBarPressColor:'#f5f5f5', // Disable touch effect color
+        tabBarPressColor:'rgba(234, 221, 243, 0.2)', // Disable touch effect color
         tabBarPressOpacity: 0,
       }}>
       <Tab.Screen 

@@ -61,12 +61,12 @@ const HomeStack = ({navigation}) => {
         headerShown: true, // Remove if you want the header bar visible
         gestureEnabled:true,
         headerStyle: {
-          backgroundColor: '#f1f1f1', // Set background color of the header
+          backgroundColor: '#321c43', // Set background color of the header
         },
         headerTitleStyle: {
           fontWeight: 500, // Set title font weight
         },
-        headerTintColor: '#353535', // Set color of back button and title
+        headerTintColor: '#f1f1f1', // Set color of back button and title
         headerTitleAlign: 'center',
       }}>
       
@@ -76,14 +76,14 @@ const HomeStack = ({navigation}) => {
         options={{
           title : 'Home',
           headerStyle: {
-            backgroundColor: '#f1f1f1', // Set background color of the header
+            backgroundColor: '#321c43', // Set background color of the header
           },
-          headerTintColor: '#353535', // Set color of back button and title
+          headerTintColor: '#f1f1f1', // Set color of back button and title
           headerTitleAlign: 'center', // Center the header title
 
           headerRight: () => (
             <TouchableOpacity onPress={searchEvent}>
-              <Ionicons name="search" size={24} color="black" marginRight={15} />
+              <Ionicons name="search" size={24} color="#f1f1f1" marginRight={15} />
             </TouchableOpacity>
           )
 
@@ -132,9 +132,9 @@ const EventMenuStack = () => {
           title: '  Edit Event',
           headerShown:true,
           headerStyle: {
-            backgroundColor: '#f1f1f1', // Set background color of the header
+            backgroundColor: '#321c43', // Set background color of the header
           },
-          headerTintColor: '#353535', // Set color of back button and title
+          headerTintColor: '#f1f1f1', // Set color of back button and title
           headerTitleAlign: 'center', // Center the header title
 
           headerRight: () => (  <DeleteTheEvent/>  ),
@@ -152,12 +152,12 @@ const ProfileStack = () => {
         headerShown: true, // Remove if you want the header bar visible
         gestureEnabled:true,
         headerStyle: {
-          backgroundColor: '#f1f1f1', // Set background color of the header
+          backgroundColor: '#321c43', // Set background color of the header
         },
         headerTitleStyle: {
           fontWeight: 500, // Set title font weight
         },
-        headerTintColor: '#353535', // Set color of back button and title
+        headerTintColor: '#f1f1f1', // Set color of back button and title
         headerTitleAlign: 'center',
       }}>
       <Stack.Screen name='ProfilePage' component={Profile} options={{title:' Your Profile'}} /> 

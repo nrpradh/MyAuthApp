@@ -40,7 +40,7 @@ const DatePicker = ({ onDateChange, value }) => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
           style={styles.inputBox}
-          datePickerContainerStyle={{ backgroundColor: "lightblue" }}
+          datePickerContainerStyle={{ backgroundColor: "#321c43" }}
         />
         <TextInput
           placeholder='dd/mm/yyyy'
@@ -50,16 +50,16 @@ const DatePicker = ({ onDateChange, value }) => {
           style={ForEventMenu.inputBox}
           onTouchStart={showDatePicker}
           color='#f1f1f1'
-          placeholderTextColor='#ABABAB'
+          placeholderTextColor='rgba(234, 221, 243, 0.5)'
         />
         <TouchableOpacity onPress={showDatePicker}>
           <Text style={{
-            color:'lightgrey', 
+            color:'rgba(234, 221, 243, 0.8)', 
             fontSize:13,
             marginBottom:15, 
             marginLeft:10,
             // textDecorationLine:'underline'
-            }}> Autopicker *</Text>
+            }}> Autopicker*</Text>
         </TouchableOpacity>
       </View>
     </View>

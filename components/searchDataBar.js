@@ -80,12 +80,14 @@ const SearchDataBar = () => {
       style={{
         flex: 1,
         padding:10,
-        marginTop:40,}}
+        marginTop:40,
+        backgroundColor:'#E4D4F1'
+      }}
       >
       <Divider 
         style={{
           height:3, 
-          backgroundColor:'#353535', 
+          backgroundColor:'#321c43', 
           marginBottom:15, marginHorizontal:90, 
           borderRadius:5,}} />
       

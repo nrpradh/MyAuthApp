@@ -50,23 +50,23 @@ const Register = () => {
       <View style={authGStyles.boxesAuth}>
         <TextInput
           placeholder='Username'
-          placeholderTextColor='#f1f1f1'
-          style={[authGStyles.inputAuth, { color: '#f1f1f1' }]}
+          placeholderTextColor='rgba(234, 221, 243, 0.7)'
+          style={[authGStyles.inputAuth, { color: '#eaddf3' }]}
           value={username}
           onChangeText={(text) => setUsername(text)}
         />
         <TextInput
           placeholder='Email'
-          placeholderTextColor='#f1f1f1'
-          style={[authGStyles.inputAuth, { color: '#f1f1f1' }]}
+          placeholderTextColor='rgba(234, 221, 243, 0.7)'
+          style={[authGStyles.inputAuth, { color: '#EADDF3' }]}
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           placeholder='Password'
-          placeholderTextColor='#f1f1f1'
+          placeholderTextColor='rgba(234, 221, 243, 0.7)'
           secureTextEntry={true}
-          style={[authGStyles.inputAuth, { color: '#f1f1f1' }]}
+          style={[authGStyles.inputAuth, { color: '#EADDF3' }]}
           value={password}
           onChangeText={(text) => setPassword(text)}
         />

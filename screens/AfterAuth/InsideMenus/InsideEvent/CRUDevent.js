@@ -256,7 +256,7 @@ export const DeleteTheEvent = () => {
     <View style={{margin:10, alignItems:'flex-end'}}>
     
       <TouchableOpacity onPress={confirmDelete}> 
-        <MaterialIcons name="delete" size={25} color='#353535' marginRight={5} />
+        <MaterialIcons name="delete" size={25} color='#f1f1f1' marginRight={5} />
       </TouchableOpacity>
       
     </View>
@@ -275,7 +275,7 @@ const TxtInputs = ({ placeholder, value, onChangeText, label }) => {
         onChangeText={onChangeText}
         style={ForEventMenu.inputBox}
         color='#f1f1f1'
-        placeholderTextColor='#ABABAB'
+        placeholderTextColor='rgba(234, 221, 243, 0.5)'
       />
     </View>
   );

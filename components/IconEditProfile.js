@@ -118,7 +118,7 @@ const IconEditProfile = ({userData}) => {
       />
 
       <Text style={{
-        color:'#ABABAB',
+        color:'rgba(234, 221, 243, 0.7)',
         fontSize:9,
         alignSelf:'center'
       }}
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
 
   buttonSave: {
     backgroundColor: '#f1f1f1',
-    color:'#353535',
+    color:'#321c43',
     padding: 10, 
     margin: 10,
     textAlign: 'center',
@@ -229,15 +229,15 @@ const styles = StyleSheet.create({
   },
 
   buttonCancel:{
-    backgroundColor: '#202020',
-    color:'lightgrey',
+    backgroundColor: '#321c43',
+    color:'rgba(234, 221, 243, 0.7)',
     padding: 10, 
     margin: 10,
     textAlign: 'center',
     width:160, 
     fontSize:15,
-    borderWidth:0.2,
-    borderColor:'lightgrey',
+    borderWidth:0.4,
+    borderColor:'rgba(234, 221, 243, 0.7)',
     borderRadius: 5, 
   },
   editLabels:{
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
   },
 
   modalContent: {
-    backgroundColor: 'rgba(25, 25, 25,1)',
+    backgroundColor: 'rgba(50, 28, 67,1)',
     padding: 22,
     justifyContent: 'center',
     borderRadius: 4,

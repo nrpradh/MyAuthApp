@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, View, Button, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, TextInput, View, Button, Text, TouchableOpacity, StatusBar } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
 
@@ -41,21 +41,22 @@ const LoginPage = () => {
 
   return (
     <View style={styles.container}>
+      
       <Text style={authGStyles.headingAuth}> Log In</Text>
       <Text style={authGStyles.subHeadingAuth}> Log into an existing account</Text>
       <View style={authGStyles.boxesAuth}>
         <TextInput
           placeholder='Email'
-          placeholderTextColor='#f1f1f1'
-          style={[authGStyles.inputAuth, { color: '#f1f1f1' }]}
+          placeholderTextColor='rgba(234, 221, 243, 0.7)'
+          style={[authGStyles.inputAuth, { color: '#EADDF3' }]}
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           placeholder='Password'
-          placeholderTextColor='#f1f1f1'
+          placeholderTextColor='rgba(234, 221, 243, 0.7)'
           secureTextEntry={true}
-          style={[authGStyles.inputAuth, { color: '#f1f1f1' }]}
+          style={[authGStyles.inputAuth, { color: '#EADDF3' }]}
           value={password}
           onChangeText={(text) => setPassword(text)}
         />

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import React, {Component} from 'react'
 
 // Original auth
@@ -13,6 +13,7 @@ import NavContainers from './navigations/NavContainers'
 
 const App = () => {
   return (
+    
    <NavContainers/>
   )
 }

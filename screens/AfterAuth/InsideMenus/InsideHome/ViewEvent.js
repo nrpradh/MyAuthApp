@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
-import { MaterialIcons, Ionicons, Feather } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons, Octicons } from '@expo/vector-icons';
 
 
 import { PGStyling } from '../../PGStyling'
@@ -92,7 +92,7 @@ const CRUDevent = ({route}) => {
               <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
             </View>
             <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
-              <Ionicons name="location-outline" size={18} color="lightblue" marginTop={6}/>
+              <Ionicons name="location-outline" size={18} color="#E4D4F1" marginTop={6}/>
               <TouchableOpacity onPress={handleAddressPress}>
                 <Text style={[
                     inCRUDevent.anotherTxt, 
@@ -109,7 +109,9 @@ const CRUDevent = ({route}) => {
             {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
             <View style={styles.showCategories}>
               {event.category.map((category, index) => (
+                
                 <View key={index} style= {styles.categoryBox }>
+                  <Octicons name="dot-fill" size={19} color="#321c43" marginRight={7}/>
                   <Text style={styles.categoryText}>
                     {category}
                   </Text>
@@ -141,16 +143,18 @@ const styles = StyleSheet.create({
     },
     
     categoryBox: {
-      // backgroundColor: '#ABABAB',
+      flexDirection:'row',
+      alignItems:'center',
+      backgroundColor: '#f1f1f1',
       borderWidth:0.5,
-      borderColor:'lightblue',
+      // borderColor:'#E4D4F1',
       paddingVertical: 5,
       paddingHorizontal:10,
       marginHorizontal: 4,
       borderRadius: 5,
     },
     categoryText: {
-      color: 'lightblue',
+      color: '#321c43',
       // fontSize: 18,
     },
 

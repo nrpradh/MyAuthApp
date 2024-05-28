@@ -6,7 +6,7 @@ export const PGStyling = StyleSheet.create ({
         // flex:1,
     },
     pageTitle:{
-        color:'#353535',
+        color:'#E4D4F1',
         textAlign:'center',
         fontSize:18,
         fontWeight:'500',
@@ -18,14 +18,14 @@ export const PGStyling = StyleSheet.create ({
     
     profileDetail:{
         flexDirection: 'row',
-        backgroundColor: '#353535',
+        // backgroundColor: '#353535',
         padding: 14,
         // marginTop:20, 
         marginBottom:5,
         alignItems: 'center',
 
         borderWidth:0.5,
-        // borderColor:'#6155e5',
+        borderColor:'#E4D4F1',
         borderRadius:5,
        
 
@@ -62,9 +62,9 @@ export const PGStyling = StyleSheet.create ({
         // marginBottom: 10,
     },
     
-    linearGradient: {  // Global Screen Gradient
+    linearGradient: {  // Global Screen Gradient ['#f1f1f1', 'lightblue', '#353535']
         flex:1,
-        colors: ['#f1f1f1', 'lightblue'],
+        colors: ['#321C43', '#321C43'],
         start: { x: 0.5, y: 0 },
         end: { x: 0.5, y: 1 },
     },

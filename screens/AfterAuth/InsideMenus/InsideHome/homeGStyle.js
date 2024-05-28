@@ -8,7 +8,7 @@ export const forCategories = StyleSheet.create ({
     },
     categoryItem: {
         borderWidth: 1,
-        borderColor: 'lightblue',
+        borderColor: '#E4D4F1',
         paddingVertical: 8,
         paddingHorizontal: 10,
         borderRadius: 5,
@@ -16,11 +16,11 @@ export const forCategories = StyleSheet.create ({
         marginHorizontal: 5,
     },
     categoryText: {
-        color: 'lightblue',
+        color: '#E4D4F1',
         fontWeight: 'bold',
     },
     selectedCategory: {
-        backgroundColor: 'lightblue',
+        backgroundColor: '#E4D4F1',
     },
     selectedText: {
         color: '#f1f1f1',
@@ -42,13 +42,12 @@ export const forCategories = StyleSheet.create ({
     },
     
     noCatFrame:{
-        backgroundColor:'#353535',
         padding:15,
         width:'100%',
         justifyContent:'center',
-        // minHeight:'50%',
-        height:225,
-        // minHeight: '92.5%',
+        height:196,
+        borderWidth:0.5,
+        borderColor:'#E4D4F1',
         borderRadius:5,  
         marginVertical:5,
         
@@ -71,7 +70,7 @@ export const forCategories = StyleSheet.create ({
         // alignItems: 'center',
         // backgroundColor: '#353535',
         borderRadius: 5,
-        borderColor:'lightblue',
+        borderColor:'#E4D4F1',
         marginRight: 10,
         // height: 200,
         // width: 220,// Adjust item width as needed
@@ -84,20 +83,13 @@ export const forCategories = StyleSheet.create ({
     },
     overlay: {
         alignSelf:'center',
-        // backgroundColor: '#353535',
+       
         margin:5,
         padding: 7,
         borderRadius: 5,
         borderWidth:0.5,
-        borderColor:'lightblue'
-        // shadowColor: 'lightblue',
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 1,
-        //     },
-        //     shadowOpacity: 0.1,
-        //     shadowRadius: 2,
-        //     elevation: 5,
+        borderColor:'#E4D4F1'
+        
     },
     overlayText: {
         color: '#f1f1f1',
@@ -113,9 +105,9 @@ export const forCategories = StyleSheet.create ({
 
 export const searchBarStyling = StyleSheet.create({
     searchInput: {
-        backgroundColor: '#353535',
+        backgroundColor: '#321c43',
         borderRadius: 5,
-        borderColor: 'lightblue',
+        borderColor: '#E4D4F1',
         borderWidth: 0.5,
         padding: 10,
         // marginHorizontal: 2,
@@ -126,7 +118,7 @@ export const searchBarStyling = StyleSheet.create({
         alignItems: 'center',
         padding: 8,
         borderBottomWidth: 1,
-        borderBottomColor: '#CCCCCC',
+        borderBottomColor: '#321c43',
     },
     location:{
         marginLeft:2,

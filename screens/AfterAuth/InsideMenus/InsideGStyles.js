@@ -6,14 +6,9 @@ export const ForEventMenu = StyleSheet.create ({
         padding:10,
     },
     theFrame: {
-        backgroundColor:'#353535',
-        // height:250,
-        padding:5,
         borderRadius:5,  
         marginTop:5,
-        // marginBottom:-20
-        // flex:1,
-        // marginVertical:10,
+       
     
     },
     eventFlex:{
@@ -39,7 +34,7 @@ export const ForEventMenu = StyleSheet.create ({
         
         // marginTop:3,
         // marginBottom:10,
-        color:'grey',
+        color:'rgba(234, 221, 243, 0.7)',
         fontSize:12,
         // textAlign:'center'
     },
@@ -48,9 +43,9 @@ export const ForEventMenu = StyleSheet.create ({
 
     // Add Image Styling
     inputBox: {
-        backgroundColor: '#353535',
+        // backgroundColor: '#353535',
         borderRadius: 5,
-        borderColor: 'lightblue',
+        borderColor: '#E4D4F1',
         borderWidth: 0.5,
         padding: 10,
         marginHorizontal: 2,
@@ -61,13 +56,13 @@ export const ForEventMenu = StyleSheet.create ({
         fontSize:15,
         fontWeight:'500',
         marginLeft:5,
-        marginVertical:10,
+        marginVertical:15,
     },
     imageContainer: {
         // flexDirection: 'row', // Arrange image and text horizontally
-        backgroundColor:'#353535',
+        // backgroundColor:'#353535',
         borderWidth:0.5,
-        borderColor:'lightblue',
+        borderColor:'#E4D4F1',
         // padding:8,
         margin:1,
         marginTop:5,
@@ -93,9 +88,11 @@ export const ForEventMenu = StyleSheet.create ({
 export const inCRUDevent = StyleSheet.create ({ 
 
     theFrame: {
-        backgroundColor:'#353535',
+        // backgroundColor:'#353535',
         padding:10,
         // minHeight: '90%',
+        borderWidth:0.5,
+        borderColor:'#E4D4F1',
         borderRadius:5,  
         // marginTop:20,
         // flex:1,
@@ -152,7 +149,7 @@ export const ForManageEvent = StyleSheet.create ({
         // flexDirection: 'row', // Arrange image and text horizontally
         // backgroundColor:'#353535',
         borderWidth:0.6,
-        borderColor:'lightblue',
+        borderColor:'#E4D4F1',
         padding:10,
         marginBottom:10, //marginTop:2,
         marginHorizontal:5,
@@ -201,7 +198,7 @@ export const ForProfile = StyleSheet.create ({
         padding: 10,
         marginVertical:5,
         borderWidth:0.5,
-        borderColor:'lightblue',
+        borderColor:'#E4D4F1',
         // width: '95%',
         alignItems: 'center',
         // marginBottom: 10,
@@ -228,8 +225,10 @@ export const ForProfile = StyleSheet.create ({
         fontSize: 11,
     },
     proFrame: {
-        backgroundColor:'#353535', //rgba(25, 25, 25, 0.25)
+        // backgroundColor:'#353535', //rgba(25, 25, 25, 0.25)
         padding:10,
+        borderWidth:0.5,
+        borderColor:'#E4D4F1',
         borderRadius:5,  
         marginVertical:5,
     },
