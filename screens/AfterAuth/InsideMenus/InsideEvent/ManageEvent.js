@@ -12,6 +12,7 @@ import { ForEventMenu, ForManageEvent } from '../InsideGStyles'
 // import { query, where } from 'firebase/firestore';
 import {collection, db, getDocs, query, where, orderBy } from '../../../../firebaseAPI'
 import { getAuth } from 'firebase/auth';
+import { EmailAuthCredential } from 'firebase/auth/cordova';
 
 const ManageEvent = () => {
   const [newEventList, setNewEventList] = useState([]);
@@ -25,38 +26,31 @@ const ManageEvent = () => {
   };
 
   const getNewEvent = async () => {
-    try {
-      setRefreshing(true);
 
-      const auth = getAuth();
-      const user = auth.currentUser;
-      const uid = user.uid;
-      
-      if (!user) {
-        return;
-      }
-  
-      
-      const q = 
-      query(collection(db, 'newevent'), 
-            // where('uid', '==', uid),
-             
-          ); 
-      const querySnapshot = await getDocs(q);
-
-      const events = [];
-      querySnapshot.forEach((doc) => {
-        events.push({
-          ...doc.data(),
-          id: doc.id,
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      const newEventCollectionRef = collection(db, 'newevent');
+      const newEventQuery = query(newEventCollectionRef, where('uid', '==', currentUser.uid));
+    
+      try {
+        const querySnapshot = await getDocs(newEventQuery);
+        const events = [];
+        querySnapshot.forEach((doc) => {
+          events.push({
+           ...doc.data(),
+            id: doc.id,
+          });
         });
-      });
-      const sortedEvents = events.sort((a, b) => b.createdAt - a.createdAt);
-      setNewEventList(events);
-    } catch (error) {
-      console.error('Error fetching documents: ', error);
-    } finally {
-      setRefreshing(false);
+    
+        const sortedEvents = events.sort((a, b) => b.createdAt - a.createdAt);
+        setNewEventList(sortedEvents);
+        setRefreshing(true);
+      } catch (error) {
+        console.error('Error fetching new events:', error);
+      } finally {
+        setRefreshing(false);
+      }
     }
   };
   

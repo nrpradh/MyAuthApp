@@ -10,7 +10,7 @@ const NavContainers = () => {
     
       <NavigationContainer>
           <StatusBar
-          backgroundColor="#321C43" // Change background color
+          backgroundColor="#321C75" // Change background color
           barStyle="light-content" // Change status bar icon color
           translucent={false} // Whether the status bar is translucent
         />

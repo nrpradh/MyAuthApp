@@ -69,14 +69,14 @@ const TopTabNav = () => {
           fontWeight: 500, // Font weight of the tab labels
         },
         tabBarStyle: {
-          backgroundColor: '#321C43', // Background color of the tab bar
+          backgroundColor: '#321C75', // Background color of the tab bar
           paddingTop:10,
         },
         tabBarIndicatorStyle: {
           backgroundColor: '#EADDF3',
           // padding:1.5
         },
-        tabBarPressColor:'rgba(234, 221, 243, 0.2)', // Disable touch effect color
+        tabBarPressColor:'#321C65', // Disable touch effect color
         tabBarPressOpacity: 0,
       }}>
       <Tab.Screen 

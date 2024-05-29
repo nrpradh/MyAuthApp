@@ -61,7 +61,7 @@ const HomeStack = ({navigation}) => {
         headerShown: true, // Remove if you want the header bar visible
         gestureEnabled:true,
         headerStyle: {
-          backgroundColor: '#321c43', // Set background color of the header
+          backgroundColor: '#321C75', // Set background color of the header
         },
         headerTitleStyle: {
           fontWeight: 500, // Set title font weight
@@ -76,7 +76,7 @@ const HomeStack = ({navigation}) => {
         options={{
           title : 'Home',
           headerStyle: {
-            backgroundColor: '#321c43', // Set background color of the header
+            backgroundColor: '#321C75', // Set background color of the header
           },
           headerTintColor: '#f1f1f1', // Set color of back button and title
           headerTitleAlign: 'center', // Center the header title
@@ -132,7 +132,7 @@ const EventMenuStack = () => {
           title: '  Edit Event',
           headerShown:true,
           headerStyle: {
-            backgroundColor: '#321c43', // Set background color of the header
+            backgroundColor: '#321C75', // Set background color of the header
           },
           headerTintColor: '#f1f1f1', // Set color of back button and title
           headerTitleAlign: 'center', // Center the header title
@@ -152,7 +152,7 @@ const ProfileStack = () => {
         headerShown: true, // Remove if you want the header bar visible
         gestureEnabled:true,
         headerStyle: {
-          backgroundColor: '#321c43', // Set background color of the header
+          backgroundColor: '#321C75', // Set background color of the header
         },
         headerTitleStyle: {
           fontWeight: 500, // Set title font weight

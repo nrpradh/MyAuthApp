@@ -52,7 +52,7 @@ const Home = ({navigation }) => {
       <ScrollView
         showsHorizontalScrollIndicator={false}
         
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
         <Prlx/>
         <CategoryFilter />
