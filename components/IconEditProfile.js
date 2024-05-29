@@ -137,7 +137,7 @@ const IconEditProfile = ({userData}) => {
             <Text style={styles.buttonSave}>Save</Text>
           </View>
         </TouchableOpacity>
-        {loading && <ActivityIndicator color="lightblue" />} 
+        {loading && <ActivityIndicator color="#EADDF3" />} 
         {error && <Text style={{ color: 'red' }}>{error}</Text>}
       </View>
       
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 50,
     borderWidth:1, 
-    borderColor:'lightblue',
+    borderColor:'#EADDF3',
     width: 85, 
     height: 85,
   },  

@@ -26,9 +26,11 @@ const LogOut = () => {
   return (
     <View style={styles.logOutPos}>
       <TouchableOpacity onPress={handleLogout}>
+        
           <View style={styles.theBtn}>
-                  <Text style={styles.logOutOnly}>Log Out</Text>
-              <Feather name='log-out' size={18} color="#F72F31" marginLeft={15} />
+              <Feather name='log-out' size={18} color="#F72F31"/>
+              <Text style={styles.logOutOnly}> Log Out </Text>
+              
           </View>
       </TouchableOpacity>
     </View>
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     logOutOnly:{
         color: '#F72F31',
         // paddingTop: 2,
-        marginLeft: 20,
+        marginLeft: 10,
         // fontSize: 16,
       },
       logOutSubOnly: {
