@@ -38,12 +38,12 @@ const ToAddEvent = () => {
       openIcon={{ name: 'close', color: '#321C43' }}
       onOpen={() => setOpen(!open)}
       onClose={() => setOpen(!open)}
-      buttonStyle={{backgroundColor:'#f1f1f1'}} 
+      buttonStyle={{backgroundColor:'#EADDF3'}} 
       containerStyle={{ borderWidth: 0.5, borderColor: '#321C43' }}
     >
       <SpeedDial.Action
         icon={{ name: 'upload', color: '#321C43' }}
-        buttonStyle={{backgroundColor:'#f1f1f1', }}
+        buttonStyle={{backgroundColor:'#EADDF3', }}
         title="Create & upload"
         titleStyle={{ color: '#321C43' }}
         containerStyle={{ borderWidth: 0.5, borderColor: '#321C43' }}

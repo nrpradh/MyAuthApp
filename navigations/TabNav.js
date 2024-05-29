@@ -16,7 +16,7 @@ const TabNav = () => {
         shifting={true} // Enable it to shift animation for more than 3 tabs
         initialRouteName="HomePage"
         activeColor="#321C43"
-        inactiveColor="#f1f1f1"
+        inactiveColor="#EADDF3"
         barStyle={{ backgroundColor:'#321C43', height:65  }}
         
       >

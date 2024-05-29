@@ -66,7 +66,7 @@ const HomeStack = ({navigation}) => {
         headerTitleStyle: {
           fontWeight: 500, // Set title font weight
         },
-        headerTintColor: '#f1f1f1', // Set color of back button and title
+        headerTintColor: '#EADDF3', // Set color of back button and title
         headerTitleAlign: 'center',
       }}>
       
@@ -78,7 +78,7 @@ const HomeStack = ({navigation}) => {
           headerStyle: {
             backgroundColor: '#321C75', // Set background color of the header
           },
-          headerTintColor: '#f1f1f1', // Set color of back button and title
+          headerTintColor: '#EADDF3', // Set color of back button and title
           headerTitleAlign: 'center', // Center the header title
 
           headerRight: () => (
@@ -134,7 +134,7 @@ const EventMenuStack = () => {
           headerStyle: {
             backgroundColor: '#321C75', // Set background color of the header
           },
-          headerTintColor: '#f1f1f1', // Set color of back button and title
+          headerTintColor: '#EADDF3', // Set color of back button and title
           headerTitleAlign: 'center', // Center the header title
 
           headerRight: () => (  <DeleteTheEvent/>  ),
@@ -157,7 +157,7 @@ const ProfileStack = () => {
         headerTitleStyle: {
           fontWeight: 500, // Set title font weight
         },
-        headerTintColor: '#f1f1f1', // Set color of back button and title
+        headerTintColor: '#EADDF3', // Set color of back button and title
         headerTitleAlign: 'center',
       }}>
       <Stack.Screen name='ProfilePage' component={Profile} options={{title:' Your Profile'}} /> 

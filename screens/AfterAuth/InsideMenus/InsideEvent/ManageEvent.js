@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   noEvents: {
     fontSize:13,
-    color:'#ABABAB',
+    color:'#EADDF3',
     marginVertical:8,
     textAlign: 'center',
     
