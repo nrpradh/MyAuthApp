@@ -10,17 +10,22 @@ const EventLogs = () => {
   return (
     <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
       <View style={ForManageEvent.forContainer}>
-      
-      
-      
         <View style={ForEventMenu.eventFlex}>  
           <View style={styles.flexEndRow}>
             <Text style={ForEventMenu.textGuide} > List of active, requested event, etc. </Text>
+
+
+
           </View>
         </View>
         
         
-        <ScrollView style={ForEventMenu.theFrame}>
+        <ScrollView 
+          style={ForEventMenu.theFrame}
+          contentContainerStyle={{flexGrow: 1, }}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          >
           <Text> CRUD </Text>
         </ScrollView>
       </View>

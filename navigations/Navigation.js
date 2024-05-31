@@ -54,10 +54,14 @@ const HomeStack = ({navigation}) => {
   const searchEvent = () => {
     navigation.navigate('SearchEventPage');
   };
+  const createEvent = () => {
+    navigation.navigate('AddEventPage');
+  };
   
   return( 
     <Stack.Navigator
       screenOptions={{
+        headerShadowVisible:false,
         headerShown: true, // Remove if you want the header bar visible
         gestureEnabled:true,
         headerStyle: {
@@ -82,14 +86,24 @@ const HomeStack = ({navigation}) => {
           headerTitleAlign: 'center', // Center the header title
 
           headerRight: () => (
-            <TouchableOpacity onPress={searchEvent}>
-              <Ionicons name="search" size={24} color="#f1f1f1" marginRight={15} />
-            </TouchableOpacity>
+            <View style={{flexDirection:'row', alignItems:'center'}}> 
+              <TouchableOpacity onPress={searchEvent} >
+                <Ionicons name="search" size={24} color="#f1f1f1" marginRight={12} />
+              
+              </TouchableOpacity>
+              <TouchableOpacity onPress={createEvent} >
+                <Ionicons name="add" size={30} color="#f1f1f1" marginRight={15} />
+              
+              </TouchableOpacity>
+            
+            </View>
+            
           )
 
         }}/> 
       <Stack.Screen name='Categories' component={Categories} /> 
       <Stack.Screen name='ViewEventPage' component={ViewEvent} options={{title : 'The Event'}}/>
+      <Stack.Screen name='AddEventPage' component={AddEvent} options={{headerShown:false}}/>
       <Stack.Screen 
         name='SearchEventPage' 
         component={SearchEvent}
@@ -118,6 +132,7 @@ const EventMenuStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerShadowVisible:false,
         headerShown: false, // Remove if you want the header bar visible
         // gestureEnabled: true
       }}>
@@ -149,6 +164,7 @@ const ProfileStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerShadowVisible:false,
         headerShown: true, // Remove if you want the header bar visible
         gestureEnabled:true,
         headerStyle: {

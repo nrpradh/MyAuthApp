@@ -58,13 +58,7 @@ const Home = ({navigation }) => {
         <CategoryFilter />
        
         {/* Other content goes here */}
-        
-        
-        <TouchableOpacity>
-          <Text style={{color:'#EADDF3'}}>  Create new event </Text>
-        </TouchableOpacity>
-        
-        
+  
       </ScrollView>
     </LinearGradient>
   )
@@ -76,5 +70,14 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     padding:10,
+   
+  },
+
+  btnGoTo :{
+    
+    padding:12,
+    borderRadius:20,
+    alignItems:'center',
+    backgroundColor:'#f1f1f1'
   }
 });

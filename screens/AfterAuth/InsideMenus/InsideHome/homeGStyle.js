@@ -73,7 +73,7 @@ export const forCategories = StyleSheet.create ({
         borderColor:'#E4D4F1',
         marginRight: 10,
         // height: 200,
-        // width: 220,// Adjust item width as needed
+        width: 230,// Adjust item width as needed
     },
     image: {
         resizeMode:'cover',

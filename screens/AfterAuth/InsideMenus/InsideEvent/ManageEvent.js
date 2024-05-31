@@ -73,7 +73,7 @@ const ManageEvent = () => {
 
         <ScrollView
           style={ForEventMenu.theFrame}
-          contentContainerStyle={styles.scrollViewContent}
+          contentContainerStyle={{flexGrow: 1, }}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
@@ -102,7 +102,7 @@ const ManageEvent = () => {
           
             ))
           ) : (
-              <Text style={styles.noEvents}>No events available yet</Text>
+              <Text style={styles.noEvents}>-- No events available yet --</Text>
           )}
           
         </ScrollView>
@@ -118,14 +118,13 @@ const ManageEvent = () => {
 export default ManageEvent;
 
 const styles = StyleSheet.create({
-  scrollViewContent: {
-    flexGrow: 1, 
-    // alignItems: 'center',
-    // paddingBottom: 20,
-  },
+ 
   noEvents: {
+    borderTopWidth:1,
+    borderColor:'rgba(234, 221, 243, 0.4)',
+    paddingTop:15,
     fontSize:13,
-    color:'#EADDF3',
+    color:'rgba(234, 221, 243, 0.4)',
     marginVertical:8,
     textAlign: 'center',
     
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 2,
     width: '100%', 
-    height: 155,
+    height: 125,
   },  
 });
 
