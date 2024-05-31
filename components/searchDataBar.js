@@ -20,26 +20,23 @@ const SearchDataBar = () => {
     try {
       const auth = getAuth();
       const currentUser = auth.currentUser;
-
+  
       if (!currentUser) {
         return; // Exit if user not authenticated
       }
-
-      let q = query(collection(db, 'newevent'));
-
+  
+      const q = query(collection(db, 'newevent'));
+      const querySnapshot = await getDocs(q);
+  
+      const events = querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id }));
+  
       // Apply search filter if searchQuery is not empty
       if (searchQuery) {
-        q = query(
-          q,
-          where('eventName', '>=', searchQuery), // StartAt searchQuery
-          where('eventName', '<=', searchQuery + '\uf8ff') // EndAt searchQuery + any character
-        );
+        const filteredEvents = events.filter(event => event.eventName.includes(searchQuery));
+        setCombinedData(filteredEvents);
+      } else {
+        setCombinedData(events);
       }
-
-      const querySnapshot = await getDocs(q);
-      const events = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-
-      setCombinedData(events);
     } catch (error) {
       console.error('Error fetching documents: ', error);
     } finally {
@@ -80,36 +77,37 @@ const SearchDataBar = () => {
       style={{
         flex: 1,
         padding:10,
-        marginTop:40,
-        backgroundColor:'#E4D4F1'
+        // marginTop:40,  #E4D4F1
+        backgroundColor:'rgba(50, 28, 67,0.9)'
       }}
       >
       <Divider 
         style={{
-          height:3, 
-          backgroundColor:'#321c43', 
-          marginBottom:15, marginHorizontal:90, 
+          height:2, 
+          backgroundColor:'#e4d4f1', 
+          marginVertical:18, marginHorizontal:90, 
           borderRadius:5,}} />
       
       <TextInput
         style={searchBarStyling.searchInput}
-        placeholder="Search..."
+        placeholder="Search by the name..."
         value={searchQuery}
         onChangeText={text => setSearchQuery(text)}
-        color='#f1f1f1'
-        placeholderTextColor='#ABABAB'
+        color= '#E4D4F1'
+        placeholderTextColor='rgba(228, 212, 241, 0.5)'
         onFocus={handleSearchBarClick}
         onBlur={handleSearchBarBlur}
       />
       {searchClicked && ( // Conditionally render the FlatList based on searchClicked state
         <FlatList
           data={combinedData}
+          showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={toViewEvent} >
               <View style={searchBarStyling.itemContainer}>
                 
                 <Image source={{ uri: item.imageSource }} style={styles.image} />
-                <Text>{item.eventName}</Text>
+                <Text style={{color:'#E4D4F1'}}>{item.eventName}</Text>
                 <Text style={searchBarStyling.location}> {item.location} </Text>
                 
               </View>
@@ -129,6 +127,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginRight: 10,
+    borderRadius:3
   },
 });
 

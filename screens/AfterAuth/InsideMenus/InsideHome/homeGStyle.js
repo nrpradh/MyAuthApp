@@ -108,8 +108,9 @@ export const searchBarStyling = StyleSheet.create({
         backgroundColor: '#321c43',
         borderRadius: 5,
         borderColor: '#E4D4F1',
-        borderWidth: 0.5,
+        borderWidth: 0.4,
         padding: 10,
+        marginBottom:10,
         // marginHorizontal: 2,
         // marginBottom:5,
     },
@@ -117,13 +118,14 @@ export const searchBarStyling = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 8,
-        borderBottomWidth: 1,
-        borderBottomColor: '#321c43',
+        marginBottom:6,
+        borderBottomWidth: 0.4,
+        borderBottomColor: '#e4d4f1',
     },
     location:{
         marginLeft:2,
         fontSize:12,
-        color:'#505050'
+        color:'rgba(228, 212, 241, 0.5)'
 
     }
 })
