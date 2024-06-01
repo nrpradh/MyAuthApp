@@ -2,33 +2,33 @@ import React from 'react';
 import {  Text, View, Image, useWindowDimensions, StyleSheet } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, getDocs, db, limit, orderBy } from '../../../../firebaseAPI';// Ensure this points to your firebase configuration file
+import { collection, query, where, getDocs, db, limit, orderBy, onSnapshot } from '../../../../firebaseAPI';// Ensure this points to your firebase configuration file
 import { forCategories } from './homeGStyle';
 
-const fetchData = async (setCombinedData, setRefreshing) => {
-  try {
-    const auth = getAuth();
-    const currentUser = auth.currentUser;
+const fetchData = (setCombinedData, setRefreshing) => {
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
 
-    if (!currentUser) {
-      return; // Exit if user not authenticated
-    }
+  if (!currentUser) {
+    return; // Exit if user not authenticated
+  }
 
-    const q = query(collection(db, 'newevent'), orderBy("createdAt", "desc"), limit(4));
+  const q = query(collection(db, 'newevent'), orderBy("createdAt", "desc"), limit(4));
 
-    const querySnapshot = await getDocs(q);
-    const events = querySnapshot.docs.map(doc => ({
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const events = querySnapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
       category: doc.data().category, // Add category property to each event
     }));
 
     setCombinedData(events);
-  } catch (error) {
-    console.error('Error fetching documents: ', error);
-  } finally {
     setRefreshing(false); // Turn off refreshing indicator
-  }
+  }, (error) => {
+    console.error('Error fetching documents: ', error);
+  });
+
+  return unsubscribe;
 };
 
 const Crousel = () => {

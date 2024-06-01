@@ -8,7 +8,7 @@ import { forCategories } from './homeGStyle';
 
 // Import Firestore
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, getDocs, db, auth, limit, orderBy } from '../../../../firebaseAPI';
+import { collection, query, where, getDocs, db, auth, limit, orderBy, onSnapshot } from '../../../../firebaseAPI';
 import { PGStyling } from '../../PGStyling';
 
 const Categoriest = () => {
@@ -34,38 +34,38 @@ const Categoriest = () => {
     navigation.navigate('ViewEventPage', { event });
   };
 
-  const fetchData = async () => {
-    try {
-      const auth = getAuth();
-      const currentUser = auth.currentUser;
-
-      if (!currentUser) {
-        return; // Exit if user not authenticated
-      }
-
-      const q = query(collection(db, 'newevent'),orderBy("createdAt", "desc"), limit(6));
-
-      const querySnapshot = await getDocs(q);
-      const events = querySnapshot.docs.map(doc => ({
+  const fetchData = () => {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+  
+    if (!currentUser) {
+      return; // Exit if user not authenticated
+    }
+  
+    const q = query(collection(db, 'newevent'), limit(6));
+  
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const events = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
         category: doc.data().category, // Add category property to each event
       }));
-
+  
       setCombinedData(events);
-    } catch (error) {
-      console.error('Error fetching documents: ', error);
-    } finally {
       setRefreshing(false); // Turn off refreshing indicator
-    }
+    }, (error) => {
+      console.error('Error fetching documents: ', error);
+    });
+  
+    return unsubscribe;
   };
-
+  
   useEffect(() => {
-    fetchData();
+    const unsubscribe = fetchData();
+    return unsubscribe;
   }, []);
-
+  
   const onRefresh = () => {
-    setRefreshing(true); 
     fetchData();
   };
 

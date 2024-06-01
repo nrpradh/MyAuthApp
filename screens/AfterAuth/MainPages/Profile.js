@@ -8,7 +8,7 @@ import { getAuth } from 'firebase/auth';
 // Directory imports
 import { auth } from '../../../firebaseAPI';
 import { PGStyling } from '../PGStyling';
-import {collection, db,doc, getDocs, query,where } from '../../../firebaseAPI';
+import {collection, db,doc, getDocs, query,where, onSnapshot } from '../../../firebaseAPI';
 
 // Components
 import LogOut from '../InsideMenus/logOut';
@@ -23,7 +23,7 @@ const Profile = () => {
   const [userData, setUserData] = useState('');
   // const [profilePic, setProfilePic] = useState(userData.profilePic);
   
-  const fetchUserData = async () => {
+  const fetchUserData = () => {
     const auth = getAuth();
     const currentUser = auth.currentUser;
 
@@ -31,29 +31,26 @@ const Profile = () => {
       const userProfileCollectionRef = collection(db, 'userprofile');
       const userQuery = query(userProfileCollectionRef, where('uid', '==', currentUser.uid));
 
-      try {
-        const querySnapshot = await getDocs(userQuery);
+      const unsubscribe = onSnapshot(userQuery, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
           setUserData(doc.data());
-          setRefreshing(true);
+          setRefreshing(false);
         });
-      } catch (error) {
+      }, (error) => {
         console.error('Error fetching user data:', error);
-      } finally {
-        setRefreshing(false);
+      });
+
+      return unsubscribe;
       }
-    }
   };
 
   useEffect(() => {
-    fetchUserData();
+    const unsubscribe = fetchUserData();
+    return unsubscribe;
   }, []);
-
-
-  const onRefresh =() => {
-    // setRefreshing(true);
+  
+  const onRefresh = () => {
     fetchUserData();
-    // setRefreshing(false);
   };
   
 

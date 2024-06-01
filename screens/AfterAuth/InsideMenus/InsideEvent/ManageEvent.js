@@ -10,9 +10,8 @@ import { ForEventMenu, ForManageEvent } from '../InsideGStyles'
 
 // import Firestore
 // import { query, where } from 'firebase/firestore';
-import {collection, db, getDocs, query, where, orderBy } from '../../../../firebaseAPI'
+import {collection, db, getDocs, query, where, orderBy, onSnapshot } from '../../../../firebaseAPI'
 import { getAuth } from 'firebase/auth';
-import { EmailAuthCredential } from 'firebase/auth/cordova';
 
 const ManageEvent = () => {
   const [newEventList, setNewEventList] = useState([]);
@@ -25,41 +24,36 @@ const ManageEvent = () => {
     
   };
 
-  const getNewEvent = async () => {
-
+  const getEvents = () => {
     const auth = getAuth();
     const currentUser = auth.currentUser;
     if (currentUser) {
       const newEventCollectionRef = collection(db, 'newevent');
       const newEventQuery = query(newEventCollectionRef, where('uid', '==', currentUser.uid));
-    
-      try {
-        const querySnapshot = await getDocs(newEventQuery);
+
+      const unsubscribe = onSnapshot(newEventQuery, (querySnapshot) => {
         const events = [];
         querySnapshot.forEach((doc) => {
           events.push({
-           ...doc.data(),
+          ...doc.data(),
             id: doc.id,
           });
         });
-    
         const sortedEvents = events.sort((a, b) => b.createdAt - a.createdAt);
         setNewEventList(sortedEvents);
-        setRefreshing(true);
-      } catch (error) {
-        console.error('Error fetching new events:', error);
-      } finally {
-        setRefreshing(false);
-      }
+      });
+
+      return unsubscribe;
     }
   };
-  
+
   useEffect(() => {
-    getNewEvent();
+    const unsubscribe = getEvents();
+    return unsubscribe;
   }, []);
-  
+
   const onRefresh = () => {
-    getNewEvent();
+    getEvents();
   };
   
 

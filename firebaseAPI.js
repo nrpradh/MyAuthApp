@@ -22,7 +22,8 @@ import {  getFirestore,
           startAt,
           endAt,
           documentId,
-          limit
+          limit,
+          onSnapshot
           
 
         } from "firebase/firestore";
@@ -50,6 +51,6 @@ const db = getFirestore(app);
 
 export { app, db, auth, 
         getFirestore, collection, addDoc, getDocs, deleteDoc,
-        query, where, orderBy, startAt, endAt, getDoc,
+        query, where, orderBy, startAt, endAt, getDoc, onSnapshot,
         updateDoc, doc, setDoc, writeBatch, documentId, limit
       };
