@@ -8,7 +8,7 @@ import { searchBarStyling } from '../screens/AfterAuth/InsideMenus/InsideHome/ho
 
 // Import Firestore
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, getDocs, db, orderBy, startAt, endAt } from '../firebaseAPI';
+import { collection, query, where, getDocs, db, orderBy, startAt, endAt, limit } from '../firebaseAPI';
 
 const SearchDataBar = () => {
   const [combinedData, setCombinedData] = useState([]);
@@ -25,10 +25,13 @@ const SearchDataBar = () => {
         return; // Exit if user not authenticated
       }
   
-      const q = query(collection(db, 'newevent'));
+      const q = query(collection(db, 'newevent'), orderBy("createdAt", "desc"), limit(4));
       const querySnapshot = await getDocs(q);
   
-      const events = querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id }));
+      const events = querySnapshot.docs.map(doc => ({
+        ...doc.data(), 
+        id: doc.id 
+      }));
   
       // Apply search filter if searchQuery is not empty
       if (searchQuery) {

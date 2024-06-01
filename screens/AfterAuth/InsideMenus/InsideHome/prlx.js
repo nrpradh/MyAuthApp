@@ -2,7 +2,7 @@ import React from 'react';
 import {  Text, View, Image, useWindowDimensions, StyleSheet } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, getDocs, db, } from '../../../../firebaseAPI';// Ensure this points to your firebase configuration file
+import { collection, query, where, getDocs, db, limit, orderBy } from '../../../../firebaseAPI';// Ensure this points to your firebase configuration file
 import { forCategories } from './homeGStyle';
 
 const fetchData = async (setCombinedData, setRefreshing) => {
@@ -14,7 +14,7 @@ const fetchData = async (setCombinedData, setRefreshing) => {
       return; // Exit if user not authenticated
     }
 
-    const q = query(collection(db, 'newevent'));
+    const q = query(collection(db, 'newevent'), orderBy("createdAt", "desc"), limit(4));
 
     const querySnapshot = await getDocs(q);
     const events = querySnapshot.docs.map(doc => ({

@@ -8,7 +8,7 @@ import { forCategories } from './homeGStyle';
 
 // Import Firestore
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, getDocs, db, auth } from '../../../../firebaseAPI';
+import { collection, query, where, getDocs, db, auth, limit, orderBy } from '../../../../firebaseAPI';
 import { PGStyling } from '../../PGStyling';
 
 const Categoriest = () => {
@@ -43,7 +43,7 @@ const Categoriest = () => {
         return; // Exit if user not authenticated
       }
 
-      const q = query(collection(db, 'newevent'));
+      const q = query(collection(db, 'newevent'),orderBy("createdAt", "desc"), limit(6));
 
       const querySnapshot = await getDocs(q);
       const events = querySnapshot.docs.map(doc => ({
