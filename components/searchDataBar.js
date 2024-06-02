@@ -69,7 +69,7 @@ const SearchDataBar = () => {
   };
 
   const handleSearchBarBlur = () => {
-    setSearchClicked(false); // Reset searchClicked state when search bar loses focus
+    setSearchClicked(true);  // Set keyboard closed after user did search
   };
 
   const navigation = useNavigation();
@@ -106,7 +106,7 @@ const SearchDataBar = () => {
       />
       
       <View
-        style={{height:250,}}> 
+        style={{height:220,}}> 
         {searchClicked && ( // Conditionally render the FlatList based on searchClicked state
           <FlatList
             data={combinedData}
@@ -126,16 +126,17 @@ const SearchDataBar = () => {
             keyExtractor={item => item.id}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           />
+          
         )}
-        <Text style={{
+        
+      </View>
+      <Text style={{
           marginTop:20,
           textAlign:'center',
           fontSize:13,
           color:'rgba(228, 212, 241, 0.4)'
           }}
         > Latest events added*</Text>
-      </View>
-      
     </View>
   );
 };
