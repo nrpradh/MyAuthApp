@@ -17,7 +17,6 @@ const Landing = ({ navigation }) => {
   const [user, setUser] = useState(null);
   const [authChecked, setAuthChecked] = useState(false); // Track if authentication is checked
 
-  const userLog = auth.currentUser;
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
