@@ -24,8 +24,9 @@ const SearchDataBar = () => {
       if (!currentUser) {
         return; // Exit if user not authenticated
       }
-  
-      const q = query(collection(db, 'newevent'), orderBy("createdAt", "desc"), limit(4));
+
+      //orderBy("createdAt", "desc"), limit(4)
+      const q = query(collection(db, 'newevent'), orderBy("createdAt", "desc"));
       const querySnapshot = await getDocs(q);
   
       const events = querySnapshot.docs.map(doc => ({
@@ -35,7 +36,9 @@ const SearchDataBar = () => {
   
       // Apply search filter if searchQuery is not empty
       if (searchQuery) {
-        const filteredEvents = events.filter(event => event.eventName.includes(searchQuery));
+        const filteredEvents = events.filter(
+          event => event.eventName.toLowerCase().includes(searchQuery.toLowerCase()) 
+        || event.location.toLowerCase().includes(searchQuery.toLowerCase()));
         setCombinedData(filteredEvents);
       } else {
         setCombinedData(events);
@@ -101,25 +104,30 @@ const SearchDataBar = () => {
         onFocus={handleSearchBarClick}
         onBlur={handleSearchBarBlur}
       />
-      {searchClicked && ( // Conditionally render the FlatList based on searchClicked state
-        <FlatList
-          data={combinedData}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={toViewEvent} >
-              <View style={searchBarStyling.itemContainer}>
-                
-                <Image source={{ uri: item.imageSource }} style={styles.image} />
-                <Text style={{color:'#E4D4F1'}}>{item.eventName}</Text>
-                <Text style={searchBarStyling.location}> {item.location} </Text>
-                
-              </View>
-            </TouchableOpacity>
-          )}
-          keyExtractor={item => item.id}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-        />
-      )}
+      <View
+        style={{height:200,}}> 
+        {searchClicked && ( // Conditionally render the FlatList based on searchClicked state
+          <FlatList
+            data={combinedData}
+            scrollEnabled={false}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={toViewEvent} >
+                <View style={searchBarStyling.itemContainer}>
+                  
+                  <Image source={{ uri: item.imageSource }} style={styles.image} />
+                  <Text style={{color:'#E4D4F1'}}>{item.eventName}</Text>
+                  <Text style={searchBarStyling.location}> {item.location} </Text>
+                  
+                </View>
+              </TouchableOpacity>
+            )}
+            keyExtractor={item => item.id}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          />
+        )}
+      </View>
+      
     </View>
   );
 };
