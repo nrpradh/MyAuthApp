@@ -17,18 +17,22 @@ const Landing = ({ navigation }) => {
   const [user, setUser] = useState(null);
   const [authChecked, setAuthChecked] = useState(false); // Track if authentication is checked
 
-  const onAuthStateSave = (user) => {
-    setUser(user);
-    setAuthChecked(true); // Set to true after authentication check
-  };
-
+  const userLog = auth.currentUser;
   useEffect(() => {
-    const subscriber = auth.onAuthStateChanged(onAuthStateSave);
-    return () => subscriber(); // Unsubscribe on component unmount
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+        setAuthChecked(true); // Set to true after authentication check
+      } else {
+        setUser(null);
+        setAuthChecked(true); // Set to true after authentication check
+      }
+    });
   }, []);
-
+  
   // Wait for authentication check before rendering
   if (!authChecked) {
+    console.log("Authentication check is not complete yet...");
     return null; // You can render a loading spinner or placeholder here
   }
 
