@@ -112,10 +112,10 @@ const Categoriest = () => {
         {filteredData.length === 0 ? (
           <View style={forCategories.noCatFrame} >
             <Text style={{
-              color:'rgba(234, 221, 243, 0.7)',
+              color:'rgba(234, 221, 243, 0.4)',
               fontSize:12,
               textAlign:'center'
-            }}>No events available for the selected category/categories.</Text>
+            }}>-- No events available for the selected category/categories --</Text>
             
           </View>
         ) : (

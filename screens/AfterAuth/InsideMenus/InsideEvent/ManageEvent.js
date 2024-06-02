@@ -113,16 +113,6 @@ export default ManageEvent;
 
 const styles = StyleSheet.create({
  
-  noEvents: {
-    borderTopWidth:1,
-    borderColor:'rgba(234, 221, 243, 0.4)',
-    paddingTop:15,
-    fontSize:13,
-    color:'rgba(234, 221, 243, 0.4)',
-    marginVertical:8,
-    textAlign: 'center',
-    
-  },
   image: {
     alignSelf:'center',
     resizeMode: 'cover',
