@@ -96,7 +96,7 @@ const SearchDataBar = () => {
       
       <TextInput
         style={searchBarStyling.searchInput}
-        placeholder="Search by the name..."
+        placeholder="Search by the name or location.."
         value={searchQuery}
         onChangeText={text => setSearchQuery(text)}
         color= '#E4D4F1'
@@ -104,19 +104,20 @@ const SearchDataBar = () => {
         onFocus={handleSearchBarClick}
         onBlur={handleSearchBarBlur}
       />
+      
       <View
-        style={{height:200,}}> 
+        style={{height:250,}}> 
         {searchClicked && ( // Conditionally render the FlatList based on searchClicked state
           <FlatList
             data={combinedData}
             scrollEnabled={false}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={toViewEvent} >
+              <TouchableOpacity onPress={() => toViewEvent(item)}>
                 <View style={searchBarStyling.itemContainer}>
-                  
+                 
                   <Image source={{ uri: item.imageSource }} style={styles.image} />
-                  <Text style={{color:'#E4D4F1'}}>{item.eventName}</Text>
+                  <Text style={{color:'#E4D4F1', fontWeight:500,}}>{item.eventName}</Text>
                   <Text style={searchBarStyling.location}> {item.location} </Text>
                   
                 </View>
@@ -126,6 +127,13 @@ const SearchDataBar = () => {
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           />
         )}
+        <Text style={{
+          marginTop:20,
+          textAlign:'center',
+          fontSize:13,
+          color:'rgba(228, 212, 241, 0.4)'
+          }}
+        > Latest events added*</Text>
       </View>
       
     </View>

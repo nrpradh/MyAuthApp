@@ -125,7 +125,7 @@ export const searchBarStyling = StyleSheet.create({
     location:{
         marginLeft:2,
         fontSize:12,
-        color:'rgba(228, 212, 241, 0.5)'
+        color:'rgba(228, 212, 241, 0.7)'
 
     }
 })
