@@ -88,15 +88,11 @@ export const ForEventMenu = StyleSheet.create ({
 export const inCRUDevent = StyleSheet.create ({ 
 
     theFrame: {
-        // backgroundColor:'#353535',
         padding:10,
-        // minHeight: '90%',
         borderWidth:0.5,
         borderColor:'#E4D4F1',
         borderRadius:5,  
-        // marginTop:20,
-        // flex:1,
-        // marginVertical:10,
+        
     
     },
 

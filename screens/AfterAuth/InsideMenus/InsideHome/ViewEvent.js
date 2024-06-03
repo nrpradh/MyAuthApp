@@ -9,7 +9,7 @@ import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
 
 
-const CRUDevent = ({route}) => {
+const ViewEvent = ({route}) => {
     const { event} = route.params;
     const [address, setAddress] = useState(event.location);
 
@@ -120,6 +120,9 @@ const CRUDevent = ({route}) => {
             </View>
             
         </View>
+        <View style={showUserStyles.container}>
+          <Text style={{color:'#f1f1f1'}}> the user that made it</Text>
+        </View>
         
       </View>
     </LinearGradient>
@@ -130,7 +133,17 @@ const CRUDevent = ({route}) => {
 
 
 
-export default CRUDevent
+export default ViewEvent;
+
+const showUserStyles = StyleSheet.create ({
+  container: {
+    marginVertical:15,
+    padding:10,
+    borderWidth:0.5,
+    borderColor:'#E4D4F1',
+    borderRadius:5,  
+  }
+})
 
 const styles = StyleSheet.create({
     showCategories :{
