@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { PGStyling } from '../PGStyling';
 import Prlx from '../InsideMenus/InsideHome/prlx';
 import CategoryFilter from '../InsideMenus/InsideHome/Categories';
+import ThisMonth from '../InsideMenus/InsideHome/ThisMonth';
 
 const Home = ({navigation }) => {
   const [loading, setLoading] = useState(false); // State to track loading status
@@ -56,6 +57,8 @@ const Home = ({navigation }) => {
         >
         <Prlx/>
         <CategoryFilter />
+        <ThisMonth/>
+        
        
         {/* Other content goes here */}
   

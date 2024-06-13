@@ -11,7 +11,7 @@ import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
 
 const ViewEvent = ({route}) => {
     const { event} = route.params;
-    const [address, setAddress] = useState(event.location);
+    const [ address, setAddress] = useState(event.location);
 
     const DescriptionWithInstagramLinks = ({ description }) => {
       // Split the description text into parts
