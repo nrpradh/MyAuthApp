@@ -21,8 +21,12 @@ const DatePicker = ({ onDateChange, value }) => {
 
   const handleConfirm = (date) => {
     setSelectedDate(date);
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    const formattedDateTime = date ? date.toLocaleString(undefined, options) : 'No date selected';
+    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true };
+    let formattedDateTime = 'No date selected';
+    if (date) {
+      formattedDateTime = date.toLocaleString(undefined, options);
+      formattedDateTime = formattedDateTime.replace(',', ''); // remove comma between date and year
+    }
     console.log('Formatted date and time:', formattedDateTime);
     setDateInputValue(formattedDateTime); // Update dateInputValue with formatted date and time
     onDateChange(formattedDateTime); // Pass formattedDateTime to the parent component
