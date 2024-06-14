@@ -91,12 +91,11 @@ export const forCategories = StyleSheet.create ({
         borderColor:'#E4D4F1'
         
     },
-    overlayText: {
+    txtName: {
         color: '#f1f1f1',
-        fontSize: 14,
-        fontWeight: 'bold',
+        fontWeight: '500',
     },
-    locationText: {
+    txtLocation: {
         color:'lightgrey',
         fontSize:13,
     }

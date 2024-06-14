@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, RefreshControl, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import LabelsProp from '../../../../components/labelsProp';
 
 // Import Global Style
 import { forCategories } from './homeGStyle';
@@ -127,13 +128,9 @@ const Categoriest = () => {
                 <TouchableOpacity onPress={() => toViewEvent(item)}>
                   <View style={forCategories.itemContainer}>
                     <Image source={{ uri: item.imageSource }} style={styles.image} />
-                    <View style={styles.textMargin}>
-                      <Text style={forCategories.overlayText}>{item.eventName}</Text>
-                      <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 2 }}>
-                        <Ionicons name="location-outline" size={14} color="#E4D4F1" marginRight={4} />
-                        <Text style={forCategories.locationText}>{item.location}</Text>
-                      </View>
-                    </View>
+                    <LabelsProp
+                      nameLabel={item.eventName} 
+                      locLabel={item.location} />
                   </View>
                 </TouchableOpacity>
               )}

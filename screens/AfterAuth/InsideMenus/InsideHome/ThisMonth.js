@@ -2,9 +2,12 @@ import react, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, Image, RefreshControl, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import LabelsProp from '../../../../components/labelsProp';
+
 
 import { getAuth } from 'firebase/auth';
 import { collection, query, where, getDocs, db, auth, limit, orderBy, onSnapshot } from '../../../../firebaseAPI';
+import { Icon } from 'react-native-paper';
 
 const ThisMonth = () => {
  
@@ -19,13 +22,13 @@ const fetchData = () => {
       return; // Exit if user not authenticated
     }
   
-    const q = query(collection(db, 'newevent'), limit(6));
+    const q = query(collection(db, 'newevent'), limit(3));
   
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const events = querySnapshot.docs.map((doc) => ({
        ...doc.data(),
         id: doc.id,
-        category: doc.data().category, // Add category property to each event
+        category: doc.data()
       }));
   
       setCombinedData(events);
@@ -35,22 +38,29 @@ const fetchData = () => {
     });
   
     return unsubscribe;
-  };
+};
   
-  useEffect(() => {
-    const unsubscribe = fetchData();
-    return unsubscribe;
-  }, []);
+useEffect(() => {
+  const unsubscribe = fetchData();
+  return unsubscribe;
+}, []);
 
   return (
     <View style={{ padding: 8, marginTop: 5 }}>
       <Text style={styles.h1}>This Month</Text>
-      {combinedData.map((event, index) => (
-        <View>
-          <Image source={{ uri: event.imageSource }} style={styles.image} />
-          <Text key={index} style={styles.eventText}>{event.eventName}</Text>
-        </View>
-      ))}
+      <FlatList
+        data={combinedData}
+        // numColumns={1}
+        renderItem={({ item, index }) => (
+          <View style={styles.cardContainer}>
+            <Image source={{ uri: item.imageSource }} style={styles.image} />
+            <LabelsProp
+              nameLabel={item.eventName} 
+              locLabel={item.location} />
+          </View>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
   );
 }
@@ -59,24 +69,36 @@ const fetchData = () => {
 export default ThisMonth
 
 const styles = StyleSheet.create({
+
     h1 : {
-      // marginTop:15,
       color:'#f1f1f1',
       fontSize:18,
       fontWeight:'500',
       marginVertical:6,
+
+    },
+
+    cardContainer :{
+      flexDirection:'row',
+      padding: 10,
+      marginVertical: 5,
+      borderRadius: 5,
+      borderWidth: 0.5,
+      borderColor:'#E4D4F1',
+      
     },
 
     image: {
+      marginRight:8,
       resizeMode: 'cover',
       borderRadius: 2,
       width: '50%',
-      height: 125, // Adjust image height as needed
+      height: 100, // Adjust image height as needed
     },
+    
+    
+    
 
-    eventText : {
-      color:'#f1f1f1',
-    }
 
     
 
