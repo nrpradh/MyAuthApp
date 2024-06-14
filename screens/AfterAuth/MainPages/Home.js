@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, BackHandler, TouchableOpacity, RefreshControl, ScrollView, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, Button, SectionList, TouchableOpacity, RefreshControl, ScrollView, ActivityIndicator } from 'react-native'
 import React,{useEffect, useCallback, useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -45,24 +45,23 @@ const Home = ({navigation }) => {
     }, 60);
   }, []);
 
-  
+  const sections = [
+    { title: '', data: [<Prlx />] },
+    { title: '', data: [<CategoryFilter />] },
+    { title: '', data: [<ThisMonth />] },
+  ];
   
 
   return (
     <LinearGradient {...PGStyling.linearGradient} style={styles.container} >
-      <ScrollView
-        showsHorizontalScrollIndicator={false}
-        
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-        >
-        <Prlx/>
-        <CategoryFilter />
-        <ThisMonth/>
-        
-       
-        {/* Other content goes here */}
-  
-      </ScrollView>
+      <SectionList
+        sections={sections}
+        renderItem={({ item }) => item}
+        // renderSectionHeader={({ section }) => (
+        //   <Text>{section.title}</Text>
+        // )}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </LinearGradient>
   )
 }
