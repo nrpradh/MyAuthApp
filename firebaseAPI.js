@@ -23,7 +23,8 @@ import {  getFirestore,
           endAt,
           documentId,
           limit,
-          onSnapshot
+          onSnapshot,
+          Timestamp, startOfMonth, endOfMonth
           
 
         } from "firebase/firestore";
@@ -52,5 +53,6 @@ const db = getFirestore(app);
 export { app, db, auth, 
         getFirestore, collection, addDoc, getDocs, deleteDoc,
         query, where, orderBy, startAt, endAt, getDoc, onSnapshot,
-        updateDoc, doc, setDoc, writeBatch, documentId, limit
+        updateDoc, doc, setDoc, writeBatch, documentId, limit,
+        Timestamp, startOfMonth, endOfMonth
       };

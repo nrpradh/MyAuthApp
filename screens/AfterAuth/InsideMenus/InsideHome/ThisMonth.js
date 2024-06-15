@@ -2,48 +2,55 @@ import react, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, Image, RefreshControl, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+
+
 import LabelsProp from '../../../../components/labelsProp';
-
-
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, getDocs, db, auth, limit, orderBy, onSnapshot } from '../../../../firebaseAPI';
-import { Icon } from 'react-native-paper';
+import { collection, query, where, Timestamp, startOfMonth, endOfMonth, db,  limit, orderBy, onSnapshot } from '../../../../firebaseAPI';
+
 
 const ThisMonth = () => {
  
-const [combinedData, setCombinedData] = useState([]);
-const [refreshing, setRefreshing] = useState(false);
+  const [combinedData, setCombinedData] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
-const fetchData = () => {
+  const fetchData = () => {
+    
     const auth = getAuth();
     const currentUser = auth.currentUser;
-  
+
     if (!currentUser) {
       return; // Exit if user not authenticated
     }
-  
+
     const q = query(collection(db, 'newevent'), limit(3));
-  
+
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const events = querySnapshot.docs.map((doc) => ({
-       ...doc.data(),
+        ...doc.data(),
         id: doc.id,
-        category: doc.data()
+        selectedDate: doc.data().selectedDate
       }));
-  
+
       setCombinedData(events);
       setRefreshing(false); // Turn off refreshing indicator
     }, (error) => {
       console.error('Error fetching documents: ', error);
     });
-  
+
     return unsubscribe;
-};
-  
-useEffect(() => {
-  const unsubscribe = fetchData();
-  return unsubscribe;
-}, []);
+  };
+    
+  useEffect(() => {
+    const unsubscribe = fetchData();
+    return unsubscribe;
+  }, []);
+
+  const navigation = useNavigation();
+
+  const toViewEvent = (event) => {
+    navigation.navigate('ViewEventPage', { event });
+  };
 
   return (
     <View style={{ padding: 8, marginTop: 5 }}>
@@ -52,7 +59,7 @@ useEffect(() => {
         data={combinedData}
         // numColumns={1}
         renderItem={({ item, index }) => (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={{}}>
             <View style={styles.cardContainer}>
               <Image source={{ uri: item.imageSource }} style={styles.image} />
               <LabelsProp
