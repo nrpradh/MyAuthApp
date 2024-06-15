@@ -52,12 +52,14 @@ useEffect(() => {
         data={combinedData}
         // numColumns={1}
         renderItem={({ item, index }) => (
-          <View style={styles.cardContainer}>
-            <Image source={{ uri: item.imageSource }} style={styles.image} />
-            <LabelsProp
-              nameLabel={item.eventName} 
-              locLabel={item.location} />
-          </View>
+          <TouchableOpacity>
+            <View style={styles.cardContainer}>
+              <Image source={{ uri: item.imageSource }} style={styles.image} />
+              <LabelsProp
+                nameLabel={item.eventName} 
+                locLabel={item.location} />
+            </View>
+          </TouchableOpacity>
         )}
         keyExtractor={(item, index) => index.toString()}
       />
