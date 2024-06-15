@@ -12,6 +12,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
 
   const auth = getAuth();
+  const defaultPic = require('../../assets/toad-default-profilePic.png');
 
   const handleRegister = async () => {
     try {
@@ -22,7 +23,6 @@ const Register = () => {
 
      
     const userProfileCollectionRef = collection(db, 'userprofile');
-    
     const userDocRef = doc(userProfileCollectionRef, uid);
 
     // Add user data to Firestore collection
@@ -30,8 +30,8 @@ const Register = () => {
       uid: uid,
       email: user.email,
       username: username,
-      organization: '', // Initialize organization to empty string
-      profilePic:''
+      organization: 'your-org', // Initialize organization to empty string
+      profilePic: ''
     });
 
 

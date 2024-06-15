@@ -229,14 +229,14 @@ const styles = StyleSheet.create({
   },
 
   buttonCancel:{
-    backgroundColor: '#321c43',
+    // backgroundColor: '#321c43',
     color:'rgba(234, 221, 243, 0.7)',
     padding: 10, 
     margin: 10,
     textAlign: 'center',
     width:160, 
     fontSize:15,
-    borderWidth:0.4,
+    // borderWidth:0.4,
     borderColor:'rgba(234, 221, 243, 0.7)',
     borderRadius: 5, 
   },
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
   },
 
   modalContent: {
-    backgroundColor: 'rgba(50, 28, 67,0.5)',
+    backgroundColor: 'rgba(50, 28, 67,0.65)',
     padding: 22,
     justifyContent: 'center',
     borderRadius: 4,

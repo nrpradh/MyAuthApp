@@ -140,6 +140,8 @@ const styles = StyleSheet.create({
     // alignSelf:'center',
     resizeMode: 'cover',
     borderRadius: 50,
+    borderWidth:0.5, 
+    borderColor:'#EADDF3',
     width: 75, 
     height: 75,
   },  
