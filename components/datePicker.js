@@ -1,15 +1,15 @@
-
-
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet,  } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import { ForEventMenu } from "../screens/AfterAuth/InsideMenus/InsideGStyles";
+import { Timestamp } from "../firebaseAPI";
 
 const DatePicker = ({ onDateChange, value }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [dateInputValue, setDateInputValue] = useState('');
+
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -28,6 +28,8 @@ const DatePicker = ({ onDateChange, value }) => {
       formattedDateTime = formattedDateTime.replace(',', ''); // remove comma between date and year
     }
     console.log('Formatted date and time:', formattedDateTime);
+    console.log(' date input value : ', dateInputValue);
+    console.log(' selected date: ', selectedDate);
     setDateInputValue(formattedDateTime); // Update dateInputValue with formatted date and time
     onDateChange(formattedDateTime); // Pass formattedDateTime to the parent component
     hideDatePicker();

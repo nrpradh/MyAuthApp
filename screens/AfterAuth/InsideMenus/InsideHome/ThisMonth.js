@@ -3,50 +3,69 @@ import { View, Text, StyleSheet, Image, RefreshControl, FlatList, TouchableOpaci
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
-
 import LabelsProp from '../../../../components/labelsProp';
 import { getAuth } from 'firebase/auth';
 import { collection, query, where, Timestamp, startOfMonth, endOfMonth, db,  limit, orderBy, onSnapshot } from '../../../../firebaseAPI';
 
 
-const ThisMonth = () => {
- 
-  const [combinedData, setCombinedData] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
+const months = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
 
-  const fetchData = () => {
-    
-    const auth = getAuth();
-    const currentUser = auth.currentUser;
-
-    if (!currentUser) {
-      return; // Exit if user not authenticated
-    }
-
-    const q = query(collection(db, 'newevent'), limit(3));
-
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const events = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-        selectedDate: doc.data().selectedDate
-      }));
-
-      setCombinedData(events);
-      setRefreshing(false); // Turn off refreshing indicator
-    }, (error) => {
-      console.error('Error fetching documents: ', error);
-    });
-
-    return unsubscribe;
-  };
-    
-  useEffect(() => {
-    const unsubscribe = fetchData();
-    return unsubscribe;
-  }, []);
-
+const ThisMonthEvents = () => {
   const navigation = useNavigation();
+  const [data, setData] = useState([]);
+  const [currentTime, setCurrentTime] = useState('');
+
+  useEffect(() => {
+    const fetchEventData = async () => {
+      const auth = getAuth();
+      const currentUser = auth.currentUser;
+  
+      if (!currentUser) {
+        return; // Exit if user is not authenticated
+      }
+  
+      const currentMonth = new Date().getMonth(); // Get current month (0-indexed)
+      const currentYear = new Date().getFullYear(); // Get current year
+      const monthName = months[currentMonth]; // Get current month name
+  
+      setCurrentTime(monthName + ' ' + currentYear); // Set current time
+  
+      // Setup query to fetch data
+      const q = query(
+        collection(db, 'newevent'),
+        where('selectedDate', '>=', `${months[currentMonth]} 01 ${currentYear}`),
+        where('selectedDate', '<=', `${months[currentMonth]} 31 ${currentYear}`),
+        limit(3)
+      );
+  
+      // Fetch data and handle response
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const events = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+  
+        // Sort events by selectedDate, closest to farthest
+        const sortedEvents = events.sort((a, b) => {
+          const dateA = new Date(a.selectedDate);
+          const dateB = new Date(b.selectedDate);
+          return dateA - dateB;
+        });
+  
+        setData(sortedEvents); // Set sorted data into state or variable
+      }, (error) => {
+        console.error('Error fetching documents: ', error); // Handle error if any
+      });
+  
+      return unsubscribe; // Return unsubscribe function to stop listening to snapshot changes when no longer needed
+    };
+  
+    fetchEventData();
+  }, []);
+  // Kondisi ini kosong agar useEffect hanya dijalankan sekali saat komponen dimuat
 
   const toViewEvent = (event) => {
     navigation.navigate('ViewEventPage', { event });
@@ -54,28 +73,34 @@ const ThisMonth = () => {
 
   return (
     <View style={{ padding: 8, marginTop: 5 }}>
-      <Text style={styles.h1}>This Month</Text>
+      <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
+        <Text style={styles.h1}>This Month</Text>
+        <Text style={{ color: 'lightgrey' }}> {currentTime} </Text>
+      </View>
       <FlatList
-        data={combinedData}
-        // numColumns={1}
-        renderItem={({ item, index }) => (
-          <TouchableOpacity onPress={{}}>
+        data={data}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => toViewEvent(item)}>
             <View style={styles.cardContainer}>
               <Image source={{ uri: item.imageSource }} style={styles.image} />
-              <LabelsProp
+              <LabelsProp 
                 nameLabel={item.eventName} 
-                locLabel={item.location} />
+                locLabel={item.location}
+                dateLabel={item.selectedDate}
+                />
+              
+              
             </View>
           </TouchableOpacity>
         )}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.id}
       />
     </View>
   );
 }
 
 
-export default ThisMonth
+export default ThisMonthEvents
 
 const styles = StyleSheet.create({
 

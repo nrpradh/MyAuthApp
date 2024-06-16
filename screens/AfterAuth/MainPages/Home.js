@@ -49,6 +49,7 @@ const Home = ({navigation }) => {
     { title: '', data: [<Prlx />] },
     { title: '', data: [<CategoryFilter />] },
     { title: '', data: [<ThisMonth />] },
+    
   ];
   
 
@@ -57,6 +58,7 @@ const Home = ({navigation }) => {
       <SectionList
         sections={sections}
         renderItem={({ item }) => item}
+        showsVerticalScrollIndicator={false}
         // renderSectionHeader={({ section }) => (
         //   <Text>{section.title}</Text>
         // )}
