@@ -45,7 +45,7 @@ export const forCategories = StyleSheet.create ({
         padding:15,
         width:'100%',
         justifyContent:'center',
-        height:196,
+        height:200,
         borderWidth:0.5,
         borderColor:'#E4D4F1',
         borderRadius:5,  
@@ -72,7 +72,7 @@ export const forCategories = StyleSheet.create ({
         borderRadius: 5,
         borderColor:'#E4D4F1',
         marginRight: 10,
-        // height: 200,
+        height: 200,
         width: 230,// Adjust item width as needed
     },
     image: {

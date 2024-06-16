@@ -1,12 +1,12 @@
 import react, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, Image, RefreshControl, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+
 
 import LabelsProp from '../../../../components/labelsProp';
 import { getAuth } from 'firebase/auth';
 import { collection, query, where, Timestamp, startOfMonth, endOfMonth, db,  limit, orderBy, onSnapshot } from '../../../../firebaseAPI';
-
+import ViewAllProp from '../../../../components/viewAllNav';
 
 const months = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -73,9 +73,9 @@ const ThisMonthEvents = () => {
 
   return (
     <View style={{ padding: 8, marginTop: 5 }}>
-      <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
+      <View style={{flexDirection:'row', alignItems:'flex-end',}}>
         <Text style={styles.h1}>This Month</Text>
-        <Text style={{ color: 'lightgrey' }}> {currentTime} </Text>
+        <Text style={{ color: 'lightgrey',marginVertical:8, marginLeft:7, }}> {currentTime} </Text>
       </View>
       <FlatList
         data={data}
@@ -87,7 +87,7 @@ const ThisMonthEvents = () => {
                 nameLabel={item.eventName} 
                 locLabel={item.location}
                 dateLabel={item.selectedDate}
-                />
+              />
               
               
             </View>
@@ -95,9 +95,12 @@ const ThisMonthEvents = () => {
         )}
         keyExtractor={(item) => item.id}
       />
+       <ViewAllProp toWhere={() => console.log('To view event for this month')} />
+
     </View>
   );
 }
+
 
 
 export default ThisMonthEvents

@@ -14,10 +14,7 @@ const LabelsProp = ({nameLabel, locLabel, dateLabel}) => {
         <Text style={{
             color:'lightgrey', 
             fontSize:12.3,
-             
-            
-    
-        }}> {dateLabel}</Text>
+            }}> {dateLabel}</Text>
 
         
     </View>

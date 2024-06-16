@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, RefreshControl, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import CatLabelsProp from '../../../../components/catLabelsProp';
 
 // Import Global Style
 import { forCategories } from './homeGStyle';
+import ViewAllProp from '../../../../components/viewAllNav';
+import CatLabelsProp from '../../../../components/catLabelsProp';
 
 // Import Firestore
 import { getAuth } from 'firebase/auth';
@@ -120,7 +121,7 @@ const Categoriest = () => {
             
           </View>
         ) : (
-          <View style={{marginVertical:10,}}>
+          <View style={{marginVertical:5,}}>
             <FlatList
               data={filteredData}
               keyExtractor={item => item.id}
@@ -140,7 +141,8 @@ const Categoriest = () => {
             />
           </View>
         )}
-      
+      <ViewAllProp toWhere={() => console.log('To view events based on their categories')} />
+
 
     </View>
       
