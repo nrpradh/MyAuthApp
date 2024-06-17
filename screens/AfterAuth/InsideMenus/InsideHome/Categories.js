@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 // Import Global Style
 import { forCategories } from './homeGStyle';
 import ViewAllProp from '../../../../components/viewAllNav';
-import CatLabelsProp from '../../../../components/catLabelsProp';
+import CatLabelsProp from '../../../../components/homeComps/catLabelsProp';
 
 // Import Firestore
 import { getAuth } from 'firebase/auth';

@@ -14,7 +14,7 @@ import {collection, db,doc, getDocs, query,where, onSnapshot } from '../../../fi
 import LogOut from '../InsideMenus/logOut';
 import BtnForProfile from '../InsideMenus/InsideProfile/btnForProfile'
 import { ForProfile } from '../InsideMenus/InsideGStyles';
-import IconEditProfile from '../../../components/IconEditProfile';
+import IconEditProfile from '../../../components/profileComps/IconEditProfile';
 
 const Profile = () => {
   const navigation = useNavigation();

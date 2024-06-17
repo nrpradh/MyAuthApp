@@ -4,7 +4,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { PGStyling } from '../PGStyling';
-import Prlx from '../InsideMenus/InsideHome/prlx';
+import Prlx from '../InsideMenus/InsideHome/PicCarousel';
 import CategoryFilter from '../InsideMenus/InsideHome/Categories';
 import ThisMonth from '../InsideMenus/InsideHome/ThisMonth';
 

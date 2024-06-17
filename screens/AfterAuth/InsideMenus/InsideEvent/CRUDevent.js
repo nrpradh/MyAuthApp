@@ -10,8 +10,8 @@ import { getAuth } from 'firebase/auth';
 import { updateDoc, getDoc, deleteDoc, db, collection, where, getDocs, query, doc, setDoc } from '../../../../firebaseAPI';
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
-import DatePicker from '../../../../components/datePicker';
-import PickCategories from '../../../../components/pickCategories'
+import DatePicker from '../../../../components/eventComps/datePicker';
+import PickCategories from '../../../../components/eventComps/pickCategories'
 
 const CRUDevent = ({route}) => {
     const { event} = route.params;

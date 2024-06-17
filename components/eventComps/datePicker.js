@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet,  } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-import { ForEventMenu } from "../screens/AfterAuth/InsideMenus/InsideGStyles";
-import { Timestamp } from "../firebaseAPI";
+import { ForEventMenu } from "../../screens/AfterAuth/InsideMenus/InsideGStyles";
+import { Timestamp } from "../../firebaseAPI";
 
 const DatePicker = ({ onDateChange, value }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);

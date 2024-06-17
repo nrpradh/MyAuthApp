@@ -6,10 +6,10 @@ import * as ImagePicker from 'expo-image-picker';
 import { Feather} from '@expo/vector-icons';
 import { getAuth } from 'firebase/auth';
 
-import {updateDoc, doc,db, getDoc,  collection, } from '../firebaseAPI';
+import {updateDoc, doc,db, getDoc,  collection, } from '../../firebaseAPI';
 
 
-import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
+import { ForEventMenu } from '../../screens/AfterAuth/InsideMenus/InsideGStyles';
 
 
 
@@ -160,6 +160,7 @@ const IconEditProfile = ({userData}) => {
         <Modal
           isVisible={visibleModal === 1}
           style={styles.bottomModal}
+          onBackdropPress={() => setVisibleModal(null)}
         >
           {renderModalContent()}
         </Modal>

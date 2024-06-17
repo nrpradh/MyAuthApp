@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, RefreshControl, FlatList, TouchableOpaci
 import { useNavigation } from '@react-navigation/native';
 
 
-import LabelsProp from '../../../../components/labelsProp';
+import LabelsProp from '../../../../components/homeComps/labelsProp';
 import { getAuth } from 'firebase/auth';
 import { collection, query, where, Timestamp, startOfMonth, endOfMonth, db,  limit, orderBy, onSnapshot } from '../../../../firebaseAPI';
 import ViewAllProp from '../../../../components/viewAllNav';

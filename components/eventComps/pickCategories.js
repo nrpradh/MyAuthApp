@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-import { ForEventMenu } from '../screens/AfterAuth/InsideMenus/InsideGStyles';
+import { ForEventMenu } from '../../screens/AfterAuth/InsideMenus/InsideGStyles';
 
 const PickCategories = ({
   open,

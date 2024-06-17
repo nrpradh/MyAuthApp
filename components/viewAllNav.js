@@ -1,8 +1,10 @@
 import React from 'react';
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native';
+import Modal from 'react-native-modal';
 import { Feather } from '@expo/vector-icons';
 
 const ViewAllProp = ({ toWhere }) => {
+
   return (
     <TouchableOpacity onPress={toWhere}>
       <View style={styles.container}>
@@ -33,16 +35,8 @@ const styles = StyleSheet.create({
 });
 
 
-
-
-const ViewAllProp2 = () => {
-  return (
-    <View>
-      <Text>viewAllProp_2</Text>
-    </View>
-  )
-}
-
 export default ViewAllProp
-// export default {ViewAllProp, ViewAllProp2 }
+
+
+
 

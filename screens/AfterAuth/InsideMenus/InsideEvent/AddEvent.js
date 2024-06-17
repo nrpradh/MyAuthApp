@@ -5,8 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
 
-import PickCategories from '../../../../components/pickCategories';
-import DatePicker from '../../../../components/datePicker';
+import PickCategories from '../../../../components/eventComps/pickCategories';
+import DatePicker from '../../../../components/eventComps/datePicker';
 import { ForEventMenu, inCRUDevent } from '../InsideGStyles'
 import { PGStyling } from '../../PGStyling'
 

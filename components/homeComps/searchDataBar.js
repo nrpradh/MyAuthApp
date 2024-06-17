@@ -4,11 +4,11 @@ import { Divider } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 // Import Global Style
-import { searchBarStyling } from '../screens/AfterAuth/InsideMenus/InsideHome/homeGStyle';
+import { searchBarStyling } from '../../screens/AfterAuth/InsideMenus/InsideHome/homeGStyle';
 
 // Import Firestore
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, getDocs, db, orderBy, startAt, endAt, limit } from '../firebaseAPI';
+import { collection, query, where, getDocs, db, orderBy, startAt, endAt, limit } from '../../firebaseAPI';
 
 const SearchDataBar = () => {
   const [combinedData, setCombinedData] = useState([]);

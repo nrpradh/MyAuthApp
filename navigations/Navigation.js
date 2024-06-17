@@ -19,7 +19,7 @@ import Login from '../screens/Auth/Login';
 import Home from '../screens/AfterAuth/MainPages/Home';
 import Categories from '../screens/AfterAuth/InsideMenus/InsideHome/Categories';
 import ViewEvent from '../screens/AfterAuth/InsideMenus/InsideHome/ViewEvent';
-import SearchEvent from '../components/searchDataBar';
+import SearchEvent from '../components/homeComps/searchDataBar';
 
 // EventMenu Stack w/ inside it
 import EventMenu from '../screens/AfterAuth/MainPages/EventMenu';
@@ -30,7 +30,7 @@ import EventLogs from '../screens/AfterAuth/InsideMenus/InsideEvent/EventLogs';
 
 // Profile Stack w/ inside it
 import Profile from '../screens/AfterAuth/MainPages/Profile';
-import EditProfileModal from '../components/IconEditProfile'
+import EditProfileModal from '../components/profileComps/IconEditProfile'
 
 
 const Stack = createStackNavigator();
