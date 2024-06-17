@@ -12,7 +12,7 @@ import {collection, db,doc, getDocs, query,where, onSnapshot } from '../../../fi
 
 // Components
 import LogOut from '../InsideMenus/logOut';
-import BtnForProfile from '../InsideMenus/InsideProfile/btnForProfile'
+import BtnForProfile from '../../../components/profileComps/btnForProfile'
 import { ForProfile } from '../InsideMenus/InsideGStyles';
 import IconEditProfile from '../../../components/profileComps/IconEditProfile';
 

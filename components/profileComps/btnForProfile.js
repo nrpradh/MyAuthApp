@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome5, AntDesign } from '@expo/vector-icons';
 
-import { ForProfile } from '../InsideGStyles';
+import { ForProfile } from '../../screens/AfterAuth/InsideMenus/InsideGStyles';
 
 const ProfileComponent = ({ icon, headText, subHeading, onPress }) => {
   return (

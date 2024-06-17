@@ -120,14 +120,14 @@ const ThisMonthLimited = () => {
         animationOut={'slideOutRight'}
         >
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>{selectedEvent?.eventName}</Text>
           <Image source={{ uri: selectedEvent?.imageSource }} style={styles.modalImage} />
           <LabelsProp
             nameLabel={selectedEvent?.eventName}
             locLabel={selectedEvent?.location}
             dateLabel={selectedEvent?.selectedDate}
           />
-          {/* Additional modal content as needed */}
+          {/* <Text style={styles.modalTitle}>{selectedEvent?.description}</Text> */}
+          <Text style={{color:'#f1f1f1'}}>{selectedEvent?.description}</Text>
         </View>
       </Modal>
     </View>
@@ -156,18 +156,24 @@ const styles = StyleSheet.create({
     width: '50%',
     height: 100,
   },
-  modalContainer: {
- 
+  modalContent: {
+    backgroundColor: 'rgba(50, 28, 67,0.8)',
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 0.5,
+    borderColor: '#E4D4F1',
     
   },
   modalTitle: {
     fontSize: 22,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
+    fontSize:'#E4D4F1',
     marginBottom: 10,
   },
   modalImage: {
     width: '100%',
     height: 180,
+    resizeMode:'cover',
     borderRadius: 5,
     marginBottom: 10,
   },
