@@ -4,9 +4,9 @@ import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { PGStyling } from '../PGStyling';
-import Prlx from '../InsideMenus/InsideHome/PicCarousel';
+import PicCarousel from '../InsideMenus/InsideHome/PicCarousel';
 import CategoryFilter from '../InsideMenus/InsideHome/Categories';
-import ThisMonthShortly from '../../../components/homeComps/ThisMonth';
+import ThisMonthLimited from '../../../components/homeComps/ThisMonthLimited';
 
 const Home = ({navigation }) => {
   const [loading, setLoading] = useState(false); // State to track loading status
@@ -46,9 +46,9 @@ const Home = ({navigation }) => {
   }, []);
 
   const sections = [
-    { title: '', data: [<Prlx />] },
+    { title: '', data: [<PicCarousel />] },
     { title: '', data: [<CategoryFilter />] },
-    { title: '', data: [<ThisMonthShortly />] },
+    { title: '', data: [<ThisMonthLimited />] },
     
   ];
   

@@ -53,7 +53,7 @@ const MainStack = () => {
 
 const HomeStack = ({navigation}) => {
   const searchEvent = () => {
-    navigation.navigate('SearchEventPage');
+    navigation.navigate('SearchEventPanel');
   };
   const createEvent = () => {
     navigation.navigate('AddEventPage');
@@ -106,7 +106,7 @@ const HomeStack = ({navigation}) => {
       <Stack.Screen name='ViewEventPage' component={ViewEvent} options={{title : 'The Event'}}/>
       <Stack.Screen name='AddEventPage' component={AddEvent} options={{headerShown:false}}/>
       <Stack.Screen 
-        name='SearchEventPage' 
+        name='SearchEventPanel' 
         component={SearchEvent}
         options={{
           title : 'Search Event', 
@@ -118,12 +118,14 @@ const HomeStack = ({navigation}) => {
           
           
         }}/>
+        <Stack.Screen name='ThisMonthEventsPage' component={ThisMonthEvents} options={{title :' This Month'}}/>
     </Stack.Navigator>
   );
 };
 
 
 import { DeleteTheEvent } from '../screens/AfterAuth/InsideMenus/InsideEvent/CRUDevent';
+import ThisMonthShortly from '../screens/AfterAuth/InsideMenus/InsideHome/ThisMonthEvents';
 
 const EventMenuStack = () => {
 

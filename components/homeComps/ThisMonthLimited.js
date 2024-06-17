@@ -13,7 +13,7 @@ const months = [
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
-const ThisMonthShortly = () => {
+const ThisMonthLimited = () => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const [currentTime, setCurrentTime] = useState('');
@@ -67,8 +67,8 @@ const ThisMonthShortly = () => {
   }, []);
   // Kondisi ini kosong agar useEffect hanya dijalankan sekali saat komponen dimuat
 
-  const toViewEvent = (event) => {
-    navigation.navigate('ViewEventPage', { event });
+  const toViewWholeEvents = () => {
+    navigation.navigate('ThisMonthEventsPage');
   };
 
   return (
@@ -95,7 +95,7 @@ const ThisMonthShortly = () => {
         )}
         keyExtractor={(item) => item.id}
       />
-       <ViewAllProp toWhere={() => console.log('To view event for this month')} />
+       <ViewAllProp toWhere={toViewWholeEvents} />
 
     </View>
   );
@@ -103,7 +103,7 @@ const ThisMonthShortly = () => {
 
 
 
-export default ThisMonthShortly
+export default ThisMonthLimited
 
 const styles = StyleSheet.create({
 
