@@ -93,7 +93,7 @@ const ViewEvent = ({route}) => {
             </View>
             <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
               <Ionicons name="location-outline" size={18} color="#E4D4F1" marginTop={6}/>
-              <TouchableOpacity onPress={handleAddressPress}>
+              <TouchableOpacity onPress={openMaps}>
                 <Text style={[
                     inCRUDevent.anotherTxt, 
                     {   textDecorationLine:'underline',
@@ -103,10 +103,7 @@ const ViewEvent = ({route}) => {
               </TouchableOpacity>
                
             </View>
-            
-            {/* <Text style={styles.showCategories}>{event.category}</Text>  */}
             <DescriptionWithInstagramLinks description={event.description} />
-            {/* <Text style={inCRUDevent.anotherTxt}>{event.description}</Text> */}
             <View style={styles.showCategories}>
               {event.category.map((category, index) => (
                 
@@ -120,9 +117,9 @@ const ViewEvent = ({route}) => {
             </View>
             
         </View>
-        <View style={showUserStyles.container}>
+        {/* <View style={showUserStyles.container}>
           <Text style={{color:'#f1f1f1'}}> the user that made it</Text>
-        </View>
+        </View> */}
         
       </View>
     </LinearGradient>
@@ -199,14 +196,14 @@ const styles = StyleSheet.create({
     regularText: {
         // fontSize:13,
         marginLeft:5,
-        color:'rgba(255, 255, 255, 0.8)',
+        color:'#f1f1f1',
         textAlign:'justify',
 
         
     },
     instagramUsername: {
         // fontSize:13,
-        color: '#ADD8E6',
+        color: '#f1f123',
         textAlign:'justify',
        
     },

@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 // Import Global Style
 import { forCategories } from './homeGStyle';
 import ViewAllProp from '../../../../components/viewAllNav';
-import CatLabelsProp from '../../../../components/homeComps/catLabelsProp';
+import { CategoryLabels } from '../../../../components/homeComps/LabelProps';
 
 // Import Firestore
 import { getAuth } from 'firebase/auth';
@@ -82,7 +82,7 @@ const Categoriest = () => {
   });
 
   return (
-    <View style={{marginTop:5,}}>
+    <View style={{}}>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -129,7 +129,7 @@ const Categoriest = () => {
                 <TouchableOpacity onPress={() => toViewEvent(item)}>
                   <View style={forCategories.itemContainer}>
                     <Image source={{ uri: item.imageSource }} style={styles.image} />
-                    <CatLabelsProp
+                    <CategoryLabels
                       nameLabel={item.eventName} 
                       locLabel={item.location} />
                   </View>
@@ -141,7 +141,7 @@ const Categoriest = () => {
             />
           </View>
         )}
-      <ViewAllProp toWhere={() => console.log('To view events based on their categories')} />
+      {/* <ViewAllProp toWhere={() => console.log('To view events based on their categories')} /> */}
 
 
     </View>
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     // padding:10,
     marginRight: 8,
-    marginBottom:5,
+    marginVertical:6,
     borderRadius: 20,
     borderWidth:0.8,
     borderColor:'#E4D4F1'

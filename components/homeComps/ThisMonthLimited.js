@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, Platform,Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Modal from 'react-native-modal'; // Import Modal from react-native-modal
 
-import LabelsProp from './labelsProp'; // Assuming this is a custom component for labels
+import { ThisMonthLabels } from './LabelProps'; // Assuming this is a custom component for labels
 import { getAuth } from 'firebase/auth';
 import { collection, query, where, limit, orderBy, onSnapshot, db } from '../../firebaseAPI';
 import ViewAllProp from '../viewAllNav';
+import { Ionicons } from '@expo/vector-icons';
 
 const months = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -68,13 +69,75 @@ const ThisMonthLimited = () => {
     fetchEventData();
   }, []);
 
-  // Function to open modal and set selected event
+  const DescriptionWithInstagramLinks = ({ description }) => {
+    // Split the description text into parts
+    const parts = description.split(/(@[a-zA-Z0-9_]+)/g);
+  
+    // Directly open someone's profile
+    const handleInstagramUsernameClick = (username) => {
+      const instagramUrl = `https://www.instagram.com/${username}`;
+      Linking.openURL(instagramUrl);
+    };
+  
+    return (
+      <View style={modalStyles.container}>
+        <Text style={modalStyles.regularText}>
+          {parts.map((part, index) => {
+            if (part.startsWith('@')) {
+              // This part is an Instagram username
+              const username = part.slice(1); // to remove the '@' symbol
+              return (
+                <Text
+                  key={index}
+                  style={modalStyles.instagramUsername}
+                  onPress={() => handleInstagramUsernameClick(username)}>
+                  {part}
+                </Text>
+              );
+            } else {
+              // This part is regular text
+              return part;
+            }
+          })}
+        </Text>
+      </View>
+    );
+  };
+
+  const [ address, setAddress] = useState('');
+  const openMaps = () => {
+    const formattedAddress = address.replace(/\s/g, '+');
+    let url;
+  
+    // Check the platform 
+    if (Platform.OS === 'android') {
+      url = `https://www.google.com/maps/search/?api=1&query=${formattedAddress}`;
+    } else if (Platform.OS === 'ios') {
+      url = `http://maps.apple.com/?q=${formattedAddress}`;
+    } else {
+      console.warn('Unsupported platform');
+      return;
+    }
+  
+    Linking.openURL(url).catch(err => console.error('An error occurred', err));
+  };
+
+  const handleAddressPress = () => {
+    if  (address) {
+        console.log("opened address :", address);
+        // console.log("URL:", url);
+        openMaps();
+    }   else {
+        console.warn('Location is not provided');
+    }
+  };
+  
   const openModal = (event) => {
     setSelectedEvent(event);
+    setAddress(event.location);
     setIsModalVisible(true);
   };
 
-  // Function to close modal
   const closeModal = () => {
     setIsModalVisible(false);
   };
@@ -99,7 +162,7 @@ const ThisMonthLimited = () => {
           <TouchableOpacity onPress={() => openModal(item)}>
             <View style={styles.cardContainer}>
               <Image source={{ uri: item.imageSource }} style={styles.image} />
-              <LabelsProp
+              <ThisMonthLabels
                 nameLabel={item.eventName}
                 locLabel={item.location}
                 dateLabel={item.selectedDate}
@@ -116,23 +179,36 @@ const ThisMonthLimited = () => {
         isVisible={isModalVisible} 
         onBackdropPress={closeModal}
         animationIn={'fadeInUp'}
-        animationInTiming={300}
+        animationInTiming={340}
         animationOut={'slideOutRight'}
+        animationOutTiming={320}
         >
-        <View style={styles.modalContent}>
-          <Image source={{ uri: selectedEvent?.imageSource }} style={styles.modalImage} />
-          <LabelsProp
-            nameLabel={selectedEvent?.eventName}
-            locLabel={selectedEvent?.location}
-            dateLabel={selectedEvent?.selectedDate}
-          />
-          {/* <Text style={styles.modalTitle}>{selectedEvent?.description}</Text> */}
-          <Text style={{color:'#f1f1f1'}}>{selectedEvent?.description}</Text>
+        <View style={modalStyles.modalContent}>
+          <Text style={modalStyles.modalTitle}>{selectedEvent?.eventName} </Text>
+          <Image source={{ uri: selectedEvent?.imageSource }} style={modalStyles.modalImage} />
+          <View style={modalStyles.dateLocContainer}>
+            <TouchableOpacity onPress={openMaps}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Ionicons name='location-outline' size={18} color={'#e4d4f1'} marginRight={4}/>
+                <Text style={[
+                  modalStyles.dateLoc, {
+                    textDecorationLine:'underline',
+                    color:'#e4d4f1'
+                    
+                    }]}>{selectedEvent?.location}</Text>
+              </View>
+            </TouchableOpacity>
+            <Text style={modalStyles.dateLoc}> {selectedEvent?.selectedDate} </Text>
+          </View>
+          <DescriptionWithInstagramLinks description={selectedEvent?.description} />
+          {/* <Text style={{color:'#f1f1f1', textAlign:'justify', paddingHorizontal:5}}>{selectedEvent?.description}</Text> */}
         </View>
       </Modal>
     </View>
   );
 };
+
+export default ThisMonthLimited;
 
 const styles = StyleSheet.create({
   h1: {
@@ -156,6 +232,10 @@ const styles = StyleSheet.create({
     width: '50%',
     height: 100,
   },
+  
+});
+
+const modalStyles = StyleSheet.create({
   modalContent: {
     backgroundColor: 'rgba(50, 28, 67,0.8)',
     padding: 10,
@@ -165,17 +245,52 @@ const styles = StyleSheet.create({
     
   },
   modalTitle: {
-    fontSize: 22,
-    // fontWeight: 'bold',
-    fontSize:'#E4D4F1',
-    marginBottom: 10,
+    fontSize: 18,
+    fontWeight: '500',
+    color:'#f1f1f1',
+    marginVertical: 2,
+    textAlign:'center'
+  },
+  dateLocContainer : {
+    flexDirection: 'row', 
+    alignItems: 'center',   
+    justifyContent:'space-between', 
+    marginHorizontal:2,  
+  },
+
+  dateLoc: {
+    color:'lightgrey',
+    marginVertical:5,
   },
   modalImage: {
     width: '100%',
     height: 180,
     resizeMode:'cover',
     borderRadius: 5,
-    marginBottom: 10,
-  },
-});
-export default ThisMonthLimited;
+    marginVertical: 10,
+  }, 
+
+  //  description styling
+    container: {
+        flexDirection: 'row',
+        flexWrap:'wrap',
+        // margin:10,
+        padding:5,
+        // backgroundColor: 'black', 
+        
+    },
+    regularText: {
+        // fontSize:13,
+        marginLeft:5,
+        color:'#f1f1f1',
+        textAlign:'justify',
+
+        
+    },
+    instagramUsername: {
+        // fontSize:13,
+        color: '#f1f123',
+        textAlign:'justify',
+       
+    },
+})
