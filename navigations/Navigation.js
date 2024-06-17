@@ -180,7 +180,7 @@ const ProfileStack = () => {
         headerTitleAlign: 'center',
       }}>
       <Stack.Screen name='ProfilePage' component={Profile} options={{title:' Your Profile'}} /> 
-      <Stack.Screen name='EditProfileModal' component={EditProfileModal} />
+      {/* <Stack.Screen name='EditProfileModal' component={EditProfileModal} /> */}
     </Stack.Navigator>
   )
 }
