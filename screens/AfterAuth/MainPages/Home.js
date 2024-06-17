@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { PGStyling } from '../PGStyling';
 import Prlx from '../InsideMenus/InsideHome/PicCarousel';
 import CategoryFilter from '../InsideMenus/InsideHome/Categories';
-import ThisMonth from '../InsideMenus/InsideHome/ThisMonth';
+import ThisMonthShortly from '../../../components/homeComps/ThisMonth';
 
 const Home = ({navigation }) => {
   const [loading, setLoading] = useState(false); // State to track loading status
@@ -48,7 +48,7 @@ const Home = ({navigation }) => {
   const sections = [
     { title: '', data: [<Prlx />] },
     { title: '', data: [<CategoryFilter />] },
-    { title: '', data: [<ThisMonth />] },
+    { title: '', data: [<ThisMonthShortly />] },
     
   ];
   

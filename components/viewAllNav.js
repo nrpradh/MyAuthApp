@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 });
 
 
-export default ViewAllProp
+export default ViewAllProp;
 
 
 

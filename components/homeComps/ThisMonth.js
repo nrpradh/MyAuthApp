@@ -3,17 +3,17 @@ import { View, Text, StyleSheet, Image, RefreshControl, FlatList, TouchableOpaci
 import { useNavigation } from '@react-navigation/native';
 
 
-import LabelsProp from '../../../../components/homeComps/labelsProp';
+import LabelsProp from './labelsProp';
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, Timestamp, startOfMonth, endOfMonth, db,  limit, orderBy, onSnapshot } from '../../../../firebaseAPI';
-import ViewAllProp from '../../../../components/viewAllNav';
+import { collection, query, where, Timestamp, startOfMonth, endOfMonth, db,  limit, orderBy, onSnapshot } from '../../firebaseAPI';
+import ViewAllProp from '../viewAllNav';
 
 const months = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
-const ThisMonthEvents = () => {
+const ThisMonthShortly = () => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const [currentTime, setCurrentTime] = useState('');
@@ -103,7 +103,7 @@ const ThisMonthEvents = () => {
 
 
 
-export default ThisMonthEvents
+export default ThisMonthShortly
 
 const styles = StyleSheet.create({
 

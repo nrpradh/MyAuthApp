@@ -20,6 +20,7 @@ import Home from '../screens/AfterAuth/MainPages/Home';
 import Categories from '../screens/AfterAuth/InsideMenus/InsideHome/Categories';
 import ViewEvent from '../screens/AfterAuth/InsideMenus/InsideHome/ViewEvent';
 import SearchEvent from '../components/homeComps/searchDataBar';
+import ThisMonthEvents from '../screens/AfterAuth/InsideMenus/InsideHome/ThisMonthEvents';
 
 // EventMenu Stack w/ inside it
 import EventMenu from '../screens/AfterAuth/MainPages/EventMenu';
