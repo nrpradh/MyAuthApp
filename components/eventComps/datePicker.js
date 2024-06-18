@@ -28,8 +28,6 @@ const DatePicker = ({ onDateChange, value }) => {
       formattedDateTime = formattedDateTime.replace(',', ''); // remove comma between date and year
     }
     console.log('Formatted date and time:', formattedDateTime);
-    console.log(' date input value : ', dateInputValue);
-    console.log(' selected date: ', selectedDate);
     setDateInputValue(formattedDateTime); // Update dateInputValue with formatted date and time
     onDateChange(formattedDateTime); // Pass formattedDateTime to the parent component
     hideDatePicker();

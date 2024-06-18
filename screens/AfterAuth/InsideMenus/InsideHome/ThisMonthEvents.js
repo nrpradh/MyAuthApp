@@ -20,8 +20,8 @@ const ThisMonthLimited = () => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const [currentTime, setCurrentTime] = useState('');
-  const [selectedEvent, setSelectedEvent] = useState(null); // State to manage selected event for modal
-  const [isModalVisible, setIsModalVisible] = useState(false); // State to manage modal visibility
+  const [selectedEvent, setSelectedEvent] = useState(null); 
+  const [isModalVisible, setIsModalVisible] = useState(false); 
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -29,21 +29,20 @@ const ThisMonthLimited = () => {
       const currentUser = auth.currentUser;
 
       if (!currentUser) {
-        return; // Exit if user is not authenticated
+        return; 
       }
 
-      const currentMonth = new Date().getMonth(); // Get current month (0-indexed)
-      const currentYear = new Date().getFullYear(); // Get current year
-      const monthName = months[currentMonth]; // Get current month name
+      const today = new Date();
+      const currentMonth = today.getMonth(); // getMonth() returns 0-11
+      const currentYear = today.getFullYear();
+      const currentDate = today.getDate();
 
-      setCurrentTime(monthName + ' ' + currentYear); // Set current time
-
-      // Setup query to fetch data
+      setCurrentTime(`${months[currentMonth]} ${currentYear}`);
+      
       const q = query(
         collection(db, 'newevent'),
-        where('selectedDate', '>=', `${months[currentMonth]} 01 ${currentYear}`),
-        where('selectedDate', '<=', `${months[currentMonth]} 31 ${currentYear}`),
-        
+        where('selectedDate', '>=', `${months[currentMonth]} ${currentDate} ${currentYear}`), 
+        where('selectedDate', '<=', `${months[currentMonth]} 31 ${currentYear}`), 
       );
 
       // Fetch data and handle response
@@ -62,7 +61,7 @@ const ThisMonthLimited = () => {
 
         setData(sortedEvents); // Set sorted data into state
       }, (error) => {
-        console.error('Error fetching documents: ', error); // Handle error if any
+        console.error('Error fetching documents: ', error); 
       });
 
       return unsubscribe; // Return unsubscribe function to stop listening to snapshot changes
@@ -86,7 +85,7 @@ const ThisMonthLimited = () => {
         <Text style={modalStyles.regularText}>
           {parts.map((part, index) => {
             if (part.startsWith('@')) {
-              // This part is an Instagram username
+              // An Instagram username
               const username = part.slice(1); // to remove the '@' symbol
               return (
                 <Text
@@ -97,7 +96,7 @@ const ThisMonthLimited = () => {
                 </Text>
               );
             } else {
-              // This part is regular text
+              // Regular text
               return part;
             }
           })}
@@ -114,6 +113,7 @@ const ThisMonthLimited = () => {
     // Check the platform 
     if (Platform.OS === 'android') {
       url = `https://www.google.com/maps/search/?api=1&query=${formattedAddress}`;
+      console.log("URL:", url);
     } else if (Platform.OS === 'ios') {
       url = `http://maps.apple.com/?q=${formattedAddress}`;
     } else {
@@ -127,7 +127,7 @@ const ThisMonthLimited = () => {
   const handleAddressPress = () => {
     if  (address) {
         console.log("opened address :", address);
-        // console.log("URL:", url);
+   
         openMaps();
     }   else {
         console.warn('Location is not provided');
@@ -144,13 +144,6 @@ const ThisMonthLimited = () => {
     setIsModalVisible(false);
   };
 
-  const toViewWholeEvents = () => {
-    navigation.navigate('ThisMonthEventsPage');
-  };
-
-  const toViewEvent = (event) => {
-    navigation.navigate('ViewEventPage', { event });
-  };
 
   return (
     <LinearGradient {...PGStyling.linearGradient} style= {{padding: 10, }} >
@@ -205,7 +198,6 @@ const ThisMonthLimited = () => {
                 <Text style={modalStyles.dateLoc}> {selectedEvent?.selectedDate} </Text>
             </View>
             <DescriptionWithInstagramLinks description={selectedEvent?.description} />
-            {/* <Text style={{color:'#f1f1f1', textAlign:'justify', paddingHorizontal:5}}>{selectedEvent?.description}</Text> */}
             </View>
         </Modal>
         </ScrollView>

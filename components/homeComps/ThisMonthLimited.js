@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, Platform,Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Modal from 'react-native-modal'; // Import Modal from react-native-modal
+import Modal from 'react-native-modal'; 
 
-import { ThisMonthLabels } from './LabelProps'; // Assuming this is a custom component for labels
-import { getAuth } from 'firebase/auth';
+import { ThisMonthLabels } from './LabelProps'; 
 import { collection, query, where, limit, orderBy, onSnapshot, db } from '../../firebaseAPI';
 import ViewAllProp from '../viewAllNav';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,8 +17,8 @@ const ThisMonthLimited = () => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const [currentTime, setCurrentTime] = useState('');
-  const [selectedEvent, setSelectedEvent] = useState(null); // State to manage selected event for modal
-  const [isModalVisible, setIsModalVisible] = useState(false); // State to manage modal visibility
+  const [selectedEvent, setSelectedEvent] = useState(null); 
+  const [isModalVisible, setIsModalVisible] = useState(false); 
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -30,18 +29,18 @@ const ThisMonthLimited = () => {
         return; // Exit if user is not authenticated
       }
 
-      const currentMonth = new Date().getMonth(); // Get current month (0-indexed)
-      const currentYear = new Date().getFullYear(); // Get current year
-      const monthName = months[currentMonth]; // Get current month name
+      const today = new Date();
+      const currentMonth = today.getMonth(); // getMonth() returns 0-11
+      const currentYear = today.getFullYear();
+      const currentDate = today.getDate();
 
-      setCurrentTime(monthName + ' ' + currentYear); // Set current time
+      setCurrentTime(`${months[currentMonth]} ${currentYear}`); 
 
-      // Setup query to fetch data
       const q = query(
         collection(db, 'newevent'),
-        where('selectedDate', '>=', `${months[currentMonth]} 01 ${currentYear}`),
-        where('selectedDate', '<=', `${months[currentMonth]} 31 ${currentYear}`),
-        limit(3)
+        where('selectedDate', '>=', `${months[currentMonth]} ${currentDate} ${currentYear}`), 
+        where('selectedDate', '<=', `${months[currentMonth]} 31 ${currentYear}`), 
+        limit(3) 
       );
 
       // Fetch data and handle response
@@ -60,7 +59,7 @@ const ThisMonthLimited = () => {
 
         setData(sortedEvents); // Set sorted data into state
       }, (error) => {
-        console.error('Error fetching documents: ', error); // Handle error if any
+        console.error('Error fetching documents: ', error); 
       });
 
       return unsubscribe; // Return unsubscribe function to stop listening to snapshot changes
@@ -84,7 +83,7 @@ const ThisMonthLimited = () => {
         <Text style={modalStyles.regularText}>
           {parts.map((part, index) => {
             if (part.startsWith('@')) {
-              // This part is an Instagram username
+              // an Instagram username
               const username = part.slice(1); // to remove the '@' symbol
               return (
                 <Text
@@ -95,7 +94,7 @@ const ThisMonthLimited = () => {
                 </Text>
               );
             } else {
-              // This part is regular text
+              // regular text
               return part;
             }
           })}
@@ -112,6 +111,7 @@ const ThisMonthLimited = () => {
     // Check the platform 
     if (Platform.OS === 'android') {
       url = `https://www.google.com/maps/search/?api=1&query=${formattedAddress}`;
+      // console.log("URL:", url);
     } else if (Platform.OS === 'ios') {
       url = `http://maps.apple.com/?q=${formattedAddress}`;
     } else {
@@ -125,7 +125,7 @@ const ThisMonthLimited = () => {
   const handleAddressPress = () => {
     if  (address) {
         console.log("opened address :", address);
-        // console.log("URL:", url);
+        
         openMaps();
     }   else {
         console.warn('Location is not provided');
