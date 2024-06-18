@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, Platform,Linking, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, Platform,Linking, ScrollView, Share, BackHandler } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Modal from 'react-native-modal'; 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -9,7 +9,7 @@ import { ThisMonthLabels } from '../../../../components/homeComps/LabelProps';
 import { getAuth } from 'firebase/auth';
 import { collection, query, where, limit, orderBy, onSnapshot, db } from '../../../../firebaseAPI';
 import ViewAllProp from '../../../../components/viewAllNav';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Octicons } from '@expo/vector-icons';
 
 const months = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -144,6 +144,19 @@ const ThisMonthLimited = () => {
     setIsModalVisible(false);
   };
 
+  useEffect(() => {
+    const handleBackButton = () => {
+      if (isModalVisible) {
+        closeModal();
+        return true; // Prevent default back button behavior
+      }
+      return false; // Allow default back button behavior
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButton);
+
+    return () => backHandler.remove(); // Clean up event listener on unmount
+  }, [isModalVisible, closeModal]);
 
   return (
     <LinearGradient {...PGStyling.linearGradient} style= {{padding: 10, }} >
@@ -172,36 +185,84 @@ const ThisMonthLimited = () => {
             )}
             keyExtractor={(item) => item.id}
         />
-        <Modal 
+          <Modal 
             isVisible={isModalVisible} 
             onBackdropPress={closeModal}
             animationIn={'fadeInUp'}
             animationInTiming={340}
-            animationOut={'slideOutRight'}
-            animationOutTiming={320}
-            >
+            animationOut={'slideOutDown'}
+            animationOutTiming={450}
+            onBackButtonPress={closeModal}
+          >
+          <View >
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <View style={{ flex: 1, alignItems: 'center', marginLeft:30}}>
+                  <Text style={modalStyles.modalTitle}>{selectedEvent?.eventName}</Text>
+                </View>
+                  <ShareEvent selectedEvent={selectedEvent} />
+              </View>
             <View style={modalStyles.modalContent}>
-            <Text style={modalStyles.modalTitle}>{selectedEvent?.eventName} </Text>
-            <Image source={{ uri: selectedEvent?.imageSource }} style={modalStyles.modalImage} />
-            <View style={modalStyles.dateLocContainer}>
+              
+              <Image source={{ uri: selectedEvent?.imageSource }} style={modalStyles.modalImage} />
+              <View style={modalStyles.dateLocContainer}>
                 <TouchableOpacity onPress={openMaps}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Ionicons name='location-outline' size={18} color={'#e4d4f1'} marginRight={4}/>
                     <Text style={[
-                    modalStyles.dateLoc, {
+                      modalStyles.dateLoc, {
                         textDecorationLine:'underline',
                         color:'#e4d4f1'
                         
                         }]}>{selectedEvent?.location}</Text>
-                </View>
+                  </View>
                 </TouchableOpacity>
                 <Text style={modalStyles.dateLoc}> {selectedEvent?.selectedDate} </Text>
+              </View>
+              <DescriptionWithInstagramLinks description={selectedEvent?.description} />
+              <FlatList
+                  data={selectedEvent?.category}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <View style={modalStyles.categoryBox}>
+                      <Octicons name="dot-fill" size={19} color="#321c43" marginRight={7} />
+                      <Text style={modalStyles.categoryText}>{item}</Text>
+                    </View>
+                  )}
+                />
             </View>
-            <DescriptionWithInstagramLinks description={selectedEvent?.description} />
-            </View>
+          </View>
         </Modal>
-        </ScrollView>
+      </ScrollView>
     </LinearGradient>
+  );
+};
+
+export const ShareEvent = ({ selectedEvent }) => {
+  const handleShare = async () => {
+    try {
+      // Replace 'eventour' with your app's scheme
+      const deepLink = `eventour://event-details/${selectedEvent?.id}`;
+  
+      // Message to share including event details and deep link
+      const message = `${selectedEvent?.eventName}\n${selectedEvent?.selectedDate}\nLocation: ${selectedEvent?.location}\n\nEvent Details: ${deepLink}`;
+  
+      // Share using Share API with message and image URL
+      await Share.share({
+        message,
+        url: selectedEvent?.imageSource, // Include the image URL here
+      });
+  
+    } catch (error) {
+      console.error('Error sharing event:', error.message);
+    }
+  };
+
+  return (
+    <TouchableOpacity onPress={handleShare}>
+      <Ionicons name="share-social-outline" size={24} color="#f1f1f1" style={{ marginRight: 4, marginBottom: 10,}} />
+    </TouchableOpacity>
   );
 };
 
@@ -242,10 +303,14 @@ const modalStyles = StyleSheet.create({
     
   },
   modalTitle: {
+    alignSelf:'center',
+    borderColor:'#f1f1f1',
+    padding:8,
     fontSize: 18,
     fontWeight: '500',
     color:'#f1f1f1',
-    marginVertical: 2,
+    marginBottom: 10,
+
     textAlign:'center'
   },
   dateLocContainer : {
@@ -289,5 +354,20 @@ const modalStyles = StyleSheet.create({
         color: '#f1f123',
         textAlign:'justify',
        
+    },
+    categoryBox: {
+      flexDirection:'row',
+      flexWrap:'wrap',
+      alignItems:'center',
+      backgroundColor: '#f1f1f1',
+      borderWidth:0.5,
+      paddingVertical: 5,
+      paddingHorizontal:10,
+      marginLeft: 6,
+      borderRadius: 5,
+    },
+    categoryText: {
+      color: '#321c43',
+      // fontSize: 18,
     },
 })
