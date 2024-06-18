@@ -10,7 +10,6 @@ import { searchBarStyling } from '../InsideHome/homeGStyle';
 import { ForEventMenu, ForManageEvent } from '../InsideGStyles'
 
 // import Firestore
-// import { query, where } from 'firebase/firestore';
 import {collection, db, getDocs, query, where, orderBy, onSnapshot } from '../../../../firebaseAPI'
 import { getAuth } from 'firebase/auth';
 
@@ -80,14 +79,14 @@ const EventLogs = () => {
                 <View style={styles.itemContainer}>
                   <Image source={{ uri: item.imageSource }} style={styles.image} />
                   <Text style={{color:'#f1f1f1', fontWeight:'500', }}>{item.eventName}</Text>
-                  {/* <Text style={searchBarStyling.location}> {item.location} </Text> */}
-                  
                 </View>
               </TouchableOpacity>
           
             ))
           ) : (
+            <View style={styles.noEventsContainer}>
               <Text style={styles.noEvents}>-- No events available yet --</Text>
+            </View>
           )}
           
         </ScrollView>
@@ -103,7 +102,16 @@ const EventLogs = () => {
 export default EventLogs;
 
 const styles = StyleSheet.create({
- 
+  noEventsContainer:{
+    justifyContent:'center', 
+    alignItems:'center', 
+    flex:1,
+  },
+
+  noEvents : {
+    color:'rgba(234, 221, 243, 0.4)',
+    fontSize:12,
+  },
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',

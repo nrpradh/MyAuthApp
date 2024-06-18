@@ -9,7 +9,6 @@ import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent } from '../InsideGStyles'
 
 // import Firestore
-// import { query, where } from 'firebase/firestore';
 import {collection, db, getDocs, query, where, orderBy, onSnapshot } from '../../../../firebaseAPI'
 import { getAuth } from 'firebase/auth';
 
@@ -96,7 +95,9 @@ const ManageEvent = () => {
           
             ))
           ) : (
+            <View style={styles.noEventsContainer}>
               <Text style={styles.noEvents}>-- No events available yet --</Text>
+            </View>
           )}
           
         </ScrollView>
@@ -112,7 +113,17 @@ const ManageEvent = () => {
 export default ManageEvent;
 
 const styles = StyleSheet.create({
- 
+  noEventsContainer:{
+    justifyContent:'center', 
+    alignItems:'center', 
+    flex:1,
+  },
+
+  noEvents : {
+    color:'rgba(234, 221, 243, 0.4)',
+    fontSize:12,
+  },
+
   image: {
     alignSelf:'center',
     resizeMode: 'cover',
