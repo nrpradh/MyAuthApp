@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image,Modal} from 'react-native'
+import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image, ToastAndroid,} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
@@ -70,7 +70,7 @@ const CRUDevent = ({route}) => {
               description: newDescription,
             });
             
-            console.log('Event data updated successfully');
+            ToastAndroid.show('Event updated!', ToastAndroid.SHORT);
             navigation.navigate('EventMenuPage');
           } else {
             console.log('Event not found');
@@ -228,6 +228,7 @@ export const DeleteTheEvent = () => {
         const eventId = doc.id;
         await deleteDoc(doc.ref);
         console.log(`Deleted document with ID: ${eventId}`);
+        ToastAndroid.show(`"${event.eventName}" deleted`, ToastAndroid.SHORT);
         navigation.navigate('EventMenuPage')
       }
     });
@@ -236,7 +237,7 @@ export const DeleteTheEvent = () => {
   const confirmDelete = () => {
     Alert.alert(
       'Warning',
-      `Are you sure you want to delete the event "${event.eventName}"?`,
+      `Are you sure you want to delete "${event.eventName}"?`,
       [
         {
           text: 'Cancel',
@@ -244,8 +245,10 @@ export const DeleteTheEvent = () => {
         },
         {
           text: 'Delete',
+          
           style: 'destructive',
           onPress: handleDeleteEvent,
+          
         },
       ],
       { cancelable: true }

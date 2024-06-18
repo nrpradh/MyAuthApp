@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image, StatusBar} from 'react-native'
+import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, ToastAndroid, TouchableOpacity, Image, StatusBar} from 'react-native'
 import React, {useState} from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Ionicons } from '@expo/vector-icons';
@@ -85,18 +85,23 @@ const AddEvent = () => {
       const auth = getAuth(); 
       const user = auth.currentUser; 
 
-
       if (!user) {
-        alert('Please sign in to continue.');
+        ToastAndroid.show('Please sign in to continue.', ToastAndroid.LONG);
         return;
       }
 
       if (!category || !imageSource || !eventName || !selectedDate || !location || !description) {
-        // If any of the fields are empty, display an alert to the user
-        alert('Please fill in all fields.');
+        console.log('One or more fields are empty. Showing toast...');
+        ToastAndroid.showWithGravity(
+          'Please fill in all fields.',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER
+        );
+        console.log('Toast shown.');
         return;
+        
       }
-
+      
       Alert.alert(
         'Confirmation',
         'Do you want to continue with the entered information?',
@@ -109,29 +114,33 @@ const AddEvent = () => {
           {
             text: 'Continue',
             onPress: async () => {
-              
-              const newEventRef = collection(db, 'newevent');
-              const docRef = await addDoc(newEventRef, {
-                category: category,
-                imageSource: imageSource,
-                eventName: eventName,
-                selectedDate: selectedDate,
-                location: location,
-                description: description,
-                uid: user.uid, 
-                createdAt: new Date(),
-                
-              });
-              console.log("Document written with ID: ", docRef.id);
-                  
+              try {
+                const newEventRef = collection(db, 'newevent');
+                const docRef = await addDoc(newEventRef, {
+                  category: category,
+                  imageSource: imageSource,
+                  eventName: eventName,
+                  selectedDate: selectedDate,
+                  location: location,
+                  description: description,
+                  uid: user.uid, 
+                  createdAt: new Date(),
+                });
+                console.log("Document written with ID: ", docRef.id);
+                ToastAndroid.show('New event created!', ToastAndroid.SHORT);
+                navigation.navigate('EventMenuPage');
 
-              // Proceed to the next step or navigate to another page
-              console.log('The Image:', imageSource);
-              console.log('Event Name:', eventName);
-              console.log('Date & Time:', selectedDate);
-              console.log('Location:', location);
-              console.log('Description:', description);
-              navigation.navigate('EventMenuPage');
+                // // Proceed to the next step or navigate to another page
+                // console.log('The Image:', imageSource);
+                // console.log('Event Name:', eventName);
+                // console.log('Date & Time:', selectedDate);
+                // console.log('Location:', location);
+                // console.log('Description:', description);
+               
+              } catch (error) {
+                console.error("Error adding document: ", error);
+                ToastAndroid.show(`${error.message}`, ToastAndroid.LONG);
+              }
             }
           }
         ],
@@ -139,6 +148,7 @@ const AddEvent = () => {
       );
     } catch (error) {
       console.error("Error adding document: ", error);
+      ToastAndroid.show(`Error: ${error.message}`, ToastAndroid.LONG);
     }
   };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, TouchableOpacity, StyleSheet, View, TextInput, Image, ActivityIndicator, Alert } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, View, TextInput, Image, ActivityIndicator, Alert, ToastAndroid } from 'react-native';
 import Modal from 'react-native-modal';
 import firebase from 'firebase/compat/app';
 import * as ImagePicker from 'expo-image-picker';
@@ -35,7 +35,7 @@ const IconEditProfile = ({userData}) => {
     try {
       // Get the current user
       const user = auth.currentUser;
-      
+
       if (user) {
         // Reference to the user's document in the 'userprofile' collection
         const userProfileCollectionRef = collection(db, 'userprofile');
@@ -44,21 +44,43 @@ const IconEditProfile = ({userData}) => {
         // Get the current user profile data
         const userData = (await getDoc(userDocRef)).data();
 
-        // Update user data in Firestore
-        await updateDoc(userDocRef, {
-          // Update specific fields
-          username: username ,
-          organization: organization ,
-          profilePic: profilePic 
-        });
+        let updates = {};
+        let fieldsUpdated = [];
 
-        console.log('User data updated successfully : ',  username, organization, profilePic);
-        setVisibleModal(null);
+        // Check for updates and build the updates object
+        if (username && username !== userData.username) {
+          updates.username = username;
+          fieldsUpdated.push('Username');
+        }
+        if (organization && organization !== userData.organization) {
+          updates.organization = organization;
+          fieldsUpdated.push('Organization');
+        }
+        if (profilePic && profilePic !== userData.profilePic) {
+          updates.profilePic = profilePic;
+          fieldsUpdated.push('Profile Pic');
+        }
+
+        if (Object.keys(updates).length > 0) {
+          // Update user data in Firestore
+          await updateDoc(userDocRef, updates);
+
+          fieldsUpdated.forEach(field => {
+            ToastAndroid.show(`${field} updated`, ToastAndroid.SHORT);
+          });
+
+          console.log('User data updated successfully:', updates);
+          setVisibleModal(null);
+        } else {
+          ToastAndroid.show('No changes detected.', ToastAndroid.SHORT);
+        }
       } else {
         console.error('No user is currently signed in');
+        ToastAndroid.show('No user is currently signed in', ToastAndroid.LONG);
       }
     } catch (error) {
       console.error('Error updating user data:', error);
+      ToastAndroid.show(`Error updating user data: ${error.message}`, ToastAndroid.LONG);
     }
   };
 

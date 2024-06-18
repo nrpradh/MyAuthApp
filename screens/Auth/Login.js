@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, View, Button, Text, TouchableOpacity, StatusBar } from 'react-native'
+import { StyleSheet, TextInput, View, Button, Text, TouchableOpacity, StatusBar, ToastAndroid,  } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
 
@@ -23,19 +23,42 @@ const LoginPage = () => {
     console.log("No user signed in.");
   }
 
+  const getErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case 'auth/invalid-email':
+        return 'The email is probably badly formatted.';
+      case 'auth/user-disabled':
+        return 'This user account has been disabled.';
+      case 'auth/user-not-found':
+        return 'No account found with this email.';
+      case 'auth/wrong-password':
+        return 'Incorrect password. Please try again.';
+      default:
+        return 'An unknown error occurred. Please try again.';
+    }
+  };
+
   const LoggingIn = () => {
+    if (!email || !password) {
+      const message = 'Please fill in all fields.';
+      setError(message);
+      ToastAndroid.show(message, ToastAndroid.LONG);
+      return;
+    }
+
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log('User logged in:', user.email);
+        ToastAndroid.show('Login successful!', ToastAndroid.SHORT);
         // navigation.navigate('TabNav');
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error('Login error:', errorCode, errorMessage);
+        const errorMessage = getErrorMessage(errorCode);
         setError(errorMessage);
+        ToastAndroid.show(`${errorMessage}`, ToastAndroid.LONG);
       });
   };
 
@@ -70,7 +93,7 @@ const LoginPage = () => {
       
       
      
-      {error && <Text style={styles.errorText}>{error}</Text>}
+      {/* {error && <Text style={styles.errorText}>{error}</Text>} */}
       {/* <Text style={authGStyles.switchAuth}> Don't have an account? </Text> */}
     </View>
   );
