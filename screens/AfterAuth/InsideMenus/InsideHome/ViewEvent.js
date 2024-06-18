@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, ScrollView, Linking, Alert, Platform, TouchableOpacity, Image,} from 'react-native'
+import { StyleSheet, Text, View, TextInput, Share, Linking, FlatList, Platform, TouchableOpacity, Image,} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
@@ -7,6 +7,7 @@ import { MaterialIcons, Ionicons, Octicons } from '@expo/vector-icons';
 
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const ViewEvent = ({route}) => {
@@ -75,46 +76,40 @@ const ViewEvent = ({route}) => {
         }
     };
 
-     
-      
-      const navigation = useNavigation()
-
-      const handleGoBack = () => {
-        navigation.goBack();
-      };
     return (
     <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
         <View >
           <View style={inCRUDevent.theFrame}>
             <Image source={{ uri: event.imageSource }} style={styles.image} />
             <View style={styles.nameWDate}>
-              <Text style={inCRUDevent.eventName}>{event.eventName}</Text>
+              <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
+                <Ionicons name="location-outline" size={18} color="#E4D4F1" />
+                <TouchableOpacity onPress={openMaps}>
+                  <Text style={[
+                      inCRUDevent.anotherTxt, 
+                      {   textDecorationLine:'underline',
+                            // marginTop:6,
+                          
+                      }]}>{event.location}</Text>
+                </TouchableOpacity>
+                
+              </View>
               <Text style={inCRUDevent.anotherTxt}>{event.selectedDate}</Text>
             </View>
-            <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
-              <Ionicons name="location-outline" size={18} color="#E4D4F1" marginTop={6}/>
-              <TouchableOpacity onPress={openMaps}>
-                <Text style={[
-                    inCRUDevent.anotherTxt, 
-                    {   textDecorationLine:'underline',
-                          marginTop:6,
-                        
-                    }]}>{event.location}</Text>
-              </TouchableOpacity>
-               
-            </View>
+            
             <DescriptionWithInstagramLinks description={event.description} />
-            <View style={styles.showCategories}>
-              {event.category.map((category, index) => (
-                
-                <View key={index} style= {styles.categoryBox }>
-                  <Octicons name="dot-fill" size={19} color="#321c43" marginRight={7}/>
-                  <Text style={styles.categoryText}>
-                    {category}
-                  </Text>
+            <FlatList
+              data={event.category}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <View style={styles.categoryBox}>
+                  <Octicons name="dot-fill" size={19} color="#321c43" marginRight={7} />
+                  <Text style={styles.categoryText}>{item}</Text>
                 </View>
-              ))}
-            </View>
+              )}
+            />
             
         </View>
         {/* <View style={showUserStyles.container}>
@@ -126,6 +121,33 @@ const ViewEvent = ({route}) => {
       
     )
 }
+
+export const ShareEvent = ({ event }) => {
+  const handleShare = async () => {
+    try {
+      // Replace 'eventour' with your app's scheme
+      const deepLink = `eventour://event-details/${event.id}`;
+  
+      // Message to share including event details and deep link
+      const message = `${event.eventName}\n${event.selectedDate}\nLocation: ${event.location}\n\nEvent Details: ${deepLink}`;
+  
+      // Share using Share API with message and image URL
+      await Share.share({
+        message,
+        url: event.imageSource, // Include the image URL here
+      });
+  
+    } catch (error) {
+      console.error('Error sharing event:', error.message);
+    }
+  };
+
+  return (
+    <TouchableOpacity onPress={handleShare}>
+      <Ionicons name="share-social-outline" size={24} color="#E4D4F1" style={{ marginRight: 15}} />
+    </TouchableOpacity>
+  );
+};
 
 
 
@@ -148,19 +170,19 @@ const styles = StyleSheet.create({
       // backgroundColor:'#f1f1f1',
       borderRadius:20,
       // marginHorizontal:5,
-      marginTop:5,
-      padding:2,
+      marginVertical:2,
+      marginHorizontal:7,
     },
     
     categoryBox: {
       flexDirection:'row',
+      flexWrap:'wrap',
       alignItems:'center',
       backgroundColor: '#f1f1f1',
       borderWidth:0.5,
-      // borderColor:'#E4D4F1',
       paddingVertical: 5,
       paddingHorizontal:10,
-      marginHorizontal: 4,
+      marginLeft: 6,
       borderRadius: 5,
     },
     categoryText: {
@@ -172,7 +194,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row', 
       alignItems: 'center' ,
       justifyContent:'space-between',
-      marginTop:10,
+      marginTop:15,
     },
 
     image: {
@@ -188,9 +210,10 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         flexWrap:'wrap',
-        // margin:10,
-        padding:5,
-        // backgroundColor: 'black', 
+        margin:8,
+        // padding:8,
+        alignItems:'center'
+        
         
     },
     regularText: {

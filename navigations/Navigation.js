@@ -51,7 +51,10 @@ const MainStack = () => {
   );
 };
 
+import { ShareEvent } from '../screens/AfterAuth/InsideMenus/InsideHome/ViewEvent';
+
 const HomeStack = ({navigation}) => {
+  
   const searchEvent = () => {
     navigation.navigate('SearchEventPanel');
   };
@@ -103,7 +106,14 @@ const HomeStack = ({navigation}) => {
 
         }}/> 
       <Stack.Screen name='Categories' component={Categories} /> 
-      <Stack.Screen name='ViewEventPage' component={ViewEvent} options={{title : 'The Event'}}/>
+      <Stack.Screen
+        name="ViewEventPage"
+        component={ViewEvent}
+        options={({ route }) => ({
+          title: route.params.event.eventName,
+          headerRight: () => <ShareEvent event={route.params.event} />,
+        })}
+      />
       <Stack.Screen name='AddEventPage' component={AddEvent} options={{headerShown:false}}/>
       <Stack.Screen 
         name='SearchEventPanel' 

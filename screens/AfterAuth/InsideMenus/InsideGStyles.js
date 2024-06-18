@@ -113,7 +113,7 @@ export const inCRUDevent = StyleSheet.create ({
 
         color:'rgba(255, 255, 255, 0.8)',
         marginHorizontal:5,
-        marginVertical:1
+
         
     },
 
