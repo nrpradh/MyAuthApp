@@ -1,38 +1,56 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Alert} from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native'; 
-
-import { auth } from '../../../firebaseAPI';
-import { ForProfile } from './InsideGStyles';
-import { getAuth } from 'firebase/auth';
+import { useNavigation } from '@react-navigation/native'; ;
+import { getAuth, signOut } from 'firebase/auth';
 
 const LogOut = () => {
   const navigation = useNavigation(); 
   const auth = getAuth();
-  const user = auth.currentUser
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleLogout = () => {
-    auth.signOut().then(() => {
+  const handleLogout = async () => {
+    setIsLoading(true);
+    try {
+      await signOut(auth);
       navigation.navigate('LandingPage');
-      console.log(user.email, 'logged out');
-      
-    })
-    .catch((error) => {
+    } catch (error) {
       console.error('Error logging out:', error);
-    });
-  }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const confirmLogout = () => {
+    Alert.alert(
+      "Confirm Logout",
+      "Are you sure you want to log out?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Logout canceled"),
+          style: "cancel"
+        },
+        {
+          text: "Yes",
+          onPress: handleLogout
+        }
+      ]
+    );
+  };
 
   return (
     <View style={styles.logOutPos}>
-      <TouchableOpacity onPress={handleLogout}>
-        
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#F72F31" />
+      ) : (
+        <TouchableOpacity onPress={confirmLogout}>
           <View style={styles.theBtn}>
-              <Feather name='log-out' size={18} color="#F72F31"/>
-              <Text style={styles.logOutOnly}> Log Out </Text>
-              
+            <Feather name='log-out' size={18} color="#F72F31" />
+            <Text style={styles.logOutOnly}> Log Out </Text>
           </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
