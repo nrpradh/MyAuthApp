@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Alert} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Alert, ToastAndroid} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'; ;
 import { getAuth, signOut } from 'firebase/auth';
@@ -14,6 +14,7 @@ const LogOut = () => {
     try {
       await signOut(auth);
       navigation.navigate('LandingPage');
+      ToastAndroid.show('You logged out', ToastAndroid.SHORT);
     } catch (error) {
       console.error('Error logging out:', error);
     } finally {
@@ -27,13 +28,15 @@ const LogOut = () => {
       "Are you sure you want to log out?",
       [
         {
-          text: "Cancel",
+          text: "Cancel",  
           onPress: () => console.log("Logout canceled"),
-          style: "cancel"
+          style: "cancel",
+        
         },
         {
           text: "Yes",
           onPress: handleLogout
+          
         }
       ]
     );
