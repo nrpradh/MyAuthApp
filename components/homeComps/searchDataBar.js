@@ -16,67 +16,77 @@ const SearchDataBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchClicked, setSearchClicked] = useState(false);
 
-  const fetchData = async () => {
-    try {
-      const auth = getAuth();
-      const currentUser = auth.currentUser;
-  
-      if (!currentUser) {
-        return; // Exit if user not authenticated
-      }
+  const navigation = useNavigation();
 
-      //orderBy("createdAt", "desc"), limit(4)
-      const q = query(collection(db, 'newevent'), orderBy("createdAt", "desc"));
-      const querySnapshot = await getDocs(q);
-  
-      const events = querySnapshot.docs.map(doc => ({
-        ...doc.data(), 
-        id: doc.id 
-      }));
-  
-      // Apply search filter if searchQuery is not empty
-      if (searchQuery) {
-        const filteredEvents = events.filter(
-          event => event.eventName.toLowerCase().includes(searchQuery.toLowerCase()) 
-        || event.location.toLowerCase().includes(searchQuery.toLowerCase()));
-        setCombinedData(filteredEvents);
-      } else {
-        setCombinedData(events);
-      }
-    } catch (error) {
-      console.error('Error fetching documents: ', error);
-    } finally {
-      setRefreshing(false); // Turn off refreshing indicator
-    }
-  };
+    const fetchData = async () => {
+        try {
+            const auth = getAuth();
+            const currentUser = auth.currentUser;
 
-  useEffect(() => {
-    fetchData();
-  }, [searchQuery]); // Fetch data again when searchQuery changes
+            if (!currentUser) {
+                return;
+            }
 
-  const onRefresh = () => {
-    setRefreshing(true); // Set refreshing indicator to true
-    fetchData(); // Fetch data again
-  };
+            const q = query(collection(db, 'newevent'), orderBy("createdAt", "desc"));
+            const querySnapshot = await getDocs(q);
+
+            const events = querySnapshot.docs.map(doc => ({
+                ...doc.data(),
+                id: doc.id
+            }));
+
+            const eventsWithCreators = await Promise.all(events.map(async event => {
+                const profileQuery = query(collection(db, 'userprofile'), where('uid', '==', event.uid));
+                const profileSnapshot = await getDocs(profileQuery);
+                const eventCreatorProfile = !profileSnapshot.empty ? profileSnapshot.docs[0].data() : null;
+                return {
+                    ...event,
+                    eventCreatorProfile
+                };
+            }));
+
+            if (searchQuery) {
+                const filteredEvents = eventsWithCreators.filter(
+                    event => event.eventName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    event.location.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+                setCombinedData(filteredEvents);
+            } else {
+                setCombinedData(eventsWithCreators);
+            }
+        } catch (error) {
+            console.error('Error fetching documents: ', error);
+        } finally {
+            setRefreshing(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, [searchQuery]);
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        fetchData();
+    };
+
+    const toViewEvent = (event) => {
+        navigation.navigate('ViewEventPage', { event, eventCreatorProfile: event.eventCreatorProfile });
+    };
+
 
   const handleEventPress = (eventName) => {
-    // Handle event press, for example, navigate to event details screen
     console.log(`Event ${eventName} pressed`);
   };
 
   const handleSearchBarClick = () => {
-    setSearchClicked(true); // Set search bar clicked to true
+    setSearchClicked(true); 
   };
 
   const handleSearchBarBlur = () => {
-    setSearchClicked(true);  // Set keyboard closed after user did search
+    setSearchClicked(true); 
   };
 
-  const navigation = useNavigation();
-  const toViewEvent = (event) => {
-    navigation.navigate('ViewEventPage', { event });
-    
-  }; 
 
   return (
     <View  
