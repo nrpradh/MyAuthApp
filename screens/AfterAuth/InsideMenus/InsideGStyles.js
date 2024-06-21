@@ -175,7 +175,7 @@ export const ForManageEvent = StyleSheet.create ({
     },
     location: {
         fontSize:13,
-        color:'lightgrey'
+        color:'#EADDF3'
     },
     dTime: {
         margin:2,

@@ -10,55 +10,74 @@ import { searchBarStyling } from '../../screens/AfterAuth/InsideMenus/InsideHome
 import { getAuth } from 'firebase/auth';
 import { collection, query, where, getDocs, db, orderBy, startAt, endAt, limit } from '../../firebaseAPI';
 
+const months = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
 const SearchDataBar = () => {
   const [combinedData, setCombinedData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchClicked, setSearchClicked] = useState(false);
+  const [currentTime, setCurrentTime] = useState('');
 
   const navigation = useNavigation();
 
     const fetchData = async () => {
-        try {
-            const auth = getAuth();
-            const currentUser = auth.currentUser;
+      try {
+        const auth = getAuth();
+        const currentUser = auth.currentUser;
 
-            if (!currentUser) {
-                return;
-            }
-
-            const q = query(collection(db, 'newevent'), orderBy("createdAt", "desc"));
-            const querySnapshot = await getDocs(q);
-
-            const events = querySnapshot.docs.map(doc => ({
-                ...doc.data(),
-                id: doc.id
-            }));
-
-            const eventsWithCreators = await Promise.all(events.map(async event => {
-                const profileQuery = query(collection(db, 'userprofile'), where('uid', '==', event.uid));
-                const profileSnapshot = await getDocs(profileQuery);
-                const eventCreatorProfile = !profileSnapshot.empty ? profileSnapshot.docs[0].data() : null;
-                return {
-                    ...event,
-                    eventCreatorProfile
-                };
-            }));
-
-            if (searchQuery) {
-                const filteredEvents = eventsWithCreators.filter(
-                    event => event.eventName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    event.location.toLowerCase().includes(searchQuery.toLowerCase())
-                );
-                setCombinedData(filteredEvents);
-            } else {
-                setCombinedData(eventsWithCreators);
-            }
-        } catch (error) {
-            console.error('Error fetching documents: ', error);
-        } finally {
-            setRefreshing(false);
+        if (!currentUser) {
+            return;
         }
+        const today = new Date();
+        const currentMonth = today.getMonth(); // getMonth() returns 0-11
+        const currentYear = today.getFullYear();
+        const currentDate = today.getDate();
+        
+        setCurrentTime(`${months[currentMonth]} ${currentYear}`); 
+
+        const q = query(
+          collection(db, 'newevent'), 
+          // orderBy("createdAt", "desc"),
+          where('selectedDate', '>=', `${months[currentMonth]} ${currentDate} ${currentYear}`), 
+          where('selectedDate', '<=', `${months[currentMonth]} 31 ${currentYear}`), 
+        );
+
+        const querySnapshot = await getDocs(q);
+        const events = querySnapshot.docs.map(doc => ({
+            ...doc.data(),
+            id: doc.id
+        }));
+        events.sort((a, b) => b.createdAt - a.createdAt);
+
+        const eventsWithCreators = await Promise.all(events.map(async event => {
+            const profileQuery = query(collection(db, 'userprofile'), where('uid', '==', event.uid));
+            const profileSnapshot = await getDocs(profileQuery);
+            const eventCreatorProfile = !profileSnapshot.empty ? profileSnapshot.docs[0].data() : null;
+            return {
+                ...event,
+                eventCreatorProfile
+            };
+        }));
+
+        if (searchQuery) {
+            const filteredEvents = eventsWithCreators.filter(
+                event => event.eventName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                event.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                event.eventCreatorProfile.organization.toLowerCase().includes(searchQuery.toLowerCase()) 
+            );
+            setCombinedData(filteredEvents);
+        } else {
+            setCombinedData(eventsWithCreators);
+        }
+      } catch (error) {
+          console.error('Error fetching documents: ', error);
+      } finally {
+          setRefreshing(false);
+      }
     };
 
     useEffect(() => {
@@ -125,11 +144,14 @@ const SearchDataBar = () => {
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => toViewEvent(item)}>
                 <View style={searchBarStyling.itemContainer}>
-                 
                   <Image source={{ uri: item.imageSource }} style={styles.image} />
-                  <Text style={{color:'#E4D4F1', fontWeight:500,}}>{item.eventName}</Text>
-                  <Text style={searchBarStyling.location}> {item.location} </Text>
-                  
+                  <View style={{alignItems:'left', marginLeft:5,}}>
+                    <Text style={{color:'#f1f1f1', fontWeight:500,}}>{item.eventName}</Text>
+                    <Text style={searchBarStyling.location}> {item.location} </Text>
+                  </View>
+                  <View style={{flex:1, alignItems:'flex-end',}}>
+                    <Text style={{color:'#f1f1f1', fontSize:12,}}>{item.eventCreatorProfile.organization} </Text>
+                  </View>
                 </View>
               </TouchableOpacity>
             )}

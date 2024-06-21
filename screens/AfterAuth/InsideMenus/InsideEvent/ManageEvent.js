@@ -81,7 +81,6 @@ const ManageEvent = () => {
                   <View style={ForManageEvent.textContainer}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
                       <Text style={ForManageEvent.eventName}>{item.eventName}</Text>
-
                       <Text style={ForManageEvent.dTime}>{item.selectedDate}</Text>
                     </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:2 }}>

@@ -4,10 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 import Modal from 'react-native-modal'; 
 import { LinearGradient } from 'expo-linear-gradient';
 
+import { CreatorTag } from '../../../../components/homeComps/LabelProps';
 import { PGStyling } from '../../PGStyling';
 import { ThisMonthLabels } from '../../../../components/homeComps/LabelProps'; 
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, limit, orderBy, onSnapshot, db } from '../../../../firebaseAPI';
+import { collection, query, where, limit, orderBy, onSnapshot, db, getDocs } from '../../../../firebaseAPI';
 import ViewAllProp from '../../../../components/viewAllNav';
 import { Ionicons, Octicons } from '@expo/vector-icons';
 
@@ -29,7 +30,7 @@ const ThisMonthLimited = () => {
       const currentUser = auth.currentUser;
 
       if (!currentUser) {
-        return; 
+        return; // Exit if user is not authenticated
       }
 
       const today = new Date();
@@ -38,19 +39,25 @@ const ThisMonthLimited = () => {
       const currentDate = today.getDate();
 
       setCurrentTime(`${months[currentMonth]} ${currentYear}`);
-      
+
       const q = query(
         collection(db, 'newevent'),
-        where('selectedDate', '>=', `${months[currentMonth]} ${currentDate} ${currentYear}`), 
-        where('selectedDate', '<=', `${months[currentMonth]} 31 ${currentYear}`), 
+        where('selectedDate', '>=', `${months[currentMonth]} ${currentDate} ${currentYear}`),
+        where('selectedDate', '<=', `${months[currentMonth]} 31 ${currentYear}`),
+        // limit(3)
       );
 
       // Fetch data and handle response
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const events = querySnapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
+      const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+        const events = await Promise.all(
+          querySnapshot.docs.map(async (doc) => {
+            const eventData = { ...doc.data(), id: doc.id };
+            const profileQuery = query(collection(db, 'userprofile'), where('uid', '==', eventData.uid));
+            const profileSnapshot = await getDocs(profileQuery);
+            const profileData = profileSnapshot.empty ? {} : profileSnapshot.docs[0].data();
+            return { ...eventData, creatorProfile: profileData };
+          })
+        );
 
         // Sort events by selectedDate, closest to farthest
         const sortedEvents = events.sort((a, b) => {
@@ -61,7 +68,7 @@ const ThisMonthLimited = () => {
 
         setData(sortedEvents); // Set sorted data into state
       }, (error) => {
-        console.error('Error fetching documents: ', error); 
+        console.error('Error fetching documents: ', error);
       });
 
       return unsubscribe; // Return unsubscribe function to stop listening to snapshot changes
@@ -232,6 +239,18 @@ const ThisMonthLimited = () => {
                   )}
                 />
             </View>
+            <Text style={{
+              marginTop:12,
+              marginLeft:5,
+              color:'#EADDF3',
+              fontSize:15,
+              fontWeight:'500'
+              }}>Created by</Text>     
+            <CreatorTag 
+              profilePic={selectedEvent?.creatorProfile?.profilePic}
+              nameLabel={selectedEvent?.creatorProfile?.username}
+              orgLabel={selectedEvent?.creatorProfile?.organization}
+            />
           </View>
         </Modal>
       </ScrollView>

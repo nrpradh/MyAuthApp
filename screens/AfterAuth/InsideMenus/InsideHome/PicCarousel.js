@@ -5,15 +5,32 @@ import { getAuth } from 'firebase/auth';
 import { collection, query, where, getDocs, db, limit, orderBy, onSnapshot } from '../../../../firebaseAPI';// Ensure this points to your firebase configuration file
 import { forCategories } from './homeGStyle';
 
+
+const months = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
 const fetchData = (setCombinedData, setRefreshing) => {
   const auth = getAuth();
   const currentUser = auth.currentUser;
+  ;
 
   if (!currentUser) {
     return; // Exit if user not authenticated
   }
 
-  const q = query(collection(db, 'newevent'), orderBy("createdAt", "desc"), limit(4));
+  const today = new Date();
+  const currentMonth = today.getMonth(); // getMonth() returns 0-11
+  const currentYear = today.getFullYear();
+  const currentDate = today.getDate();
+  
+  const q = query(
+    collection(db, 'newevent'), 
+    // orderBy("createdAt", "desc"), 
+    where('selectedDate', '>=', `${months[currentMonth]} ${currentDate} ${currentYear}`), 
+    where('selectedDate', '<=', `${months[currentMonth]} 31 ${currentYear}`), 
+    limit(6));
 
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const events = querySnapshot.docs.map((doc) => ({
@@ -34,6 +51,7 @@ const fetchData = (setCombinedData, setRefreshing) => {
 const Crousel = () => {
   const [combinedData, setCombinedData] = React.useState([]);
   const [refreshing, setRefreshing] = React.useState(true);
+  const [currentTime, setCurrentTime] = React.useState('')
   const [limitedData, setLimitedData] = React.useState(combinedData.slice(0, 5));
 
   React.useEffect(() => {

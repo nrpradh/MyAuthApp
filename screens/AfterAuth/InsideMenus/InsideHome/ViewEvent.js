@@ -4,9 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
 import { MaterialIcons, Ionicons, Octicons } from '@expo/vector-icons';
 
-
 import { PGStyling } from '../../PGStyling'
-import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
+import { ForEventMenu, inCRUDevent } from '../InsideGStyles'
 import { CreatorTag } from '../../../../components/homeComps/LabelProps';
 
 
@@ -88,7 +87,7 @@ const ViewEvent = ({route}) => {
                   <Text style={[
                       inCRUDevent.anotherTxt, 
                       {   textDecorationLine:'underline',
-                            // marginTop:6,
+                          color:'#EADDF3'
                           
                       }]}>{event.location}</Text>
                 </TouchableOpacity>
@@ -164,9 +163,7 @@ export default ViewEvent;
 const styles = StyleSheet.create({
     showCategories :{
       flexDirection:'row',
-      // backgroundColor:'#f1f1f1',
       borderRadius:20,
-      // marginHorizontal:5,
       marginVertical:2,
       marginHorizontal:7,
     },

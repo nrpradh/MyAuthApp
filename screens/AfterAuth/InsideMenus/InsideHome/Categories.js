@@ -13,6 +13,12 @@ import { getAuth } from 'firebase/auth';
 import { collection, query, where, getDocs, db, auth, limit, orderBy, onSnapshot } from '../../../../firebaseAPI';
 import { PGStyling } from '../../PGStyling';
 
+
+const months = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
 const Categoriest = () => {
   
   const [combinedData, setCombinedData] = useState([]);
@@ -40,18 +46,27 @@ const Categoriest = () => {
       return; // Exit if user not authenticated
     }
 
-    const newEventQuery = query(collection(db, 'newevent'), limit(6));
-    
+    const today = new Date();
+    const currentMonth = today.getMonth(); // getMonth() returns 0-11
+    const currentYear = today.getFullYear();
+    const currentDate = today.getDate();
 
+    const newEventQuery = query(
+      collection(db, 'newevent'),
+      where('selectedDate', '>=', `${months[currentMonth]} ${currentDate} ${currentYear}`), 
+      where('selectedDate', '<=', `${months[currentMonth]} 31 ${currentYear}`),
+      limit(6)
+    );
+    
     return onSnapshot(newEventQuery, (querySnapshot) => {
       const events = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
-        category: doc.data().category, // Add category property to each event
+        category: doc.data().category,
       }));
 
       setCombinedData(events);
-      setRefreshing(false); // Turn off refreshing indicator
+      setRefreshing(false); 
     }, (error) => {
       console.error('Error fetching documents: ', error);
     });
@@ -78,11 +93,11 @@ const Categoriest = () => {
 
     
     if (!currentUser) {
-      return; // Exit if user not authenticated
+      return;
     }
 
     try {
-      // Fetch profile of event creator
+      // Fetch the creator
       const profileQuery = query(collection(db, 'userprofile'), where('uid', '==', event.uid));
       const profileSnapshot = await getDocs(profileQuery);
 
@@ -150,7 +165,7 @@ const Categoriest = () => {
               color:'rgba(234, 221, 243, 0.4)',
               fontSize:12,
               textAlign:'center'
-            }}>-- No events available for the selected category/categories --</Text>
+            }}>-- No events available for the selected category --</Text>
             
           </View>
         ) : (
