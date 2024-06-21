@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Share, Linking, FlatList, Platform, TouchableOpacity, Image,} from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Share, Linking, FlatList, Platform, TouchableOpacity, Image,} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
@@ -7,11 +7,11 @@ import { MaterialIcons, Ionicons, Octicons } from '@expo/vector-icons';
 
 import { PGStyling } from '../../PGStyling'
 import { ForEventMenu, ForManageEvent, inCRUDevent } from '../InsideGStyles'
-import { ScrollView } from 'react-native-gesture-handler';
+import { CreatorTag } from '../../../../components/homeComps/LabelProps';
 
 
 const ViewEvent = ({route}) => {
-    const { event} = route.params;
+    const { event, eventCreatorProfile } = route.params;
     const [ address, setAddress] = useState(event.location);
 
     const DescriptionWithInstagramLinks = ({ description }) => {
@@ -78,7 +78,7 @@ const ViewEvent = ({route}) => {
 
     return (
     <LinearGradient {...PGStyling.linearGradient} style={ForEventMenu.screenLayout}>
-        <View >
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={inCRUDevent.theFrame}>
             <Image source={{ uri: event.imageSource }} style={styles.image} />
             <View style={styles.nameWDate}>
@@ -111,12 +111,20 @@ const ViewEvent = ({route}) => {
               )}
             />
             
-        </View>
-        {/* <View style={showUserStyles.container}>
-          <Text style={{color:'#f1f1f1'}}> the user that made it</Text>
-        </View> */}
-        
-      </View>
+          </View>
+        <Text style={{
+          marginTop:20,
+          marginLeft:5,
+          color:'#EADDF3',
+          fontSize:15,
+          fontWeight:'500'
+          }}>Created by</Text>  
+        <CreatorTag 
+          profilePic={eventCreatorProfile.profilePic}
+          nameLabel={eventCreatorProfile.username}
+          orgLabel={eventCreatorProfile.organization} />
+          
+      </ScrollView>
     </LinearGradient>
       
     )
@@ -125,16 +133,13 @@ const ViewEvent = ({route}) => {
 export const ShareEvent = ({ event }) => {
   const handleShare = async () => {
     try {
-      // Replace 'eventour' with your app's scheme
       const deepLink = `eventour://event-details/${event.id}`;
   
-      // Message to share including event details and deep link
       const message = `${event.eventName}\n${event.selectedDate}\nLocation: ${event.location}\n\nEvent Details: ${deepLink}`;
-  
-      // Share using Share API with message and image URL
+
       await Share.share({
         message,
-        url: event.imageSource, // Include the image URL here
+        url: event.imageSource, 
       });
   
     } catch (error) {
@@ -154,15 +159,7 @@ export const ShareEvent = ({ event }) => {
 
 export default ViewEvent;
 
-const showUserStyles = StyleSheet.create ({
-  container: {
-    marginVertical:15,
-    padding:10,
-    borderWidth:0.5,
-    borderColor:'#E4D4F1',
-    borderRadius:5,  
-  }
-})
+
 
 const styles = StyleSheet.create({
     showCategories :{

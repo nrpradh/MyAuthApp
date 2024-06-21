@@ -29,57 +29,90 @@ const Categoriest = () => {
     { label: 'Workshop', value: 'Workshop', id: 7 },
     { label: 'Others', value: 'Others', id: 8 },
   ]);
-
+  
   const navigation = useNavigation();
 
-  const toViewEvent = (event) => {
-    navigation.navigate('ViewEventPage', { event });
-  };
-
-  const fetchData = () => {
+  const newEventData = () => {
     const auth = getAuth();
     const currentUser = auth.currentUser;
-  
+
     if (!currentUser) {
       return; // Exit if user not authenticated
     }
-  
-    const q = query(collection(db, 'newevent'), limit(6));
-  
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+
+    const newEventQuery = query(collection(db, 'newevent'), limit(6));
+    
+
+    return onSnapshot(newEventQuery, (querySnapshot) => {
       const events = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
         category: doc.data().category, // Add category property to each event
       }));
-  
+
       setCombinedData(events);
       setRefreshing(false); // Turn off refreshing indicator
     }, (error) => {
       console.error('Error fetching documents: ', error);
     });
-  
-    return unsubscribe;
   };
-  
+
   useEffect(() => {
-    const unsubscribe = fetchData();
+    const unsubscribe = newEventData();
     return unsubscribe;
-  }, []);
-  
+  }, [selectedCategory]);
+
   const onRefresh = () => {
-    fetchData();
+    setRefreshing(true);
+    newEventData();
   };
 
   const handleCategorySelection = (value) => {
     setSelectedCategory(value);
   };
 
+  
+  const toViewEvent = async (event) => {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+
+    
+    if (!currentUser) {
+      return; // Exit if user not authenticated
+    }
+
+    try {
+      // Fetch profile of event creator
+      const profileQuery = query(collection(db, 'userprofile'), where('uid', '==', event.uid));
+      const profileSnapshot = await getDocs(profileQuery);
+
+      if (!profileSnapshot.empty) {
+          const eventCreatorProfile = profileSnapshot.docs[0].data();
+          navigation.navigate('ViewEventPage', { event, eventCreatorProfile });
+      } else {
+          console.error('Profile not found for event creator');
+      }
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+    }
+  };
+
+  // Filter events based on selected categories
   const filteredData = combinedData.filter(item => {
-    // Check if the event belongs to at least one of the selected categories
     const selectedCategories = Array.isArray(selectedCategory) ? selectedCategory : [selectedCategory];
     return selectedCategories.some(cat => item.category.includes(cat));
   });
+
+  const renderEventItem = ({ item }) => (
+    <TouchableOpacity onPress={() => toViewEvent(item)}>
+      <View style={forCategories.itemContainer}>
+        <Image source={{ uri: item.imageSource }} style={styles.image} />
+        <CategoryLabels
+          nameLabel={item.eventName} 
+          locLabel={item.location} />
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={{}}>
@@ -125,16 +158,7 @@ const Categoriest = () => {
             <FlatList
               data={filteredData}
               keyExtractor={item => item.id}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => toViewEvent(item)}>
-                  <View style={forCategories.itemContainer}>
-                    <Image source={{ uri: item.imageSource }} style={styles.image} />
-                    <CategoryLabels
-                      nameLabel={item.eventName} 
-                      locLabel={item.location} />
-                  </View>
-                </TouchableOpacity>
-              )}
+              renderItem={renderEventItem}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}

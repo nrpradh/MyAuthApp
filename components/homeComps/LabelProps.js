@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const CategoryLabels = ({ nameLabel, locLabel }) => {
@@ -27,10 +27,54 @@ const ThisMonthLabels = ({ nameLabel, locLabel, dateLabel }) => {
   );
 };
 
-// Export both components
-export { CategoryLabels, ThisMonthLabels };
+const CreatorTag = ({ profilePic, nameLabel, orgLabel }) => {
+  return (
+    <View style={creatorStyles.container}>
+      <Image  source={{ uri:profilePic}} style={creatorStyles.image} />
+      <View style={{flexDirection:'column'}}>
+        <Text style={creatorStyles.userName}>{nameLabel}</Text>
+        <Text style={creatorStyles.userOrg}>{orgLabel}</Text>
+      </View>
+    </View>
+  );
+};
 
-// Define styles
+
+export { CategoryLabels, ThisMonthLabels, CreatorTag };
+
+const creatorStyles = StyleSheet.create({
+  container: {
+    flexDirection:'row',
+    alignItems:'center',
+    // paddingVertical:5,
+    // paddingHorizontal:8,
+    margin:10,
+    // borderWidth:0.5,
+    // borderColor:'#E4D4F1',
+    // borderRadius:5,  
+  },
+  
+  image: {
+    resizeMode: 'cover',
+    borderRadius: 50,
+    borderWidth:5,
+    margin:5,
+    width: 55, 
+    height: 55,
+  },  
+  userName :{
+    marginHorizontal:10,
+    // fontSize:16,
+    color:'#f1f1f1',
+  },
+
+  userOrg :{
+    marginHorizontal:10,
+    fontSize:12,
+    color:'rgba(230, 231, 230, 0.8)',
+  }
+})
+
 const styles = StyleSheet.create({
   textMargin: {
     paddingHorizontal: 8,
