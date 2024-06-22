@@ -57,7 +57,8 @@ const creatorStyles = StyleSheet.create({
   image: {
     resizeMode: 'cover',
     borderRadius: 50,
-    borderWidth:5,
+    borderWidth:1,
+    borderColor:'#e4d4f1',
     margin:5,
     width: 55, 
     height: 55,
@@ -71,7 +72,7 @@ const creatorStyles = StyleSheet.create({
   userOrg :{
     marginHorizontal:10,
     fontSize:12,
-    color:'rgba(230, 231, 230, 0.8)',
+    color:'rgba(230, 231, 230, 0.9)',
   }
 })
 
