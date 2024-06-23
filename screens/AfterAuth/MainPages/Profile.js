@@ -12,7 +12,7 @@ import {collection, db,doc, getDocs, query,where, onSnapshot } from '../../../fi
 
 // Components
 import LogOut from '../InsideMenus/logOut';
-import BtnForProfile from '../../../components/profileComps/btnForProfile'
+import ProfileComponent from '../../../components/profileComps/btnForProfile'
 import { ForProfile } from '../InsideMenus/InsideGStyles';
 import IconEditProfile from '../../../components/profileComps/IconEditProfile';
 
@@ -96,21 +96,27 @@ const Profile = () => {
         
       
       
-        <View style={ForProfile.proFrame}>
+        {/* <View style={ForProfile.proFrame}>
           <Text style={ForProfile.headerFrame} > Preferences </Text>
-          <BtnForProfile 
+          <ProfileComponent
+            preref='Terms of use'
+            content={`1) Using accurate and non-misleading information when creating and managing events.\n2) Do not do spam for creating events.\n3) Prohibited from using indecent images.\n4) Complying with all applicable terms and conditions.`}
             icon={<Feather name="book-open" size={22} color="#f1f1f1" marginLeft={5}  />}
             headText="Terms of use"
             subHeading="User guidelines, rights, agreements, etc."
             onPress={() => navigation.navigate('HomeScreen')}
           />
-          <BtnForProfile 
+          <ProfileComponent
+            preref='About'
+            content='Aplikasi penyedia informasi seputar event '
             icon={<Feather name="help-circle" size={25} color="#f1f1f1" marginLeft={2} />}
             headText="About"
             subHeading="About the app and etc."
             onPress={() => navigation.navigate('EventLogsPage')}
           />
-          <BtnForProfile 
+          <ProfileComponent
+            preref='FAQ'
+            content=''
             icon={<MaterialCommunityIcons name="comment-question-outline" size={22} color="#f1f1f1" marginLeft={5}  />}
             headText="FAQ"
             subHeading="Frequently asked question"
@@ -120,7 +126,7 @@ const Profile = () => {
           
           
           
-        </View>
+        </View> */}
         <LogOut/>
       </ScrollView>
     
