@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "MyAuthApp",
-    "slug": "MyAuthApp",
+    "name": "Eventour",
+    "slug": "Eventour",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/appIconEventour.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splashEventour.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
