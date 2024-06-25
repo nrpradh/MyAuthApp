@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Button, SectionList, TouchableOpacity, RefreshControl, ScrollView, ActivityIndicator } from 'react-native'
 import React,{useEffect, useCallback, useState} from 'react';
-import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { PGStyling } from '../PGStyling';
@@ -10,33 +9,7 @@ import ThisMonthLimited from '../../../components/homeComps/ThisMonthLimited';
 
 const Home = ({navigation }) => {
   const [loading, setLoading] = useState(false); // State to track loading status
-
   const [refreshing, setRefreshing] = useState(false);
-
-  // _______________ * ________________ * User Go Back Disabled
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     const backAction = () => {
-  //       return true;
-  //     };
-
-  //     const backHandler = BackHandler.addEventListener(
-  //       'hardwareBackPress',
-  //       backAction
-  //     );
-
-  //     return () => backHandler.remove();
-  //   }, [])
-  // );
-  // useEffect(() => {
-  //   // Simulate loading data
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 400); // Simulated loading time in milliseconds
-  // }, []);
-
-  // _______________ * ________________ * ________________
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -59,9 +32,6 @@ const Home = ({navigation }) => {
         sections={sections}
         renderItem={({ item }) => item}
         showsVerticalScrollIndicator={false}
-        // renderSectionHeader={({ section }) => (
-        //   <Text>{section.title}</Text>
-        // )}
         keyExtractor={(item, index) => index.toString()}
       />
     </LinearGradient>
